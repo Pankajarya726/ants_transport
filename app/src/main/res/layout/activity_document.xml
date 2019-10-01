@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        tools:context=".activity.documents.DocumentActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorWhite"
+            android:elevation="2dp">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/back_icon" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Partner Doucments"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp">
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Professional Driver Picture of the face"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/iv_Add"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@color/colorGrey"
+                        android:elevation="5dp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/plus" />
+
+                    <ImageButton
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="15sp"
+                        android:layout_toRightOf="@+id/iv_Add"
+                        android:background="@color/colorGrey"
+                        android:elevation="5dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_camera" />
+
+
+                </RelativeLayout>
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="ID Proof"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/img_id_front"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@color/colorGrey"
+                        android:elevation="5dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_camera" />
+
+                    <ImageButton
+                        android:id="@+id/img_id_back"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="15sp"
+                        android:layout_toRightOf="@+id/img_id_front"
+                        android:background="@color/colorGrey"
+                        android:elevation="5dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_camera" />
+
+
+                </RelativeLayout>
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Valid Driver's License front and back"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/img_license_front"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@color/colorGrey"
+                        android:elevation="5dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_camera" />
+
+                    <ImageButton
+                        android:id="@+id/img_license_back"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="15sp"
+                        android:layout_toRightOf="@+id/img_license_front"
+                        android:background="@color/colorGrey"
+                        android:elevation="5dp"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_camera" />
+
+
+                </RelativeLayout>
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Proof of Home Address"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <com.an.customfontview.CustomButton
+                        android:id="@+id/btn_browse_address"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:elevation="0dp"
+                        android:outlineSpotShadowColor="@color/colorBlack"
+                        android:text="Browse"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        app:btnFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                </LinearLayout>
+
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Letter form the bank Confirming the Account \n (not older than one month)"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <com.an.customfontview.CustomButton
+                        android:id="@+id/btn_browse_confirmation"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:elevation="0dp"
+                        android:outlineSpotShadowColor="@color/colorBlack"
+                        android:text="Browse"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        app:btnFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                </LinearLayout>
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="The most recent page of your bank statment\n (not older than one month)"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <com.an.customfontview.CustomButton
+                        android:id="@+id/btn_browse_bankstatement"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:elevation="0dp"
+                        android:outlineSpotShadowColor="@color/colorBlack"
+                        android:text="Browse"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        app:btnFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                </LinearLayout>
+
+
+                <com.an.customfontview.CustomButton
+                    android:id="@+id/btn_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginTop="15sp"
+                    android:background="@drawable/button_theam"
+                    android:text="upload"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="15sp"
+                    app:btnFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Already have an account?"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15dp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_signup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sign_in"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15dp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+</layout>

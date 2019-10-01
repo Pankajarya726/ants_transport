@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical">
+
+    <com.an.customfontview.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/textview"
+        android:gravity="center"
+        android:text="Select your profile"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|left"
+            android:layout_weight="1"
+            android:src="@drawable/account" />
+
+        <com.an.customfontview.CustomTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_weight="2"
+            android:text="Owner"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+        <ImageView
+            android:id="@+id/img_owner"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|left"
+            android:layout_weight="1"
+            android:src="@drawable/radio_yes"
+
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|left"
+            android:layout_weight="1"
+            android:src="@drawable/user" />
+
+        <com.an.customfontview.CustomTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_weight="2"
+            android:text="Partner"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+        <ImageView
+            android:id="@+id/img_partner"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|left"
+            android:layout_weight="1"
+            android:src="@drawable/radio_off"
+
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center|left"
+            android:layout_weight="1"
+            android:src="@drawable/account" />
+
+        <com.an.customfontview.CustomTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:layout_weight="2"
+            android:text="Both"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+        <ImageView
+            android:id="@+id/img_both"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|left"
+            android:layout_weight="1"
+            android:src="@drawable/radio_off"
+            />
+
+
+    </LinearLayout>
+
+
+
+    <com.an.customfontview.CustomButton
+        android:id="@+id/btn_ok"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/button_theam"
+        android:text="OK"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+
+        />
+
+</LinearLayout>
+

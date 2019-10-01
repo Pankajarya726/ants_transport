@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.vehicleInfo.VehicleInfoActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorWhite"
+            android:elevation="2dp">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/back_icon" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Vehicle Information"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+        </RelativeLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:orientation="vertical"
+                android:paddingLeft="15dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp">
+
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Select Vehicle Type"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15dp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:id="@+id/edt_vehicle_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:drawableRight="@drawable/down"
+                    android:gravity="center|left"
+                    android:hint="Select Vehicle"
+                    android:textSize="15sp"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorGrey"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="Registration Date"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15dp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:id="@+id/edt_reg_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:drawableRight="@drawable/calenar"
+                    android:gravity="center|left"
+                    android:hint="YYYY-MM-DD"
+                    android:maxLines="1"
+                    android:textSize="15sp"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorGrey"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="Tire"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15dp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomEditText
+                    android:id="@+id/edt_tire"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:gravity="center|left"
+                    android:hint="Enter Tire"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorGrey"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="Gross Vehicle Mass"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15dp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomEditText
+                    android:id="@+id/edt_mass"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:gravity="center|left"
+                    android:hint="Mass"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorGrey"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="Vehicle Registration Number"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15dp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomEditText
+                    android:id="@+id/edt_reg_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:gravity="center|left"
+                    android:hint="Re-enter Password"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorGrey"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="Vehicle Model"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15dp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomEditText
+                    android:id="@+id/edt_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:gravity="center|left"
+                    android:hint="Enter Model"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorGrey"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="Vehicle Manufacture"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15dp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomEditText
+                    android:id="@+id/edt_manufacture"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:gravity="center|left"
+                    android:hint="Enter Manufacture"
+                    android:maxLines="1"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorGrey"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Upload picture of latest vehicle license"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <com.an.customfontview.CustomButton
+                        android:id="@+id/btn_browse_license"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:elevation="0dp"
+                        android:outlineSpotShadowColor="@color/colorBlack"
+                        android:text="Browse"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        app:btnFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_license"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                </LinearLayout>
+
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Upload Picture of the Odometer with Current KM's"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <com.an.customfontview.CustomButton
+                        android:id="@+id/btn_browse_odometer"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:elevation="0dp"
+                        android:outlineSpotShadowColor="@color/colorBlack"
+                        android:text="Browse"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        app:btnFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_odometer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                </LinearLayout>
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Upload Picture Proof of Insurence"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <com.an.customfontview.CustomButton
+                        android:id="@+id/btn_browse_insurence"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rounded_button"
+                        android:elevation="0dp"
+                        android:outlineSpotShadowColor="@color/colorBlack"
+                        android:text="Browse"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        app:btnFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_insurence"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                </LinearLayout>
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Picture of Vehicle"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Front"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="back"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Left"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Right"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <ImageView
+                        android:id="@+id/img_front"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorGrey"
+                        android:gravity="center"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_camera" />
+
+
+                    <ImageView
+                        android:id="@+id/img_back"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorGrey"
+                        android:gravity="center"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_camera" />
+
+                    <ImageView
+                        android:id="@+id/img_left"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorGrey"
+                        android:gravity="center"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_camera" />
+
+                    <ImageView
+                        android:id="@+id/img_right"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_weight="1"
+                        android:background="@color/colorGrey"
+                        android:gravity="center"
+                        android:scaleType="centerInside"
+                        android:src="@android:drawable/ic_menu_camera" />
+
+
+                </LinearLayout>
+
+
+                <com.an.customfontview.CustomButton
+                    android:id="@+id/btn_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginTop="15sp"
+                    android:background="@drawable/button_theam"
+                    android:text="upload"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="15sp"
+                    app:btnFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Already have an account?"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15dp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_signup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sign_in"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15dp"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        tools:context="com.ants.driverpartner.everywhere.activity.otp.OtpActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorWhite"
+            android:elevation="2dp">
+
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="OTP"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/back_icon" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"
+                android:src="@drawable/sms" />
+
+            <LinearLayout
+                android:id="@+id/layout_otp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enter OTP"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20sp"
+                    app:textFontPath="fonts/MyriadProBold.ttf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Please enter the four digit code"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sent via SMS to reset your password"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <com.an.customfontview.CustomEditText
+                        android:id="@+id/et_pin_box_1"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rectangular_bg"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="#fff"
+                        android:textSize="18sp" />
+
+                    <com.an.customfontview.CustomEditText
+                        android:id="@+id/et_pin_box_2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rectangular_bg"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="#fff"
+                        android:textSize="18sp" />
+
+                    <com.an.customfontview.CustomEditText
+                        android:id="@+id/et_pin_box_3"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rectangular_bg"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="#fff"
+                        android:textSize="18sp" />
+
+                    <com.an.customfontview.CustomEditText
+                        android:id="@+id/et_pin_box_4"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/rectangular_bg"
+                        android:drawablePadding="10dp"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="#fff"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <com.an.customfontview.CustomButton
+                android:id="@+id/btn_reset_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_otp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/button_theam"
+                android:text="RESET PASSWORD"
+                android:textColor="@color/colorWhite"
+                app:textFontPath="fonts/MyriadProRegular.ttf"/>
+
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tv_resent_otp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="30dp"
+                android:text="Din't receive the One Time Password?"
+                android:gravity="center"
+                android:textColor="@color/colorBlack"
+                app:textFontPath="fonts/MyriadProRegular.ttf"/>
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_resent_otp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="40dp"
+                android:layout_marginRight="30dp"
+                android:text="Resend OTP"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/colorAccent"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</layout>
