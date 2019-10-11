@@ -48,7 +48,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp">
 
 
                 <com.an.customfontview.CustomTextView
@@ -59,17 +61,17 @@
                     android:text="E-mail"
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/rectangular_bg"
-                    android:orientation="horizontal">
+                    android:background="@drawable/rectangular_bg">
 
                     <ImageView
+                        android:id="@+id/img_email"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_gravity="center"
@@ -79,26 +81,29 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/img_email"
                         android:background="#9E9E9E" />
 
 
                     <com.an.customfontview.CustomEditText
                         android:id="@+id/edt_email"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_margin="1dp"
-                        android:layout_marginBottom="1dp"
+                        android:layout_toRightOf="@+id/img_email"
                         android:background="@color/colorWhite"
                         android:gravity="center|left"
                         android:hint="abc@xyz.com"
+                        android:maxLines="1"
                         android:padding="10dp"
                         android:textColor="@color/colorBlack"
                         android:textColorHint="@color/colorGrey"
-                        android:textSize="15dp"
+                        android:textSize="@dimen/edt_size"
                         app:textFontPath="fonts/MyriadProRegular.ttf" />
 
 
-                </LinearLayout>
+                </RelativeLayout>
 
                 <com.an.customfontview.CustomTextView
                     android:layout_width="wrap_content"
@@ -109,56 +114,57 @@
                     android:text="Password"
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/rectangular_bg"
-                    android:orientation="horizontal">
+                    android:background="@drawable/rectangular_bg">
 
                     <ImageView
+                        android:id="@+id/img_lock"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:layout_gravity="center"
+                        android:layout_alignParentLeft="true"
                         android:padding="10dp"
                         android:src="@drawable/lock" />
 
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/img_lock"
                         android:background="#9E9E9E" />
 
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <com.an.customfontview.CustomEditText
+                        android:id="@+id/edt_password"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_margin="1dp"
+                        android:layout_toLeftOf="@+id/img_eye"
+                        android:layout_toRightOf="@+id/img_lock"
+                        android:background="@color/colorWhite"
                         android:gravity="center|left"
-                        app:hintEnabled="false"
-                        app:passwordToggleDrawable="@drawable/eye_grey"
-                        app:passwordToggleEnabled="true"
+                        android:hint="abc@xyz.com"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/colorGrey"
+                        android:textSize="@dimen/edt_size"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
 
-                        app:passwordToggleTint="@color/colorAccent">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edt_password"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="2dp"
-                            android:layout_marginBottom="2dp"
-                            android:background="@color/colorWhite"
-                            android:gravity="center|left"
-                            android:hint="password"
-                            android:inputType="textPassword"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/colorBlack"
-                            android:textColorHint="@color/colorGrey"
-                            android:textSize="15dp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
+                    <ImageView
+                        android:id="@+id/img_eye"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:scaleType="center"
+                        android:src="@drawable/eye_grey" />
 
                     <!--  <com.an.customfontview.CustomEditText
                           android:layout_width="match_parent"
@@ -175,7 +181,7 @@
                           app:textFontPath="fonts/MyriadProRegular.ttf" />-->
 
 
-                </LinearLayout>
+                </RelativeLayout>
 
                 <com.an.customfontview.CustomTextView
                     android:id="@+id/tv_forgot_password"
@@ -187,14 +193,14 @@
                     android:text="Forgot Your Password?"
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <com.an.customfontview.CustomButton
                     android:id="@+id/btn_signin"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
                     android:background="@drawable/button_theam"
                     android:gravity="center"
                     android:text="Sign in"
@@ -222,7 +228,7 @@
                     android:gravity="center"
                     android:text="Sign in with"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
 
@@ -253,13 +259,13 @@
                         android:textSize="18sp"
                         app:textFontPath="fonts/MyriadProRegular.ttf" />
 
-                    <ImageView
-                        android:id="@+id/iv_google"
+                    <Button
+                        android:id="@+id/btn_google"
                         android:layout_width="0dp"
                         android:layout_height="45dp"
                         android:layout_weight="3"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/google" />
+                        android:background="@drawable/google"
+                        android:scaleType="fitXY" />
 
 
                 </LinearLayout>
@@ -277,9 +283,9 @@
                     <com.an.customfontview.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Don't have an account?"
+                        android:text="Don't have an account? "
                         android:textColor="@color/colorBlack"
-                        android:textSize="15dp"
+                        android:textSize="@dimen/tv_size"
                         app:textFontPath="fonts/MyriadProRegular.ttf"
 
                         />
@@ -288,10 +294,11 @@
                         android:id="@+id/tv_signup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/sign_up"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="15dp"
                         android:onClick="showDialog"
+                        android:text="@string/sign_up"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="@dimen/tv_size"
                         app:textFontPath="fonts/MyriadProRegular.ttf"
 
                         />

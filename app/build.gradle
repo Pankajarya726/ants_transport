@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+
 android {
     signingConfigs {
         release {
@@ -77,7 +78,8 @@ dependencies {
 
 
     //for image loding
-    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
 
     //circleImageView
@@ -90,5 +92,11 @@ dependencies {
     //custom view
     implementation 'com.an.customfontview:customfont:0.1.0'
 
+    //google-play-service for google login
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    //firebase analytics
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
 
 }
+

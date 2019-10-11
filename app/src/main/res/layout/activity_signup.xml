@@ -23,7 +23,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="15dp"
                 android:src="@drawable/back_icon" />
 
             <com.an.customfontview.CustomTextView
@@ -57,26 +57,23 @@
                     android:gravity="center">
 
 
-                    <com.mikhaellopez.circularimageview.CircularImageView
+                    <ImageView
+                        android:id="@+id/img_user"
                         android:layout_width="110dp"
                         android:layout_height="110dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/upload_pic"
-                        app:civ_border_color="@color/colorBlack"
-                        app:civ_border_width="1dp"
-                        app:civ_shadow="false" />
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/upload_pic" />
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="15dp"
-                        android:background="@drawable/ellipse1"
                         android:padding="2dp"
-                        android:visibility="gone"
-                        android:src="@drawable/rounded_plus" />
+                        android:src="@drawable/rounded_plus"
+                        android:visibility="gone" />
 
                 </RelativeLayout>
 
@@ -86,7 +83,7 @@
                     android:layout_height="match_parent"
                     android:text="Full Name"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <com.an.customfontview.CustomEditText
@@ -101,6 +98,7 @@
                     android:paddingLeft="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <com.an.customfontview.CustomTextView
@@ -109,7 +107,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Mobile Number"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <com.an.customfontview.CustomEditText
@@ -124,6 +122,7 @@
                     android:paddingLeft="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
 
@@ -133,7 +132,7 @@
                     android:layout_marginTop="10dp"
                     android:text="E-mail"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <com.an.customfontview.CustomEditText
@@ -148,6 +147,7 @@
                     android:paddingLeft="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <com.an.customfontview.CustomTextView
@@ -156,7 +156,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Password"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
 
@@ -182,6 +182,7 @@
                         android:paddingRight="10dp"
                         android:textColor="@color/colorBlack"
                         android:textColorHint="@color/colorGrey"
+                        android:textSize="@dimen/edt_size"
                         app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                     <ImageView
@@ -203,7 +204,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Confirm Password"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <RelativeLayout
@@ -217,17 +218,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="50dp"
                         android:layout_marginLeft="1dp"
+                        android:layout_marginRight="50dp"
                         android:background="@color/colorWhite"
                         android:gravity="center|left"
-                        android:hint="Re-enter Password"
+                        android:hint="Confirm Password"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:textColor="@color/colorBlack"
                         android:textColorHint="@color/colorGrey"
+                        android:textSize="@dimen/edt_size"
                         app:textFontPath="fonts/MyriadProRegular.ttf" />
 
 
@@ -249,7 +251,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Residential Address"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <com.an.customfontview.CustomEditText
@@ -265,6 +267,7 @@
                     android:padding="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <com.an.customfontview.CustomTextView
@@ -273,7 +276,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Postal Address"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15dp"
+                    android:textSize="@dimen/tv_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <com.an.customfontview.CustomEditText
@@ -289,16 +292,22 @@
                     android:padding="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
 
                 <com.an.customfontview.CustomButton
                     android:id="@+id/btn_next"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@drawable/button_theam"
                     android:text="Next"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/MyriadProRegular.ttf" />
 
                 <LinearLayout
@@ -323,7 +332,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/sign_in"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorAccent"
                         android:textSize="15dp"
                         app:textFontPath="fonts/MyriadProRegular.ttf" />
 

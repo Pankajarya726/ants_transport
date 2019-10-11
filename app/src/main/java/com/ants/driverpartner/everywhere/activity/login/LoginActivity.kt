@@ -3,31 +3,57 @@ package com.ants.driverpartner.everywhere.activity.login
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.ImageView
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.Signup.SignUpActivity
 import com.ants.driverpartner.everywhere.activity.base.MvpActivity
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPasswordActivity
 import com.ants.driverpartner.everywhere.databinding.LoginBinding
 import com.ants.driverpartner.everywhere.uitl.Utility
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
+
 
 open class LoginActivity : MvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
 
 
     lateinit var binding: LoginBinding
+    lateinit var mGoogleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.login)
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
+        init()
+
+
+    }
+
+    private fun init() {
+
         binding.btnSignin.setOnClickListener(this)
         binding.tvSignup.setOnClickListener(this)
         binding.tvForgotPassword.setOnClickListener(this)
-
+        binding.btnGoogle.setOnClickListener(this)
+        binding.imgEye.setOnClickListener(this)
     }
 
     override fun createPresenter(): LoginPresenter {
@@ -46,91 +72,116 @@ open class LoginActivity : MvpActivity<LoginPresenter>(), LoginView, View.OnClic
                 startActivity(intent)
             }
 
+            R.id.btn_google ->
+                googleSignIn()
+
+            R.id.img_eye -> {
+                if (binding.edtPassword.transformationMethod == null) {
+                    binding.edtPassword.transformationMethod = PasswordTransformationMethod()
+                    binding.imgEye.setImageResource(R.drawable.eye_grey)
+
+                } else {
+                    binding.edtPassword.setTransformationMethod(null)
+                    binding.imgEye.setImageResource(R.drawable.eye_green)
+                }
+            }
+
 
         }
 
 
     }
 
+    private fun googleSignIn() {
+
+        Log.e(localClassName, "Google sign in clicked")
+
+        val signInIntent = mGoogleSignInClient.getSignInIntent()
+        startActivityForResult(signInIntent, Constant.RC_SIGN_IN)
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+//        val account = GoogleSignIn.getLastSignedInAccount(this)
+//        updateUI(account)
+    }
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == Constant.RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
+        }
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+
+            // Signed in successfully, show authenticated UI.
+
+            Log.e(localClassName, "signInResult=" + account)
+            // updateUI(account)
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.e(localClassName, "signInResult:failed code=" + e.statusCode)
+            //  updateUI(null)
+        }
+
+    }
 
     open fun showDialog() {
 
-        var a = 1
-        var b = 0
-        var c = 0
 
-        val dialog = Dialog(this)
-        dialog.setContentView(R.layout.dialog_profile_type)
+        var dialog = Dialog(this)
+        dialog.setContentView(com.ants.driverpartner.everywhere.R.layout.dialog_profile_type)
         dialog.setTitle("Custom Dialog")
 
-        val imageOwner = dialog.findViewById(R.id.img_owner) as ImageView
-        val imagePartner = dialog.findViewById(R.id.img_partner) as ImageView
-        val imageBoth = dialog.findViewById(R.id.img_both) as ImageView
-        val btnOk = dialog.findViewById(R.id.btn_ok) as Button
+        var btnOk = dialog.findViewById(R.id.btn_ok) as Button
+        var radioGroup = dialog.findViewById(R.id.radio_group_profile) as RadioGroup
+
 
         dialog.show()
 
-        if (a == 1) {
-            imageOwner.setImageResource(R.drawable.radio_yes)
-        } else {
-            imageOwner.setImageResource(R.drawable.radio_off)
-        }
-        if (b == 1) {
-            imagePartner.setImageResource(R.drawable.radio_yes)
-        } else {
-            imagePartner.setImageResource(R.drawable.radio_off)
-        }
-        if (c == 1) {
-            imageBoth.setImageResource(R.drawable.radio_yes)
-        } else {
-            imageBoth.setImageResource(R.drawable.radio_off)
-        }
-
-
-        imageOwner.setOnClickListener(View.OnClickListener { view ->
-            if (a == 0) {
-                imageOwner.setImageResource(R.drawable.radio_yes)
-                imagePartner.setImageResource(R.drawable.radio_off)
-                imageBoth.setImageResource(R.drawable.radio_off)
-                a = 1;
-                b = 0;
-                c = 0;
-            }
-        })
-        imagePartner.setOnClickListener(View.OnClickListener { view ->
-            if (b == 0) {
-                imagePartner.setImageResource(R.drawable.radio_yes)
-                imageOwner.setImageResource(R.drawable.radio_off)
-                imageBoth.setImageResource(R.drawable.radio_off)
-                a = 0;
-                b = 1;
-                c = 0;
-            }
-        })
-
-        imageBoth.setOnClickListener(View.OnClickListener { view ->
-            if (a == 0) {
-                imageBoth.setImageResource(R.drawable.radio_yes)
-                imageOwner.setImageResource(R.drawable.radio_off)
-                imagePartner.setImageResource(R.drawable.radio_off)
-                a = 0;
-                b = 0;
-                c = 1;
-            }
-        })
-
-
-
-
-
-
         btnOk.setOnClickListener(View.OnClickListener { view ->
+
+            var selected = dialog.findViewById(radioGroup.checkedRadioButtonId) as RadioButton
             dialog.dismiss()
-            val intent = Intent(applicationContext, SignUpActivity::class.java)
-            startActivity(intent)
+
+            when (selected) {
+                dialog.findViewById(R.id.radio_owner) as RadioButton -> {
+                    val intent = Intent(applicationContext, SignUpActivity::class.java)
+                    intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
+                    startActivity(intent)
+                }
+                dialog.findViewById(R.id.radio_partner) as RadioButton -> {
+                    val intent = Intent(applicationContext, SignUpActivity::class.java)
+                    intent.putExtra(Constant.PROFILE_TYPE, Constant.PARTNER)
+                    startActivity(intent)
+                }
+                dialog.findViewById(R.id.radio_both) as RadioButton -> {
+                    val intent = Intent(applicationContext, SignUpActivity::class.java)
+                    intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
+                    startActivity(intent)
+                }
+
+            }
+
+
             //finish()
 
         })
+
+
+    }
+
+    private fun gotoSignUpScreen(selected: RadioButton) {
 
 
     }

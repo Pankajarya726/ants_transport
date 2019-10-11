@@ -1,0 +1,5 @@
+<root>
+    <item name='com.bumptech.glide.load.resource.bitmap.BitmapResource'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>

@@ -1,0 +1,52 @@
+{
+  "project_info": {
+    "project_number": "959322323632",
+    "firebase_url": "https://ants-driver-1570780956645.firebaseio.com",
+    "project_id": "ants-driver-1570780956645",
+    "storage_bucket": "ants-driver-1570780956645.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959322323632:android:d493f5e1b8f7548a369975",
+        "android_client_info": {
+          "package_name": "com.ants.driverpartner.everywhere"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959322323632-6jilr4e97rcr7j9dmegtb3fp2i1ugqmp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ants.driverpartner.everywhere",
+            "certificate_hash": "44335090177d17f9893afa8a74012b9953e3bb7e"
+          }
+        },
+        {
+          "client_id": "959322323632-ojk3i1dapbt1gp02o3bvn0edn0n2lhs2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ants.driverpartner.everywhere",
+            "certificate_hash": "8880b52f83b585b76773ee5b990fe1600f6b4bcd"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlraid4FXQU64bZ5kOgzVOxIpErLYpgG0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959322323632-5hjj9k1rqpl5a9ek2jh539sa5oob69rg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

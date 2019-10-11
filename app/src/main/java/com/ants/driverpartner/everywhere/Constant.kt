@@ -13,6 +13,11 @@ interface Constant {
     }
 
     companion object {
+        val OWNER = "Owner"
+        val PARTNER = "Partner"
+        val BOTH = "Both"
+        val PROFILE_TYPE = "Profile_type"
+        val RC_SIGN_IN = 101
         val isLogEnable = true
         val PROFILE_PERMISSION_CALLBACK = 111
         val MAP_ZOOM_LEVEL = 14.0f
@@ -41,6 +46,7 @@ interface Constant {
 
     interface UploadType {
         companion object {
+            val USER = "user"
             val ID_FRONT = "idFront"
             val ID_BACK = "idBack"
             val LICENCE_FRONT = "licenceFront"
