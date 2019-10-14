@@ -1,10 +1,14 @@
 package com.ants.driverpartner.everywhere.activity.documents
 
-import com.ants.driverpartner.everywhere.activity.base.BasePresenter
+import com.ants.driverpartner.everywhere.activity.base.BaseMainView
 
-class DocumentPresenter(view: DocumentView) : BasePresenter<DocumentView>() {
+class DocumentPresenter {
 
-    init {
-        attachView(view)
+    interface DocumentMainPresenter{
+
     }
+    interface DocumentView :BaseMainView{
+
+    }
+
 }

@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.base.MvpActivity
 import com.ants.driverpartner.everywhere.activity.otp.OtpActivity
+import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityForgotPasswordBinding
 
-class ForgotPasswordActivity : MvpActivity<ForgotPasswordPresenter>(), ForgotPasswordView {
-
+class ForgotPasswordActivity : BaseMainActivity(), ForgotPasswordPresenter.ForgotPasswordView {
 
     lateinit var binding: ActivityForgotPasswordBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,8 +22,10 @@ class ForgotPasswordActivity : MvpActivity<ForgotPasswordPresenter>(), ForgotPas
 
     }
 
-    override fun createPresenter(): ForgotPasswordPresenter {
-        return ForgotPasswordPresenter(this)
+
+    override fun validateError(message: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
 
 }

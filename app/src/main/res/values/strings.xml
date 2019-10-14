@@ -4,4 +4,5 @@
     <string name="sign_in"><u>Sign In</u></string>
 
     <string name="server_client_id">959322323632-fup1smv3i4bdhidvlcbpbk41na70v407.apps.googleusercontent.com</string>
+    <string name="check_internet">Please Check Internet Connection</string>
 </resources>

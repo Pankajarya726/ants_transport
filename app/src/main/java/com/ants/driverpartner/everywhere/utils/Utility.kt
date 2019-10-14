@@ -1,12 +1,13 @@
-package com.ants.driverpartner.everywhere.uitl
+package com.ants.driverpartner.everywhere.utils
 
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 object Utility {
     private val ANTS = "ANTS"
-
 
 
     fun setSharedPreference(context: Context, name: String, value: String) {
@@ -116,6 +117,16 @@ object Utility {
 
     fun alphanumericValidator(vehicle_number: String): Boolean {
         return vehicle_number.matches("[a-zA-Z0-9]+".toRegex())
+    }
+
+    fun isNetworkConnected(context: Context): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+
+        return isConnected
+
     }
 
 

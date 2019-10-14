@@ -14,19 +14,21 @@ import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.Signup.SignUpActivity
-import com.ants.driverpartner.everywhere.activity.base.MvpActivity
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPasswordActivity
+import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.LoginBinding
-import com.ants.driverpartner.everywhere.uitl.Utility
+import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.tekzee.amiggos.ui.login.LoginPresenter
 
 
-open class LoginActivity : MvpActivity<LoginPresenter>(), LoginView, View.OnClickListener {
+class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnClickListener {
+
 
 
     lateinit var binding: LoginBinding
@@ -56,9 +58,9 @@ open class LoginActivity : MvpActivity<LoginPresenter>(), LoginView, View.OnClic
         binding.imgEye.setOnClickListener(this)
     }
 
-    override fun createPresenter(): LoginPresenter {
-        return LoginPresenter(this)
-    }
+//    override fun createPresenter(): LoginPresenter {
+//        return LoginPresenter(this)
+//    }
 
     override fun onClick(v: View) {
 
@@ -186,6 +188,11 @@ open class LoginActivity : MvpActivity<LoginPresenter>(), LoginView, View.OnClic
 
     }
 
+    override fun validateError(message: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
     private fun login() {
 
         if (binding.edtEmail.text.toString().trim().isEmpty()) {
@@ -203,4 +210,10 @@ open class LoginActivity : MvpActivity<LoginPresenter>(), LoginView, View.OnClic
         }
 
     }
+
+
+    /*override fun onLoginSuccess(responseData: LoginResponse) {
+
+
+    }*/
 }

@@ -1,10 +1,22 @@
 package com.ants.driverpartner.everywhere.activity.Signup
 
-import com.ants.driverpartner.everywhere.activity.base.BasePresenter
+import android.content.Context
+import com.ants.driverpartner.everywhere.activity.base.BaseMainView
+import com.google.gson.JsonObject
 
-class SignupPresenter(view: SignupView) : BasePresenter<SignupView>() {
+class SignupPresenter {
 
-    init {
-        attachView(view)
+
+    interface SignupMainPresenter{
+        fun signupApi(
+            input: JsonObject
+
+        )
+        fun onStop()
     }
+
+    interface SignupMainView: BaseMainView {
+        fun onRegisterSuccess(responseData: RegisterResponse)
+    }
+
 }

@@ -21,16 +21,18 @@ import com.ants.driverpartner.everywhere.Constant.Companion.PROFILE_PERMISSION_C
 import com.ants.driverpartner.everywhere.Constant.Companion.REQUEST_PERMISSION_SETTING
 import com.ants.driverpartner.everywhere.Constant.Companion.profilePermissionsRequired
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.base.MvpActivity
 import com.ants.driverpartner.everywhere.activity.vehicleInfo.VehicleInfoActivity
+import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityDocumentBinding
-import com.ants.driverpartner.everywhere.uitl.Utility
+import com.ants.driverpartner.everywhere.utils.Utility
 import com.asksira.bsimagepicker.BSImagePicker
 import com.asksira.bsimagepicker.Utils
 import com.bumptech.glide.Glide
 
-class DocumentActivity : MvpActivity<DocumentPresenter>(), DocumentView,
+class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
     BSImagePicker.OnSingleImageSelectedListener {
+
+
     private var sentToSettings = false
     lateinit var binding: ActivityDocumentBinding
     private var upload_type: String? = null
@@ -67,10 +69,10 @@ class DocumentActivity : MvpActivity<DocumentPresenter>(), DocumentView,
         super.onResume()
         if (sentToSettings) {
             if (ActivityCompat.checkSelfPermission(
-                    mActivity,
+                    this,
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) === PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    mActivity,
+                    this,
                     Manifest.permission.CAMERA
                 ) === PackageManager.PERMISSION_GRANTED
             ) {
@@ -237,16 +239,16 @@ class DocumentActivity : MvpActivity<DocumentPresenter>(), DocumentView,
 
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        mActivity,
+                        this,
                         profilePermissionsRequired[0]
                     ) && ActivityCompat.shouldShowRequestPermissionRationale(
-                        mActivity,
+                        this,
                         profilePermissionsRequired[1]
                     )
                 ) {
 
                     //Show Information about why you need the permission
-                    val builder = AlertDialog.Builder(mActivity)
+                    val builder = AlertDialog.Builder(this)
                     builder.setTitle("Permission request_old")
                     builder.setMessage("This app needs storage and camera permission for captured and save image.")
                     builder.setPositiveButton("Grant") { dialog, which ->
@@ -254,7 +256,7 @@ class DocumentActivity : MvpActivity<DocumentPresenter>(), DocumentView,
 
 
                         ActivityCompat.requestPermissions(
-                            mActivity,
+                            this,
                             profilePermissionsRequired,
                             PROFILE_PERMISSION_CALLBACK
                         )
@@ -280,9 +282,9 @@ class DocumentActivity : MvpActivity<DocumentPresenter>(), DocumentView,
 
     }
 
-    override fun createPresenter(): DocumentPresenter {
-        return DocumentPresenter(this)
-    }
+//    override fun createPresenter(): DocumentPresenter {
+//        return DocumentPresenter(this)
+//    }
 
 
     override fun onSingleImageSelected(uri: Uri) {
@@ -353,5 +355,9 @@ class DocumentActivity : MvpActivity<DocumentPresenter>(), DocumentView,
         }
 
 
+    }
+
+    override fun validateError(message: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

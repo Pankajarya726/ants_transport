@@ -1,10 +1,14 @@
 package com.ants.driverpartner.everywhere.activity.otp
 
-import com.ants.driverpartner.everywhere.activity.base.BasePresenter
+import com.ants.driverpartner.everywhere.activity.base.BaseMainView
 
-class OtpPresenter(view: OptView) : BasePresenter<OptView>() {
+class OtpPresenter{
 
-    init {
-        attachView(view)
+    interface OtpMainPresenter{
+
     }
+    interface OtpView : BaseMainView{
+
+    }
+
 }

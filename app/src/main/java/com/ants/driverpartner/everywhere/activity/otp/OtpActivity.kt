@@ -7,11 +7,11 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.base.MvpActivity
 import com.ants.driverpartner.everywhere.activity.resetPassword.ResetPasswordActivity
+import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityOtpBinding
 
-class OtpActivity : MvpActivity<OtpPresenter>(), OptView {
+class OtpActivity : BaseMainActivity(), OtpPresenter.OtpView {
 
 
     lateinit var binding: ActivityOtpBinding
@@ -103,7 +103,7 @@ class OtpActivity : MvpActivity<OtpPresenter>(), OptView {
 
             override fun afterTextChanged(mEditable: Editable) {
                 if (mEditable.length == 1) {
-                    hideSoftKeyboard()
+                    hideKeyboard()
                 } else if (mEditable.length == 0) {
                     binding.etPinBox3.requestFocus()
                 }
@@ -112,7 +112,8 @@ class OtpActivity : MvpActivity<OtpPresenter>(), OptView {
 
     }
 
-    override fun createPresenter(): OtpPresenter {
-        return OtpPresenter(this)
+
+    override fun validateError(message: String) {
+
     }
 }

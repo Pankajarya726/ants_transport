@@ -1,4 +1,4 @@
-package com.ants.driverpartner.everywhere.uitl
+package com.ants.driverpartner.everywhere.utils
 
 import android.app.Activity
 import android.content.Context

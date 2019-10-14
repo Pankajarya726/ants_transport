@@ -11,7 +11,6 @@ import android.provider.Settings
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
@@ -21,26 +20,30 @@ import com.ants.driverpartner.everywhere.Constant.Companion.PROFILE_PERMISSION_C
 import com.ants.driverpartner.everywhere.Constant.Companion.REQUEST_PERMISSION_SETTING
 import com.ants.driverpartner.everywhere.Constant.Companion.profilePermissionsRequired
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.base.MvpActivity
 import com.ants.driverpartner.everywhere.activity.documents.DocumentActivity
+import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivitySignupBinding
-import com.ants.driverpartner.everywhere.uitl.Utility
+import com.ants.driverpartner.everywhere.utils.Utility
 import com.asksira.bsimagepicker.BSImagePicker
 import com.asksira.bsimagepicker.Utils
-import com.bumptech.glide.Glide
+import com.google.gson.JsonObject
+import com.squareup.picasso.Picasso
+import com.tekzee.amiggos.ui.login.SignupPresenterImplementation
 
 
-class SignUpActivity : MvpActivity<SignupPresenter>(), SignupView,
+class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     BSImagePicker.OnSingleImageSelectedListener {
+
     lateinit var binding: ActivitySignupBinding
     var title: String = ""
     private var sentToSettings = false
     private var upload_type: String? = null
+    private var presenter: SignupPresenterImplementation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup)
-
+        presenter = SignupPresenterImplementation(this, this)
         title = intent.getStringExtra(Constant.PROFILE_TYPE)
         binding.tvTitle.text = title + " Sign Up"
 
@@ -76,20 +79,86 @@ class SignUpActivity : MvpActivity<SignupPresenter>(), SignupView,
             }
         })
 
+        binding.imgUser1.setOnClickListener(View.OnClickListener {
+            uploadDocument(Constant.UploadType.USER)
+        })
+
+        binding.imgAddImage.setOnClickListener(View.OnClickListener {
+            uploadDocument(Constant.UploadType.USER)
+        })
+
+        binding.btnNext.setOnClickListener(View.OnClickListener {
+            registerUser()
+        })
+
+
     }
 
-    override fun createPresenter(): SignupPresenter {
-        return SignupPresenter(this)
+    private fun registerUser() {
+
+
+        if (binding.edtName.text.toString().trim().isEmpty()) {
+            binding.edtName.setError("Enter Name")
+        } else if (binding.edtMobile.text.toString().trim().isEmpty()) {
+            binding.edtMobile.setError("Enter Mobile Number")
+        } else if (binding.edtMobile.text.toString().trim().length != 10) {
+            binding.edtMobile.setError("Invalid Mobile Number")
+        } else if (binding.edtEmail.text.toString().trim().isEmpty()) {
+            binding.edtMobile.setError("Enter Email")
+        } else if (!Utility.emailValidator(binding.edtEmail.text.toString().trim())) {
+            binding.edtEmail.setError("Invalid Email")
+        } else if (binding.edtPassword.text.toString().isEmpty()) {
+            binding.edtPassword.setError("Enter Password")
+        } else if (binding.edtComfirmPassword.text.toString().isEmpty()) {
+            binding.edtPassword.setError("Enter Password")
+        } else if (!binding.edtComfirmPassword.text.toString().equals(binding.edtPassword.text.toString())) {
+            binding.edtComfirmPassword.setError("Password not match")
+        } else if (binding.edtResAddress.text.toString().trim().isEmpty()) {
+            binding.edtResAddress.setError("Enter Residential Address")
+        } else if (binding.edtPostAddress.text.toString().trim().isEmpty()) {
+            binding.edtPostAddress.setError("Enter Postal Address")
+        } else {
+            var json = JsonObject()
+
+            json.addProperty("name", binding.edtName.text.toString().trim().isEmpty())
+            json.addProperty("mobile", binding.edtMobile.text.toString().trim().isEmpty())
+            json.addProperty("email", binding.edtEmail.text.toString().trim().isEmpty())
+            json.addProperty("password", binding.edtPassword.text.toString().trim().isEmpty())
+            json.addProperty(
+                "residential_address",
+                binding.edtResAddress.text.toString().trim().isEmpty()
+            )
+            json.addProperty(
+                "postal_address",
+                binding.edtPostAddress.text.toString().trim().isEmpty()
+            )
+
+            when (title) {
+                Constant.OWNER ->
+                    json.addProperty("account_type", 1)
+                Constant.PARTNER ->
+                    json.addProperty("account_type", 2)
+
+                Constant.BOTH ->
+                    json.addProperty("account_type", 3)
+
+            }
+            presenter!!.signupApi(json)
+
+        }
+
+
     }
+
 
     override fun onResume() {
         super.onResume()
         if (sentToSettings) {
             if (ActivityCompat.checkSelfPermission(
-                    mActivity,
+                    applicationContext,
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) === PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    mActivity,
+                    applicationContext,
                     Manifest.permission.CAMERA
                 ) === PackageManager.PERMISSION_GRANTED
             ) {
@@ -99,12 +168,12 @@ class SignUpActivity : MvpActivity<SignupPresenter>(), SignupView,
         }
     }
 
-    private fun uploadDocument(idFront: String) {
+    private fun uploadDocument(type: String) {
 
 
         if (checkProfilePermissions()
         ) {
-            this.upload_type = idFront
+            this.upload_type = type
             val singleSelectionPicker = BSImagePicker.Builder(Constant.PROVIDE_AUTHORITY)
                 .setMaximumDisplayingImages(Integer.MAX_VALUE)
                 .setSpanCount(3) //Default: 3. This is the number of columns
@@ -256,16 +325,16 @@ class SignUpActivity : MvpActivity<SignupPresenter>(), SignupView,
 
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        mActivity,
+                        this,
                         profilePermissionsRequired[0]
                     ) && ActivityCompat.shouldShowRequestPermissionRationale(
-                        mActivity,
+                        this,
                         profilePermissionsRequired[1]
                     )
                 ) {
 
                     //Show Information about why you need the permission
-                    val builder = AlertDialog.Builder(mActivity)
+                    val builder = AlertDialog.Builder(this)
                     builder.setTitle("Permission request_old")
                     builder.setMessage("This app needs storage and camera permission for captured and save image.")
                     builder.setPositiveButton("Grant") { dialog, which ->
@@ -273,7 +342,7 @@ class SignUpActivity : MvpActivity<SignupPresenter>(), SignupView,
 
 
                         ActivityCompat.requestPermissions(
-                            mActivity,
+                            this,
                             profilePermissionsRequired,
                             PROFILE_PERMISSION_CALLBACK
                         )
@@ -302,12 +371,14 @@ class SignUpActivity : MvpActivity<SignupPresenter>(), SignupView,
 
     override fun onSingleImageSelected(uri: Uri) {
         if (upload_type.equals(Constant.UploadType.USER, ignoreCase = true)) {
-            binding.imgUser.setScaleType(ImageView.ScaleType.FIT_XY)
+//            binding.imgUser.setScaleType(ImageView.ScaleType.FIT_XY)
 
+            binding.imgUser1.visibility = View.GONE
+            binding.imgUser.visibility = View.VISIBLE
+            binding.imgAddImage.visibility = View.VISIBLE
 
+            Picasso.with(applicationContext).load(uri).into(binding.imgUser)
 
-
-            Glide.with(applicationContext).load(uri).into(binding.imgUser)
 
             try {
                 var licenceBackInputStream =
@@ -321,4 +392,15 @@ class SignUpActivity : MvpActivity<SignupPresenter>(), SignupView,
 
     }
 
+    override fun validateError(message: String) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onRegisterSuccess(responseData: RegisterResponse) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
 }
+
+

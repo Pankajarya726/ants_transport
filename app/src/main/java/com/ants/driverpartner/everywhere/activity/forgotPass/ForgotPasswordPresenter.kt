@@ -1,10 +1,14 @@
 package com.ants.driverpartner.everywhere.activity.forgotPass
 
-import com.ants.driverpartner.everywhere.activity.base.BasePresenter
+import com.ants.driverpartner.everywhere.activity.base.BaseMainView
+import com.ants.driverpartner.everywhere.base.BaseMainActivity
 
-class ForgotPasswordPresenter(view: ForgotPasswordView) : BasePresenter<ForgotPasswordView>() {
+class ForgotPasswordPresenter {
 
-    init {
-        attachView(view)
+    interface ForgotPasswordMainPresenter{
+
+    }
+    interface ForgotPasswordView :BaseMainView{
+
     }
 }
