@@ -2,6 +2,7 @@ package com.ants.driverpartner.everywhere.activity.documents
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -28,18 +29,40 @@ import com.ants.driverpartner.everywhere.utils.Utility
 import com.asksira.bsimagepicker.BSImagePicker
 import com.asksira.bsimagepicker.Utils
 import com.bumptech.glide.Glide
+import java.io.File
 
 class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
     BSImagePicker.OnSingleImageSelectedListener {
 
-
+    private var title = ""
     private var sentToSettings = false
     lateinit var binding: ActivityDocumentBinding
     private var upload_type: String? = null
+    private var file_id_front: File? = null
+    private var file_id_back: File? = null
+    private var file_licence_front: File? = null
+    private var file_licence_back: File? = null
+    private var file_driver: File? = null
+    private var file_home_address: File? = null
+    private var file_bank_letter: File? = null
+    private var file_bank_statement: File? = null
+    private var file_ownership: File? = null
+    private var presenter: DocumentPresenterImplementation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_document)
+        presenter = DocumentPresenterImplementation(this, this)
+
+
+        title = intent.getStringExtra(Constant.PROFILE_TYPE)
+
+        if (title.equals(Constant.BOTH)) {
+            binding.tvTitle.text = Constant.OWNER + " Documents"
+        } else {
+            binding.tvTitle.text = title + " Documents"
+        }
+
 
         requestPermission()
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -120,9 +143,7 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
 
         } else {
             return false
-
         }
-
     }
 
     private fun requestPermission() {
@@ -138,7 +159,6 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
                     profilePermissionsRequired[1]
                 ))
             ) {
-
                 val builder = AlertDialog.Builder(applicationContext)
                 builder.setTitle("Permission request_old")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
@@ -288,73 +308,98 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
 
 
     override fun onSingleImageSelected(uri: Uri) {
-        if (upload_type.equals(Constant.UploadType.ID_FRONT, ignoreCase = true)) {
 
-            binding.imgIdFront.setScaleType(ImageView.ScaleType.FIT_XY);
-            Glide.with(applicationContext).load(uri).into(binding.imgIdFront)
+        when (upload_type) {
+            Constant.UploadType.ID_FRONT -> {
 
-            try {
-                var idFrontInputStream =
-                    applicationContext.getContentResolver().openInputStream(uri)
-                Log.e("idFrontInputStream", idFrontInputStream.toString())
+                binding.imgIdFront.setScaleType(ImageView.ScaleType.FIT_XY)
 
-            } catch (e: Exception) {
-                e.printStackTrace()
+                this.file_id_front = File(uri.path)
+
+                Glide.with(applicationContext).load(uri).into(binding.imgIdFront)
+
+                presenter!!.uploadDocument(Constant.UploadType.ID_FRONT, file_id_front!!)
             }
 
-//            val imageBytes = Utility.getBytes(licenseInputStream)
-//            mvpPresenter.uploadDocument(UploadType.LICENCE, imageBytes)
+            Constant.UploadType.ID_BACK -> {
+                binding.imgIdBack.setScaleType(ImageView.ScaleType.FIT_XY)
 
-        } else if (upload_type.equals(Constant.UploadType.ID_BACK, ignoreCase = true)) {
-            binding.imgIdBack.setScaleType(ImageView.ScaleType.FIT_XY);
-            Glide.with(applicationContext).load(uri).into(binding.imgIdBack)
+                Glide.with(applicationContext).load(uri).into(binding.imgIdBack)
 
-            try {
-                var idBackInputStream =
-                    applicationContext.getContentResolver().openInputStream(uri)
-                Log.e("idBackInputStream", idBackInputStream.toString())
-            } catch (e: Exception) {
-                e.printStackTrace()
+                this.file_id_back = File(uri.path)
+
+                presenter!!.uploadDocument(Constant.UploadType.ID_BACK, file_id_back!!)
             }
 
-//            val imageBytes = Utility.getBytes(vehicleRegistrationInputStream)
-//            mvpPresenter.uploadDocument(UploadType.VEHICLE_REGISTRATION, imageBytes)
+            Constant.UploadType.LICENCE_FRONT -> {
+                binding.imgLicenseFront.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(applicationContext).load(uri).into(binding.imgLicenseFront)
 
-        } else if (upload_type.equals(Constant.UploadType.LICENCE_FRONT, ignoreCase = true)) {
-            binding.imgLicenseFront.setScaleType(ImageView.ScaleType.FIT_XY);
-            Glide.with(applicationContext).load(uri).into(binding.imgLicenseFront)
+                this.file_licence_front = File(uri.path)
 
-            try {
-                var licenceFrontInputStream =
-                    applicationContext.getContentResolver().openInputStream(uri)
-                Log.e("licenceFrontInputStream", licenceFrontInputStream.toString())
-
-            } catch (e: Exception) {
-                e.printStackTrace()
+                presenter!!.uploadDocument(Constant.UploadType.LICENCE_FRONT, file_licence_front!!)
             }
 
-//            val imageBytes = Utility.getBytes(insuranceInputStream)
-//            mvpPresenter.uploadDocument(UploadType.INSURANCE, imageBytes)
+            Constant.UploadType.LICENCE_BACK -> {
 
-        } else if (upload_type.equals(Constant.UploadType.LICENCE_BACK, ignoreCase = true)) {
-            binding.imgLicenseBack.setScaleType(ImageView.ScaleType.FIT_XY)
-            Glide.with(applicationContext).load(uri).into(binding.imgLicenseBack)
+                binding.imgLicenseBack.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(applicationContext).load(uri).into(binding.imgLicenseBack)
 
-            try {
-                var licenceBackInputStream =
-                    applicationContext.getContentResolver().openInputStream(uri)
-                Log.e("licenceBackInputStream", licenceBackInputStream.toString())
-            } catch (e: Exception) {
-                e.printStackTrace()
+                this.file_licence_back = File(uri.path)
+
+                presenter!!.uploadDocument(Constant.UploadType.LICENCE_BACK, file_licence_back!!)
+
+            }
+            Constant.UploadType.DRIVER_FACE -> {
+
+                binding.imgDriverPic.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(applicationContext).load(uri).into(binding.imgDriverPic)
+
+                this.file_driver = File(uri.path)
+
+                presenter!!.uploadDocument(Constant.UploadType.DRIVER_FACE, file_driver!!)
+
+            }
+
+            Constant.UploadType.HOME_ADDRESS -> {
+
+                binding.imgHomeAddress.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(applicationContext).load(uri).into(binding.imgHomeAddress)
+
+                this.file_home_address = File(uri.path)
+
+                presenter!!.uploadDocument(Constant.UploadType.HOME_ADDRESS, file_home_address!!)
+
             }
 
 
-//            val imageBytes = Utility.getBytes(idProofInputStream)
-//            mvpPresenter.uploadDocument(UploadType.ID_PROOF, imageBytes)
+            Constant.UploadType.BANK_LATTER -> {
 
+                binding.imgBankLatter.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(applicationContext).load(uri).into(binding.imgBankLatter)
+
+                this.file_bank_letter = File(uri.path)
+
+                presenter!!.uploadDocument(Constant.UploadType.BANK_LATTER, file_bank_letter!!)
+
+            }
+            Constant.UploadType.BANK_LATTER -> {
+
+                binding.imgBankLatter.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(applicationContext).load(uri).into(binding.imgBankLatter)
+
+                this.file_bank_letter = File(uri.path)
+
+                presenter!!.uploadDocument(Constant.UploadType.BANK_LATTER, file_bank_letter!!)
+
+            }
         }
+    }
 
 
+    override fun getContext(): Context {
+
+        return this
     }
 
     override fun validateError(message: String) {

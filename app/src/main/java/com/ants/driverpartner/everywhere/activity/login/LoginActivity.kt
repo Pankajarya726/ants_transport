@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.Signup.SignUpActivity
+import com.ants.driverpartner.everywhere.activity.signup.SignUpActivity
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPasswordActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.LoginBinding
@@ -169,7 +169,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
                 }
                 dialog.findViewById(R.id.radio_both) as RadioButton -> {
                     val intent = Intent(applicationContext, SignUpActivity::class.java)
-                    intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
+                    intent.putExtra(Constant.PROFILE_TYPE, Constant.BOTH)
                     startActivity(intent)
                 }
 

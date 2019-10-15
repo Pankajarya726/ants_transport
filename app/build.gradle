@@ -116,5 +116,9 @@ dependencies {
 
     //logger
     implementation 'com.orhanobut:logger:2.2.0'
+
+    //dialog
+
+        implementation 'com.github.f0ris.sweetalert:library:1.5.1'
 }
 

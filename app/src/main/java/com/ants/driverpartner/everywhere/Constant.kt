@@ -13,6 +13,7 @@ interface Constant {
     }
 
     companion object {
+        val USER_ID = "userId"
         val OWNER = "Owner"
         val PARTNER = "Partner"
         val BOTH = "Both"
@@ -22,7 +23,8 @@ interface Constant {
         val PROFILE_PERMISSION_CALLBACK = 111
         val MAP_ZOOM_LEVEL = 14.0f
         val REQUEST_PERMISSION_SETTING = 333
-        val profilePermissionsRequired = arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val profilePermissionsRequired =
+            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         val CURRENCY = "R"
         /**
          * Shared preference constant data
@@ -42,15 +44,21 @@ interface Constant {
         val IS_NEW_BOKKING_REQUEST = "IS_NEW_BOKKING_REQUEST"
         val IS_BOOKING_REJECTED_BY_CUSTOMER = "IS_BOOKING_REJECTED_BY_CUSTOMER"
         val GEO_DISTANCE = "GEO_DISTANCE"
+        val PROFILE = "profile"
     }
 
     interface UploadType {
         companion object {
+
             val USER = "user"
-            val ID_FRONT = "idFront"
-            val ID_BACK = "idBack"
-            val LICENCE_FRONT = "licenceFront"
-            val LICENCE_BACK = "licenceBack"
+            val ID_FRONT = "idproof_front"
+            val ID_BACK = "idproof_back"
+            val LICENCE_FRONT = "driver_license_front"
+            val LICENCE_BACK = "driver_license_back"
+            val DRIVER_FACE = "proffesional_driver_face"
+            val HOME_ADDRESS = "proof_home_add"
+            val BANK_LATTER = "bank_letter"
+            val BANK_STATEMENT = "bank_statement"
             val INSURANCE = "insurance"
             val VEHICLE_REGISTRATION = "registration"
         }

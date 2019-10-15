@@ -3,8 +3,13 @@ package com.ants.driverpartner.everywhere.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.widget.TextView
+import com.google.android.material.snackbar.Snackbar
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+
 
 object Utility {
     private val ANTS = "ANTS"
@@ -41,6 +46,15 @@ object Utility {
         editor.clear()
         editor.commit()
     }
+
+//    fun createHeaders(sharedPreferences: SharedPreference?): HashMap<String, String?> {
+//        val headers = HashMap<String, String?>()
+//        headers["language-code"] = if(sharedPreferences!!.getValueString(ConstantLib.LANGUAGE_CODE).isNullOrEmpty()){"en"}else{
+//            sharedPreferences.getValueString(ConstantLib.LANGUAGE_CODE)}
+//        headers["api-key"] = sharedPreferences.getValueString(ConstantLib.API_TOKEN)
+//        headers["device_type"] = ConstantLib.DEVICETYPE
+//        return headers
+//    }
 
     fun emailValidator(email: String): Boolean {
         val pattern: Pattern
@@ -127,6 +141,35 @@ object Utility {
 
         return isConnected
 
+    }
+
+
+    fun showSnakbar(context: Context, message: String) {
+
+        val tv = TextView(context)
+
+
+        Snackbar.make(tv, message, Snackbar.LENGTH_LONG).show()
+    }
+
+    fun getBytes(inputStream: InputStream): ByteArray {
+        val byteBuffer = ByteArrayOutputStream()
+        val bufferSize = 1024
+        val buffer = ByteArray(bufferSize)
+        try {
+            var len = 0
+            var v = inputStream.read(buffer)
+            while (v != -1) {
+                len = inputStream.read(buffer)
+                v = len
+                byteBuffer.write(buffer, 0, v)
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return byteBuffer.toByteArray()
     }
 
 

@@ -1,6 +1,8 @@
 package com.tekzee.mallortaxi.network
 
-import com.ants.driverpartner.everywhere.activity.Signup.RegisterResponse
+
+import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
+import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.google.gson.JsonObject
 import io.reactivex.Observable
 import okhttp3.MultipartBody
@@ -19,6 +21,17 @@ interface ApiService {
 
 
 
+
+    @Multipart
+    @POST("imageUpdate")
+    fun uploadImage(
+        @HeaderMap createHeaders: HashMap<String, String?>,
+        @Part("userid") userid: RequestBody,
+        @Part image: MultipartBody.Part,
+        @Part("type") type: RequestBody,
+        @Part("driver_id") driver_id: RequestBody
+
+    ): Observable<Response<UploadImageResponse>>
 
 //    @Multipart
 //    @POST("user/save_photoid")

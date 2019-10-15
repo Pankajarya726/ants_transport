@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:orientation="vertical"
-        tools:context=".activity.Signup.SignUpActivity">
+        tools:context=".activity.signup.SignUpActivity">
 
         <RelativeLayout
 

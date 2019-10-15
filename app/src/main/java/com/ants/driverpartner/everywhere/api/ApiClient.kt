@@ -1,6 +1,8 @@
 package com.tekzee.mallortaxi.network
 
-import com.ants.driverpartner.everywhere.activity.Signup.RegisterResponse
+
+import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
+import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.orhanobut.logger.AndroidLogAdapter
@@ -8,7 +10,9 @@ import com.orhanobut.logger.BuildConfig
 import com.orhanobut.logger.Logger.addLogAdapter
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -68,6 +72,13 @@ class ApiClient {
         input: JsonObject
     ): Observable<Response<RegisterResponse>> {
         return apiService.signup(input)
+    }
+
+    fun uploadImage(
+        headers: HashMap<String, String?>,
+        userId: RequestBody, image: MultipartBody.Part, type: RequestBody, driver_id: RequestBody
+    ): Observable<Response<UploadImageResponse>> {
+        return apiService.uploadImage(headers,userId,image,type,driver_id)
     }
 
 //    fun doValidateAppVersionApi(
