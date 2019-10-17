@@ -1,6 +1,7 @@
 package com.tekzee.mallortaxi.network
 
 
+import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.google.gson.JsonObject
@@ -32,6 +33,12 @@ interface ApiService {
         @Part("driver_id") driver_id: RequestBody
 
     ): Observable<Response<UploadImageResponse>>
+
+
+    @POST("login")
+    fun login(@Body input: JsonObject): Observable<Response<LoginResponse>>
+
+
 
 //    @Multipart
 //    @POST("user/save_photoid")

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
-    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ants.driverpartner.everywhere">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,11 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme">
+        <activity android:name=".activity.partnerDocument.PartnerDocActivity"></activity>
         <activity
             android:name=".activity.resetPassword.ResetPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.otp.OtpActivity"
             android:screenOrientation="portrait"
@@ -80,8 +79,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
     </application>
-
 
 </manifest>

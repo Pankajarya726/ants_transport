@@ -13,8 +13,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.signup.SignUpActivity
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPasswordActivity
+import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
+import com.ants.driverpartner.everywhere.activity.signup.SignUpActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.LoginBinding
 import com.ants.driverpartner.everywhere.utils.Utility
@@ -24,19 +25,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.google.gson.JsonObject
 import com.tekzee.amiggos.ui.login.LoginPresenter
+import com.tekzee.amiggos.ui.login.LoginPresenterImplementation
 
 
 class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnClickListener {
 
-
-
     lateinit var binding: LoginBinding
     lateinit var mGoogleSignInClient: GoogleSignInClient
+    private var presenter: LoginPresenterImplementation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.login)
+        presenter = LoginPresenterImplementation(this, this)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -57,10 +60,6 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
         binding.btnGoogle.setOnClickListener(this)
         binding.imgEye.setOnClickListener(this)
     }
-
-//    override fun createPresenter(): LoginPresenter {
-//        return LoginPresenter(this)
-//    }
 
     override fun onClick(v: View) {
 
@@ -183,10 +182,6 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
     }
 
-    private fun gotoSignUpScreen(selected: RadioButton) {
-
-
-    }
 
     override fun validateError(message: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -203,17 +198,49 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
             //Toast.makeText(applicationContext, "Invalid Email", Toast.LENGTH_LONG).show()
             binding.edtEmail.setError("Invalid Email")
 
-
         } else if (binding.edtPassword.text.toString().trim().isEmpty()) {
             Toast.makeText(applicationContext, "Enter Password", Toast.LENGTH_LONG).show()
             binding.edtPassword.setError("Enter password")
+        } else {
+            var input = JsonObject()
+            input.addProperty("email", binding.edtEmail.text.toString().trim())
+            input.addProperty("password", binding.edtPassword.text.toString())
+            input.addProperty("device_type", 1)
+            input.addProperty("device_token", "adgasdgadsg")
+
+            presenter!!.login(input)
         }
 
     }
 
 
-    /*override fun onLoginSuccess(responseData: LoginResponse) {
+    override fun onLoginSuccess(responseData: LoginResponse) {
+
+        when (responseData.data.account_status) {
+
+            1 -> gotoDocumentActivity(responseData.data.accountType)
+
+            2 -> gotoVehicleActivity(responseData.data.accountType)
+
+            3 -> gotoDocumentActivity(responseData.data.accountType)
+
+            4 -> gotoHomeActivity()
+
+        }
+    }
+
+    private fun gotoHomeActivity() {
+
+    }
+
+    private fun gotoVehicleActivity(accountType: Int) {
 
 
-    }*/
+    }
+
+    private fun gotoDocumentActivity(accountType: Int) {
+
+
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.tekzee.mallortaxi.network
 
 
+import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.google.gson.GsonBuilder
@@ -72,6 +73,12 @@ class ApiClient {
         input: JsonObject
     ): Observable<Response<RegisterResponse>> {
         return apiService.signup(input)
+    }
+
+    fun login(
+        input: JsonObject
+    ): Observable<Response<LoginResponse>> {
+        return apiService.login(input)
     }
 
     fun uploadImage(

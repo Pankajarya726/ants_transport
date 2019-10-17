@@ -23,6 +23,7 @@ import com.ants.driverpartner.everywhere.Constant.Companion.REQUEST_PERMISSION_S
 import com.ants.driverpartner.everywhere.Constant.Companion.profilePermissionsRequired
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.documents.DocumentActivity
+import com.ants.driverpartner.everywhere.activity.partnerDocument.PartnerDocActivity
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
@@ -355,81 +356,80 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
 
     private fun registerUser() {
-//
-//        if (binding.edtName.text.toString().trim().isEmpty()) {
-//            binding.edtName.setError("Enter name")
-////            showAlertDialog(this, "Enter name")
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Enter name")
-//
-//        } else if (binding.edtMobile.text.toString().trim().isEmpty()) {
-//            binding.edtMobile.setError("Enter Mobile Number")
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Mobile Number")
-//        } else if (binding.edtMobile.text.toString().trim().length != 10) {
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Invalid Mobile Number")
-//            binding.edtMobile.setError("Invalid Mobile Number")
-//        } else if (binding.edtEmail.text.toString().trim().isEmpty()) {
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Email")
-//            binding.edtMobile.setError("Enter Email")
-//        } else if (!Utility.emailValidator(binding.edtEmail.text.toString().trim())) {
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Invalid Email")
-//            binding.edtEmail.setError("Invalid Email")
-//        } else if (binding.edtPassword.text.toString().isEmpty()) {
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Password")
-//            binding.edtPassword.setError("Enter Password")
-//        } else if (binding.edtComfirmPassword.text.toString().isEmpty()) {
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Password")
-//            binding.edtPassword.setError("Enter Password")
-//        } else if (!binding.edtComfirmPassword.text.toString().equals(binding.edtPassword.text.toString())) {
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Password not match")
-//            binding.edtComfirmPassword.setError("Password not match")
-//        } else if (binding.edtResAddress.text.toString().trim().isEmpty()) {
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Residential Address")
-//            binding.edtResAddress.setError("Enter Residential Address")
-//        } else if (binding.edtPostAddress.text.toString().trim().isEmpty()) {
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Postal Address")
-//            binding.edtPostAddress.setError("Enter Postal Address")
-//        } else if (file == null) {
-//            SnackbarUtils.snackBarBottom(binding.edtName, "Select Image")
-//            // binding.edtPostAddress.setError("Enter Postal Address")
-//        } else {
-//            var json = JsonObject()
-//
-//            json.addProperty("name", binding.edtName.text.toString().trim())
-//            json.addProperty("mobile", binding.edtMobile.text.toString().trim())
-//            json.addProperty("email", binding.edtEmail.text.toString().trim())
-//            json.addProperty("password", binding.edtPassword.text.toString())
-//            json.addProperty(
-//                "residential_address",
-//                binding.edtResAddress.text.toString().trim()
-//            )
-//            json.addProperty(
-//                "postal_address",
-//                binding.edtPostAddress.text.toString().trim()
-//            )
-//
-//            when (title) {
-//                Constant.OWNER ->
-//                    json.addProperty("account_type", 1)
-//                Constant.PARTNER ->
-//                    json.addProperty("account_type", 2)
-//                Constant.BOTH ->
-//                    json.addProperty("account_type", 3)
-//
-//            }
-//
-//            json.addProperty(
-//                "device_type",
-//                "1"
-//            )
-//            json.addProperty(
-//                "device_token",
-//                "adgasdgasg"
-//            )
-//            presenter!!.signupApi(json)
-////            Logger.e("Input JsonObject", json.toString())
-//            Log.e("Input JsonObject", json.toString())
-//        }
-        gotoDocumentActivity()
+
+        if (binding.edtName.text.toString().trim().isEmpty()) {
+            binding.edtName.setError("Enter name")
+//            showAlertDialog(this, "Enter name")
+            SnackbarUtils.snackBarBottom(binding.edtName, "Enter name")
+
+        } else if (binding.edtMobile.text.toString().trim().isEmpty()) {
+            binding.edtMobile.setError("Enter Mobile Number")
+            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Mobile Number")
+        } else if (binding.edtMobile.text.toString().trim().length != 10) {
+            SnackbarUtils.snackBarBottom(binding.edtName, "Invalid Mobile Number")
+            binding.edtMobile.setError("Invalid Mobile Number")
+        } else if (binding.edtEmail.text.toString().trim().isEmpty()) {
+            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Email")
+            binding.edtMobile.setError("Enter Email")
+        } else if (!Utility.emailValidator(binding.edtEmail.text.toString().trim())) {
+            SnackbarUtils.snackBarBottom(binding.edtName, "Invalid Email")
+            binding.edtEmail.setError("Invalid Email")
+        } else if (binding.edtPassword.text.toString().isEmpty()) {
+            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Password")
+            binding.edtPassword.setError("Enter Password")
+        } else if (binding.edtComfirmPassword.text.toString().isEmpty()) {
+            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Password")
+            binding.edtPassword.setError("Enter Password")
+        } else if (!binding.edtComfirmPassword.text.toString().equals(binding.edtPassword.text.toString())) {
+            SnackbarUtils.snackBarBottom(binding.edtName, "Password not match")
+            binding.edtComfirmPassword.setError("Password not match")
+        } else if (binding.edtResAddress.text.toString().trim().isEmpty()) {
+            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Residential Address")
+            binding.edtResAddress.setError("Enter Residential Address")
+        } else if (binding.edtPostAddress.text.toString().trim().isEmpty()) {
+            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Postal Address")
+            binding.edtPostAddress.setError("Enter Postal Address")
+        } else if (file == null) {
+            SnackbarUtils.snackBarBottom(binding.edtName, "Select Image")
+            // binding.edtPostAddress.setError("Enter Postal Address")
+        } else {
+            var json = JsonObject()
+
+            json.addProperty("name", binding.edtName.text.toString().trim())
+            json.addProperty("mobile", binding.edtMobile.text.toString().trim())
+            json.addProperty("email", binding.edtEmail.text.toString().trim())
+            json.addProperty("password", binding.edtPassword.text.toString())
+            json.addProperty(
+                "residential_address",
+                binding.edtResAddress.text.toString().trim()
+            )
+            json.addProperty(
+                "postal_address",
+                binding.edtPostAddress.text.toString().trim()
+            )
+
+            when (title) {
+                Constant.OWNER ->
+                    json.addProperty("account_type", 1)
+                Constant.PARTNER ->
+                    json.addProperty("account_type", 2)
+                Constant.BOTH ->
+                    json.addProperty("account_type", 3)
+
+            }
+
+            json.addProperty(
+                "device_type",
+                "1"
+            )
+            json.addProperty(
+                "device_token",
+                "adgasdgasg"
+            )
+            presenter!!.signupApi(json)
+            Log.e("Input JsonObject", json.toString())
+        }
+//        gotoDocumentActivity()
     }
 
 
@@ -441,8 +441,29 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
         Toast.makeText(applicationContext, responseData.message, Toast.LENGTH_LONG).show()
 
 
+        Utility.setSharedPreference(getContext(), Constant.NAME, responseData.data.name)
+        Utility.setSharedPreference(getContext(), Constant.MOBILE, responseData.data.mobile)
+        Utility.setSharedPreference(getContext(), Constant.EMAIL, responseData.data.email)
+        Utility.setSharedPreference(
+            getContext(),
+            Constant.RESIDENTIAL_ADDRESS,
+            responseData.data.residentialAddress
+        )
+        Utility.setSharedPreference(
+            getContext(),
+            Constant.POSTAL_ADDRESS,
+            responseData.data.postalAddress
+        )
+        Utility.setSharedPreference(getContext(), Constant.S_TOKEN, responseData.data.deviceToken)
         Utility.setSharedPreference(getContext(), Constant.USER_ID, responseData.data.userid)
-        Utility.setSharedPreference(getContext(), Constant.S_TOKEN, responseData.data.stoken)
+        Utility.setSharedPreference(getContext(), Constant.API_KEY, responseData.data.stoken)
+        if (responseData.data.accountType == 1) {
+            Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.OWNER)
+        }else if(responseData.data.accountType == 2){
+            Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.PARTNER)
+        }else {
+            Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.BOTH)
+        }
 
 
         if (file != null) {
@@ -456,16 +477,39 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     }
 
     override fun onImageUploadSuccess(responseData: UploadImageResponse) {
-        Toast.makeText(applicationContext, responseData.message, Toast.LENGTH_LONG).show()
+        //Toast.makeText(applicationContext, responseData.message, Toast.LENGTH_LONG).show()
 
         gotoDocumentActivity()
 
     }
 
     private fun gotoDocumentActivity() {
-        val intent = Intent(applicationContext, DocumentActivity::class.java)
-        intent.putExtra(Constant.PROFILE_TYPE, title)
-        startActivity(intent)
+
+        when (title) {
+
+            Constant.OWNER -> {
+                val intent = Intent(applicationContext, DocumentActivity::class.java)
+                intent.putExtra(Constant.PROFILE_TYPE, title)
+                startActivity(intent)
+            }
+
+            Constant.PARTNER -> {
+                val intent = Intent(applicationContext, PartnerDocActivity::class.java)
+                intent.putExtra(Constant.PROFILE_TYPE, title)
+                intent.putExtra("value", 1)
+                startActivity(intent)
+            }
+
+            Constant.BOTH -> {
+                val intent = Intent(applicationContext, DocumentActivity::class.java)
+                intent.putExtra(Constant.PROFILE_TYPE, title)
+                startActivity(intent)
+            }
+
+
+        }
+
+
     }
 
     fun showAlertDialog(context: Context, msg: String) {

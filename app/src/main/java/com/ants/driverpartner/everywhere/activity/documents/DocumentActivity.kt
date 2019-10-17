@@ -383,14 +383,24 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
                 presenter!!.uploadDocument(Constant.UploadType.BANK_LATTER, file_bank_letter!!)
 
             }
-            Constant.UploadType.BANK_LATTER -> {
+            Constant.UploadType.BANK_STATEMENT -> {
 
-                binding.imgBankLatter.setScaleType(ImageView.ScaleType.FIT_XY);
-                Glide.with(applicationContext).load(uri).into(binding.imgBankLatter)
+                binding.imgBankStatement.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(applicationContext).load(uri).into(binding.imgBankStatement)
 
-                this.file_bank_letter = File(uri.path)
+                this.file_bank_statement = File(uri.path)
 
-                presenter!!.uploadDocument(Constant.UploadType.BANK_LATTER, file_bank_letter!!)
+                presenter!!.uploadDocument(Constant.UploadType.BANK_STATEMENT, file_bank_statement!!)
+
+            }
+            Constant.UploadType.OWNERSHIP-> {
+
+                binding.imgOwnership.setScaleType(ImageView.ScaleType.FIT_XY);
+                Glide.with(applicationContext).load(uri).into(binding.imgOwnership)
+
+                this.file_ownership = File(uri.path)
+
+                presenter!!.uploadDocument(Constant.UploadType.OWNERSHIP, file_ownership!!)
 
             }
         }
@@ -403,6 +413,6 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
     }
 
     override fun validateError(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }

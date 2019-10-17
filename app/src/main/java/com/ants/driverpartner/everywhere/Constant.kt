@@ -13,7 +13,9 @@ interface Constant {
     }
 
     companion object {
-        val USER_ID = "userId"
+        val USER_ID = "USER_ID"
+        val ACCOUNT_TYPE = "ACCOUNT_TYPE"
+
         val OWNER = "Owner"
         val PARTNER = "Partner"
         val BOTH = "Both"
@@ -37,6 +39,9 @@ interface Constant {
         val EMAIL = "EMAIL"
         val MOBILE = "MOBILE"
         val S_TOKEN = "S_TOKEN"
+        val API_KEY = "API_KEY"
+        val RESIDENTIAL_ADDRESS = "RESIDENTIAL_ADDRESS"
+        val POSTAL_ADDRESS = "POSTAL_ADDRESS"
         val PLAN_ID = "PLAN_ID"
         val PROFILE_IMAGE_URL = "PROFILE_IMAGE_URL"
         val IS_ONLINE = "IS_ONLINE"
@@ -59,6 +64,7 @@ interface Constant {
             val HOME_ADDRESS = "proof_home_add"
             val BANK_LATTER = "bank_letter"
             val BANK_STATEMENT = "bank_statement"
+            val OWNERSHIP = "ownership"
             val INSURANCE = "insurance"
             val VEHICLE_REGISTRATION = "registration"
         }
