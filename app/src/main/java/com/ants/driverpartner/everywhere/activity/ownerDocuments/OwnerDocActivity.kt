@@ -1,4 +1,4 @@
-package com.ants.driverpartner.everywhere.activity.documents
+package com.ants.driverpartner.everywhere.activity.ownerDocuments
 
 import android.Manifest
 import android.app.AlertDialog
@@ -31,7 +31,7 @@ import com.asksira.bsimagepicker.Utils
 import com.bumptech.glide.Glide
 import java.io.File
 
-class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
+class OwnerDocActivity : BaseMainActivity(), OwnerDocPresenter.DocumentView,
     BSImagePicker.OnSingleImageSelectedListener {
 
     private var title = ""
@@ -47,12 +47,12 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
     private var file_bank_letter: File? = null
     private var file_bank_statement: File? = null
     private var file_ownership: File? = null
-    private var presenter: DocumentPresenterImplementation? = null
+    private var presenter: OwnerDocPresenterImplementation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_document)
-        presenter = DocumentPresenterImplementation(this, this)
+        presenter = OwnerDocPresenterImplementation(this, this)
 
 
         title = intent.getStringExtra(Constant.PROFILE_TYPE)
@@ -83,6 +83,26 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
         })
         binding.imgLicenseBack.setOnClickListener(View.OnClickListener { v ->
             uploadDocument(Constant.UploadType.LICENCE_BACK)
+        })
+
+        binding.imgDriverPic.setOnClickListener(View.OnClickListener {
+            uploadDocument(Constant.UploadType.DRIVER_FACE)
+        })
+
+        binding.imgHomeAddress.setOnClickListener(View.OnClickListener {
+            uploadDocument(Constant.UploadType.HOME_ADDRESS)
+        })
+
+        binding.imgBankLatter.setOnClickListener(View.OnClickListener {
+            uploadDocument(Constant.UploadType.BANK_LATTER)
+        })
+
+        binding.imgBankStatement.setOnClickListener(View.OnClickListener {
+            uploadDocument(Constant.UploadType.BANK_STATEMENT)
+        })
+
+        binding.imgOwnership.setOnClickListener(View.OnClickListener {
+            uploadDocument(Constant.UploadType.OWNERSHIP)
         })
 
     }
@@ -130,20 +150,8 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
     }
 
     private fun checkProfilePermissions(): Boolean {
-        if ((ActivityCompat.checkSelfPermission(
-                applicationContext,
-                profilePermissionsRequired[0]
-            ) == PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(
-                applicationContext,
-                profilePermissionsRequired[1]
-            ) == PackageManager.PERMISSION_GRANTED)
-        ) {
-            return true
+        return (ActivityCompat.checkSelfPermission(applicationContext, profilePermissionsRequired[0]) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(applicationContext, profilePermissionsRequired[1]) == PackageManager.PERMISSION_GRANTED)
 
-        } else {
-            return false
-        }
     }
 
     private fun requestPermission() {
@@ -318,7 +326,7 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
 
                 Glide.with(applicationContext).load(uri).into(binding.imgIdFront)
 
-                presenter!!.uploadDocument(Constant.UploadType.ID_FRONT, file_id_front!!)
+                presenter!!.uploadDocument("idproof_front", file_id_front!!)
             }
 
             Constant.UploadType.ID_BACK -> {
@@ -328,47 +336,51 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
 
                 this.file_id_back = File(uri.path)
 
-                presenter!!.uploadDocument(Constant.UploadType.ID_BACK, file_id_back!!)
+                presenter!!.uploadDocument("idproof_back", file_id_back!!)
             }
 
             Constant.UploadType.LICENCE_FRONT -> {
                 binding.imgLicenseFront.setScaleType(ImageView.ScaleType.FIT_XY);
+
                 Glide.with(applicationContext).load(uri).into(binding.imgLicenseFront)
 
                 this.file_licence_front = File(uri.path)
 
-                presenter!!.uploadDocument(Constant.UploadType.LICENCE_FRONT, file_licence_front!!)
+                presenter!!.uploadDocument("driver_license_front", file_licence_front!!)
             }
 
             Constant.UploadType.LICENCE_BACK -> {
 
                 binding.imgLicenseBack.setScaleType(ImageView.ScaleType.FIT_XY);
+
                 Glide.with(applicationContext).load(uri).into(binding.imgLicenseBack)
 
                 this.file_licence_back = File(uri.path)
 
-                presenter!!.uploadDocument(Constant.UploadType.LICENCE_BACK, file_licence_back!!)
+                presenter!!.uploadDocument("driver_license_back", file_licence_back!!)
 
             }
             Constant.UploadType.DRIVER_FACE -> {
 
                 binding.imgDriverPic.setScaleType(ImageView.ScaleType.FIT_XY);
+
                 Glide.with(applicationContext).load(uri).into(binding.imgDriverPic)
 
                 this.file_driver = File(uri.path)
 
-                presenter!!.uploadDocument(Constant.UploadType.DRIVER_FACE, file_driver!!)
+                presenter!!.uploadDocument("proffesional_driver_face", file_driver!!)
 
             }
 
             Constant.UploadType.HOME_ADDRESS -> {
 
                 binding.imgHomeAddress.setScaleType(ImageView.ScaleType.FIT_XY);
+
                 Glide.with(applicationContext).load(uri).into(binding.imgHomeAddress)
 
                 this.file_home_address = File(uri.path)
 
-                presenter!!.uploadDocument(Constant.UploadType.HOME_ADDRESS, file_home_address!!)
+                presenter!!.uploadDocument("proof_home_add", file_home_address!!)
 
             }
 
@@ -376,26 +388,29 @@ class DocumentActivity : BaseMainActivity(), DocumentPresenter.DocumentView,
             Constant.UploadType.BANK_LATTER -> {
 
                 binding.imgBankLatter.setScaleType(ImageView.ScaleType.FIT_XY);
+
                 Glide.with(applicationContext).load(uri).into(binding.imgBankLatter)
 
                 this.file_bank_letter = File(uri.path)
 
-                presenter!!.uploadDocument(Constant.UploadType.BANK_LATTER, file_bank_letter!!)
+                presenter!!.uploadDocument("bank_letter", file_bank_letter!!)
 
             }
             Constant.UploadType.BANK_STATEMENT -> {
 
                 binding.imgBankStatement.setScaleType(ImageView.ScaleType.FIT_XY);
+
                 Glide.with(applicationContext).load(uri).into(binding.imgBankStatement)
 
                 this.file_bank_statement = File(uri.path)
 
-                presenter!!.uploadDocument(Constant.UploadType.BANK_STATEMENT, file_bank_statement!!)
+                presenter!!.uploadDocument("bank_statement", file_bank_statement!!)
 
             }
             Constant.UploadType.OWNERSHIP-> {
 
                 binding.imgOwnership.setScaleType(ImageView.ScaleType.FIT_XY);
+
                 Glide.with(applicationContext).load(uri).into(binding.imgOwnership)
 
                 this.file_ownership = File(uri.path)

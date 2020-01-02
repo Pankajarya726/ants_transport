@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite"
         android:orientation="vertical"
-        tools:context=".activity.documents.DocumentActivity">
+        tools:context=".activity.ownerDocuments.OwnerDocActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -105,7 +105,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
                     <ImageView
                         android:id="@+id/img_id_front"
@@ -117,7 +117,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@android:drawable/ic_menu_camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>
@@ -175,7 +175,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
                     <ImageView
                         android:id="@+id/img_license_front"
@@ -187,7 +187,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@android:drawable/ic_menu_camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>
@@ -218,7 +218,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>
@@ -249,7 +249,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>
@@ -281,7 +281,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>
@@ -312,7 +312,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>
@@ -343,7 +343,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>

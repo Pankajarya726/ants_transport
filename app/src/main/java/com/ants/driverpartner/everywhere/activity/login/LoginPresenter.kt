@@ -12,6 +12,7 @@ class LoginPresenter {
     }
 
     interface LoginMainView : BaseMainView {
+
         fun onLoginSuccess(responseData: LoginResponse)
     }
 }

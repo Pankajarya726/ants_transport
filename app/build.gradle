@@ -8,7 +8,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         release {
-            storeFile file('/home/pankaj/Desktop/pankaj/projects/ANTS/Driver/app/src/main/assets/ants.jks')
+            storeFile file('/Users/tekzee/Desktop/pankaj/git/AntsDriver/app/src/main/assets/ants.jks')
             storePassword '123456'
             keyAlias = 'ants'
             keyPassword '123456'
@@ -24,12 +24,13 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BaseUrl", "\"http://dev.tekzee.in/\""
+        signingConfig signingConfigs.release
     }
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            applicationIdSuffix = 'com.ants.driverpartner.everywhere'
-            versionNameSuffix = '1.0'
+           // applicationIdSuffix = 'com.ants.driverpartner.everywhere'
+          //  versionNameSuffix = 'com.ants.driverpartner.everywhere'
             debuggable = true
             jniDebuggable = false
             renderscriptDebuggable = false
@@ -38,8 +39,8 @@ android {
             multiDexEnabled = true
         }
         debug {
-            applicationIdSuffix = kotlin_version
-            versionNameSuffix = kotlin_version
+           // applicationIdSuffix = 'com.ants.driverpartner.everywhere'
+           // versionNameSuffix = 'com.ants.driverpartner.everywhere'
             debuggable = true
             jniDebuggable = false
             renderscriptDebuggable = false

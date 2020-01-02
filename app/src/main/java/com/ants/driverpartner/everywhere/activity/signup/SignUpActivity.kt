@@ -22,7 +22,7 @@ import com.ants.driverpartner.everywhere.Constant.Companion.PROFILE_PERMISSION_C
 import com.ants.driverpartner.everywhere.Constant.Companion.REQUEST_PERMISSION_SETTING
 import com.ants.driverpartner.everywhere.Constant.Companion.profilePermissionsRequired
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.documents.DocumentActivity
+import com.ants.driverpartner.everywhere.activity.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.activity.partnerDocument.PartnerDocActivity
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
@@ -68,7 +68,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
     private fun init() {
         binding.btnNext.setOnClickListener(View.OnClickListener { v ->
-            val intent = Intent(applicationContext, DocumentActivity::class.java)
+            val intent = Intent(applicationContext, OwnerDocActivity::class.java)
             startActivity(intent)
         })
 
@@ -488,7 +488,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
         when (title) {
 
             Constant.OWNER -> {
-                val intent = Intent(applicationContext, DocumentActivity::class.java)
+                val intent = Intent(applicationContext, OwnerDocActivity::class.java)
                 intent.putExtra(Constant.PROFILE_TYPE, title)
                 startActivity(intent)
             }
@@ -501,7 +501,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             }
 
             Constant.BOTH -> {
-                val intent = Intent(applicationContext, DocumentActivity::class.java)
+                val intent = Intent(applicationContext, OwnerDocActivity::class.java)
                 intent.putExtra(Constant.PROFILE_TYPE, title)
                 startActivity(intent)
             }

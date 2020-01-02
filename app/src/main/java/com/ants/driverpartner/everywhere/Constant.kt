@@ -55,18 +55,24 @@ interface Constant {
     interface UploadType {
         companion object {
 
-            val USER = "user"
-            val ID_FRONT = "idproof_front"
-            val ID_BACK = "idproof_back"
-            val LICENCE_FRONT = "driver_license_front"
-            val LICENCE_BACK = "driver_license_back"
-            val DRIVER_FACE = "proffesional_driver_face"
-            val HOME_ADDRESS = "proof_home_add"
-            val BANK_LATTER = "bank_letter"
-            val BANK_STATEMENT = "bank_statement"
-            val OWNERSHIP = "ownership"
-            val INSURANCE = "insurance"
-            val VEHICLE_REGISTRATION = "registration"
+            val USER = "USER"
+            val ID_FRONT = "ID_FRONT"
+            val ID_BACK = "ID_BACK"
+            val LICENCE_FRONT = "LICENCE_FRONT"
+            val LICENCE_BACK = "LICENCE_BACK"
+            val DRIVER_FACE = "DRIVER_FACE"
+            val HOME_ADDRESS = "HOME_ADDRESS"
+            val BANK_LATTER = "BANK_LATTER"
+            val BANK_STATEMENT = "BANK_STATEMENT"
+            val OWNERSHIP = "OWNERSHIP"
+            val VEHICLE_INSURANCE = "VEHICLE_INSURANCE"
+            val VEHICLE_REGISTRATION = "VEHICLE_REGISTRATION"
+            val VEHICLE_LICENSE = "VEHICLE_LICENSE"
+            val VEHICLE_ODOMETER = "VEHICLE_ODOMETER"
+            val VEHICLE_FRONT = "VEHICLE_FRONT"
+            val VEHICLE_BACK = "VEHICLE_BACK"
+            val VEHICLE_LEFT = "VEHICLE_LEFT"
+            val VEHICLE_RIGHT = "VEHICLE_RIGHT"
         }
     }
 

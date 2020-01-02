@@ -33,6 +33,6 @@ data class LoginResponse(
         @SerializedName("userid")
         val userid: Int = 0,
         @SerializedName("account_status")
-        val account_status: Int = 0
+        val account_status: Int = 1
     )
 }

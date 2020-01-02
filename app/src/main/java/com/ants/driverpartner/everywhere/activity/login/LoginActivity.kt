@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPasswordActivity
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.signup.SignUpActivity
@@ -97,6 +98,9 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
         Log.e(localClassName, "Google sign in clicked")
 
+        mGoogleSignInClient.signOut()
+
+
         val signInIntent = mGoogleSignInClient.getSignInIntent()
         startActivityForResult(signInIntent, Constant.RC_SIGN_IN)
     }
@@ -127,6 +131,19 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
             // Signed in successfully, show authenticated UI.
 
             Log.e(localClassName, "signInResult=" + account)
+
+            if (account != null) {
+                Log.e(localClassName,"displayName\t"+account.displayName )
+                Log.e(localClassName,"email\t"+account.email )
+                Log.e(localClassName,"givenName\t"+account.givenName )
+                Log.e(localClassName,"photoUrl\t"+account.photoUrl )
+                Log.e(localClassName,"givenName\t"+account.givenName )
+                Log.e(localClassName,"id\t"+account.id )
+                Log.e(localClassName,"idToken\t"+account.idToken )
+                Log.e(localClassName,"familyName\t"+account.familyName )
+
+            }
+
             // updateUI(account)
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
@@ -184,7 +201,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
 
     override fun validateError(message: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 
 
@@ -216,6 +233,19 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
     override fun onLoginSuccess(responseData: LoginResponse) {
 
+        Log.e(javaClass.simpleName, responseData.data.account_status.toString())
+
+        Utility.setSharedPreferenceBoolean(applicationContext,Constant.IS_LOGIN,true)
+        Utility.setSharedPreference(this,Constant.API_KEY,responseData.data.apiToken)
+        Utility.setSharedPreference(this,Constant.USER_ID,responseData.data.userid.toString())
+        Utility.setSharedPreference(this,Constant.EMAIL,responseData.data.email)
+        Utility.setSharedPreference(this,Constant.MOBILE,responseData.data.mobile)
+        Utility.setSharedPreference(this,Constant.NAME,responseData.data.name)
+        Utility.setSharedPreference(this,Constant.PROFILE_IMAGE_URL,responseData.data.profile)
+        Utility.setSharedPreference(this,Constant.S_TOKEN,responseData.data.stoken)
+        Utility.setSharedPreference(this,Constant.PROFILE_TYPE,responseData.data.accountType.toString())
+
+
         when (responseData.data.account_status) {
 
             1 -> gotoDocumentActivity(responseData.data.accountType)
@@ -239,6 +269,16 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
     }
 
     private fun gotoDocumentActivity(accountType: Int) {
+        var intent = Intent(applicationContext,OwnerDocActivity::class.java)
+        when(accountType){
+            1->intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
+            2->intent.putExtra(Constant.PROFILE_TYPE, Constant.PARTNER)
+            3->intent.putExtra(Constant.PROFILE_TYPE, Constant.BOTH)
+        }
+
+
+
+        startActivity(intent)
 
 
     }

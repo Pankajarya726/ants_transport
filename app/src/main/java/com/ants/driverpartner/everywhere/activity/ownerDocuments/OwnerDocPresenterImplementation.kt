@@ -1,4 +1,4 @@
-package com.ants.driverpartner.everywhere.activity.documents
+package com.ants.driverpartner.everywhere.activity.ownerDocuments
 
 import android.content.Context
 import android.util.Log
@@ -16,11 +16,8 @@ import okhttp3.RequestBody
 import retrofit2.Response
 import java.io.File
 
-class DocumentPresenterImplementation(
-    private var mainView: DocumentPresenter.DocumentView,
-    context: Context
-) :
-    DocumentPresenter.DocumentMainPresenter {
+class OwnerDocPresenterImplementation(private var mainView: OwnerDocPresenter.DocumentView, context: Context) :
+    OwnerDocPresenter.DocumentMainPresenter {
 
 
     var context: Context? = context
@@ -28,18 +25,24 @@ class DocumentPresenterImplementation(
 
 
     override fun uploadDocument(uploadType: String, file: File) {
-        mainView.showProgressbar()
+
         if (mainView.checkInternet()) {
+            mainView.showProgressbar()
+           // Utility.showProgressDialog(context,"Uploading image please wait...")
 
             Log.e("Internet Connection", mainView.checkInternet().toString())
             val type = RequestBody.create(MultipartBody.FORM, uploadType)
-            val userId = Utility.getSharedPreferences(mainView.getContext(), Constant.USER_ID).let {
-                RequestBody.create(
-                    MultipartBody.FORM,
-                    it.toString()
-                )
-            }
+            val userId = RequestBody.create(MultipartBody.FORM,
+                Utility.getSharedPreferences(mainView.getContext(), Constant.USER_ID).toString()
+            )
 
+
+//            val userId = Utility.getSharedPreferences(mainView.getContext(), Constant.USER_ID).let {
+//                RequestBody.create(
+//                    MultipartBody.FORM,
+//                    it.toString()
+//                )
+//            }
 
             val driver_id = RequestBody.create(MultipartBody.FORM, "")
 
@@ -54,8 +57,7 @@ class DocumentPresenterImplementation(
             var headers = HashMap<String, String?>()
 
 
-            headers["api-key"] =
-                Utility.getSharedPreferences(mainView.getContext(), Constant.API_KEY)
+            headers["api-key"] = Utility.getSharedPreferences(mainView.getContext(), Constant.API_KEY)
 
             Log.e(javaClass.simpleName, headers.toString())
 
@@ -65,6 +67,7 @@ class DocumentPresenterImplementation(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<UploadImageResponse> ->
                     mainView.hideProgressbar()
+                   // Utility.hideProgressbar()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
@@ -89,10 +92,12 @@ class DocumentPresenterImplementation(
                     }
                 }, { error ->
                     mainView.hideProgressbar()
+//                    Utility.hideProgressbar()
                     mainView.validateError(error.message.toString())
                 })
         } else {
             mainView.hideProgressbar()
+//            Utility.hideProgressbar()
             mainView.validateError(context!!.getString(R.string.check_internet))
         }
     }

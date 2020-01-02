@@ -1,9 +1,13 @@
 package com.ants.driverpartner.everywhere.utils
 
+import android.app.ProgressDialog
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import com.ants.driverpartner.everywhere.Constant
 import com.google.android.material.snackbar.Snackbar
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
@@ -13,7 +17,8 @@ import java.util.regex.Pattern
 
 object Utility {
     private val ANTS = "ANTS"
-
+    private var sentToSettings = false
+    var progressDialog: ProgressDialog? = null
 
     fun setSharedPreference(context: Context, name: String, value: String) {
         val settings = context.getSharedPreferences(ANTS, 0)
@@ -172,5 +177,28 @@ object Utility {
         return byteBuffer.toByteArray()
     }
 
+    fun checkProfilePermissions(context: Context): Boolean {
+        return (ActivityCompat.checkSelfPermission(
+            context,
+            Constant.profilePermissionsRequired[0]
+        ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            context,
+            Constant.profilePermissionsRequired[1]
+        ) == PackageManager.PERMISSION_GRANTED)
 
+    }
+
+    fun showProgressDialog(context: Context?, message: String) {
+        if (progressDialog == null) {
+            progressDialog = ProgressDialog(context)
+        }
+
+        progressDialog!!.setMessage("Please wait...")
+        progressDialog!!.setCancelable(false)
+        progressDialog!!.show()
+    }
+
+    fun hideProgressbar() {
+        progressDialog?.dismiss()
+    }
 }

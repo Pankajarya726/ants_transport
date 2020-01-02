@@ -1,16 +1,15 @@
-package com.ants.driverpartner.everywhere.activity.documents
+package com.ants.driverpartner.everywhere.activity.vehicleInfo
 
 import android.content.Context
 import com.ants.driverpartner.everywhere.activity.base.BaseMainView
 import java.io.File
 
-class DocumentPresenter {
-
-    interface DocumentMainPresenter{
+class VehicleInfoPresenter {
+    interface VehicleInfoMainPresenter{
         fun uploadDocument(idFront: String, fileIdFront: File)
         fun onStop()
     }
-    interface DocumentView :BaseMainView{
+    interface VehicleInfoView : BaseMainView {
         fun getContext(): Context
 
     }
