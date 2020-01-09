@@ -67,10 +67,10 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     }
 
     private fun init() {
-        binding.btnNext.setOnClickListener(View.OnClickListener { v ->
-            val intent = Intent(applicationContext, OwnerDocActivity::class.java)
-            startActivity(intent)
-        })
+//        binding.btnNext.setOnClickListener(View.OnClickListener { v ->
+//            val intent = Intent(applicationContext, OwnerDocActivity::class.java)
+//            startActivity(intent)
+//        })
 
         binding.imgPassword.setOnClickListener(View.OnClickListener { v ->
 
@@ -153,21 +153,10 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     }
 
     private fun checkProfilePermissions(): Boolean {
-        if ((ActivityCompat.checkSelfPermission(
-                applicationContext,
-                profilePermissionsRequired[0]
-            ) == PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(
-                applicationContext,
-                profilePermissionsRequired[1]
-            ) == PackageManager.PERMISSION_GRANTED)
-        ) {
-            return true
 
-        } else {
-            return false
+        return (ActivityCompat.checkSelfPermission(this.applicationContext,profilePermissionsRequired[0]) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(applicationContext, profilePermissionsRequired[1]) == PackageManager.PERMISSION_GRANTED)
 
-        }
+
 
     }
 
@@ -457,6 +446,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
         Utility.setSharedPreference(getContext(), Constant.S_TOKEN, responseData.data.deviceToken)
         Utility.setSharedPreference(getContext(), Constant.USER_ID, responseData.data.userid)
         Utility.setSharedPreference(getContext(), Constant.API_KEY, responseData.data.stoken)
+
         if (responseData.data.accountType == 1) {
             Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.OWNER)
         }else if(responseData.data.accountType == 2){

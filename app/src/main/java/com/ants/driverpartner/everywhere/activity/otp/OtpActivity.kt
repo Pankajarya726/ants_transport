@@ -113,6 +113,7 @@ class OtpActivity : BaseMainActivity(), OtpPresenter.OtpView {
     }
 
 
+
     override fun validateError(message: String) {
 
     }

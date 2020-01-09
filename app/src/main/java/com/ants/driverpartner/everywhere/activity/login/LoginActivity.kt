@@ -17,6 +17,8 @@ import com.ants.driverpartner.everywhere.activity.ownerDocuments.OwnerDocActivit
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPasswordActivity
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.signup.SignUpActivity
+import com.ants.driverpartner.everywhere.activity.vehicleInfo.VehicleInfoActivity
+import com.ants.driverpartner.everywhere.activity.vehicleInfo.VehicleInfoPresenterImplementation
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.LoginBinding
 import com.ants.driverpartner.everywhere.utils.Utility
@@ -54,6 +56,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
     }
 
     private fun init() {
+        binding.edtPassword.transformationMethod = PasswordTransformationMethod()
 
         binding.btnSignin.setOnClickListener(this)
         binding.tvSignup.setOnClickListener(this)
@@ -133,14 +136,14 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
             Log.e(localClassName, "signInResult=" + account)
 
             if (account != null) {
-                Log.e(localClassName,"displayName\t"+account.displayName )
-                Log.e(localClassName,"email\t"+account.email )
-                Log.e(localClassName,"givenName\t"+account.givenName )
-                Log.e(localClassName,"photoUrl\t"+account.photoUrl )
-                Log.e(localClassName,"givenName\t"+account.givenName )
-                Log.e(localClassName,"id\t"+account.id )
-                Log.e(localClassName,"idToken\t"+account.idToken )
-                Log.e(localClassName,"familyName\t"+account.familyName )
+                Log.e(localClassName, "displayName\t" + account.displayName)
+                Log.e(localClassName, "email\t" + account.email)
+                Log.e(localClassName, "givenName\t" + account.givenName)
+                Log.e(localClassName, "photoUrl\t" + account.photoUrl)
+                Log.e(localClassName, "givenName\t" + account.givenName)
+                Log.e(localClassName, "id\t" + account.id)
+                Log.e(localClassName, "idToken\t" + account.idToken)
+                Log.e(localClassName, "familyName\t" + account.familyName)
 
             }
 
@@ -174,21 +177,23 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
             when (selected) {
                 dialog.findViewById(R.id.radio_owner) as RadioButton -> {
+                    Utility.setSharedPreference(this,Constant.ACCOUNT_TYPE,Constant.OWNER)
                     val intent = Intent(applicationContext, SignUpActivity::class.java)
                     intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
                     startActivity(intent)
                 }
                 dialog.findViewById(R.id.radio_partner) as RadioButton -> {
+                    Utility.setSharedPreference(this,Constant.ACCOUNT_TYPE,Constant.PARTNER)
                     val intent = Intent(applicationContext, SignUpActivity::class.java)
                     intent.putExtra(Constant.PROFILE_TYPE, Constant.PARTNER)
                     startActivity(intent)
                 }
                 dialog.findViewById(R.id.radio_both) as RadioButton -> {
+                    Utility.setSharedPreference(this,Constant.ACCOUNT_TYPE,Constant.BOTH)
                     val intent = Intent(applicationContext, SignUpActivity::class.java)
                     intent.putExtra(Constant.PROFILE_TYPE, Constant.BOTH)
                     startActivity(intent)
                 }
-
             }
 
 
@@ -201,7 +206,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
 
     override fun validateError(message: String) {
-       Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
 
@@ -235,16 +240,28 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
         Log.e(javaClass.simpleName, responseData.data.account_status.toString())
 
-        Utility.setSharedPreferenceBoolean(applicationContext,Constant.IS_LOGIN,true)
-        Utility.setSharedPreference(this,Constant.API_KEY,responseData.data.apiToken)
-        Utility.setSharedPreference(this,Constant.USER_ID,responseData.data.userid.toString())
-        Utility.setSharedPreference(this,Constant.EMAIL,responseData.data.email)
-        Utility.setSharedPreference(this,Constant.MOBILE,responseData.data.mobile)
-        Utility.setSharedPreference(this,Constant.NAME,responseData.data.name)
-        Utility.setSharedPreference(this,Constant.PROFILE_IMAGE_URL,responseData.data.profile)
-        Utility.setSharedPreference(this,Constant.S_TOKEN,responseData.data.stoken)
-        Utility.setSharedPreference(this,Constant.PROFILE_TYPE,responseData.data.accountType.toString())
+        Utility.setSharedPreferenceBoolean(applicationContext, Constant.IS_LOGIN, true)
+        Utility.setSharedPreference(this, Constant.API_KEY, responseData.data.apiToken)
+        Utility.setSharedPreference(this, Constant.USER_ID, responseData.data.userid.toString())
+        Utility.setSharedPreference(this, Constant.EMAIL, responseData.data.email)
+        Utility.setSharedPreference(this, Constant.MOBILE, responseData.data.mobile)
+        Utility.setSharedPreference(this, Constant.NAME, responseData.data.name)
+        Utility.setSharedPreference(this, Constant.PROFILE_IMAGE_URL, responseData.data.profile)
+        Utility.setSharedPreference(this, Constant.S_TOKEN, responseData.data.stoken)
+        Utility.setSharedPreference(
+            this,
+            Constant.PROFILE_TYPE,
+            responseData.data.accountType.toString()
+        )
 
+
+        if (responseData.data.accountType == 1) {
+            Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.OWNER)
+        } else if (responseData.data.accountType == 2) {
+            Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.PARTNER)
+        } else {
+            Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.BOTH)
+        }
 
         when (responseData.data.account_status) {
 
@@ -264,16 +281,18 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
     }
 
     private fun gotoVehicleActivity(accountType: Int) {
-
-
+        var intent = Intent(applicationContext, VehicleInfoActivity::class.java)
+        startActivity(intent)
     }
 
     private fun gotoDocumentActivity(accountType: Int) {
-        var intent = Intent(applicationContext,OwnerDocActivity::class.java)
-        when(accountType){
-            1->intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
-            2->intent.putExtra(Constant.PROFILE_TYPE, Constant.PARTNER)
-            3->intent.putExtra(Constant.PROFILE_TYPE, Constant.BOTH)
+
+        var intent = Intent(applicationContext, OwnerDocActivity::class.java)
+
+        when (accountType) {
+            1 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
+            2 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.PARTNER)
+            3 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.BOTH)
         }
 
 

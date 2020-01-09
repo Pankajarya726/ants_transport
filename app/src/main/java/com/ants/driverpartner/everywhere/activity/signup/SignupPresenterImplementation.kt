@@ -28,9 +28,7 @@ class SignupPresenterImplementation(
     var context: Context? = context
     private var disposable: Disposable? = null
 
-    override fun signupApi(
-        input: JsonObject
-    ) {
+    override fun signupApi(input: JsonObject) {
         mainView.showProgressbar()
         if (mainView.checkInternet()) {
 
@@ -42,6 +40,7 @@ class SignupPresenterImplementation(
                 .subscribe({ response: Response<RegisterResponse> ->
                     mainView.hideProgressbar()
                     val responseCode = response.code()
+                    Log.e(javaClass.simpleName, responseCode.toString())
                     when (responseCode) {
                         200 -> {
                             val responseData: RegisterResponse? = response.body()
@@ -64,6 +63,10 @@ class SignupPresenterImplementation(
                         }
                     }
                 }, { error ->
+                    Log.e(
+                        javaClass.simpleName + "\tApi output\n\n",
+                        "jhagdfhjgsd"
+                    )
                     mainView.hideProgressbar()
                     mainView.validateError(error.message.toString())
                 })

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBg"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="180dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/profile_edit_pic" />
+
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="Vehicle Type"
+                android:textColor="@color/colorGrey"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_vehicle_no"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="TATA MP 09 AB 1234"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="Registration Date"
+                android:textColor="@color/colorGrey"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_reg_date"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="T05 Sep 2019"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="TARE"
+                android:textColor="@color/colorGrey"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_tare"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="TATA SUMO"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="Gross Vehicle Mass"
+                android:textColor="@color/colorGrey"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_vehicle_mass"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="SAV-ZT45C"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="Vehicle Registration Number"
+                android:textColor="@color/colorGrey"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_reg_no"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="347987"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="Vehicle Identification Number"
+                android:textColor="@color/colorGrey"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_id_no"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/tv_vehicle_no"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/img_date"
+                android:gravity="center|left"
+                android:text="1234567890"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</LinearLayout>

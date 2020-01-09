@@ -51,6 +51,73 @@
                 android:paddingTop="15dp"
                 android:paddingRight="15dp">
 
+                <RelativeLayout
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
+
+
+                    <ImageView
+                        android:id="@+id/img_user1"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/upload_pic"
+                        android:visibility="visible" />
+
+                    <com.ants.driverpartner.everywhere.custom.CircleImageView
+                        android:id="@+id/img_user"
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:visibility="gone"
+                        app:civ_border_color="@color/colorBlack"
+                        app:civ_border_width="3dp" />
+
+                    <ImageView
+                        android:id="@+id/img_add_image"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="0dp"
+                        android:layout_marginBottom="15dp"
+                        android:padding="2dp"
+                        android:src="@drawable/rounded_plus"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <!-- <RelativeLayout
+                     android:id="@+id/layout_image"
+                     android:layout_width="120dp"
+                     android:layout_height="120dp"
+                     android:layout_centerHorizontal="true"
+                     android:layout_marginTop="80dp">
+
+                     <ImageView
+                         android:id="@+id/img_profile"
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:scaleType="fitXY"
+                         android:src="@drawable/profile_edit_pic">
+
+                     </ImageView>
+
+                     <ImageView
+                         android:id="@+id/imageView"
+                         android:layout_width="match_parent"
+                         android:layout_height="40dp"
+                         android:layout_alignParentBottom="true"
+                         android:layout_centerHorizontal="true"
+                         android:layout_marginLeft="4dp"
+                         android:layout_marginRight="10dp"
+                         android:src="@drawable/camera" />
+
+
+                 </RelativeLayout>-->
+
                 <LinearLayout
                     android:id="@+id/layout_form"
                     android:layout_width="match_parent"
@@ -109,6 +176,81 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
+                        android:text="Residential Address"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/tv_size"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomEditText
+                        android:id="@+id/edt_res_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rectangular_bg"
+                        android:hint="Residential Address"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/colorGrey"
+                        android:textSize="@dimen/edt_size"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Postal Address"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/tv_size"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomEditText
+                        android:id="@+id/edt_postal_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rectangular_bg"
+                        android:hint="Postal Address"
+                        android:maxHeight="135dp"
+                        android:maxLines="3"
+                        android:minHeight="45dp"
+                        android:minLines="2"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/colorGrey"
+                        android:textSize="@dimen/edt_size"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Vehicle Type"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/tv_size"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomEditText
+                        android:id="@+id/edt_vehicle_type"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/rectangular_bg"
+                        android:hint="BMW 2020"
+
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/colorGrey"
+                        android:textSize="@dimen/edt_size"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
                         android:text="Password"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
@@ -116,12 +258,14 @@
 
                     <com.an.customfontview.CustomEditText
                         android:id="@+id/edt_password"
+
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/rectangular_bg"
-                        android:hint="Password"
                         android:paddingLeft="10dp"
+                        android:hint="Password"
+
                         android:paddingRight="10dp"
                         android:textColor="@color/colorBlack"
                         android:textColorHint="@color/colorGrey"
@@ -182,7 +326,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
                     <ImageView
                         android:id="@+id/img_id_front"
@@ -194,7 +338,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@android:drawable/ic_menu_camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>
@@ -252,7 +396,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
                     <ImageView
                         android:id="@+id/img_license_front"
@@ -264,12 +408,12 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@android:drawable/ic_menu_camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>
 
-                <RelativeLayout
+             <!--   <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="15dp"
@@ -295,10 +439,10 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
 
-                </RelativeLayout>
+                </RelativeLayout>-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -326,7 +470,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>
@@ -358,7 +502,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>
@@ -389,7 +533,7 @@
                         android:background="@color/colorWhite"
                         android:elevation="5dp"
                         android:scaleType="centerInside"
-                        android:src="@drawable/camera" />
+                        android:src="@drawable/camera_black" />
 
 
                 </RelativeLayout>

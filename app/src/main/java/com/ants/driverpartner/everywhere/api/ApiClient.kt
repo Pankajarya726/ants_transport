@@ -4,6 +4,7 @@ package com.tekzee.mallortaxi.network
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
+import com.ants.driverpartner.everywhere.activity.vehicleInfo.model.VehicleCategory
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.orhanobut.logger.AndroidLogAdapter
@@ -86,6 +87,11 @@ class ApiClient {
         userId: RequestBody, image: MultipartBody.Part, type: RequestBody, driver_id: RequestBody
     ): Observable<Response<UploadImageResponse>> {
         return apiService.uploadImage(headers,userId,image,type,driver_id)
+    }
+
+
+    fun getVehicleCategory(headers: HashMap<String, String?>, userid: RequestBody):Observable<Response<VehicleCategory>>{
+return  apiService.getVehicleCategory(headers,userid)
     }
 
 //    fun doValidateAppVersionApi(

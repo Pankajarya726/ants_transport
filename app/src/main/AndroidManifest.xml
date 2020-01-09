@@ -19,7 +19,12 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme"
         android:networkSecurityConfig="@xml/network_security_config">
-        <activity android:name=".activity.partnerDocument.PartnerDocActivity"></activity>
+        <activity android:name=".activity.partnerDocument.PartnerDocActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden"/>
+
+
         <activity
             android:name=".activity.resetPassword.ResetPasswordActivity"
             android:screenOrientation="portrait"

@@ -4,6 +4,7 @@ package com.tekzee.mallortaxi.network
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
+import com.ants.driverpartner.everywhere.activity.vehicleInfo.model.VehicleCategory
 import com.google.gson.JsonObject
 import io.reactivex.Observable
 import okhttp3.MultipartBody
@@ -17,7 +18,7 @@ interface ApiService {
 //    fun doValidateAppVersionApi(@Body input: JsonObject, @HeaderMap headers: HashMap<String, String?>): Observable<Response<ValidateAppVersionResponse>>
 
 
-    @POST("driverRegistration")
+    @POST("SignUp")
     fun signup(@Body input: JsonObject): Observable<Response<RegisterResponse>>
 
 
@@ -38,6 +39,9 @@ interface ApiService {
     @POST("login")
     fun login(@Body input: JsonObject): Observable<Response<LoginResponse>>
 
+
+    @POST("get_vehicleCategory")
+    fun getVehicleCategory(@HeaderMap createHeaders: HashMap<String, String?>,  @Part("userid") userid: RequestBody): Observable<Response<VehicleCategory>>
 
 
 //    @Multipart

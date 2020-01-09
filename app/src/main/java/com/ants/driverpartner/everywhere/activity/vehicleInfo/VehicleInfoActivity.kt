@@ -1,7 +1,9 @@
+
 package com.ants.driverpartner.everywhere.activity.vehicleInfo
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -15,12 +17,14 @@ import android.widget.DatePicker
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.NonNull
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.login.LoginActivity
+import com.ants.driverpartner.everywhere.activity.ownerDocuments.OwnerDocActivity
+import com.ants.driverpartner.everywhere.activity.partnerDocument.PartnerDocActivity
+import com.ants.driverpartner.everywhere.activity.vehicleInfo.model.VehicleCategory
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityVehicleInfoBinding
 import com.ants.driverpartner.everywhere.utils.DialogUtils
@@ -65,6 +69,7 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
         binding.btnUpload.setOnClickListener(this)
         binding.edtRegDate.setOnClickListener(this)
         binding.btnUpload.setOnClickListener(this)
+        binding.edtVehicleType.setOnClickListener(this)
 
     }
 
@@ -89,13 +94,13 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
             R.id.edt_reg_date -> {
 
                 val dateSetListener = object : DatePickerDialog.OnDateSetListener {
-                    override fun onDateSet(
-                        view: DatePicker, year: Int, monthOfYear: Int,
-                        dayOfMonth: Int
+                    override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int,dayOfMonth: Int
                     ) {
                         cal.set(Calendar.YEAR, year)
                         cal.set(Calendar.MONTH, monthOfYear)
                         cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+
                         updateDateInView()
                     }
                 }
@@ -117,6 +122,9 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
                 startActivity(intent)
                 finish()
             }
+
+            R.id.edt_vehicle_type -> presenter!!.getVechicleCategory()
+
 
             R.id.btn_upload -> submit()
 
@@ -163,6 +171,16 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
             DialogUtils.showAlertDialog(this, "Select picture of vehicle left side")
         } else if (file_img_vehicle_right == null) {
             DialogUtils.showAlertDialog(this, "Select picture of vehicle right side")
+        }else {
+            if(Utility.getSharedPreferences(this,Constant.ACCOUNT_TYPE)==Constant.OWNER)
+            {
+                val intent = Intent(this,PartnerDocActivity::class.java)
+                startActivity(intent)
+            }else if(Utility.getSharedPreferences(this,Constant.ACCOUNT_TYPE)==Constant.PARTNER){
+                val intent = Intent(this,OwnerDocActivity::class.java)
+                startActivity(intent)
+            }
+
         }
     }
 
@@ -445,6 +463,18 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
 
     override fun getContext(): Context {
         return this
+    }
+
+    override fun onGetVehicleCategory(responseData: VehicleCategory) {
+
+        if(responseData.data.isNotEmpty()){
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.selection_dialog)
+
+
+        }
+
+
     }
 
     override fun validateError(message: String) {

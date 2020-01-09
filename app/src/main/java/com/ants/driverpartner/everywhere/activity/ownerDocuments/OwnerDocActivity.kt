@@ -55,21 +55,31 @@ class OwnerDocActivity : BaseMainActivity(), OwnerDocPresenter.DocumentView,
         presenter = OwnerDocPresenterImplementation(this, this)
 
 
-        title = intent.getStringExtra(Constant.PROFILE_TYPE)
-
-        if (title.equals(Constant.BOTH)) {
-            binding.tvTitle.text = Constant.OWNER + " Documents"
-        } else {
-            binding.tvTitle.text = title + " Documents"
-        }
+//        title = intent.getStringExtra(Constant.PROFILE_TYPE)
+//
+//        if (title.equals(Constant.BOTH)) {
+//            binding.tvTitle.text = Constant.OWNER + " Documents"
+//        } else {
+//            binding.tvTitle.text = title + " Documents"
+//        }
 
 
         requestPermission()
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         binding.btnUpload.setOnClickListener(View.OnClickListener { v ->
-            val intent = Intent(applicationContext, VehicleInfoActivity::class.java)
-            startActivity(intent)
+
+            if (Utility.getSharedPreferences(this,Constant.ACCOUNT_TYPE)==Constant.OWNER){
+                val intent = Intent(applicationContext, VehicleInfoActivity::class.java)
+                startActivity(intent)
+            }else if(Utility.getSharedPreferences(this,Constant.ACCOUNT_TYPE)==Constant.BOTH){
+                val intent = Intent(applicationContext, VehicleInfoActivity::class.java)
+                startActivity(intent)
+            }else{
+               // val intent = Intent(applicationContext,HomeA)
+            }
+
+
         })
 
         binding.imgIdFront.setOnClickListener(View.OnClickListener { v ->
@@ -125,12 +135,12 @@ class OwnerDocActivity : BaseMainActivity(), OwnerDocPresenter.DocumentView,
         }
     }
 
-    private fun uploadDocument(idFront: String) {
+    private fun uploadDocument(uploadType: String) {
 
 
         if (checkProfilePermissions()
         ) {
-            this.upload_type = idFront
+            this.upload_type = uploadType
             val singleSelectionPicker = BSImagePicker.Builder(Constant.PROVIDE_AUTHORITY)
                 .setMaximumDisplayingImages(Integer.MAX_VALUE)
                 .setSpanCount(3) //Default: 3. This is the number of columns

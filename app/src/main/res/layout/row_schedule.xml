@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginBottom="8dp"
+    android:background="@color/colorWhite"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/colorWhite">
+
+        <LinearLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_name"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:hint="Jhon Smith"
+                android:text="@{history.name}"
+                android:textColor="@color/colorWhite"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_time"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@color/colorGrey"
+                android:gravity="center"
+                android:hint="03 Sep 2019 03:00 PM"
+                android:text="@{history.time}"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout1"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Booking ID"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_booking_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center|left"
+                android:hint="12121"
+                android:text="@{history.vehicleType}"
+                android:textColor="@color/colorGrey"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout3"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Distance"
+
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_distance"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center|left"
+                android:hint="10km"
+                android:text="@{history.bookingId}"
+                android:textColor="@color/colorGrey"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout4"
+            android:layout_marginHorizontal="10dp">
+
+            <LinearLayout
+                android:id="@+id/layout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|left"
+                        android:maxLines="2"
+                        android:minLines="2"
+                        android:text="Pick Up"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/MyriadProBold.ttf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top|left"
+                        android:maxLines="2"
+                        android:minLines="2"
+                        android:text="Drop"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/MyriadProBold.ttf" />
+
+
+                </LinearLayout>
+
+                <!--  <ImageView
+
+                      android:layout_width="10dp"
+                      android:layout_height="match_parent"
+                      android:layout_marginTop="15dp"
+                      android:layout_marginRight="5dp"
+                      android:layout_marginBottom="15sp"
+                      android:scaleType="fitCenter"
+                      android:src="@drawable/distance" />-->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_pickup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|left"
+                        android:hint="2nd floor, 160-161, AB Rd, Behind C21 Mall, Scheme 54 PU4, Indore"
+                        android:maxLines="2"
+                        android:minLines="2"
+                        android:text="@{history.pickUpAddress}"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_drop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="top|left"
+                        android:hint="2nd floor, 160-161, AB Rd, Behind C21 Mall, Scheme 54 PU4, Indore"
+                        android:maxLines="2"
+                        android:minLines="2"
+                        android:text="@{history.dropAddress}"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout5"
+            android:layout_marginHorizontal="10dp">
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center|left"
+                android:text="Payment Status"
+                android:textColor="@color/colorGrey"
+                android:textSize="16sp"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/status"
+                android:gravity="center|left"
+                android:hint="Uppaid"
+                android:onClick="@{()->itemClickListner.onStatusClickListner()}"
+                android:text="@{history.status}"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tv_cost"
+                android:gravity="center|left"
+                android:text="Cost"
+                android:textColor="@color/colorGrey"
+                android:textSize="16sp"
+                app:textFontPath="fonts/MyriadProRegular.ttf" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center|left"
+                android:hint="50$"
+                android:text="@{history.cost}"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:textFontPath="fonts/MyriadProBold.ttf" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+
+
+

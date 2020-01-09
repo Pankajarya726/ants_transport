@@ -18,10 +18,7 @@ class LoginPresenterImplementation(
     var context: Context? = context
     private var disposable: Disposable? = null
 
-    override fun login(
-        input: JsonObject
-
-    ) {
+    override fun login(input: JsonObject) {
         mainView.showProgressbar()
         if (mainView.checkInternet()) {
             disposable = ApiClient.instance.login(input)
