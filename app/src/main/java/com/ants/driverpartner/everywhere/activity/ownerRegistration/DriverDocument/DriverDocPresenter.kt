@@ -1,8 +1,8 @@
-package com.ants.driverpartner.everywhere.activity.partnerDocument
+package com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument
 
 import com.ants.driverpartner.everywhere.activity.base.BaseMainView
 
-class PartnerDocPresenter{
+class DriverDocPresenter{
 
     interface PartnerDocMainPresenter {
         fun onStop()

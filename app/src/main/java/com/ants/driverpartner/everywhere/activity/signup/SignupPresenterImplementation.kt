@@ -83,6 +83,7 @@ class SignupPresenterImplementation(
 
             Log.e("Internet Connection", mainView.checkInternet().toString())
             val type = RequestBody.create(MultipartBody.FORM, Constant.PROFILE)
+
             val userId = Utility.getSharedPreferences(mainView.getContext(),Constant.USER_ID).let {
                 RequestBody.create(MultipartBody.FORM,
                     it.toString()

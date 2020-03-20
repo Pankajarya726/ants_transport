@@ -5,12 +5,26 @@
     <color name="colorAccent">#D81B60</color>-->
 
 
-    <color name="colorPrimary">#00FF03</color>
-    <color name="colorPrimaryDark">#0EE227</color>
-    <color name="colorAccent">#15b76c</color>
-    <color name="colorWhite">#FFFFFF</color>
-    <color name="colorBlack">#000000</color>
-    <color name="colorGrey">#ABABAB</color>
+
+
+  <color name="colorPrimary1">#008577</color>
+  <color name="colorPrimaryDark1">#00574B</color>
+  <color name="colorAccent1">#D81B60</color>
+
+
+  <color name="colorPrimary">#00FF03</color>
+  <color name="colorPrimaryDark">#0EE227</color>
+  <color name="colorAccent">#35ffb1</color>
+
+  <color name="colorWhite">#FFFFFF</color>
+  <color name="colorBlack">#000000</color>
+  <color name="colorBlackGrey">#323539</color>
+  <color name="colorGrey">#ABABAB</color>
+  <color name="colorTransparant">#80FFFFFF</color>
+  <color name="colorRed">#E31029</color>
+  <color name="colorLightGrey">#f4f6f7</color>
+
+
     <color name="colorBg">#F1F2F5</color>
 
 </resources>

@@ -22,12 +22,14 @@ import com.ants.driverpartner.everywhere.Constant.Companion.PROFILE_PERMISSION_C
 import com.ants.driverpartner.everywhere.Constant.Companion.REQUEST_PERMISSION_SETTING
 import com.ants.driverpartner.everywhere.Constant.Companion.profilePermissionsRequired
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.ownerDocuments.OwnerDocActivity
-import com.ants.driverpartner.everywhere.activity.partnerDocument.PartnerDocActivity
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivitySignupBinding
+import com.ants.driverpartner.everywhere.utils.DialogUtils
+import com.ants.driverpartner.everywhere.utils.DialogUtils.showCustomAlertDialog
+import com.ants.driverpartner.everywhere.utils.DialogUtils.showSuccessDialog
 import com.ants.driverpartner.everywhere.utils.SnackbarUtils
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.asksira.bsimagepicker.BSImagePicker
@@ -58,19 +60,11 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
         title = intent.getStringExtra(Constant.PROFILE_TYPE)
 
 
-        if (title.equals(Constant.BOTH)) {
-            binding.tvTitle.text = Constant.OWNER + " Sign Up"
-        } else {
-            binding.tvTitle.text = title + " Sign Up"
-        }
         init()
     }
 
     private fun init() {
-//        binding.btnNext.setOnClickListener(View.OnClickListener { v ->
-//            val intent = Intent(applicationContext, OwnerDocActivity::class.java)
-//            startActivity(intent)
-//        })
+
 
         binding.imgPassword.setOnClickListener(View.OnClickListener { v ->
 
@@ -99,12 +93,13 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             uploadDocument(Constant.UploadType.USER)
         })
 
-        binding.imgAddImage.setOnClickListener(View.OnClickListener {
+        binding.imgUser.setOnClickListener(View.OnClickListener {
             uploadDocument(Constant.UploadType.USER)
         })
 
         binding.btnNext.setOnClickListener(View.OnClickListener {
             registerUser()
+//            gotoDocumentActivity()
         })
 
 
@@ -154,11 +149,17 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
     private fun checkProfilePermissions(): Boolean {
 
-        return (ActivityCompat.checkSelfPermission(this.applicationContext,profilePermissionsRequired[0]) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(applicationContext, profilePermissionsRequired[1]) == PackageManager.PERMISSION_GRANTED)
-
+        return (ActivityCompat.checkSelfPermission(
+            this.applicationContext,
+            profilePermissionsRequired[0]
+        ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            applicationContext,
+            profilePermissionsRequired[1]
+        ) == PackageManager.PERMISSION_GRANTED)
 
 
     }
+
 
     private fun requestPermission() {
         if (!checkProfilePermissions()) {
@@ -325,7 +326,6 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             this.file = File(uri.path)
             binding.imgUser1.visibility = View.GONE
             binding.imgUser.visibility = View.VISIBLE
-            binding.imgAddImage.visibility = View.VISIBLE
 
             Picasso.with(applicationContext).load(uri).into(binding.imgUser)
             inputStream = applicationContext.getContentResolver().openInputStream(uri)
@@ -346,41 +346,40 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
     private fun registerUser() {
 
+
         if (binding.edtName.text.toString().trim().isEmpty()) {
             binding.edtName.setError("Enter name")
-//            showAlertDialog(this, "Enter name")
-            SnackbarUtils.snackBarBottom(binding.edtName, "Enter name")
+            showSuccessDialog(this, "Enter name")
 
         } else if (binding.edtMobile.text.toString().trim().isEmpty()) {
             binding.edtMobile.setError("Enter Mobile Number")
-            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Mobile Number")
+            showSuccessDialog(this, "Enter Mobile Number")
         } else if (binding.edtMobile.text.toString().trim().length != 10) {
-            SnackbarUtils.snackBarBottom(binding.edtName, "Invalid Mobile Number")
+            showSuccessDialog(this, "Invalid Mobile Number")
             binding.edtMobile.setError("Invalid Mobile Number")
         } else if (binding.edtEmail.text.toString().trim().isEmpty()) {
-            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Email")
+            showSuccessDialog(this, "Enter Email")
             binding.edtMobile.setError("Enter Email")
         } else if (!Utility.emailValidator(binding.edtEmail.text.toString().trim())) {
-            SnackbarUtils.snackBarBottom(binding.edtName, "Invalid Email")
+            showSuccessDialog(this, "Invalid Email")
             binding.edtEmail.setError("Invalid Email")
         } else if (binding.edtPassword.text.toString().isEmpty()) {
             SnackbarUtils.snackBarBottom(binding.edtName, "Enter Password")
             binding.edtPassword.setError("Enter Password")
         } else if (binding.edtComfirmPassword.text.toString().isEmpty()) {
-            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Password")
+            showSuccessDialog(this, "Enter Password")
             binding.edtPassword.setError("Enter Password")
         } else if (!binding.edtComfirmPassword.text.toString().equals(binding.edtPassword.text.toString())) {
-            SnackbarUtils.snackBarBottom(binding.edtName, "Password not match")
+            showSuccessDialog(this, "Password not match")
             binding.edtComfirmPassword.setError("Password not match")
         } else if (binding.edtResAddress.text.toString().trim().isEmpty()) {
-            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Residential Address")
+            showSuccessDialog(this, "Enter Residential Address")
             binding.edtResAddress.setError("Enter Residential Address")
         } else if (binding.edtPostAddress.text.toString().trim().isEmpty()) {
-            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Postal Address")
+            showSuccessDialog(this, "Enter Postal Address")
             binding.edtPostAddress.setError("Enter Postal Address")
         } else if (file == null) {
-            SnackbarUtils.snackBarBottom(binding.edtName, "Select Image")
-            // binding.edtPostAddress.setError("Enter Postal Address")
+            showSuccessDialog(this, "Select Image")
         } else {
             var json = JsonObject()
 
@@ -399,17 +398,15 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
             when (title) {
                 Constant.OWNER ->
-                    json.addProperty("account_type", 1)
+                    json.addProperty("account_type", "1")
                 Constant.PARTNER ->
-                    json.addProperty("account_type", 2)
-                Constant.BOTH ->
-                    json.addProperty("account_type", 3)
+                    json.addProperty("account_type", "2")
 
             }
 
             json.addProperty(
                 "device_type",
-                "1"
+                "2"
             )
             json.addProperty(
                 "device_token",
@@ -428,8 +425,6 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
     override fun onRegisterSuccess(responseData: RegisterResponse) {
         Toast.makeText(applicationContext, responseData.message, Toast.LENGTH_LONG).show()
-
-
         Utility.setSharedPreference(getContext(), Constant.NAME, responseData.data.name)
         Utility.setSharedPreference(getContext(), Constant.MOBILE, responseData.data.mobile)
         Utility.setSharedPreference(getContext(), Constant.EMAIL, responseData.data.email)
@@ -449,10 +444,8 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
         if (responseData.data.accountType == 1) {
             Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.OWNER)
-        }else if(responseData.data.accountType == 2){
+        } else {
             Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.PARTNER)
-        }else {
-            Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.BOTH)
         }
 
 
@@ -469,9 +462,18 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     override fun onImageUploadSuccess(responseData: UploadImageResponse) {
         //Toast.makeText(applicationContext, responseData.message, Toast.LENGTH_LONG).show()
 
-        gotoDocumentActivity()
+        showCustomAlertDialog(this,"You fave successfully registered", object : DialogUtils.CustomDialogClick {
+            override fun onOkClick() {
+                gotoDocumentActivity()
+            }
+
+        })
+
+
 
     }
+
+
 
     private fun gotoDocumentActivity() {
 
@@ -483,18 +485,12 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
                 startActivity(intent)
             }
 
-            Constant.PARTNER -> {
-                val intent = Intent(applicationContext, PartnerDocActivity::class.java)
-                intent.putExtra(Constant.PROFILE_TYPE, title)
-                intent.putExtra("value", 1)
-                startActivity(intent)
-            }
-
-            Constant.BOTH -> {
-                val intent = Intent(applicationContext, OwnerDocActivity::class.java)
-                intent.putExtra(Constant.PROFILE_TYPE, title)
-                startActivity(intent)
-            }
+//            Constant.DRIVER -> {
+//                val intent = Intent(applicationContext, DriverDocActivity::class.java)
+//                intent.putExtra(Constant.PROFILE_TYPE, title)
+//                intent.putExtra("value", 1)
+//                startActivity(intent)
+//            }
 
 
         }

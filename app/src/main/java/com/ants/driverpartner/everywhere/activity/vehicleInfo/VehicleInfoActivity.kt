@@ -1,7 +1,5 @@
+/*package com.ants.driverpartner.everywhere.activity.vehicleInfo
 
-package com.ants.driverpartner.everywhere.activity.vehicleInfo
-
-import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
@@ -12,19 +10,21 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.DatePicker
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.login.LoginActivity
-import com.ants.driverpartner.everywhere.activity.ownerDocuments.OwnerDocActivity
-import com.ants.driverpartner.everywhere.activity.partnerDocument.PartnerDocActivity
-import com.ants.driverpartner.everywhere.activity.vehicleInfo.model.VehicleCategory
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.DriverDocActivity
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityVehicleInfoBinding
 import com.ants.driverpartner.everywhere.utils.DialogUtils
@@ -32,9 +32,11 @@ import com.ants.driverpartner.everywhere.utils.Utility
 import com.asksira.bsimagepicker.BSImagePicker
 import com.asksira.bsimagepicker.Utils
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.selection_dialog.view.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
     BSImagePicker.OnSingleImageSelectedListener, VehicleInfoPresenter.VehicleInfoView {
@@ -51,6 +53,7 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
     private var file_img_vehicle_left: File? = null
     private var presenter: VehicleInfoPresenterImplementation? = null
     private var cal = Calendar.getInstance()
+    private var vehicleId =0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -94,7 +97,8 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
             R.id.edt_reg_date -> {
 
                 val dateSetListener = object : DatePickerDialog.OnDateSetListener {
-                    override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int,dayOfMonth: Int
+                    override fun onDateSet(
+                        view: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int
                     ) {
                         cal.set(Calendar.YEAR, year)
                         cal.set(Calendar.MONTH, monthOfYear)
@@ -171,13 +175,16 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
             DialogUtils.showAlertDialog(this, "Select picture of vehicle left side")
         } else if (file_img_vehicle_right == null) {
             DialogUtils.showAlertDialog(this, "Select picture of vehicle right side")
-        }else {
-            if(Utility.getSharedPreferences(this,Constant.ACCOUNT_TYPE)==Constant.OWNER)
-            {
-                val intent = Intent(this,PartnerDocActivity::class.java)
+        } else {
+            if (Utility.getSharedPreferences(this, Constant.ACCOUNT_TYPE) == Constant.OWNER) {
+                val intent = Intent(this, DriverDocActivity::class.java)
                 startActivity(intent)
-            }else if(Utility.getSharedPreferences(this,Constant.ACCOUNT_TYPE)==Constant.PARTNER){
-                val intent = Intent(this,OwnerDocActivity::class.java)
+            } else if (Utility.getSharedPreferences(
+                    this,
+                    Constant.ACCOUNT_TYPE
+                ) == Constant.PARTNER
+            ) {
+                val intent = Intent(this, OwnerDocActivity::class.java)
                 startActivity(intent)
             }
 
@@ -465,17 +472,41 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
         return this
     }
 
-    override fun onGetVehicleCategory(responseData: VehicleCategory) {
+/*   override fun onGetVehicleCategory(responseData: VehicleCategory) {
 
-        if(responseData.data.isNotEmpty()){
-            val dialog = Dialog(this)
-            dialog.setContentView(R.layout.selection_dialog)
+        if (responseData.data.isNotEmpty()) {
 
+
+
+            var dialogView = LayoutInflater.from(this).inflate(R.layout.selection_dialog, null)
+
+            var dialog = android.app.AlertDialog.Builder(this).setView(dialogView).setCancelable(false).show()
+
+
+            dialogView.tv_close.setOnClickListener(View.OnClickListener {
+
+                dialog.dismiss()
+            })
+
+            dialogView.tv_header.text = "Select Vehicle Type"
+
+
+            var adaper = VehicleAdaper(this, responseData.data, object : VehicleAdaper.ItemClick {
+                override fun onSelect(data: VehicleCategory.Data) {
+                    dialog.dismiss()
+                    binding.edtVehicleType.setText(data.name.toString())
+                }
+            })
+
+            dialogView.rv_category.hasFixedSize()
+            dialogView.rv_category.layoutManager = LinearLayoutManager(this)
+
+            dialogView.rv_category.adapter = adaper
 
         }
 
 
-    }
+    }*/
 
     override fun validateError(message: String) {
 
@@ -483,6 +514,6 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
 
 //    override fun createPresenter(): DocumentPresenter {
 //        return DocumentPresenter(this)
-//    }
+//   }
 
-}
+}*/

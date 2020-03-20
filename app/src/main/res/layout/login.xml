@@ -15,14 +15,14 @@
             android:id="@+id/tv_login"
             elevation="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#F7F7F7"
             android:gravity="center"
-            android:text="Partner Sign in"
+            android:text="Sign in"
             android:textAllCaps="false"
             android:textColor="@color/colorBlack"
             android:textSize="20dp"
-            app:textFontPath="fonts/MyriadProBold.ttf" />
+            app:textFontPath="fonts/poppins_regular.otf" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -36,9 +36,9 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/center_layout"
                 android:layout_alignParentTop="true"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="70dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="70dp"
                 android:layout_weight="1.5"
                 android:src="@drawable/splash_logo_black" />
 
@@ -62,7 +62,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/tv_size"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -95,12 +95,13 @@
                         android:background="@color/colorWhite"
                         android:gravity="center|left"
                         android:hint="abc@xyz.com"
+                        android:text="pankaj.arya@tekzee.com"
                         android:maxLines="1"
                         android:padding="10dp"
                         android:textColor="@color/colorBlack"
                         android:textColorHint="@color/colorGrey"
                         android:textSize="@dimen/edt_size"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
 
                 </RelativeLayout>
@@ -115,7 +116,7 @@
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/tv_size"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -149,13 +150,14 @@
                         android:background="@color/colorWhite"
                         android:gravity="center|left"
                         android:hint="*******"
-                        android:maxLines="1"
+                        android:text="123456"
                         android:inputType="textPassword"
+                        android:maxLines="1"
                         android:padding="10dp"
                         android:textColor="@color/colorBlack"
                         android:textColorHint="@color/colorGrey"
                         android:textSize="@dimen/edt_size"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
                     <ImageView
                         android:id="@+id/img_eye"
@@ -179,7 +181,7 @@
                           android:padding="10dp"
                           android:textColor="@color/colorBlack"
                           android:textSize="20dp"
-                          app:textFontPath="fonts/MyriadProRegular.ttf" />-->
+                          app:textFontPath="fonts/poppins_regular.otf" />-->
 
 
                 </RelativeLayout>
@@ -188,26 +190,27 @@
                     android:id="@+id/tv_forgot_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="25dp"
                     android:background="@color/colorWhite"
                     android:gravity="center"
                     android:text="Forgot Your Password?"
                     android:textAllCaps="false"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/tv_size"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomButton
                     android:id="@+id/btn_signin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
-                    android:background="@drawable/button_theam"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/button_accent_round"
                     android:gravity="center"
                     android:text="Sign in"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="15dp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
 
             </LinearLayout>
@@ -218,58 +221,8 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/center_layout"
                 android:layout_alignParentBottom="true"
-                android:layout_weight="2"
+
                 android:orientation="vertical">
-
-
-                <com.an.customfontview.CustomTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:gravity="center"
-                    android:text="Sign in with"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/tv_size"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="20dp"
-                    android:orientation="horizontal"
-                    android:weightSum="7">
-
-                    <ImageView
-                        android:id="@+id/iv_facebook"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="3"
-                        android:fitsSystemWindows="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/facebook" />
-
-                    <com.an.customfontview.CustomTextView
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Or"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="18sp"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
-
-                    <Button
-                        android:id="@+id/btn_google"
-                        android:layout_width="0dp"
-                        android:layout_height="45dp"
-                        android:layout_weight="3"
-                        android:background="@drawable/google"
-                        android:scaleType="fitXY" />
-
-
-                </LinearLayout>
 
 
                 <LinearLayout
@@ -277,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginBottom="20dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -287,7 +240,7 @@
                         android:text="Don't have an account? "
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
-                        app:textFontPath="fonts/MyriadProRegular.ttf"
+                        app:textFontPath="fonts/poppins_regular.otf"
 
                         />
 
@@ -297,10 +250,10 @@
                         android:layout_height="wrap_content"
                         android:onClick="showDialog"
                         android:text="@string/sign_up"
-                        android:textStyle="bold"
                         android:textColor="@color/colorAccent"
                         android:textSize="@dimen/tv_size"
-                        app:textFontPath="fonts/MyriadProRegular.ttf"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf"
 
                         />
 

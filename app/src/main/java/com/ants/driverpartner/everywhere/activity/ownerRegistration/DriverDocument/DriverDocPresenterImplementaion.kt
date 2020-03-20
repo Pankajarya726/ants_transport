@@ -1,9 +1,9 @@
-package com.ants.driverpartner.everywhere.activity.partnerDocument
+package com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument
 
 import android.content.Context
 import io.reactivex.disposables.Disposable
 
-class PartnerDocPresenterImplementaion(private var mainView: PartnerDocPresenter.PartnerDocView, context: Context) : PartnerDocPresenter.PartnerDocMainPresenter {
+class DriverDocPresenterImplementaion(private var mainView: DriverDocPresenter.PartnerDocView, context: Context) : DriverDocPresenter.PartnerDocMainPresenter {
     var context: Context? = context
     private var disposable: Disposable? =null
     override fun onStop() {

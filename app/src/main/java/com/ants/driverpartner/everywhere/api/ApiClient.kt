@@ -2,9 +2,10 @@ package com.tekzee.mallortaxi.network
 
 
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
-import com.ants.driverpartner.everywhere.activity.vehicleInfo.model.VehicleCategory
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.orhanobut.logger.AndroidLogAdapter
@@ -30,12 +31,16 @@ class ApiClient {
     init {
         val gson = GsonBuilder().setLenient().create()
         val clientBuilder = OkHttpClient.Builder()
-        if (BuildConfig.DEBUG) {
-            val loggingInterceptor = HttpLoggingInterceptor()
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-            clientBuilder.addInterceptor(loggingInterceptor)
-            addLogAdapter(AndroidLogAdapter())
-        }
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.apply { loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY }
+        clientBuilder.addInterceptor(loggingInterceptor)
+        addLogAdapter(AndroidLogAdapter())
+//        if (BuildConfig.DEBUG) {
+//            val loggingInterceptor = HttpLoggingInterceptor()
+//            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+//            clientBuilder.addInterceptor(loggingInterceptor)
+//            addLogAdapter(AndroidLogAdapter())
+//        }
 
         val okHttpClient: OkHttpClient = clientBuilder
             .readTimeout(2, TimeUnit.MINUTES)
@@ -90,8 +95,49 @@ class ApiClient {
     }
 
 
-    fun getVehicleCategory(headers: HashMap<String, String?>, userid: RequestBody):Observable<Response<VehicleCategory>>{
+    fun getVehicleCategory(headers: HashMap<String, String?>, userid: String):Observable<Response<VehicleCategory>>{
 return  apiService.getVehicleCategory(headers,userid)
+    }
+
+    fun callRegisterVehicleApi(
+        headers: java.util.HashMap<String, String?>,
+        userId: RequestBody,
+        vehicleType: RequestBody,
+        registrationDate: RequestBody,
+        tare: RequestBody,
+        grossVehicleMass: RequestBody,
+        vehicleRegistrationNumber: RequestBody,
+        vehicleModel: RequestBody,
+        vehicleManufacturer: RequestBody,
+        vin: RequestBody,
+        pictureVehicleLicense: MultipartBody.Part,
+        odometerImage: MultipartBody.Part,
+        insurancePicture: MultipartBody.Part,
+        vehicleFrontImage: MultipartBody.Part,
+        vehicleBackImage: MultipartBody.Part,
+        vehicleLeftImage: MultipartBody.Part,
+        vehicleRightImage: MultipartBody.Part
+    ): Observable<Response<RegisterVehicleResponse>>{
+        return  apiService.registerVehicleApi(
+            headers,
+            userId,
+            vehicleType,
+            registrationDate,
+            tare,
+            grossVehicleMass,
+            vehicleRegistrationNumber,
+            vehicleModel,
+            vehicleManufacturer,
+            vin,
+            pictureVehicleLicense,
+            odometerImage,
+            insurancePicture,
+            vehicleFrontImage,
+            vehicleBackImage,
+            vehicleLeftImage,
+            vehicleRightImage
+
+            )
     }
 
 //    fun doValidateAppVersionApi(

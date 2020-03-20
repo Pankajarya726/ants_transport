@@ -1,7 +1,8 @@
-package com.ants.driverpartner.everywhere.activity.ownerDocuments
+package com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments
 
 import android.content.Context
 import com.ants.driverpartner.everywhere.activity.base.BaseMainView
+import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import java.io.File
 
 class OwnerDocPresenter {
@@ -12,6 +13,7 @@ class OwnerDocPresenter {
     }
     interface DocumentView :BaseMainView{
         fun getContext(): Context
+        fun onImageUploadSuccess(responseData: UploadImageResponse)
 
     }
 

@@ -32,7 +32,7 @@
                 android:text="Vehicle Information"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp"
-                app:textFontPath="fonts/MyriadProBold.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
         </RelativeLayout>
 
@@ -57,7 +57,7 @@
                     android:text="Select Vehicle Type"
                     android:textColor="@color/colorBlack"
                     android:textSize="15dp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
                     android:id="@+id/edt_vehicle_type"
@@ -74,7 +74,7 @@
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
                     android:textSize="15sp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
                     android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                     android:text="Registration Date"
                     android:textColor="@color/colorBlack"
                     android:textSize="15dp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
                     android:id="@+id/edt_reg_date"
@@ -100,7 +100,7 @@
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
                     android:textSize="15sp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
 
                 <com.an.customfontview.CustomTextView
@@ -110,7 +110,7 @@
                     android:text="Tire"
                     android:textColor="@color/colorBlack"
                     android:textSize="15dp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomEditText
                     android:id="@+id/edt_tire"
@@ -126,7 +126,7 @@
                     android:paddingLeft="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
                     android:layout_width="match_parent"
@@ -135,7 +135,7 @@
                     android:text="Gross Vehicle Mass"
                     android:textColor="@color/colorBlack"
                     android:textSize="15dp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomEditText
                     android:id="@+id/edt_mass"
@@ -150,7 +150,7 @@
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
                     android:layout_width="match_parent"
@@ -159,7 +159,7 @@
                     android:text="Vehicle Registration Number"
                     android:textColor="@color/colorBlack"
                     android:textSize="15dp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomEditText
                     android:id="@+id/edt_reg_number"
@@ -174,7 +174,7 @@
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
                     android:layout_width="match_parent"
@@ -183,7 +183,7 @@
                     android:text="Vehicle Model"
                     android:textColor="@color/colorBlack"
                     android:textSize="15dp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomEditText
                     android:id="@+id/edt_model"
@@ -198,7 +198,7 @@
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
                     android:layout_width="match_parent"
@@ -207,7 +207,7 @@
                     android:text="Vehicle Manufacture"
                     android:textColor="@color/colorBlack"
                     android:textSize="15dp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomEditText
                     android:id="@+id/edt_manufacture"
@@ -222,7 +222,7 @@
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
 
                 <RelativeLayout
@@ -239,7 +239,7 @@
                         android:text="Upload picture of latest \nVehicle License"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
 
                     <ImageView
@@ -270,7 +270,7 @@
                         android:text="Upload Picture of the Odometer \nwith Current KM's"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
 
                     <ImageView
@@ -301,7 +301,7 @@
                         android:text="Upload Picture Proof of Insurence"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
 
                     <ImageView
@@ -330,7 +330,7 @@
                     android:text="Picture of Vehicle"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
 
                 <LinearLayout
@@ -350,7 +350,7 @@
                         android:text="Front"
                         android:textColor="@color/colorBlack"
                         android:textSize="15sp"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
 
                     <com.an.customfontview.CustomTextView
@@ -362,7 +362,7 @@
                         android:text="back"
                         android:textColor="@color/colorBlack"
                         android:textSize="15sp"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
                     <com.an.customfontview.CustomTextView
                         android:layout_width="80dp"
@@ -373,7 +373,7 @@
                         android:text="Left"
                         android:textColor="@color/colorBlack"
                         android:textSize="15sp"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
                     <com.an.customfontview.CustomTextView
                         android:layout_width="80dp"
@@ -384,7 +384,7 @@
                         android:text="Right"
                         android:textColor="@color/colorBlack"
                         android:textSize="15sp"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
 
                 </LinearLayout>
@@ -464,7 +464,7 @@
                     android:text="Vehicle Identification Number(VIN)"
                     android:textColor="@color/colorBlack"
                     android:textSize="15dp"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomEditText
                     android:id="@+id/edt_vin"
@@ -479,7 +479,7 @@
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
-                    app:textFontPath="fonts/MyriadProRegular.ttf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
 
 
@@ -493,7 +493,7 @@
                     android:text="upload"
                     android:textColor="@color/colorWhite"
                     android:textSize="15sp"
-                    app:btnFontPath="fonts/MyriadProRegular.ttf" />
+                    app:btnFontPath="fonts/poppins_regular.otf" />
 
 
                 <LinearLayout
@@ -512,7 +512,7 @@
                         android:text="Already have an account?"
                         android:textColor="@color/colorBlack"
                         android:textSize="15dp"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
                     <com.an.customfontview.CustomTextView
                         android:id="@+id/tv_signup"
@@ -521,7 +521,7 @@
                         android:text="@string/sign_in"
                         android:textColor="@color/colorPrimary"
                         android:textSize="15dp"
-                        app:textFontPath="fonts/MyriadProRegular.ttf" />
+                        app:textFontPath="fonts/poppins_regular.otf" />
 
                 </LinearLayout>
 

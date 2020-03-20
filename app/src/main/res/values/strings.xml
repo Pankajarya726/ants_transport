@@ -5,4 +5,9 @@
 
     <string name="server_client_id">959322323632-fup1smv3i4bdhidvlcbpbk41na70v407.apps.googleusercontent.com</string>
     <string name="check_internet">Please Check Internet Connection</string>
+    <string name="tare">Tare</string>
+    <string name="enter_tare">Enter Tare</string>
+    <string name="upload_picture_of_latest_vehicle_license">Upload picture of latest Vehicle License</string>
+    <string name="upload_picture_of_odometer">Upload Picture of the Odometer with Current KM\'s</string>
+    <string name="save_continue">Save &amp; Continue</string>
 </resources>

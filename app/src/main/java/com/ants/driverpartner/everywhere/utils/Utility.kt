@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.util.Log
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import com.ants.driverpartner.everywhere.Constant
@@ -200,5 +201,10 @@ object Utility {
 
     fun hideProgressbar() {
         progressDialog?.dismiss()
+    }
+
+
+    fun log(tag:String,message:String){
+        Log.e(tag,message);
     }
 }

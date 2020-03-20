@@ -1,4 +1,4 @@
-package com.ants.driverpartner.everywhere.activity.ownerDocuments
+package com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments
 
 import android.content.Context
 import android.util.Log
@@ -13,6 +13,8 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 import java.io.File
 
@@ -31,22 +33,14 @@ class OwnerDocPresenterImplementation(private var mainView: OwnerDocPresenter.Do
            // Utility.showProgressDialog(context,"Uploading image please wait...")
 
             Log.e("Internet Connection", mainView.checkInternet().toString())
-            val type = RequestBody.create(MultipartBody.FORM, uploadType)
-            val userId = RequestBody.create(MultipartBody.FORM,
-                Utility.getSharedPreferences(mainView.getContext(), Constant.USER_ID).toString()
-            )
+            val type = uploadType.toRequestBody(MultipartBody.FORM)
+            val userId = Utility.getSharedPreferences(mainView.getContext(), Constant.USER_ID).toString()
+                .toRequestBody(MultipartBody.FORM)
 
 
-//            val userId = Utility.getSharedPreferences(mainView.getContext(), Constant.USER_ID).let {
-//                RequestBody.create(
-//                    MultipartBody.FORM,
-//                    it.toString()
-//                )
-//            }
+            val driver_id = "".toRequestBody(MultipartBody.FORM)
 
-            val driver_id = RequestBody.create(MultipartBody.FORM, "")
-
-            val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), file)
+            val requestFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
 
             val image = MultipartBody.Part.createFormData(
                 "image",
@@ -75,19 +69,22 @@ class OwnerDocPresenterImplementation(private var mainView: OwnerDocPresenter.Do
                             Log.e(javaClass.simpleName, response.body().toString())
 
 
-                            if (responseData != null) {
-                                Log.e(javaClass.simpleName, responseData.status.toString())
+                            when(responseData!!.status){
+
+                                1->{
+                                    mainView.onImageUploadSuccess(responseData)
+                                }
+                                0->
+                                {
+                                    mainView.validateError(responseData.message)
+                                }
+
+                                2->{
+                                    mainView.validateError(responseData.message)
+                                }
+
                             }
 
-                            if (responseData!!.status == 1) {
-                              //  mainView.onImageUploadSuccess(responseData)
-                            } else {
-                                Log.e(
-                                    javaClass.simpleName + "\tApi output\n\n",
-                                    responseData.status.toString()
-                                )
-                                mainView.validateError(responseData.message)
-                            }
                         }
                     }
                 }, { error ->

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <variable
+            name="vehicleType"
+            type="com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory" />
+
+<!--        <variable-->
+<!--            name="itemClickListner"-->
+<!--            type="com.ants.everywhere.adapter.CustomAdaper.ItemClickListner" />-->
+    </data>
+
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:layout_height="50dp">
+
+    <com.an.customfontview.CustomTextView
+        android:id="@+id/tv_item"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorWhite"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="type"
+        android:textColor="@color/colorBlack"
+        android:textSize="16sp"
+        app:textFontPath="fonts/poppins_regular.otf"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@color/colorGrey"/>
+
+
+
+</LinearLayout>
+</layout>

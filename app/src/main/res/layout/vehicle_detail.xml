@@ -43,7 +43,7 @@
                 android:text="Vehicle Type"
                 android:textColor="@color/colorGrey"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProRegular.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:id="@+id/tv_vehicle_no"
@@ -57,7 +57,7 @@
                 android:text="TATA MP 09 AB 1234"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProBold.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                 android:text="Registration Date"
                 android:textColor="@color/colorGrey"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProRegular.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:id="@+id/tv_reg_date"
@@ -84,7 +84,7 @@
                 android:text="T05 Sep 2019"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProBold.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:layout_width="wrap_content"
@@ -97,7 +97,7 @@
                 android:text="TARE"
                 android:textColor="@color/colorGrey"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProRegular.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:id="@+id/tv_tare"
@@ -111,7 +111,7 @@
                 android:text="TATA SUMO"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProBold.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
                 android:text="Gross Vehicle Mass"
                 android:textColor="@color/colorGrey"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProRegular.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:id="@+id/tv_vehicle_mass"
@@ -138,7 +138,7 @@
                 android:text="SAV-ZT45C"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProBold.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:layout_width="wrap_content"
@@ -151,7 +151,7 @@
                 android:text="Vehicle Registration Number"
                 android:textColor="@color/colorGrey"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProRegular.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:id="@+id/tv_reg_no"
@@ -165,7 +165,7 @@
                 android:text="347987"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProBold.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
                 android:text="Vehicle Identification Number"
                 android:textColor="@color/colorGrey"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProRegular.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
                 android:id="@+id/tv_id_no"
@@ -192,7 +192,7 @@
                 android:text="1234567890"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
-                app:textFontPath="fonts/MyriadProBold.ttf" />
+                app:textFontPath="fonts/poppins_regular.otf" />
 
 
         </LinearLayout>

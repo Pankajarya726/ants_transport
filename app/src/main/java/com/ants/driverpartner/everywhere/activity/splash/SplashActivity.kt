@@ -9,7 +9,7 @@ import com.ants.driverpartner.everywhere.activity.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
     private var mDelayHandler: Handler? = null
-    private val SPLASH_DELAY: Long = 3000 //3 seconds
+    private val SPLASH_DELAY: Long = 5000 //3 seconds
 
     internal val mRunnable: Runnable = Runnable {
         if (!isFinishing) {

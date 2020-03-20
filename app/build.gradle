@@ -8,7 +8,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     signingConfigs {
         release {
-            storeFile file('/Users/tekzee/Desktop/pankaj/git/AntsDriver/app/src/main/assets/ants.jks')
+            storeFile file('/home/pankaj/Desktop/pankaj/projects/ANTS/Driver/app/src/main/assets/ants.jks')
             storePassword '123456'
             keyAlias = 'ants'
             keyPassword '123456'
@@ -29,8 +29,8 @@ android {
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-           // applicationIdSuffix = 'com.ants.driverpartner.everywhere'
-          //  versionNameSuffix = 'com.ants.driverpartner.everywhere'
+            // applicationIdSuffix = 'com.ants.driverpartner.everywhere'
+            //  versionNameSuffix = 'com.ants.driverpartner.everywhere'
             debuggable = true
             jniDebuggable = false
             renderscriptDebuggable = false
@@ -39,8 +39,8 @@ android {
             multiDexEnabled = true
         }
         debug {
-           // applicationIdSuffix = 'com.ants.driverpartner.everywhere'
-           // versionNameSuffix = 'com.ants.driverpartner.everywhere'
+            // applicationIdSuffix = 'com.ants.driverpartner.everywhere'
+            // versionNameSuffix = 'com.ants.driverpartner.everywhere'
             debuggable = true
             jniDebuggable = false
             renderscriptDebuggable = false
@@ -119,4 +119,7 @@ dependencies {
     //dialog
 
     implementation 'com.github.f0ris.sweetalert:library:1.5.1'
+
+    //Materuak Style Dialog
+    implementation 'com.github.javiersantos:MaterialStyledDialogs:2.1'
 }

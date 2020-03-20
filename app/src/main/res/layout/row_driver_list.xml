@@ -47,7 +47,7 @@
             android:text="Paul Walker"
             android:textColor="@color/colorBlack"
             android:textSize="15sp"
-            app:textFontPath="fonts/MyriadProBold.ttf" />
+            app:textFontPath="fonts/poppins_regular.otf" />
 
 
         <ImageView
@@ -82,7 +82,7 @@
             android:text="1234567890"
             android:textColor="@color/colorBlack"
             android:textSize="12sp"
-            app:textFontPath="fonts/MyriadProRegular.ttf" />
+            app:textFontPath="fonts/poppins_regular.otf" />
 
         <com.an.customfontview.CustomTextView
             android:id="@+id/tv_model"
@@ -97,7 +97,7 @@
             android:text="paul.walker@gmail.com"
             android:textColor="@color/colorBlack"
             android:textSize="12sp"
-            app:textFontPath="fonts/MyriadProRegular.ttf" />
+            app:textFontPath="fonts/poppins_regular.otf" />
 
 
     </RelativeLayout>
@@ -113,7 +113,7 @@
         android:text="view"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
-        app:textFontPath="fonts/MyriadProRegular.ttf" />
+        app:textFontPath="fonts/poppins_regular.otf" />
 
 
 </LinearLayout>

@@ -13,21 +13,16 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPasswordActivity
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.activity.signup.SignUpActivity
-import com.ants.driverpartner.everywhere.activity.vehicleInfo.VehicleInfoActivity
-import com.ants.driverpartner.everywhere.activity.vehicleInfo.VehicleInfoPresenterImplementation
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.LoginBinding
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.google.gson.JsonObject
 import com.tekzee.amiggos.ui.login.LoginPresenter
 import com.tekzee.amiggos.ui.login.LoginPresenterImplementation
@@ -61,7 +56,6 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
         binding.btnSignin.setOnClickListener(this)
         binding.tvSignup.setOnClickListener(this)
         binding.tvForgotPassword.setOnClickListener(this)
-        binding.btnGoogle.setOnClickListener(this)
         binding.imgEye.setOnClickListener(this)
     }
 
@@ -77,8 +71,6 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
                 startActivity(intent)
             }
 
-            R.id.btn_google ->
-                googleSignIn()
 
             R.id.img_eye -> {
                 if (binding.edtPassword.transformationMethod == null) {
@@ -97,65 +89,6 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
     }
 
-    private fun googleSignIn() {
-
-        Log.e(localClassName, "Google sign in clicked")
-
-        mGoogleSignInClient.signOut()
-
-
-        val signInIntent = mGoogleSignInClient.getSignInIntent()
-        startActivityForResult(signInIntent, Constant.RC_SIGN_IN)
-    }
-
-
-    override fun onStart() {
-        super.onStart()
-//        val account = GoogleSignIn.getLastSignedInAccount(this)
-//        updateUI(account)
-    }
-
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == Constant.RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
-        }
-    }
-
-    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            val account = completedTask.getResult(ApiException::class.java)
-
-            // Signed in successfully, show authenticated UI.
-
-            Log.e(localClassName, "signInResult=" + account)
-
-            if (account != null) {
-                Log.e(localClassName, "displayName\t" + account.displayName)
-                Log.e(localClassName, "email\t" + account.email)
-                Log.e(localClassName, "givenName\t" + account.givenName)
-                Log.e(localClassName, "photoUrl\t" + account.photoUrl)
-                Log.e(localClassName, "givenName\t" + account.givenName)
-                Log.e(localClassName, "id\t" + account.id)
-                Log.e(localClassName, "idToken\t" + account.idToken)
-                Log.e(localClassName, "familyName\t" + account.familyName)
-
-            }
-
-            // updateUI(account)
-        } catch (e: ApiException) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.e(localClassName, "signInResult:failed code=" + e.statusCode)
-            //  updateUI(null)
-        }
-
-    }
 
     open fun showDialog() {
 
@@ -177,23 +110,19 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
             when (selected) {
                 dialog.findViewById(R.id.radio_owner) as RadioButton -> {
-                    Utility.setSharedPreference(this,Constant.ACCOUNT_TYPE,Constant.OWNER)
+                    Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.OWNER)
                     val intent = Intent(applicationContext, SignUpActivity::class.java)
                     intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
                     startActivity(intent)
                 }
+
                 dialog.findViewById(R.id.radio_partner) as RadioButton -> {
-                    Utility.setSharedPreference(this,Constant.ACCOUNT_TYPE,Constant.PARTNER)
+                    Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.DRIVER)
                     val intent = Intent(applicationContext, SignUpActivity::class.java)
-                    intent.putExtra(Constant.PROFILE_TYPE, Constant.PARTNER)
+                    intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
                     startActivity(intent)
                 }
-                dialog.findViewById(R.id.radio_both) as RadioButton -> {
-                    Utility.setSharedPreference(this,Constant.ACCOUNT_TYPE,Constant.BOTH)
-                    val intent = Intent(applicationContext, SignUpActivity::class.java)
-                    intent.putExtra(Constant.PROFILE_TYPE, Constant.BOTH)
-                    startActivity(intent)
-                }
+
             }
 
 
@@ -258,9 +187,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
         if (responseData.data.accountType == 1) {
             Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.OWNER)
         } else if (responseData.data.accountType == 2) {
-            Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.PARTNER)
-        } else {
-            Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.BOTH)
+            Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.DRIVER)
         }
 
         when (responseData.data.account_status) {
@@ -281,8 +208,8 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
     }
 
     private fun gotoVehicleActivity(accountType: Int) {
-        var intent = Intent(applicationContext, VehicleInfoActivity::class.java)
-        startActivity(intent)
+//        var intent = Intent(applicationContext, VehicleInfoActivity::class.java)
+//        startActivity(intent)
     }
 
     private fun gotoDocumentActivity(accountType: Int) {
@@ -291,10 +218,8 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
         when (accountType) {
             1 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
-            2 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.PARTNER)
-            3 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.BOTH)
+            2 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
         }
-
 
 
         startActivity(intent)

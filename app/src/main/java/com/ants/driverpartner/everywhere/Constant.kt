@@ -17,6 +17,7 @@ interface Constant {
         val ACCOUNT_TYPE = "ACCOUNT_TYPE"
 
         val OWNER = "Owner"
+        val DRIVER = "Driver"
         val PARTNER = "Partner"
         val BOTH = "Both"
         val PROFILE_TYPE = "Profile_type"
