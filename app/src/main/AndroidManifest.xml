@@ -19,12 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme">
-        <activity android:name=".activity.ownerRegistration.vehicleInformation.VehicleActivity"
+        <activity
+            android:name=".activity.Home.HomeActivity"
+
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.ownerRegistration.vehicleInformation.VehicleActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:windowSoftInputMode="stateHidden"
-            ></activity>
-        <!-- <activity -->
+            android:windowSoftInputMode="stateHidden" /> <!-- <activity -->
         <!-- android:name=".activity.vehicleInfo.VehicleInfoActivity" -->
         <!-- android:screenOrientation="portrait" -->
         <!-- android:theme="@style/Theme.AppCompat.NoActionBar" -->

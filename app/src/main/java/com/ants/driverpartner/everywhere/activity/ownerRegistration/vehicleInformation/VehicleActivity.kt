@@ -287,7 +287,6 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
         if (responseData.data.isNotEmpty()) {
 
-
             var dialogView = LayoutInflater.from(this).inflate(R.layout.selection_dialog, null)
 
             var dialog =

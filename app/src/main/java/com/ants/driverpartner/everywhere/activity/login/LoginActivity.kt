@@ -13,8 +13,10 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.Home.HomeActivity
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPasswordActivity
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.DriverDocActivity
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.activity.signup.SignUpActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
@@ -167,16 +169,18 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
     override fun onLoginSuccess(responseData: LoginResponse) {
 
-        Log.e(javaClass.simpleName, responseData.data.account_status.toString())
+        Log.e(javaClass.simpleName, responseData.data.driverStatus.toString())
 
         Utility.setSharedPreferenceBoolean(applicationContext, Constant.IS_LOGIN, true)
-        Utility.setSharedPreference(this, Constant.API_KEY, responseData.data.apiToken)
+//        Utility.setSharedPreference(this, Constant.API_KEY, responseData.data.a)
         Utility.setSharedPreference(this, Constant.USER_ID, responseData.data.userid.toString())
         Utility.setSharedPreference(this, Constant.EMAIL, responseData.data.email)
         Utility.setSharedPreference(this, Constant.MOBILE, responseData.data.mobile)
         Utility.setSharedPreference(this, Constant.NAME, responseData.data.name)
-        Utility.setSharedPreference(this, Constant.PROFILE_IMAGE_URL, responseData.data.profile)
+        Utility.setSharedPreference(this, Constant.PROFILE_IMAGE_URL, responseData.data.profileImage)
         Utility.setSharedPreference(this, Constant.S_TOKEN, responseData.data.stoken)
+        Utility.setSharedPreference(this,Constant.API_KEY, responseData.data.stoken)
+
         Utility.setSharedPreference(
             this,
             Constant.PROFILE_TYPE,
@@ -190,21 +194,47 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
             Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.DRIVER)
         }
 
-        when (responseData.data.account_status) {
+        when (responseData.data.driverStatus.toString()) {
 
-            1 -> gotoDocumentActivity(responseData.data.accountType)
 
-            2 -> gotoVehicleActivity(responseData.data.accountType)
+//            "1" -> gotoDriverDocActivity(responseData.data.accountType)
+            "1" -> gotoDocumentActivity(responseData.data.accountType)
 
-            3 -> gotoDocumentActivity(responseData.data.accountType)
+            "2" -> gotoVehicleActivity(responseData.data.accountType)
 
-            4 -> gotoHomeActivity()
+            "3" -> gotoDriverDocActivity(responseData.data.accountType)
+
+            "4" -> gotoHomeActivity()
 
         }
     }
 
+    private fun gotoDriverDocActivity(accountType: Int) {
+
+        var intent = Intent(applicationContext, DriverDocActivity::class.java)
+
+        when (accountType) {
+            1 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
+            2 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
+        }
+
+
+        startActivity(intent)
+    }
+
     private fun gotoHomeActivity() {
 
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        this.finish()
+
+
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter!!.onStop()
     }
 
     private fun gotoVehicleActivity(accountType: Int) {

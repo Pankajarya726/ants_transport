@@ -5,34 +5,32 @@ import com.google.gson.annotations.SerializedName
 
 data class LoginResponse(
     @SerializedName("data")
-    val `data`: Data = Data(),
+    var `data`: Data = Data(),
     @SerializedName("message")
-    val message: String = "",
+    var message: String = "",
     @SerializedName("status")
-    val status: Int = 0
+    var status: Int = 0
 ) {
     data class Data(
         @SerializedName("account_type")
-        val accountType: Int = 0,
-        @SerializedName("api_token")
-        val apiToken: String = "",
+        var accountType: Int = 0,
+        @SerializedName("driver_status")
+        var driverStatus: String = "",
         @SerializedName("email")
-        val email: String = "",
+        var email: String = "",
+        @SerializedName("message")
+        var message: String = "",
         @SerializedName("mobile")
-        val mobile: String = "",
+        var mobile: String = "",
         @SerializedName("name")
-        val name: String = "",
-        @SerializedName("profile")
-        val profile: String = "",
+        var name: String = "",
         @SerializedName("profile_image")
-        val profileImage: String = "",
+        var profileImage: String = "",
         @SerializedName("stoken")
-        val stoken: String = "",
+        var stoken: String = "",
         @SerializedName("type")
-        val type: Int = 0,
+        var type: Int = 0,
         @SerializedName("userid")
-        val userid: Int = 0,
-        @SerializedName("account_status")
-        val account_status: Int = 1
+        var userid: Int = 0
     )
 }

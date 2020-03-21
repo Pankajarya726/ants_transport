@@ -2,6 +2,8 @@ package com.tekzee.mallortaxi.network
 
 
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
@@ -63,6 +65,83 @@ interface ApiService {
         @Part vehicleLeftImage: MultipartBody.Part,
         @Part vehicleRightImage: MultipartBody.Part
     ): Observable<Response<RegisterVehicleResponse>>
+
+
+    @POST("Owner_vehicle_list")
+    fun getOwnerVehicle(
+        @HeaderMap  headers: java.util.HashMap<String, String?>,
+       @Body input: JsonObject
+    ): Observable<Response<OwnersVehilce>>
+
+
+//    @Multipart
+//    @POST("register_partner")
+//    fun registerDriverApi(
+//        @HeaderMap headers: HashMap<String, String?>,
+//        @Part("userid") userId: RequestBody,
+//        @Part("name") name: RequestBody,
+//        @Part("email")  email: RequestBody,
+//        @Part("mobile") mobile: RequestBody,
+//        @Part("residential_address") residentialAddress: RequestBody,
+//        @Part("postal_address") postalAddress: RequestBody,
+//        @Part("vehicle_id") vehicleId: RequestBody,
+//        @Part("password") password: RequestBody,
+//        @Part idproofFrontImage: MultipartBody.Part,
+//        @Part idproofBackImage: MultipartBody.Part,
+//        @Part driverLicenseFrontImage: MultipartBody.Part,
+//        @Part driverLicenseBackImage: MultipartBody.Part,
+//        @Part proofHomeAddImage: MultipartBody.Part,
+//        @Part bankLetterImage: MultipartBody.Part,
+//        @Part bankStatementImage: MultipartBody.Part,
+//        @Part profileImage: MultipartBody.Part
+//    ): Observable<Response<RegisterDriverResponse>>
+
+
+
+
+    @Multipart
+    @POST("register_vehicle")
+    fun registerDriverApi(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Part("userid") userId: RequestBody,
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("mobile") mobile: RequestBody,
+        @Part("residential_address") residentialAddress: RequestBody,
+        @Part("postal_address") postalAddress: RequestBody,
+        @Part("vehicle_id") vehicleId: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part idproofFrontImage: MultipartBody.Part,
+        @Part idproofBackImage: MultipartBody.Part,
+        @Part driverLicenseFrontImage: MultipartBody.Part,
+        @Part driverLicenseBackImage: MultipartBody.Part,
+        @Part proofHomeAddImage: MultipartBody.Part,
+        @Part bankLetterImage: MultipartBody.Part,
+        @Part bankStatementImage: MultipartBody.Part,
+        @Part profileImage: MultipartBody.Part
+    ): Observable<Response<RegisterDriverResponse>>
+
+    @Multipart
+    @POST("register_partner")
+    fun registerDriverApi1(
+        @HeaderMap headers: HashMap<String, String?>,
+        @Part("userid") userId: RequestBody,
+        @Part("name") name: RequestBody,
+        @Part("email")  email: RequestBody,
+        @Part("mobile")  mobile: RequestBody,
+        @Part("residential_address")  residentialAddress: RequestBody,
+        @Part("postal_address") postalAddress: RequestBody,
+        @Part("vehicle_id") vehicleId: RequestBody,
+        @Part("password") password: RequestBody,
+        @Part idproofFrontImage: MultipartBody.Part,
+        @Part idproofBackImage: MultipartBody.Part,
+        @Part driverLicenseFrontImage: MultipartBody.Part,
+        @Part driverLicenseBackImage: MultipartBody.Part,
+        @Part proofHomeAddImage: MultipartBody.Part,
+        @Part bankLetterImage: MultipartBody.Part,
+        @Part bankStatementImage: MultipartBody.Part,
+        @Part profileImage: MultipartBody.Part
+    ): Observable<Response<RegisterDriverResponse>>
 
 
 //    @Multipart

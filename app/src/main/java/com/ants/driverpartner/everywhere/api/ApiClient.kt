@@ -2,6 +2,8 @@ package com.tekzee.mallortaxi.network
 
 
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
@@ -9,7 +11,6 @@ import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageRespon
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.orhanobut.logger.AndroidLogAdapter
-import com.orhanobut.logger.BuildConfig
 import com.orhanobut.logger.Logger.addLogAdapter
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -44,15 +45,15 @@ class ApiClient {
 
         val okHttpClient: OkHttpClient = clientBuilder
             .readTimeout(2, TimeUnit.MINUTES)
-            .connectTimeout(2, TimeUnit.SECONDS)
-            .build();
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .build()
 
 
         val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .build();
+            .build()
 
         apiService = retrofit.create(ApiService::class.java)
 
@@ -138,6 +139,93 @@ return  apiService.getVehicleCategory(headers,userid)
             vehicleRightImage
 
             )
+    }
+
+    fun getOwnerVehicle(headers: java.util.HashMap<String, String?>, input: JsonObject):
+            Observable<Response<OwnersVehilce>> {
+        return apiService.getOwnerVehicle(headers,input)
+    }
+
+    fun callRegisterDriverApi(
+        headers: java.util.HashMap<String, String?>,
+        userId: RequestBody,
+        name: RequestBody,
+        email: RequestBody,
+        mobile: RequestBody,
+        residentialAddress: RequestBody,
+        postalAddress: RequestBody,
+        vehicleId: RequestBody,
+        password: RequestBody,
+        idproofFrontImage: MultipartBody.Part,
+        idproofBackImage: MultipartBody.Part,
+        driverLicenseFrontImage: MultipartBody.Part,
+        driverLicenseBackImage: MultipartBody.Part,
+        proofHomeAddImage: MultipartBody.Part,
+        bankLetterImage: MultipartBody.Part,
+        bankStatementImage: MultipartBody.Part,
+        profileImage: MultipartBody.Part
+    ):  Observable<Response<RegisterDriverResponse>>{
+        return  apiService.registerDriverApi(
+            headers,
+            userId,
+            name,
+            email,
+            mobile,
+            residentialAddress,
+            postalAddress,
+            vehicleId,
+            password,
+            idproofFrontImage,
+            idproofBackImage,
+            driverLicenseFrontImage,
+            driverLicenseBackImage,
+            proofHomeAddImage,
+            bankLetterImage,
+            bankStatementImage,
+            profileImage
+
+        )
+    }
+
+    fun callRegisterDriverApi1(
+        headers: HashMap<String, String?>,
+        userId: RequestBody,
+        name: RequestBody,
+        email: RequestBody,
+        mobile: RequestBody,
+        residentialAddress: RequestBody,
+        postalAddress: RequestBody,
+        vehicleId: RequestBody,
+        password: RequestBody,
+        idproofFrontImage: MultipartBody.Part,
+        idproofBackImage: MultipartBody.Part,
+        driverLicenseFrontImage: MultipartBody.Part,
+        driverLicenseBackImage: MultipartBody.Part,
+        proofHomeAddImage: MultipartBody.Part,
+        bankLetterImage: MultipartBody.Part,
+        bankStatementImage: MultipartBody.Part,
+        profileImage: MultipartBody.Part
+    ): Observable<Response<RegisterDriverResponse>>{
+        return  apiService.registerDriverApi1(
+            headers,
+        userId,
+        name,
+        email,
+        mobile,
+        residentialAddress,
+        postalAddress,
+        vehicleId,
+        password,
+        idproofFrontImage,
+        idproofBackImage,
+        driverLicenseFrontImage,
+        driverLicenseBackImage,
+        proofHomeAddImage,
+        bankLetterImage,
+        bankStatementImage,
+        profileImage
+
+        )
     }
 
 //    fun doValidateAppVersionApi(

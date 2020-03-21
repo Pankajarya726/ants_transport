@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="title_array_navigation">
+        <item>Create New Booking</item>
+        <item>Current Booking</item>
+        <item>Scheduled Booking</item>
+        <item>Delivery History</item>
+        <item>Account Information</item>
+        <item>Contact ants</item>
+        <item>FAQ</item>
+        <item>Terms and Condition</item>
+        <!--  <item>Privcy Policy</item>-->
+        <!--  <item>Logout</item>-->
+
+    </string-array>
+
+    <integer-array name="drawable_array_navigation">
+        <item>@drawable/new_booking</item>
+        <item>@drawable/current_booking</item>
+        <item>@drawable/schedule_booking</item>
+        <item>@drawable/booking_history</item>
+        <item>@drawable/account_information</item>
+        <item>@drawable/contactus</item>
+        <item>@drawable/faq</item>
+        <item>@drawable/terms_conditions</item>
+        <!-- <item>@drawable/privacy_policies</item>-->
+        <!--  <item>@drawable/lock</item>-->
+    </integer-array>
+
+
+    <integer-array name="img_array_account">
+        <item>@drawable/account_information</item>
+        <item>@drawable/payment_method</item>
+        <item>@drawable/reset_password</item>
+        <item>@drawable/notifications</item>
+
+    </integer-array>
+    <string-array name="account_setting_array">
+
+        <item>@string/account_information</item>
+        <item>@string/payment_method</item>
+        <item>@string/reset_password</item>
+        <item>@string/notification</item>
+
+
+    </string-array>
+
+
+    <integer-array name="img_array_about">
+        <item>@drawable/ants</item>
+        <item>@drawable/contactus</item>
+        <item>@drawable/faq</item>
+        <item>@drawable/terms_conditions</item>
+        <item>@drawable/privacy_policies</item>
+
+    </integer-array>
+
+
+    <string-array name="about_array">
+
+        <item>@string/abount_ants</item>
+        <item>@string/contact_ants</item>
+        <item>@string/faq</item>
+        <item>@string/term_condition</item>
+        <item>@string/privacy_policy</item>
+
+
+    </string-array>
+
+
+    <string-array name="packaging_array">
+
+        <item>Pellet</item>
+        <item>
+            Crate
+        </item>
+        <item>Box</item>
+        <item>Bag</item>
+        <item>Can</item>
+        <item>Carton</item>
+        <item>Case</item>
+        <item>Coil</item>
+        <item>Cylinder</item>
+        <item>Drum</item>
+        <item>Loose</item>
+        <item>Pail</item>
+        <item>Reel</item>
+        <item>Roll</item>
+        <item>Pipe</item>
+
+    </string-array>
+
+
+    <declare-styleable name="ViewPagerIndicator">
+        <!-- Style of the circle indicator. -->
+        <attr name="vpiCirclePageIndicatorStyle" format="reference" />
+        <!-- Style of the icon indicator's views. -->
+        <attr name="vpiIconPageIndicatorStyle" format="reference" />
+        <!-- Style of the line indicator. -->
+        <attr name="vpiLinePageIndicatorStyle" format="reference" />
+        <!-- Style of the title indicator. -->
+        <attr name="vpiTitlePageIndicatorStyle" format="reference" />
+        <!-- Style of the tab indicator's tabs. -->
+        <attr name="vpiTabPageIndicatorStyle" format="reference" />
+        <!-- Style of the underline indicator. -->
+        <attr name="vpiUnderlinePageIndicatorStyle" format="reference" />
+    </declare-styleable>
+
+    <attr name="centered" format="boolean" />
+    <attr name="selectedColor" format="color" />
+    <attr name="strokeWidth" format="dimension" />
+    <attr name="unselectedColor" format="color" />
+
+    <declare-styleable name="CirclePageIndicator">
+        <!-- Whether or not the indicators should be centered. -->
+        <attr name="centered" />
+        <!-- Color of the filled circle that represents the current page. -->
+        <attr name="fillColor" format="color" />
+        <!-- Color of the filled circles that represents pages. -->
+        <attr name="pageColor" format="color" />
+        <!-- Orientation of the indicator. -->
+        <attr name="android:orientation" />
+        <!-- Radius of the circles. This is also the spacing between circles. -->
+        <attr name="radius" format="dimension" />
+        <!-- Whether or not the selected indicator snaps to the circles. -->
+        <attr name="snap" format="boolean" />
+        <!-- Color of the open circles. -->
+        <attr name="strokeColor" format="color" />
+        <!-- Width of the stroke used to draw the circles. -->
+        <attr name="strokeWidth" />
+        <!-- View background -->
+        <attr name="android:background" />
+    </declare-styleable>
+
+
+</resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorWhite"
+    android:elevation="1dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    app:contentInsetStart="0dp"
+    app:paddingEnd="0dp"
+    app:paddingStart="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+       <!-- <ImageView
+            android:id="@+id/toolbar_icon_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorWhite"
+            android:padding="10dp"
+            app:srcCompat="@drawable/splash_logo_black"
+            tools:ignore="VectorDrawableCompat" />-->
+
+        <ImageView
+            android:id="@+id/toolbar_icon_navigation"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:background="@color/colorWhite"
+            android:padding="10dp"
+            app:srcCompat="@drawable/menu"
+            tools:ignore="VectorDrawableCompat" />
+
+
+        <com.an.customfontview.CustomTextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Title"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:visibility="visible"/>
+
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>

@@ -10,4 +10,33 @@
     <string name="upload_picture_of_latest_vehicle_license">Upload picture of latest Vehicle License</string>
     <string name="upload_picture_of_odometer">Upload Picture of the Odometer with Current KM\'s</string>
     <string name="save_continue">Save &amp; Continue</string>
+
+    <string name="navigation_drawer_open">Open Drawar</string>
+    <string name="navigation_drawer_close">Close Drawar</string>
+
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <string name="account_information">Account Information</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="notification">Notification</string>
+
+    <string name="abount_ants">Abount ants</string>
+    <string name="contact_ants">Contact ants</string>
+    <string name="faq">FAQ</string>
+    <string name="term_condition">Term &amp; Condition</string>
+    <string name="privacy_policy">Privacy Policy</string>
+
 </resources>

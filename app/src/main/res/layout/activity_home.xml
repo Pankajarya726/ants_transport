@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.home.HomeActivity">
+
+        <include android:id="@+id/layout_toolbar"
+            layout="@layout/toolbar_navigation" />
+
+        <LinearLayout
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/snakbar_view"
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <TextView
+                android:id="@+id/snakbar_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/frm_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/flContainerNavigationMenu"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="@android:color/white">
+
+    </FrameLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+</layout>
