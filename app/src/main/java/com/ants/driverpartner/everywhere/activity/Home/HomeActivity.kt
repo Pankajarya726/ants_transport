@@ -10,12 +10,16 @@ import androidx.appcompat.widget.Toolbar
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.afollestad.materialdialogs.MaterialDialog
 import com.an.customfontview.CustomTextView
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.databinding.ActivityHomeBinding
+import com.ants.driverpartner.everywhere.fragment.*
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog
 
 class HomeActivity : AppCompatActivity() {
 
@@ -30,6 +34,7 @@ class HomeActivity : AppCompatActivity() {
     private var previous_fragment = "fragment"
     private var isActivityRefreshed = false
     private var navigationFragment: NavigationFragment? = null
+    private var newBookingFragment: NewBooking? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +56,9 @@ class HomeActivity : AppCompatActivity() {
 
     fun init() {
         fragmentManager = supportFragmentManager
-        toolbar = findViewById(R.id.toolbar)
-        //setToolbarTitle("Home")
-        toolbar!!.navigationIcon = null
+        toolbar = findViewById(R.id.layout_toolbar)
+        setToolbarTitle("New Booking")
+        toolbar!!.navigationIcon =null
         setSupportActionBar(toolbar)
         drawer = findViewById(R.id.drawerLayout)
         val toggle = ActionBarDrawerToggle(
@@ -77,43 +82,37 @@ class HomeActivity : AppCompatActivity() {
         val fragmentPosition = position.toString() + ""
         var title: String? = null
 
-//        when (position) {
-//            0 -> {
-//                mDashBoardFragment = DashBoardFragment.newInstance()
-//                fragment = mDashBoardFragment
-//                title = "Home"
-//            }
-//
-//            1 -> {
-//
-//                //                startActivity(new Intent(mActivity, ScheduleBookingFragment.class));
-//                //                closeNavigationDrawer();
-//
-//                fragment = ScheduleBookingFragment.newInstance()
-//                title = "Schedule Booking"
-//                isActivityRefreshed = true
-//            }
-//
-//            2 -> {
-//                //                Toast.makeText(getAppContext(), "Coming soon...", Toast.LENGTH_SHORT).show();
-//                fragment = HistoryFragment.newInstance()
-//                title = "Ride History"
-//                isActivityRefreshed = true
-//            }
-//
-//            3 -> {
-//                //                Toast.makeText(getAppContext(), "Coming soon...", Toast.LENGTH_SHORT).show();
-//                fragment = TodayEarningFragment.newInstance()
-//                title = "Today's Earning"
-//                isActivityRefreshed = true
-//            }
-//
-//            4 -> {
-//                //                Toast.makeText(getAppContext(), "Coming soon...", Toast.LENGTH_SHORT).show();
-//                fragment = ProfileFragment.newInstance()
-//                title = "My Profile"
-//                isActivityRefreshed = true
-//            }
+        when (position) {
+            0 -> {
+                newBookingFragment = NewBooking.newInstance()
+                fragment = newBookingFragment
+                title = "New Booking"
+            }
+
+            1 -> {
+
+                fragment = CurrentBookingFragment.getInstance()
+                title = "Current Booking"
+                isActivityRefreshed = true
+            }
+
+            2 -> {
+                fragment = ScheduleFragment.getInstance()
+                title = "Schedule Booking"
+                isActivityRefreshed = true
+            }
+
+            3 -> {
+                fragment = HistoryFragment.getInstance()
+                title = "Booking History"
+                isActivityRefreshed = true
+            }
+
+            4 -> {
+                fragment = AccountFragment.getInstance()
+                title = "Account Info"
+                isActivityRefreshed = true
+            }
 //
 //            5 -> {
 //                //                Toast.makeText(getAppContext(), "Coming soon...", Toast.LENGTH_SHORT).show();
@@ -128,34 +127,23 @@ class HomeActivity : AppCompatActivity() {
 //                title = "Terms & Condition"
 //                isActivityRefreshed = true
 //            }
-//
-//            7 -> {
-//                /**
-//                 * Logout
-//                 */
-//                fragment = null
-//                openCloseDrawer()
-//
-//
-//                MaterialStyledDialog.Builder(getAppContext())
-//                    .setIcon(R.drawable.app_logo_new)
-//                    .withDialogAnimation(true)
-//                    .setCancelable(false)
-//                    .setTitle(R.string.app_name)
-//                    .setDescription(R.string.logout_application)
-//                    .setHeaderColor(R.color.card_shadow_3)
-//                    .setPositiveText(R.string.yes)
-//                    .onPositive(MaterialDialog.SingleButtonCallback { dialog, which ->
-//                        dialog.dismiss()
-//
-//                        mvpPresenter.logout()
-//                    })
-//
-//                    .setNegativeText(R.string.no)
-//                    .onNegative(MaterialDialog.SingleButtonCallback { dialog, which -> dialog.dismiss() })
-//                    .show()
-//            }
-//        }// onResume();
+
+            7 -> {
+                /**
+                 * Logout
+                 */
+                fragment = null
+                openCloseDrawer()
+
+
+                AlertDialog.Builder(this)
+                    .setIcon(R.drawable.ants_icon)
+                    .setCancelable(true)
+                    .setNegativeButton(getString(R.string.no), null)
+                    .setTitle(R.string.app_name)
+                    .show()
+            }
+        }// onResume();
         //onLogout();
 
         if (fragment != null && fragmentPosition != null) {

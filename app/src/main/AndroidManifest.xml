@@ -21,8 +21,8 @@
         tools:replace="android:icon,android:theme">
         <activity
             android:name=".activity.Home.HomeActivity"
-
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity
             android:name=".activity.ownerRegistration.vehicleInformation.VehicleActivity"
             android:screenOrientation="portrait"

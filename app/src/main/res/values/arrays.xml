@@ -10,7 +10,7 @@
         <item>Contact ants</item>
         <item>FAQ</item>
         <item>Terms and Condition</item>
-        <!--  <item>Privcy Policy</item>-->
+          <item>Privcy Policy</item>
         <!--  <item>Logout</item>-->
 
     </string-array>
@@ -24,6 +24,7 @@
         <item>@drawable/contactus</item>
         <item>@drawable/faq</item>
         <item>@drawable/terms_conditions</item>
+        <item>@drawable/privacy_policies</item>
         <!-- <item>@drawable/privacy_policies</item>-->
         <!--  <item>@drawable/lock</item>-->
     </integer-array>
