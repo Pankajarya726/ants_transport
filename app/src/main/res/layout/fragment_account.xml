@@ -1,14 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.AccountFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.account.AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@drawable/bg"
+        android:orientation="vertical"
+       >
 
-</FrameLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="@drawable/background"
+            android:elevation="0dp">
+
+
+
+            <RelativeLayout
+                android:id="@+id/layout_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="#393e41"
+                android:padding="10dp"
+               >
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/img_profile"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    app:civ_border_width="0dp"
+                    android:src="@drawable/profile_edit_pic" />
+
+                <com.an.customfontview.CustomTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/img_profile"
+                    android:text="Martin Garrix"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="20sp"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:id="@+id/tv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@+id/img_profile"
+                    android:text="martimgarrix@gmail.com"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textview_size"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+
+
+            </RelativeLayout>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layout_profile"
+                android:layout_marginTop="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_account"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="30dp"
+                        app:cardCornerRadius="0dp"
+                        app:cardBackgroundColor="@color/colorWhite"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
+                            android:orientation="vertical"
+                            android:padding="15dp">
+
+                            <!-- <com.an.customfontview.CustomTextView
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:layout_marginTop="5dp"
+                                 android:layout_toRightOf="@+id/img_profile"
+                                 android:text="ACCOUNT SETTINGS"
+                                 android:textColor="@color/colorBlack"
+                                 android:textSize="@dimen/textview_size"
+                                 app:textFontPath="fonts/poppins_regular.otf" />
+ -->
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_account_setting"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scrollbars="none" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- <androidx.cardview.widget.CardView
+                         android:id="@+id/card_suppord"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_below="@+id/card_account"
+                         android:layout_marginLeft="15dp"
+                         android:layout_marginTop="15dp"
+                         android:layout_marginRight="15dp"
+                         app:cardCornerRadius="10dp">
+
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:background="@color/colorWhite"
+                             android:orientation="vertical"
+                             android:padding="15dp"
+
+                             app:cardElevation="5dp">
+
+                             <com.an.customfontview.CustomTextView
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:layout_marginTop="5dp"
+                                 android:layout_toRightOf="@+id/img_profile"
+                                 android:text="SUPPORT"
+                                 android:textColor="@color/colorBlack"
+                                 android:textSize="@dimen/textview_size"
+                                 app:textFontPath="fonts/poppins_regular.otf" />
+
+                             <androidx.recyclerview.widget.RecyclerView
+                                 android:id="@+id/rv_support"
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:scrollbars="none" />
+
+                         </LinearLayout>
+
+                     </androidx.cardview.widget.CardView>-->
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_about"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/card_suppord"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="30dp"
+                        app:cardBackgroundColor="@color/colorWhite"
+                        android:layout_marginBottom="5dp"
+                        >
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite"
+                            android:orientation="vertical"
+                            android:padding="15dp"
+
+                            app:cardElevation="5dp">
+
+                            <!--    <com.an.customfontview.CustomTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_toRightOf="@+id/img_profile"
+                                    android:text="About"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="@dimen/textview_size"
+                                    app:textFontPath="fonts/poppins_regular.otf" />
+
+             -->
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_about"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scrollbars="none" />
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:text="Log Out"
+                        android:gravity="center"
+                        android:textColor="@color/colorAccent"
+                        android:background="#393e41"
+                        android:textSize="@dimen/textview_size"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf">
+
+
+                    </com.an.customfontview.CustomTextView>
+
+
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</layout>

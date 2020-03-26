@@ -1,32 +1,39 @@
 package com.ants.driverpartner.everywhere.activity.Home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.afollestad.materialdialogs.MaterialDialog
+import androidx.navigation.ui.AppBarConfiguration
 import com.an.customfontview.CustomTextView
+import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.webViewActivity.WebViewActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityHomeBinding
-import com.ants.driverpartner.everywhere.fragment.*
-import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog
+import com.ants.driverpartner.everywhere.fragment.CurrentBookingFragment
+import com.ants.driverpartner.everywhere.fragment.HistoryFragment
+import com.ants.driverpartner.everywhere.fragment.NewBooking
+import com.ants.driverpartner.everywhere.fragment.ScheduleFragment
+import com.ants.driverpartner.everywhere.fragment.account.AccountFragment
+import com.ants.driverpartner.everywhere.fragment.contactUs.ContactFragmant
+import com.ants.driverpartner.everywhere.utils.SnackbarUtils.snackBarBottom
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), Homeview {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var drawer: DrawerLayout? = null
     private var fragmentManager: FragmentManager? = null
-    lateinit var binding:ActivityHomeBinding
+    lateinit var binding: ActivityHomeBinding
     private var imageView: ImageView? = null
     private var toolbar: Toolbar? = null
     private val currentFragment = -1
@@ -58,7 +65,7 @@ class HomeActivity : AppCompatActivity() {
         fragmentManager = supportFragmentManager
         toolbar = findViewById(R.id.layout_toolbar)
         setToolbarTitle("New Booking")
-        toolbar!!.navigationIcon =null
+        toolbar!!.navigationIcon = null
         setSupportActionBar(toolbar)
         drawer = findViewById(R.id.drawerLayout)
         val toggle = ActionBarDrawerToggle(
@@ -91,44 +98,76 @@ class HomeActivity : AppCompatActivity() {
 
             1 -> {
 
-                fragment = CurrentBookingFragment.getInstance()
+                fragment = CurrentBookingFragment(this)
                 title = "Current Booking"
                 isActivityRefreshed = true
             }
 
             2 -> {
-                fragment = ScheduleFragment.getInstance()
+                fragment = ScheduleFragment(this)
                 title = "Schedule Booking"
                 isActivityRefreshed = true
             }
 
             3 -> {
-                fragment = HistoryFragment.getInstance()
+                fragment = HistoryFragment(this)
                 title = "Booking History"
                 isActivityRefreshed = true
             }
 
             4 -> {
-                fragment = AccountFragment.getInstance()
+                fragment = AccountFragment(this)
                 title = "Account Info"
                 isActivityRefreshed = true
             }
 //
-//            5 -> {
-//                //                Toast.makeText(getAppContext(), "Coming soon...", Toast.LENGTH_SHORT).show();
-//                fragment = FAQsFragment.newInstance()
-//                title = "FAQs"
-//                isActivityRefreshed = true
-//            }
-//
-//            6 -> {
-//                //                Toast.makeText(getAppContext(), "Coming soon...", Toast.LENGTH_SHORT).show();
-//                fragment = TermsAndConditionFragment.newInstance()
-//                title = "Terms & Condition"
-//                isActivityRefreshed = true
-//            }
+            5 -> {
+                fragment = ContactFragmant(this)
+                title = "Contact ants"
+                isActivityRefreshed = true
+            }
 
+            6 -> {
+
+                fragment = null
+                title = "FAQ"
+                openCloseDrawer()
+
+                val intent = Intent(this, WebViewActivity::class.java)
+                intent.putExtra(Constant.WEB_VIEW_TITLE, title)
+                intent.putExtra(Constant.WEB_URL, "www.google.co.in")
+                startActivity(intent)
+
+
+            }
             7 -> {
+
+                fragment = null
+                title = "Term and Condition"
+                openCloseDrawer()
+
+                val intent = Intent(this, WebViewActivity::class.java)
+                intent.putExtra(Constant.WEB_VIEW_TITLE, title)
+                intent.putExtra(Constant.WEB_URL, "www.google.co.in")
+                startActivity(intent)
+
+
+            }
+            8 -> {
+
+                fragment = null
+                title = "Privacy Policy"
+                openCloseDrawer()
+
+                val intent = Intent(this, WebViewActivity::class.java)
+                intent.putExtra(Constant.WEB_VIEW_TITLE, title)
+                intent.putExtra(Constant.WEB_URL, "www.google.co.in")
+                startActivity(intent)
+
+
+            }
+
+            9 -> {
                 /**
                  * Logout
                  */
@@ -154,6 +193,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
+
     fun replaceFragment(fragment: Fragment, fragmentPosition: String, title: String) {
         setToolbarTitle(title)
         closeNavigationDrawer()
@@ -161,9 +201,8 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-
     fun setToolbarTitle(title: String) {
-       var textView =  binding.layoutToolbar.findViewById(R.id.toolbar_title) as CustomTextView
+        var textView = binding.layoutToolbar.findViewById(R.id.toolbar_title) as CustomTextView
         textView.text = title
 
     }
@@ -178,6 +217,7 @@ class HomeActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.flContainerNavigationMenu, navigationFragment!!, "Navigation").commit()
     }
+
     private fun fragmentPullPush(fragmentPosition: String, fragment: Fragment) {
         backPressed = false
         var isFragmentFound = true
@@ -242,12 +282,49 @@ class HomeActivity : AppCompatActivity() {
         }
 
     }
+
     private fun openCloseDrawer() {
         if (drawer!!.isDrawerOpen(Gravity.LEFT))
             drawer!!.closeDrawer(Gravity.LEFT)
         else
             drawer!!.openDrawer(Gravity.LEFT)
 
+    }
+
+    override fun setHeaderTitle(s: String) {
+        setToolbarTitle(s)
+    }
+
+    override fun onBackPressed() {
+
+        if (drawer!!.isDrawerOpen(Gravity.LEFT)) {
+            drawer!!.closeDrawer(Gravity.LEFT)
+        } else {
+
+            val i = supportFragmentManager.backStackEntryCount
+
+            if (backPressed) {
+                finish()
+                System.exit(0)
+
+            } else if (i == 0) {
+
+                backPressed = true
+                snackBarBottom(findViewById(R.id.drawerLayout), "Press again to Exit.")
+
+
+            } else {
+
+                replaceFragment(
+                    Integer.parseInt(
+                        fragmentManager!!.getBackStackEntryAt(
+                            fragmentManager!!.backStackEntryCount - 1
+                        ).name!!
+                    )
+                )
+
+            }
+        }
     }
 
 }

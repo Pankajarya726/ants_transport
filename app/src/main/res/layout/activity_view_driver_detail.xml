@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.driverDetails.ViewDriverDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorWhite">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorWhite"
+            android:elevation="2dp">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/arrow_back" />
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Driver Information"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                app:textFontPath="fonts/poppins_regular.otf" />
+
+            <ImageView
+                android:id="@+id/img_add"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:visibility="gone"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/plus_black" />
+
+        </RelativeLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:outlineSpotShadowColor="@color/colorGrey"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+                    android:background="@color/colorWhite"
+                    tools:context=".fragment.edit_profile.EditProfileFragment">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/profile_edit_bg_head">
+
+
+                    </ImageView>
+
+                    <RelativeLayout
+                        android:id="@+id/layout_image"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="80dp">
+
+                        <com.mikhaellopez.circularimageview.CircularImageView
+                            android:id="@+id/img_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/profile_edit_pic"
+                            app:civ_border_width="0dp">
+
+                        </com.mikhaellopez.circularimageview.CircularImageView>
+
+
+
+
+                    </RelativeLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/layout_image"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:orientation="vertical">
+
+                        <com.an.customfontview.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:text="Name"
+                            android:textColor="@color/colorBlackGrey"
+                            android:textSize="15sp"
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <com.an.customfontview.CustomEditText
+                            android:id="@+id/edt_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@null"
+                            android:backgroundTint="@color/colorGrey"
+                            android:hint="Name"
+                            android:inputType="textPersonName"
+                            android:maxLines="1"
+                            android:minLines="1"
+                            android:paddingBottom="5dp"
+                            android:text="Martin Garrix"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorGrey"
+                            android:textSize="17sp"
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2px"
+                            android:background="@color/colorGrey" />
+
+
+                        <com.an.customfontview.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+
+                            android:maxLines="1"
+                            android:text="Email"
+                            android:textColor="@color/colorBlackGrey"
+                            android:textSize="15sp"
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <com.an.customfontview.CustomEditText
+                            android:id="@+id/edt_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@null"
+                            android:backgroundTint="@color/colorGrey"
+                            android:focusable="false"
+                            android:hint="Email"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:minLines="1"
+                            android:paddingBottom="5dp"
+                            android:text="martingarrix@gmail.com"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorGrey"
+                            android:textSize="17sp"
+
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2px"
+                            android:background="@color/colorGrey" />
+
+                        <com.an.customfontview.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15sp"
+                            android:maxLines="1"
+                            android:text="Mobile Number"
+                            android:textColor="@color/colorBlackGrey"
+                            android:textSize="15sp"
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <com.an.customfontview.CustomEditText
+
+                            android:id="@+id/edt_mobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@null"
+                            android:backgroundTint="@color/colorGrey"
+                            android:hint="Mobile Number"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:minLines="1"
+                            android:paddingBottom="5dp"
+                            android:text="1234 456 789"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorGrey"
+                            android:textSize="17sp"
+
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2px"
+                            android:background="@color/colorGrey" />
+
+                        <com.an.customfontview.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15sp"
+                            android:maxLines="1"
+                            android:text="@string/residential_address"
+                            android:textColor="@color/colorBlackGrey"
+                            android:textSize="15sp"
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <com.an.customfontview.CustomEditText
+
+                            android:id="@+id/edt_residential_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@null"
+                            android:backgroundTint="@color/colorGrey"
+                            android:hint="Mobile Number"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="3"
+                            android:minLines="1"
+                            android:paddingBottom="5dp"
+                            android:text="1234 456 789"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorGrey"
+                            android:textSize="17sp"
+
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2px"
+                            android:background="@color/colorGrey" />
+
+                        <com.an.customfontview.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15sp"
+                            android:maxLines="1"
+                            android:text="@string/postal_address"
+                            android:textColor="@color/colorBlackGrey"
+                            android:textSize="15sp"
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <com.an.customfontview.CustomEditText
+
+                            android:id="@+id/edt_postal_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@null"
+                            android:backgroundTint="@color/colorGrey"
+                            android:hint="Postal Address"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="3"
+                            android:minLines="1"
+                            android:paddingBottom="5dp"
+                            android:text="1234 456 789"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorGrey"
+                            android:textSize="17sp"
+
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2px"
+                            android:background="@color/colorGrey" />
+
+                       <!-- <com.an.customfontview.CustomButton
+
+                            android:id="@+id/btn_save"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="50dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/button_theam"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1"
+                            android:minLines="1"
+                            android:text="UPDATE"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="20sp"
+                            app:textFontPath="fonts/poppins_regular.otf" />-->
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </ScrollView>
+    </LinearLayout>
+
+</layout>

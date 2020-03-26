@@ -42,5 +42,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="current_fragment">Current Fragment</string>
+    <string name="notification_setting">Notification</string>
+    <string name="support">Support</string>
+    <string name="postal_address">Postal Address</string>
+    <string name="residential_address">Residential Address</string>
+    <string name="gross_vehicle_mass">Gross Vehicle Mass</string>
+    <string name="vehicle_registration_number">Vehicle Registration Number</string>
+    <string name="vehicle_identifaction_number">Vehicle Indification Number</string>
+    <string name="assign_this_vehicle_to">Assign this Vehicle to</string>
 
 </resources>

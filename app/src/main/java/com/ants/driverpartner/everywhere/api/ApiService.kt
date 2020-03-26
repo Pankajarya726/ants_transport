@@ -1,6 +1,7 @@
 package com.tekzee.mallortaxi.network
 
 
+import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverListResponse
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
@@ -8,6 +9,7 @@ import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInfor
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
+import com.ants.driverpartner.everywhere.activity.vehicleDetails.GetVehicleListResponse
 import com.google.gson.JsonObject
 import io.reactivex.Observable
 import okhttp3.MultipartBody
@@ -69,8 +71,8 @@ interface ApiService {
 
     @POST("Owner_vehicle_list")
     fun getOwnerVehicle(
-        @HeaderMap  headers: java.util.HashMap<String, String?>,
-       @Body input: JsonObject
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
     ): Observable<Response<OwnersVehilce>>
 
 
@@ -95,8 +97,6 @@ interface ApiService {
 //        @Part bankStatementImage: MultipartBody.Part,
 //        @Part profileImage: MultipartBody.Part
 //    ): Observable<Response<RegisterDriverResponse>>
-
-
 
 
     @Multipart
@@ -127,9 +127,9 @@ interface ApiService {
         @HeaderMap headers: HashMap<String, String?>,
         @Part("userid") userId: RequestBody,
         @Part("name") name: RequestBody,
-        @Part("email")  email: RequestBody,
-        @Part("mobile")  mobile: RequestBody,
-        @Part("residential_address")  residentialAddress: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("mobile") mobile: RequestBody,
+        @Part("residential_address") residentialAddress: RequestBody,
         @Part("postal_address") postalAddress: RequestBody,
         @Part("vehicle_id") vehicleId: RequestBody,
         @Part("password") password: RequestBody,
@@ -143,6 +143,17 @@ interface ApiService {
         @Part profileImage: MultipartBody.Part
     ): Observable<Response<RegisterDriverResponse>>
 
+    @POST("get_vehicle_driver")
+    fun callVehicleListApi(@HeaderMap headers: HashMap<String, String?>, @Body input: JsonObject):
+            Observable<Response<GetVehicleListResponse>>
+
+
+    @POST("get_owners_driver")
+    fun callGetDriverListApi(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<GetDriverListResponse>>
+
 
 //    @Multipart
 //    @POST("user/save_photoid")
@@ -154,4 +165,4 @@ interface ApiService {
 //    ): Observable<Response<AttachIdResponse>>
 
 
-}
+    }

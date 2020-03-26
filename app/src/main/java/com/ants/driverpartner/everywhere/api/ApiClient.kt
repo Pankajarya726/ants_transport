@@ -1,6 +1,7 @@
 package com.tekzee.mallortaxi.network
 
 
+import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverListResponse
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
@@ -8,6 +9,7 @@ import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInfor
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
+import com.ants.driverpartner.everywhere.activity.vehicleDetails.GetVehicleListResponse
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.orhanobut.logger.AndroidLogAdapter
@@ -227,6 +229,15 @@ return  apiService.getVehicleCategory(headers,userid)
 
         )
     }
+
+    fun callVehicleListApi(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<GetVehicleListResponse>> {
+        return apiService.callVehicleListApi(headers,input)
+    }
+
+    fun callGetDriverListApi(headers: HashMap<String, String?>, input: JsonObject):Observable<Response<GetDriverListResponse>> {
+        return apiService.callGetDriverListApi(headers,input)
+    }
+
 
 //    fun doValidateAppVersionApi(
 //        input: JsonObject

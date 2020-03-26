@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--  <data>
+
+          <variable
+              name="accountSetting"
+              type="com.ants.everywhere.fragment.profile.AccountSetting" />
+
+      </data>
+  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/setting_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:id="@+id/img_flag"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/account_information" />
+
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_setting_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="25dp"
+                android:layout_toRightOf="@+id/img_flag"
+                android:gravity="center"
+                android:text="Settings"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/textview_size"
+                app:textFontPath="fonts/poppins_regular.otf" />
+
+           <!-- <ImageView
+                android:id="@+id/img_arrow_right"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/arrow_right" />-->
+
+            <View
+                android:id="@+id/view_line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/img_flag"
+                android:layout_marginTop="20dp"
+
+                android:background="@color/colorBlackGrey" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

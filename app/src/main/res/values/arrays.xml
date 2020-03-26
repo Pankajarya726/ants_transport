@@ -24,7 +24,7 @@
         <item>@drawable/contactus</item>
         <item>@drawable/faq</item>
         <item>@drawable/terms_conditions</item>
-        <item>@drawable/privacy_policies</item>
+        <item>@drawable/privacy_policy</item>
         <!-- <item>@drawable/privacy_policies</item>-->
         <!--  <item>@drawable/lock</item>-->
     </integer-array>
@@ -32,7 +32,8 @@
 
     <integer-array name="img_array_account">
         <item>@drawable/account_information</item>
-        <item>@drawable/payment_method</item>
+        <item>@drawable/driver_information</item>
+        <item>@drawable/vehicle_information</item>
         <item>@drawable/reset_password</item>
         <item>@drawable/notifications</item>
 
@@ -40,7 +41,8 @@
     <string-array name="account_setting_array">
 
         <item>@string/account_information</item>
-        <item>@string/payment_method</item>
+        <item>@string/driver_information</item>
+        <item>@string/vehicle_information</item>
         <item>@string/reset_password</item>
         <item>@string/notification</item>
 
@@ -53,7 +55,7 @@
         <item>@drawable/contactus</item>
         <item>@drawable/faq</item>
         <item>@drawable/terms_conditions</item>
-        <item>@drawable/privacy_policies</item>
+        <item>@drawable/privacy_policy</item>
 
     </integer-array>
 
@@ -135,4 +137,6 @@
     </declare-styleable>
 
 
+    <string name="driver_information">Driver Information</string>
+    <string name="vehicle_information">Vehicle Information</string>
 </resources>

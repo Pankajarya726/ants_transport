@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.contactUs.ContactFragmant">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_image"
+
+        android:background="@color/colorBlackGrey"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+        <com.an.customfontview.CustomTextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:autoLink="map"
+            android:gravity="center|top"
+            android:maxLines="3"
+            android:minLines="1"
+            android:text="There's always an ants\nclose by"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorGrey"
+            android:textSize="22sp"
+            app:textFontPath="fonts/poppins_regular.otf" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/white_ants_logo" />
+
+        <com.an.customfontview.CustomTextView
+            android:id="@+id/tv_web"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center|top"
+            android:maxLines="1"
+            android:minLines="1"
+            android:text="Reach out to us with any query"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            app:textFontPath="fonts/poppins_regular.otf" />
+
+
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/email_icon" />
+
+        <com.an.customfontview.CustomTextView
+            android:id="@+id/tv_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center|top"
+            android:maxLines="1"
+            android:minLines="1"
+            android:text="info@antsdeliver.com"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            android:textColorLink="@color/colorAccent"
+            android:textSize="20sp"
+            app:textFontPath="fonts/poppins_regular.otf" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/whatsapp_icon" />
+
+        <com.an.customfontview.CustomTextView
+            android:id="@+id/tv_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textColorLink="@color/colorBlack"
+            android:gravity="center|top"
+            android:maxLines="1"
+            android:minLines="1"
+            android:text="+27XXXXXXXX"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            app:textFontPath="fonts/poppins_regular.otf" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
