@@ -1,0 +1,1329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.packageDetailActivity.PackageDetailActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorWhite">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    app:srcCompat="@drawable/arrow_back"
+                    tools:ignore="VectorDrawableCompat"/>
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/package_detail"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25dp"
+                    app:textFontPath="fonts/poppins_regular.otf">
+
+                </com.an.customfontview.CustomTextView>
+
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#F3F3F3"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorAccent"
+                    android:elevation="5dp"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text="@string/sender_details"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Name"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_sender_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="pankaj"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Mobile Number"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_sender_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="7415760789"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Collection floor"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_sender_collection_floor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="5"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Lift/Elevator to available"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_sender_lift_elevator"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Forklift collection"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_sender_forklift"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorAccent"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text="Receiver Details"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Name"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_receiver_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="pankaj"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Mobile Number"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_receiver_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="7415760789"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Collection floor"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_receiver_floor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="5"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Lift/Elevator to available"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_receiver_lift_elevator"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Forklift collection"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_receiver_forklift"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Load Type"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_load_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorAccent"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text="Driver Details"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Driver Name"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_driver_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="5"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Driver Cont"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_driver_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="7415760789"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Vehicle Type"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_vehicle_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Truck"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Registration Number"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_registration_number"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    >
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/pickup_address"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_pickup_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="50dp"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/pickup_address"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
+                        android:minLines="2"
+
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    >
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/drop_address"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_drop_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="50dp"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/pickup_address"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp"
+                        android:minLines="2"
+
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorAccent"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:text="Item Details"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Package Type"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_package_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Box"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Number of Units"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_number_units"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="5"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Provide Loaders"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_provide_loader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="no"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Hazardous Material"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_hazardous_material"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Insurance"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_insurance"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="No"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Packaging"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_packaging"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Pellet"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Stackable"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_stackable"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Collection Service"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_collection_service"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Lift Service at collection"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_lift_service_collection"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Delivery Service"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_delivery_service"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Lift Service at Delivery"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_lift_service_delivery"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Weight facuility at Delivery"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_weight_facility_delivery"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Delivery Appointment"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_delivery_appointment"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:minHeight="45dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:weightSum="2">
+
+                    <com.an.customfontview.CustomTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="Call before Delivery"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_call_before_delivery"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/colorWhite"
+                        android:gravity="center_vertical"
+                        android:text="YES"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

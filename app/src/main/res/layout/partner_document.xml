@@ -17,13 +17,14 @@
             android:background="@color/colorWhite"
             android:elevation="2dp">
 
-<!--            <ImageView-->
-<!--                android:id="@+id/back"-->
-<!--                android:layout_width="20dp"-->
-<!--                android:layout_height="20dp"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:layout_marginLeft="5dp"-->
-<!--                android:src="@drawable/back_icon" />-->
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:visibility="gone"
+                android:src="@drawable/arrow_back" />
 
             <com.an.customfontview.CustomTextView
                 android:id="@+id/tv_title"
@@ -620,6 +621,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/layout_signin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"

@@ -1,13 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragment.HistoryFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.history.HistoryFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="@color/colorWhite"
-       >
+        >
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:visibility="gone"/>
+
+        <RelativeLayout
+
+            android:background="@color/colorBlackGrey"
+            android:id="@+id/rl_history_booking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="visible">
+
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="No History found"
+                android:textColor="@color/colorWhite"
+                android:textSize="20dp"
+                app:textFontPath="fonts/poppins_regular.otf"/>
+
+            <ImageView
+                android:id="@+id/iv_booking"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_below="@id/tv_1"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/history_background" />
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_booking"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textColor="@color/colorAccent"
+                app:textFontPath="fonts/poppins_regular.otf"
+                android:text="Sometimes even we have trouble\nseeing into the future" />
+
+
+        </RelativeLayout>
 
 
 

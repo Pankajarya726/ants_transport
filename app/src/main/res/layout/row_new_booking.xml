@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorWhite"
+        app:cardBackgroundColor="@color/colorWhite"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorWhite">
+
+
+            <RelativeLayout
+                android:id="@+id/layout1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/layout6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_image"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            app:civ_border_width="0dp"
+                            android:src="@drawable/profile_edit_pic"
+
+                            />
+
+
+                    </LinearLayout>
+
+                    <ImageView
+
+                        android:layout_width="10dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10sp"
+                        android:paddingTop="20dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/distance" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+
+                        <com.an.customfontview.CustomTextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|left"
+                            android:hint="Name"
+                            android:maxLines="1"
+                            android:minLines="1"
+                            android:text="Pankaj"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                        <com.an.customfontview.CustomTextView
+                            android:id="@+id/tv_pickup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="top|left"
+                            android:maxLines="2"
+                            android:minLines="2"
+                            android:text="indore"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                        <com.an.customfontview.CustomTextView
+                            android:id="@+id/tv_drop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="top|left"
+                            android:hint="@string/address2"
+                            android:maxLines="2"
+                            android:minLines="2"
+                            android:text="bhopal"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:textFontPath="fonts/poppins_regular.otf" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout1"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:drawableLeft="@drawable/meter"
+                        android:gravity="center"
+                        android:hint="5Kg"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:text="5kg"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_carrier"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="10dp"
+                        android:drawableLeft="@drawable/truck"
+                        android:gravity="center"
+                        android:hint="Log Carrier"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:text="Log Carier"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:drawableLeft="@drawable/clock"
+                        android:gravity="center"
+                        android:hint="6:00 PM"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:text="6:30 PM"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="10dp"
+                        android:drawableLeft="@drawable/calendar_green"
+                        android:gravity="center"
+                        android:hint="03-sep-2020"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:text="03-03-2020"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <com.an.customfontview.CustomTextView
+                        android:id="@+id/tv_distance"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:drawableTop="@drawable/ruler"
+                        android:gravity="center|top"
+                        android:hint="03-sep-2020"
+                        android:maxLines="1"
+                        android:minLines="1"
+                        android:paddingTop="5dp"
+                        android:text="02-03-2200"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:textFontPath="fonts/poppins_regular.otf" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <com.an.customfontview.CustomButton
+                android:id="@+id/btn_open"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/layout2"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="30dp"
+                android:background="@color/colorWhite"
+                android:elevation="5dp"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:text="open collection"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                app:textFontPath="fonts/poppins_regular.otf" />
+
+            <LinearLayout
+
+                android:id="@+id/rl_accept_decline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_open"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginBottom="10dp"
+                android:background="@color/colorWhite">
+                <com.an.customfontview.CustomButton
+                    android:id="@+id/btn_accept"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_theam"
+                    android:text="Accept"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp"
+                    android:layout_marginRight="10dp"
+                    app:textFontPath="fonts/poppins_regular.otf"
+
+                    />
+
+
+
+                <com.an.customfontview.CustomButton
+                    android:id="@+id/btn_decline"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_red"
+                    android:text="Decline"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp"
+                    app:textFontPath="fonts/poppins_regular.otf"
+
+                    />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

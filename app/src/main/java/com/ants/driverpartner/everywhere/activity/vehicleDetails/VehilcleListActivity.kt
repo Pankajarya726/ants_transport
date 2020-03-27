@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.util.DialogUtils
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.VehicleActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityVehilcleListBinding
 import com.google.gson.Gson
@@ -40,6 +41,12 @@ class VehilcleListActivity : BaseMainActivity(), VehicleListView,VehicleListAdap
 
         binding.back.setOnClickListener(View.OnClickListener {
             onBackPressed()
+        })
+
+        binding.imgAdd.setOnClickListener(View.OnClickListener {
+            val intent =Intent(this,VehicleActivity::class.java)
+            intent.putExtra(Constant.ADDING_VEHICLE,Constant.ADDING_VEHICLE)
+            startActivity(intent)
         })
 
     }

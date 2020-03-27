@@ -51,5 +51,10 @@
     <string name="vehicle_registration_number">Vehicle Registration Number</string>
     <string name="vehicle_identifaction_number">Vehicle Indification Number</string>
     <string name="assign_this_vehicle_to">Assign this Vehicle to</string>
+    <string name="address2">Indore</string>
+    <string name="package_detail">Package Detail</string>
+    <string name="sender_details">Sender Details</string>
+    <string name="pickup_address">Pickup Address</string>
+    <string name="drop_address">Drop of Address</string>
 
 </resources>

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverListResponse
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.DriverDocActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityDriverListBinding
 import com.google.gson.Gson
@@ -39,6 +40,17 @@ class DriverListActivity : BaseMainActivity(),DriverListView ,DriverListAdapter.
             onBackPressed()
         })
 
+        binding.imgAdd.setOnClickListener(View.OnClickListener {
+            addDriver()
+        })
+
+    }
+
+    private fun addDriver() {
+
+        val intent = Intent(this,DriverDocActivity::class.java)
+        intent.putExtra(Constant.ADDING_DRIVER,Constant.ADDING_DRIVER)
+        startActivity(intent)
     }
 
     override fun onGetDriverList(responseData: GetDriverListResponse) {

@@ -20,9 +20,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.driverDetails.DriverListActivity
 import com.ants.driverpartner.everywhere.activity.login.LoginActivity
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.DriverDocActivity
-import com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
@@ -41,7 +41,6 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
     BSImagePicker.OnSingleImageSelectedListener, VehicleView {
 
 
-
     lateinit var binding: ActivityVehicleBinding
     private var sentToSettings = false
     private var upload_type: String? = null
@@ -55,12 +54,28 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
     private var presenter: VehiclePresenter? = null
     private var cal = Calendar.getInstance()
     private var vehicleId = 0
+    private var isAddVehicle = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_vehicle)
 
         presenter = VehiclePresenter(this, this)
+
+        isAddVehicle = intent.getStringExtra(Constant.ADDING_VEHICLE)
+
+        init()
+
+
+    }
+
+
+    fun init() {
+
+        if (isAddVehicle.equals(Constant.ADDING_VEHICLE)) {
+            binding.back.visibility = View.VISIBLE
+            binding.layoutSignin.visibility = View.GONE
+        }
 
         binding.tvSignup.setOnClickListener(this)
         binding.imgLicensePic.setOnClickListener(this)
@@ -75,6 +90,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
         binding.btnUpload.setOnClickListener(this)
         binding.tvVehicleType.setOnClickListener(this)
         binding.tvType.setOnClickListener(this)
+        binding.back.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -125,10 +141,17 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
             R.id.btn_upload -> submit()
 
+            R.id.back -> onBackPressed()
+
         }
 
     }
 
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finish()
+    }
     override fun onDestroy() {
         super.onDestroy()
         presenter!!.onStop()
@@ -179,15 +202,6 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
                 presenter!!.callRegisterVehicleApi()
 
 
-
-
-
-
-
-
-
-
-
 //                if (Utility.getSharedPreferences(this, Constant.ACCOUNT_TYPE) == Constant.OWNER) {
 //                    val intent = Intent(this, DriverDocActivity::class.java)
 //                    startActivity(intent)
@@ -205,38 +219,38 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
 
     override fun getVehicleType(): String {
-        return  vehicleId.toString()
+        return vehicleId.toString()
 
     }
 
     override fun getRegistrationDate(): String {
-        return  binding.edtRegDate.text.toString()
+        return binding.edtRegDate.text.toString()
     }
 
     override fun getTare(): String {
-        return  binding.edtTire.text.toString()
+        return binding.edtTire.text.toString()
     }
 
     override fun getVehicleMass(): String {
-        return  binding.edtMass.text.toString()
+        return binding.edtMass.text.toString()
     }
 
     override fun getRegistrationNumber(): String {
-        return  binding.edtRegNumber.text.toString()
+        return binding.edtRegNumber.text.toString()
     }
 
     override fun getModel(): String {
-        return  binding.edtModel.text.toString()
+        return binding.edtModel.text.toString()
     }
 
     override fun getManufacture(): String {
-        return  binding.edtManufacture.text.toString()
+        return binding.edtManufacture.text.toString()
     }
 
     override fun getLicenceImage(): File? {
 
 
-                return file_img_license
+        return file_img_license
     }
 
     override fun getOdometerImage(): File? {
@@ -246,32 +260,33 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
     }
 
     override fun getInsuranceImage(): File? {
-        return   file_img_insuranse
+        return file_img_insuranse
 
     }
 
-    override fun getVehicleFontImage(): File ?{
-        return    file_img_vehicle_front
+    override fun getVehicleFontImage(): File? {
+        return file_img_vehicle_front
 
     }
 
     override fun getVehicelBackImage(): File? {
-        return   file_img_vehicle_back
+        return file_img_vehicle_back
 
     }
 
     override fun getVehicleLeftImage(): File? {
-        return   file_img_vehicle_right
+        return file_img_vehicle_right
 
     }
 
     override fun getVehicleRightImage(): File? {
-        return   file_img_vehicle_left
+        return file_img_vehicle_left
     }
 
     override fun getVinNumber(): String {
-        return  binding.edtVin.text.toString()
+        return binding.edtVin.text.toString()
     }
+
     private fun updateDateInView() {
         val myFormat = "MM/dd/yyyy" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
@@ -307,10 +322,13 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
 
                     binding.tvVehicleType.text = data.name
-                    vehicleId= data.id
+                    vehicleId = data.id
 
 
-                    Utility.log(javaClass.simpleName,binding.tvVehicleType.text.toString()+"\t\t"+vehicleId)
+                    Utility.log(
+                        javaClass.simpleName,
+                        binding.tvVehicleType.text.toString() + "\t\t" + vehicleId
+                    )
 
                 }
             })
@@ -326,8 +344,16 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
     }
 
     override fun onRegisterSuccess(responseData: RegisterVehicleResponse) {
-        val intent = Intent(this, DriverDocActivity::class.java)
-        startActivity(intent)
+
+        if (isAddVehicle.equals(Constant.ADDING_VEHICLE)) {
+            val intent = Intent(this, DriverListActivity::class.java)
+            startActivity(intent)
+            this.finish()
+        } else {
+            val intent = Intent(this, DriverDocActivity::class.java)
+            startActivity(intent)
+            this.finish()
+        }
     }
 
     override fun validateError(message: String) {
@@ -604,7 +630,6 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
             }
         }
     }
-
 
 
 //    override fun createPresenter(): DocumentPresenter {

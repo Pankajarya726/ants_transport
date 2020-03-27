@@ -13,6 +13,9 @@ interface Constant {
     }
 
     companion object {
+        val ADDING_DRIVER = "ADDING_DRIVER"
+        val ADDING_VEHICLE = "ADDING_VEHICLE"
+        val PACKAGE_DETAIL= "PACKAGE_DETAIL"
         val WEB_VIEW_TITLE = "WEB_VIEW_TITLE"
         val WEB_URL= "WEB_URL"
         val VEHICLE_DETAIL = "VEHICLE_DETAIL"

@@ -19,10 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:theme">
-        <activity android:name=".activity.notification.NotificationActivity"
+        <activity android:name=".activity.packageDetailActivity.PackageDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".activity.notification.NotificationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activity.webViewActivity.WebViewActivity"
             android:screenOrientation="portrait"

@@ -7,9 +7,14 @@ import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocume
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
+import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.activity.vehicleDetails.GetVehicleListResponse
+import com.ants.driverpartner.everywhere.fragment.history.model.GetHistroyBookingResponse
+import com.ants.driverpartner.everywhere.fragment.newBooking.model.BookingResponse
+import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
+import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ScheduleBookingResponse
 import com.google.gson.JsonObject
 import io.reactivex.Observable
 import okhttp3.MultipartBody
@@ -154,6 +159,35 @@ interface ApiService {
         @Body input: JsonObject
     ): Observable<Response<GetDriverListResponse>>
 
+    @POST("get_booking_request")
+    fun callGetNewBookingApi(
+        @HeaderMap  headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<GetNewBookingResponse>>
+
+
+    @POST("get_booking_request")
+    fun getHistoryBooking(
+        @HeaderMap createHeaders: HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<GetHistroyBookingResponse>>
+
+    @POST("getProfile")
+    fun getProfile(@HeaderMap headers: HashMap<String, String?>,@Body input: JsonObject): Observable<Response<GetProfileResponse>>
+
+
+    @POST("accept_booking_request")
+    fun callAcceptBookingApi(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<BookingResponse>>
+
+
+    @POST("get_all_confirm_booking")
+    fun callGetScheduleBookingApi(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<ScheduleBookingResponse>>
 
 //    @Multipart
 //    @POST("user/save_photoid")

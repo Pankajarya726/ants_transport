@@ -2,8 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    tools:context=".fragment.NewBooking">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +12,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_current_booking"
+            android:id="@+id/rv_new_booking"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone">
@@ -24,7 +23,7 @@
         <RelativeLayout
 
             android:background="@color/colorBlackGrey"
-            android:id="@+id/rl_current_booking"
+            android:id="@+id/rl_new_booking"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"

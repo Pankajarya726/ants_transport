@@ -21,9 +21,9 @@ import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.webViewActivity.WebViewActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityHomeBinding
 import com.ants.driverpartner.everywhere.fragment.CurrentBookingFragment
-import com.ants.driverpartner.everywhere.fragment.HistoryFragment
-import com.ants.driverpartner.everywhere.fragment.NewBooking
-import com.ants.driverpartner.everywhere.fragment.ScheduleFragment
+import com.ants.driverpartner.everywhere.fragment.history.HistoryFragment
+import com.ants.driverpartner.everywhere.fragment.newBooking.NewBooking
+import com.ants.driverpartner.everywhere.fragment.scheduleBooking.ScheduleFragment
 import com.ants.driverpartner.everywhere.fragment.account.AccountFragment
 import com.ants.driverpartner.everywhere.fragment.contactUs.ContactFragmant
 import com.ants.driverpartner.everywhere.utils.SnackbarUtils.snackBarBottom
@@ -104,7 +104,8 @@ class HomeActivity : AppCompatActivity(), Homeview {
             }
 
             2 -> {
-                fragment = ScheduleFragment(this)
+                fragment =
+                    ScheduleFragment(this)
                 title = "Schedule Booking"
                 isActivityRefreshed = true
             }

@@ -7,9 +7,14 @@ import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocume
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
+import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.activity.vehicleDetails.GetVehicleListResponse
+import com.ants.driverpartner.everywhere.fragment.history.model.GetHistroyBookingResponse
+import com.ants.driverpartner.everywhere.fragment.newBooking.model.BookingResponse
+import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
+import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ScheduleBookingResponse
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import com.orhanobut.logger.AndroidLogAdapter
@@ -236,6 +241,29 @@ return  apiService.getVehicleCategory(headers,userid)
 
     fun callGetDriverListApi(headers: HashMap<String, String?>, input: JsonObject):Observable<Response<GetDriverListResponse>> {
         return apiService.callGetDriverListApi(headers,input)
+    }
+
+    fun callGetNewBookingApi(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<GetNewBookingResponse>> {
+        return apiService.callGetNewBookingApi(headers,input)
+    }
+
+    fun getHistoryBooking(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<GetHistroyBookingResponse>> {
+        return apiService.getHistoryBooking(headers, input)
+    }
+
+    fun getProfile(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<GetProfileResponse>> {
+        return apiService.getProfile(headers, input)
+    }
+
+    fun callAcceptBookingApi(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<BookingResponse>> {
+        return apiService.callAcceptBookingApi(headers, input)
+    }
+
+    fun callGetScheduleBookingApi(headers: HashMap<String, String?>, input: JsonObject):Observable<Response<ScheduleBookingResponse>> {
+        return apiService.callGetScheduleBookingApi(headers, input)
     }
 
 

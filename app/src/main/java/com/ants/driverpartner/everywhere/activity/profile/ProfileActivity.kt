@@ -19,6 +19,7 @@ import com.ants.driverpartner.everywhere.Constant.Companion.PROFILE_PERMISSION_C
 import com.ants.driverpartner.everywhere.Constant.Companion.REQUEST_PERMISSION_SETTING
 import com.ants.driverpartner.everywhere.Constant.Companion.profilePermissionsRequired
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityProfileBinding
@@ -51,7 +52,7 @@ class ProfileActivity : BaseMainActivity(),ProfileView , BSImagePicker.OnSingleI
 
     private fun initVeiw() {
 
-//        presenter!!.getProfile()
+        presenter!!.getProfile()
 
 
 
@@ -99,23 +100,25 @@ class ProfileActivity : BaseMainActivity(),ProfileView , BSImagePicker.OnSingleI
         }
     }
 
-//    override fun onGetProfile(data: List<ProfileResponse.Data>) {
-//
-//        if (data.size > 0) {
-//
-//            binding.edtName.setText(data[0].name)
-//            binding.edtEmail.setText(data[0].email)
-//            binding.edtMobile.setText(data[0].mobile)
-//
-//
-//            Picasso.with(this).load(data[0].image).into(binding.imgProfile)
-//
-//
-//        }
-//
-//
-//    }
-//
+    override fun onGetProfile(data: List<GetProfileResponse.Data>) {
+
+        if (data.size > 0) {
+
+            binding.edtName.setText(data[0].name)
+            binding.edtEmail.setText(data[0].email)
+            binding.edtMobile.setText(data[0].mobile)
+            binding.edtResidentialAddress.setText(data[0].residentialAddress)
+            binding.edtPostalAddress.setText(data[0].postalAddress)
+
+
+            Picasso.with(this).load(data[0].profileImage).into(binding.imgProfile)
+
+
+        }
+
+
+    }
+
 //    override fun onUpdateProfile(message: String) {
 //
 //        DialogUtils.showAlertDialog(this, message)

@@ -19,6 +19,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.driverDetails.DriverListActivity
 import com.ants.driverpartner.everywhere.activity.login.LoginActivity
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
@@ -54,12 +55,15 @@ class DriverDocActivity : BaseMainActivity(),
     private var file_bank_statement: File? = null
     private var file_ownership: File? = null
     private var vehicleId = 0
+    private var isAddDriver = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.partner_document)
         binding = DataBindingUtil.setContentView(this, R.layout.partner_document)
         presenter = DriverDocPresenter(this, this)
+        isAddDriver = intent.getStringExtra(Constant.ADDING_DRIVER)
+
         init()
     }
 
@@ -81,7 +85,13 @@ class DriverDocActivity : BaseMainActivity(),
     }
 
     private fun init() {
-//       binding.back.setOnClickListener(this)
+
+        if (isAddDriver.equals(Constant.ADDING_DRIVER)) {
+            binding.back.visibility = View.VISIBLE
+            binding.layoutSignin.visibility = View.GONE
+        }
+
+        binding.back.setOnClickListener(this)
         binding.btnUpload.setOnClickListener(this)
         binding.imgIdFront.setOnClickListener(this)
         binding.imgIdBack.setOnClickListener(this)
@@ -94,6 +104,7 @@ class DriverDocActivity : BaseMainActivity(),
         binding.imgBankStatement.setOnClickListener(this)
         binding.imgOwnership.setOnClickListener(this)
         binding.edtVehicleType.setOnClickListener(this)
+        binding.back.setOnClickListener(this)
     }
 
     override fun validateError(message: String) {
@@ -116,9 +127,16 @@ class DriverDocActivity : BaseMainActivity(),
             R.id.img_ownership -> uploadDocument(Constant.UploadType.OWNERSHIP)
             R.id.edt_vehicle_type -> presenter!!.getOwnerVehicel()
             R.id.btn_upload -> submit()
+            R.id.back -> onBackPressed()
         }
 
 
+    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finish()
     }
 
     private fun submit() {
@@ -303,17 +321,32 @@ class DriverDocActivity : BaseMainActivity(),
     }
 
     override fun onRegisterSuccess(responseData: RegisterDriverResponse) {
-        DialogUtils.showCustomAlertDialog(this,responseData.message,object : DialogUtils.CustomDialogClick{
-            override fun onOkClick() {
-                startLoginActivity()
-            }
-        })
+        DialogUtils.showCustomAlertDialog(
+            this,
+            responseData.message,
+            object : DialogUtils.CustomDialogClick {
+                override fun onOkClick() {
 
+                    if (isAddDriver.equals(Constant.ADDING_DRIVER))
+
+                        startDriverListActivity()
+                    else
+                        startLoginActivity()
+                }
+            })
+
+    }
+
+    private fun startDriverListActivity() {
+
+        val intent = Intent(this, DriverListActivity::class.java)
+        startActivity(intent)
+        this.finish()
     }
 
     private fun startLoginActivity() {
 
-        val intent = Intent(this,LoginActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         this.finish()
     }
