@@ -95,7 +95,7 @@
                         android:background="@color/colorWhite"
                         android:gravity="center|left"
                         android:hint="abc@xyz.com"
-                        android:text="pankaj.arya@tekzee.com"
+                        android:text="@string/user_email"
                         android:maxLines="1"
                         android:padding="10dp"
                         android:textColor="@color/colorBlack"

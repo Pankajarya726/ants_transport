@@ -11,6 +11,7 @@ import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileRespon
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.activity.vehicleDetails.GetVehicleListResponse
+import com.ants.driverpartner.everywhere.activity.webView.GetWebViewResponse
 import com.ants.driverpartner.everywhere.fragment.history.model.GetHistroyBookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.BookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
@@ -188,6 +189,16 @@ interface ApiService {
         @HeaderMap headers: java.util.HashMap<String, String?>,
         @Body input: JsonObject
     ): Observable<Response<ScheduleBookingResponse>>
+
+
+    @Multipart
+    @POST("get_staticPage")
+    fun laodWevPages(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Part("userid") userId: RequestBody,
+        @Part("type") type: RequestBody,
+        @Part("pageid") pageId: RequestBody
+    ): Observable<Response<GetWebViewResponse>>
 
 //    @Multipart
 //    @POST("user/save_photoid")

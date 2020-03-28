@@ -11,6 +11,7 @@ import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileRespon
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.activity.vehicleDetails.GetVehicleListResponse
+import com.ants.driverpartner.everywhere.activity.webView.GetWebViewResponse
 import com.ants.driverpartner.everywhere.fragment.history.model.GetHistroyBookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.BookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
@@ -264,6 +265,11 @@ return  apiService.getVehicleCategory(headers,userid)
 
     fun callGetScheduleBookingApi(headers: HashMap<String, String?>, input: JsonObject):Observable<Response<ScheduleBookingResponse>> {
         return apiService.callGetScheduleBookingApi(headers, input)
+    }
+
+    fun loadWebPages(headers: HashMap<String, String?>, userId: RequestBody, type: RequestBody, pageId: RequestBody):
+            Observable<Response<GetWebViewResponse>>{
+        return  apiService.laodWevPages(headers,userId,type,pageId)
     }
 
 

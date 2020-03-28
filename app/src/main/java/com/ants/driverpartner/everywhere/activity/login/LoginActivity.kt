@@ -18,6 +18,7 @@ import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPasswordActiv
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.DriverDocActivity
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments.OwnerDocActivity
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.VehicleActivity
 import com.ants.driverpartner.everywhere.activity.signup.SignUpActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.LoginBinding
@@ -159,7 +160,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
             input.addProperty("email", binding.edtEmail.text.toString().trim())
             input.addProperty("password", binding.edtPassword.text.toString())
             input.addProperty("device_type", 1)
-            input.addProperty("device_token", "adgasdgadsg")
+            input.addProperty("device_token", Utility.getSharedPreferences(this,Constant.D_TOKEN))
 
             presenter!!.login(input)
         }
@@ -213,6 +214,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
         var intent = Intent(applicationContext, DriverDocActivity::class.java)
 
+        intent.putExtra(Constant.ADDING_DRIVER,"")
         when (accountType) {
             1 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
             2 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
@@ -238,8 +240,9 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
     }
 
     private fun gotoVehicleActivity(accountType: Int) {
-//        var intent = Intent(applicationContext, VehicleInfoActivity::class.java)
-//        startActivity(intent)
+        var intent = Intent(applicationContext, VehicleActivity::class.java)
+        intent.putExtra(Constant.ADDING_VEHICLE,"")
+        startActivity(intent)
     }
 
     private fun gotoDocumentActivity(accountType: Int) {

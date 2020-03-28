@@ -93,26 +93,22 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
 
 
             var input = JsonObject()
-            input.addProperty("userid", "1")
+            input.addProperty("userid", Utility.getSharedPreferences(context!!, Constant.USER_ID).toString())
 
             input.addProperty("booking_id",bookingId)
             input.addProperty("status",1)
 
 
             var headers = HashMap<String, String?>()
-
-//            headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
-//            headers["userid"] = Utility.getSharedPreferences(context!!, Constant.USER_ID)
-
-            headers["api-key"] = "LxGS0HxbaqJPCqepHs1a4NItdCiC6uD68TmjKD4HpsIhVyqrKTF7CAh0WjJm"
-            headers["userid"] = "1"
-
+            headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
+            headers["userid"] = Utility.getSharedPreferences(context!!, Constant.USER_ID)
             disposable = ApiClient.instance.callAcceptBookingApi(headers, input)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<BookingResponse> ->
                     Utility.hideProgressbar()
                     val responseCode = response.code()
+                    Log.e(javaClass.simpleName, response.body().toString())
                     when (responseCode) {
                         200 -> {
                             val responseData: BookingResponse? = response.body()
@@ -157,19 +153,16 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
 
 
             var input = JsonObject()
-            input.addProperty("userid", "1")
+            input.addProperty("userid", Utility.getSharedPreferences(context!!, Constant.USER_ID).toString())
 
             input.addProperty("booking_id",bookingId)
-            input.addProperty("status",1)
+            input.addProperty("status",2)
 
 
             var headers = HashMap<String, String?>()
 
-//            headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
-//            headers["userid"] = Utility.getSharedPreferences(context!!, Constant.USER_ID)
-
-            headers["api-key"] = "LxGS0HxbaqJPCqepHs1a4NItdCiC6uD68TmjKD4HpsIhVyqrKTF7CAh0WjJm"
-            headers["userid"] = "1"
+            headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
+            headers["userid"] = Utility.getSharedPreferences(context!!, Constant.USER_ID)
 
             disposable = ApiClient.instance.callAcceptBookingApi(headers, input)
                 .subscribeOn(Schedulers.io())

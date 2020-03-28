@@ -1,6 +1,5 @@
-package com.ants.driverpartner.everywhere.activity.webViewActivity
+package com.ants.driverpartner.everywhere.activity.webView
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebSettings
@@ -9,23 +8,30 @@ import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityWebViewBinding
+import com.ants.driverpartner.everywhere.utils.DialogUtils
 
-class WebViewActivity : AppCompatActivity() {
+class WebViewActivity : BaseMainActivity(),
+    com.ants.driverpartner.everywhere.activity.webView.WebView {
 
-    private var url = "http://dev.tekzee.in/Ants/get_staticPage/20/2"
     private var title = ""
+    private var pageId = 0;
 
-    lateinit var binding:ActivityWebViewBinding
+    private var presenter: WebViewPresenter? = null
+
+    lateinit var binding: ActivityWebViewBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_web_view)
-        url = intent.getStringExtra(Constant.WEB_URL)
+        presenter = WebViewPresenter(this, this)
+//        url = intent.getStringExtra(Constant.WEB_URL)
         title = intent.getStringExtra(Constant.WEB_VIEW_TITLE)
+        pageId = intent.getIntExtra(Constant.WEB_VIEW_PAGE_ID, 0)
 
         binding.tvTitle.text = title
 
-        onPageLoad(url)
+        presenter!!.loadPage(pageId)
 
         binding.ivBack.setOnClickListener(View.OnClickListener {
             onBackPressed()
@@ -33,7 +39,7 @@ class WebViewActivity : AppCompatActivity() {
     }
 
 
-    fun onPageLoad(url: String) {
+    override  fun onPageLoad(data : GetWebViewResponse.Data) {
         val settings = binding.webView.getSettings()
         settings.javaScriptEnabled = true
         settings.domStorageEnabled = true
@@ -60,12 +66,12 @@ class WebViewActivity : AppCompatActivity() {
                 onFail("Error : $description")
             }
         })
-        binding.webView.loadUrl(url)
+        binding.webView.loadUrl(data.url)
 
     }
 
     fun onFail(error_message: String) {
-        // snackBarTop(R.id.drawerLayout, error_message)
+        DialogUtils.showSuccessDialog(this, error_message)
 
     }
 
@@ -73,5 +79,10 @@ class WebViewActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+    }
+
+    override fun validateError(message: String) {
+
+       DialogUtils.showSuccessDialog(this, message)
     }
 }

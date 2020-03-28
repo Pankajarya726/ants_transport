@@ -17,6 +17,7 @@ interface Constant {
         val ADDING_VEHICLE = "ADDING_VEHICLE"
         val PACKAGE_DETAIL= "PACKAGE_DETAIL"
         val WEB_VIEW_TITLE = "WEB_VIEW_TITLE"
+        val WEB_VIEW_PAGE_ID = "WEB_VIEW_PAGE_ID"
         val WEB_URL= "WEB_URL"
         val VEHICLE_DETAIL = "VEHICLE_DETAIL"
         val DRIVER_DETAIL = "DRIVER_DETAIL"
@@ -47,6 +48,8 @@ interface Constant {
         val EMAIL = "EMAIL"
         val MOBILE = "MOBILE"
         val S_TOKEN = "S_TOKEN"
+        val D_TOKEN = "D_TOKEN"
+
         val API_KEY = "API_KEY"
         val RESIDENTIAL_ADDRESS = "RESIDENTIAL_ADDRESS"
         val POSTAL_ADDRESS = "POSTAL_ADDRESS"

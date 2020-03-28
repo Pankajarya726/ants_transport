@@ -60,7 +60,6 @@ class NewBooking : BaseMainFragment(),NewBookingView,NewBookingAdapter.NewBookin
                 bookingList.add(data)
             }
 
-
             binding.rvNewBooking.visibility = View.VISIBLE
             binding.rlNewBooking.visibility = View.GONE
 
@@ -69,11 +68,7 @@ class NewBooking : BaseMainFragment(),NewBookingView,NewBookingAdapter.NewBookin
             binding.rvNewBooking.hasFixedSize()
             binding.rvNewBooking.adapter = currentBookingAdapter
 
-
-
-
         }else{
-
 
             binding.rvNewBooking.visibility = View.GONE
             binding.rlNewBooking.visibility = View.VISIBLE
@@ -91,7 +86,7 @@ class NewBooking : BaseMainFragment(),NewBookingView,NewBookingAdapter.NewBookin
     }
 
     override fun onDecline(data: GetNewBookingResponse.Data, position: Int) {
-
+        presenter!!.callDeclineBookingApi(data.bookingId)
 
     }
 

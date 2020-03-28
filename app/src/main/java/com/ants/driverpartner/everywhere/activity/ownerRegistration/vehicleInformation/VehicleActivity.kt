@@ -23,6 +23,7 @@ import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.driverDetails.DriverListActivity
 import com.ants.driverpartner.everywhere.activity.login.LoginActivity
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.DriverDocActivity
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
@@ -55,6 +56,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
     private var cal = Calendar.getInstance()
     private var vehicleId = 0
     private var isAddVehicle = ""
+    private var title = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +65,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
         presenter = VehiclePresenter(this, this)
 
         isAddVehicle = intent.getStringExtra(Constant.ADDING_VEHICLE)
+        title = intent.getStringExtra(Constant.PROFILE_TYPE)
 
         init()
 
@@ -350,9 +353,24 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
             startActivity(intent)
             this.finish()
         } else {
-            val intent = Intent(this, DriverDocActivity::class.java)
-            startActivity(intent)
-            this.finish()
+
+
+
+            if(title.equals(Constant.DRIVER)){
+                val intent = Intent(this, OwnerDocActivity::class.java)
+                intent.putExtra(Constant.ADDING_DRIVER,"")
+                intent.putExtra(Constant.PROFILE_TYPE,title)
+                startActivity(intent)
+                this.finish()
+            }else{
+                val intent = Intent(this, DriverDocActivity::class.java)
+                intent.putExtra(Constant.ADDING_DRIVER,"")
+                startActivity(intent)
+                this.finish()
+            }
+
+
+
         }
     }
 

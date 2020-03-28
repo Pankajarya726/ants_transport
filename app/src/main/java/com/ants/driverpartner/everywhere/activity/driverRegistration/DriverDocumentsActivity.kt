@@ -1,15 +1,11 @@
-package com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments
+package com.ants.driverpartner.everywhere.activity.driverRegistration
 
-import android.Manifest
-import android.Manifest.permission.CAMERA
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -19,18 +15,15 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.checkSelfPermission
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
-import com.ants.driverpartner.everywhere.Constant.Companion.PROFILE_PERMISSION_CALLBACK
-import com.ants.driverpartner.everywhere.Constant.Companion.REQUEST_PERMISSION_SETTING
-import com.ants.driverpartner.everywhere.Constant.Companion.profilePermissionsRequired
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.login.LoginActivity
+import com.ants.driverpartner.everywhere.activity.driverRegistration.driverDocuments.DriverDocumentView
+import com.ants.driverpartner.everywhere.activity.driverRegistration.driverDocuments.DriverDocumentsPresenter
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.VehicleActivity
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
-import com.ants.driverpartner.everywhere.databinding.ActivityDocumentBinding
+import com.ants.driverpartner.everywhere.databinding.ActivityDriverDocumentsBinding
 import com.ants.driverpartner.everywhere.utils.DialogUtils
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.asksira.bsimagepicker.BSImagePicker
@@ -38,15 +31,12 @@ import com.asksira.bsimagepicker.Utils
 import com.bumptech.glide.Glide
 import java.io.File
 
-@Suppress("DEPRECATED_IDENTITY_EQUALS")
-class OwnerDocActivity : BaseMainActivity(),
-    OwnerDocPresenter.DocumentView,
-    BSImagePicker.OnSingleImageSelectedListener {
+class DriverDocumentsActivity : BaseMainActivity(),DriverDocumentView , BSImagePicker.OnSingleImageSelectedListener{
 
 
-    private var title = ""
+    lateinit var binding :ActivityDriverDocumentsBinding
+    private var presenter: DriverDocumentsPresenter? = null
     private var sentToSettings = false
-    lateinit var binding: ActivityDocumentBinding
     private var upload_type: String? = null
     private var file_id_front: File? = null
     private var file_id_back: File? = null
@@ -57,25 +47,18 @@ class OwnerDocActivity : BaseMainActivity(),
     private var file_bank_letter: File? = null
     private var file_bank_statement: File? = null
     private var file_ownership: File? = null
-    private var presenter: OwnerDocPresenterImplementation? = null
+    private var vehicleId = 0
+    private var isAddDriver = ""
+    private var title = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_document)
-        presenter =
-            OwnerDocPresenterImplementation(
-                this,
-                this
-            )
+        binding = DataBindingUtil.setContentView(this , R.layout.activity_driver_documents)
+
+
 
         title = intent.getStringExtra(Constant.PROFILE_TYPE)
 
-        init()
-
-
-    }
-
-    fun init(){
 
         requestPermission()
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -99,7 +82,7 @@ class OwnerDocActivity : BaseMainActivity(),
             uploadDocument(Constant.UploadType.LICENCE_BACK)
         })
 
-        binding.imgDriverPic.setOnClickListener(View.OnClickListener {
+        binding.imgUser.setOnClickListener(View.OnClickListener {
             uploadDocument(Constant.UploadType.DRIVER_FACE)
         })
 
@@ -119,6 +102,7 @@ class OwnerDocActivity : BaseMainActivity(),
             uploadDocument(Constant.UploadType.OWNERSHIP)
         })
     }
+
 
     private fun upload() {
 
@@ -142,40 +126,17 @@ class OwnerDocActivity : BaseMainActivity(),
         } else if (file_bank_statement == null) {
             DialogUtils.showSuccessDialog(this,"Please upload all documents")
         } else {
-
-
-
-            if(title.equals(Constant.DRIVER)){
-                val intent = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(intent)
-                this.finish()
-            }else{
-                val intent = Intent(applicationContext, VehicleActivity::class.java)
-                intent.putExtra(Constant.ADDING_VEHICLE,"")
-                intent.putExtra(Constant.PROFILE_TYPE,title)
-                startActivity(intent)
-                this.finish()
-            }
-
+            val intent = Intent(applicationContext, VehicleActivity::class.java)
+            intent.putExtra(Constant.ADDING_VEHICLE,"")
+            intent.putExtra(Constant.PROFILE_TYPE,title)
+            startActivity(intent)
         }
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        if (sentToSettings) {
-            if (checkSelfPermission(
-                    this,
-                    WRITE_EXTERNAL_STORAGE
-                ) === PERMISSION_GRANTED && checkSelfPermission(
-                    this,
-                    CAMERA
-                ) === PERMISSION_GRANTED
-            ) {
-                //Got Permission
-                proceedAfterPermission()
-            }
-        }
+    override fun validateError(message: String) {
+
+        DialogUtils.showSuccessDialog(this,message)
     }
 
     private fun uploadDocument(uploadType: String) {
@@ -201,18 +162,6 @@ class OwnerDocActivity : BaseMainActivity(),
             requestPermission()
         }
     }
-
-    private fun checkProfilePermissions(): Boolean {
-        return (checkSelfPermission(
-            applicationContext,
-            profilePermissionsRequired[0]
-        ) == PERMISSION_GRANTED && checkSelfPermission(
-            applicationContext,
-            profilePermissionsRequired[1]
-        ) == PERMISSION_GRANTED)
-
-    }
-
     private fun requestPermission() {
         if (!checkProfilePermissions()) {
             Log.e("Permission ", "Not Granted")
@@ -220,10 +169,10 @@ class OwnerDocActivity : BaseMainActivity(),
 
             if ((ActivityCompat.shouldShowRequestPermissionRationale(
                     this,
-                    profilePermissionsRequired[0]
+                    Constant.profilePermissionsRequired[0]
                 ) && ActivityCompat.shouldShowRequestPermissionRationale(
                     this,
-                    profilePermissionsRequired[1]
+                    Constant.profilePermissionsRequired[1]
                 ))
             ) {
                 val builder = AlertDialog.Builder(applicationContext)
@@ -235,8 +184,8 @@ class OwnerDocActivity : BaseMainActivity(),
                     dialogInterface.cancel()
                     ActivityCompat.requestPermissions(
                         this,
-                        profilePermissionsRequired,
-                        PROFILE_PERMISSION_CALLBACK
+                        Constant.profilePermissionsRequired,
+                        Constant.PROFILE_PERMISSION_CALLBACK
                     )
                 }
 
@@ -250,7 +199,7 @@ class OwnerDocActivity : BaseMainActivity(),
             } else if (
                 Utility.getSharedPreferencesBoolean(
                     applicationContext,
-                    profilePermissionsRequired[0]
+                    Constant.profilePermissionsRequired[0]
                 )
             ) {
                 //Previously Permission Request was cancelled with 'Dont Ask Again',
@@ -267,7 +216,7 @@ class OwnerDocActivity : BaseMainActivity(),
                         val uri =
                             Uri.fromParts("package", applicationContext.getPackageName(), null)
                         intent.data = uri
-                        startActivityForResult(intent, REQUEST_PERMISSION_SETTING)
+                        startActivityForResult(intent, Constant.REQUEST_PERMISSION_SETTING)
 
                         Toast.makeText(
                             applicationContext,
@@ -289,14 +238,14 @@ class OwnerDocActivity : BaseMainActivity(),
                 //just request_old the permission
                 ActivityCompat.requestPermissions(
                     this,
-                    profilePermissionsRequired,
-                    PROFILE_PERMISSION_CALLBACK
+                    Constant.profilePermissionsRequired,
+                    Constant.PROFILE_PERMISSION_CALLBACK
                 )
             }
 
             Utility.setSharedPreferenceBoolean(
                 applicationContext,
-                profilePermissionsRequired[0],
+                Constant.profilePermissionsRequired[0],
                 true
             )
 
@@ -305,14 +254,27 @@ class OwnerDocActivity : BaseMainActivity(),
             //proceedAfterPermission()
         }
     }
+    override fun onImageUploadSuccess(responseData: UploadImageResponse) {
+        DialogUtils.showSuccessDialog(this, responseData.message)
+    }
+    private fun checkProfilePermissions(): Boolean {
+        return (ActivityCompat.checkSelfPermission(
+            applicationContext,
+            Constant.profilePermissionsRequired[0]
+        ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            applicationContext,
+            Constant.profilePermissionsRequired[1]
+        ) == PackageManager.PERMISSION_GRANTED)
+
+    }
 
     override fun onRequestPermissionsResult(requestCode: Int, @NonNull permissions: Array<String>, @NonNull grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PROFILE_PERMISSION_CALLBACK) {
+        if (requestCode == Constant.PROFILE_PERMISSION_CALLBACK) {
 
             var allPermissionsGranted = false
             for (i in grantResults.indices) {
-                if (grantResults[i] == PERMISSION_GRANTED) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                     allPermissionsGranted = true
                 } else {
                     allPermissionsGranted = false
@@ -327,10 +289,10 @@ class OwnerDocActivity : BaseMainActivity(),
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
                         this,
-                        profilePermissionsRequired[0]
+                        Constant.profilePermissionsRequired[0]
                     ) && ActivityCompat.shouldShowRequestPermissionRationale(
                         this,
-                        profilePermissionsRequired[1]
+                        Constant.profilePermissionsRequired[1]
                     )
                 ) {
 
@@ -344,8 +306,8 @@ class OwnerDocActivity : BaseMainActivity(),
 
                         ActivityCompat.requestPermissions(
                             this,
-                            profilePermissionsRequired,
-                            PROFILE_PERMISSION_CALLBACK
+                            Constant.profilePermissionsRequired,
+                            Constant.PROFILE_PERMISSION_CALLBACK
                         )
                     }
                     builder.setNegativeButton(
@@ -421,9 +383,9 @@ class OwnerDocActivity : BaseMainActivity(),
             }
             Constant.UploadType.DRIVER_FACE -> {
 
-                binding.imgDriverPic.setScaleType(ImageView.ScaleType.FIT_XY);
+                binding.imgUser.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgDriverPic)
+                Glide.with(applicationContext).load(uri).into(binding.imgUser)
 
                 this.file_driver = File(uri.path)
 
@@ -478,19 +440,5 @@ class OwnerDocActivity : BaseMainActivity(),
 
             }
         }
-    }
-
-
-    override fun getContext(): Context {
-
-        return this
-    }
-
-    override fun validateError(message: String) {
-
-    }
-
-    override fun onImageUploadSuccess(responseData: UploadImageResponse) {
-        DialogUtils.showSuccessDialog(this, responseData.message)
     }
 }

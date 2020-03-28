@@ -18,7 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.an.customfontview.CustomTextView
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.activity.webViewActivity.WebViewActivity
+import com.ants.driverpartner.everywhere.activity.webView.WebViewActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityHomeBinding
 import com.ants.driverpartner.everywhere.fragment.CurrentBookingFragment
 import com.ants.driverpartner.everywhere.fragment.history.HistoryFragment
@@ -124,6 +124,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
 //
             5 -> {
                 fragment = ContactFragmant(this)
+                var page_id = 13
                 title = "Contact ants"
                 isActivityRefreshed = true
             }
@@ -132,11 +133,13 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
                 fragment = null
                 title = "FAQ"
+                var page_id = 21
                 openCloseDrawer()
 
                 val intent = Intent(this, WebViewActivity::class.java)
                 intent.putExtra(Constant.WEB_VIEW_TITLE, title)
-                intent.putExtra(Constant.WEB_URL, "www.google.co.in")
+                intent.putExtra(Constant.WEB_VIEW_PAGE_ID, page_id)
+
                 startActivity(intent)
 
 
@@ -145,11 +148,13 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
                 fragment = null
                 title = "Term and Condition"
+                var page_id = 18
                 openCloseDrawer()
 
                 val intent = Intent(this, WebViewActivity::class.java)
                 intent.putExtra(Constant.WEB_VIEW_TITLE, title)
-                intent.putExtra(Constant.WEB_URL, "www.google.co.in")
+                intent.putExtra(Constant.WEB_VIEW_PAGE_ID, page_id)
+
                 startActivity(intent)
 
 
@@ -158,11 +163,12 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
                 fragment = null
                 title = "Privacy Policy"
+                var page_id = 19
                 openCloseDrawer()
 
                 val intent = Intent(this, WebViewActivity::class.java)
                 intent.putExtra(Constant.WEB_VIEW_TITLE, title)
-                intent.putExtra(Constant.WEB_URL, "www.google.co.in")
+                intent.putExtra(Constant.WEB_VIEW_PAGE_ID, page_id)
                 startActivity(intent)
 
 

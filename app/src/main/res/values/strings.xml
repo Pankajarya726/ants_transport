@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ANTS</string>
+    <string name="app_name">Ant Driver</string>
     <string name="sign_up"><u>Sign Up</u></string>
     <string name="sign_in"><u>Sign In</u></string>
 
@@ -56,5 +56,18 @@
     <string name="sender_details">Sender Details</string>
     <string name="pickup_address">Pickup Address</string>
     <string name="drop_address">Drop of Address</string>
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="user_email">adityasengar2011@gmail.com</string>
 
 </resources>

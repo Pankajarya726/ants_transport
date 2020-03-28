@@ -22,6 +22,7 @@ import com.ants.driverpartner.everywhere.Constant.Companion.PROFILE_PERMISSION_C
 import com.ants.driverpartner.everywhere.Constant.Companion.REQUEST_PERMISSION_SETTING
 import com.ants.driverpartner.everywhere.Constant.Companion.profilePermissionsRequired
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.driverRegistration.DriverDocumentsActivity
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
@@ -44,7 +45,6 @@ import java.io.InputStream
 class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     BSImagePicker.OnSingleImageSelectedListener {
 
-
     lateinit var binding: ActivitySignupBinding
     var title: String = ""
     private var sentToSettings = false
@@ -64,7 +64,6 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     }
 
     private fun init() {
-
 
         binding.imgPassword.setOnClickListener(View.OnClickListener { v ->
 
@@ -401,7 +400,6 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
                     json.addProperty("account_type", "1")
                 Constant.PARTNER ->
                     json.addProperty("account_type", "2")
-
             }
 
             json.addProperty(
@@ -410,7 +408,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             )
             json.addProperty(
                 "device_token",
-                "adgasdgasg"
+                Utility.getSharedPreferences(this,Constant.D_TOKEN)
             )
             presenter!!.signupApi(json)
             Log.e("Input JsonObject", json.toString())
@@ -485,12 +483,12 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
                 startActivity(intent)
             }
 
-//            Constant.DRIVER -> {
-//                val intent = Intent(applicationContext, DriverDocActivity::class.java)
-//                intent.putExtra(Constant.PROFILE_TYPE, title)
-//                intent.putExtra("value", 1)
-//                startActivity(intent)
-//            }
+            Constant.DRIVER -> {
+                val intent = Intent(applicationContext, DriverDocumentsActivity::class.java)
+                intent.putExtra(Constant.PROFILE_TYPE, title)
+                intent.putExtra("value", 1)
+                startActivity(intent)
+            }
 
 
         }
