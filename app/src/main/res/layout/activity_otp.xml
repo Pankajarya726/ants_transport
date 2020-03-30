@@ -34,8 +34,8 @@
                 android:layout_height="20dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/back_icon" />
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/arrow_back" />
 
         </RelativeLayout>
 
@@ -81,7 +81,7 @@
                 <com.an.customfontview.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="sent via SMS to reset your password"
+                    android:text="sent via Email to reset your password"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"
                     app:textFontPath="fonts/poppins_regular.otf" />
@@ -165,7 +165,7 @@
 
 
             <com.an.customfontview.CustomButton
-                android:id="@+id/btn_reset_password"
+                android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_otp"
@@ -173,8 +173,9 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/button_theam"
-                android:text="RESET PASSWORD"
-                android:textColor="@color/colorWhite"
+                android:text="submit"
+                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
                 app:textFontPath="fonts/poppins_regular.otf"/>
 
 

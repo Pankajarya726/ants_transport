@@ -19,6 +19,7 @@ import com.ants.driverpartner.everywhere.activity.Home.Homeview
 import com.ants.driverpartner.everywhere.activity.base.BaseMainFragment
 import com.ants.driverpartner.everywhere.activity.packageDetailActivity.PackageDetailActivity
 import com.ants.driverpartner.everywhere.databinding.FragmentScheduleBinding
+import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ChangeBookingStatusResponse
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ScheduleBookingResponse
 import com.google.gson.Gson
 
@@ -50,6 +51,8 @@ class ScheduleFragment(private var view: Homeview) : BaseMainFragment(),Schedule
         binding.rvScheduleBooking.visibility = View.GONE
         presenter!!.getScheculeBooking()
 
+
+
     }
 
     override fun onViewClick(data: ScheduleBookingResponse.Data) {
@@ -63,6 +66,21 @@ class ScheduleFragment(private var view: Homeview) : BaseMainFragment(),Schedule
 
         intent.putExtra(Constant.PACKAGE_DETAIL,packageDetail)
         startActivity(intent)
+    }
+
+
+    override fun onStartClick(data: ScheduleBookingResponse.Data) {
+
+
+        presenter!!.changeBookingStatus(data.bookingId)
+
+
+    }
+
+
+    override fun onStatusChange(responseData: ChangeBookingStatusResponse) {
+
+        com.ants.driverpartner.everywhere.utils.DialogUtils.showSuccessDialog(activity!!,responseData.message)
     }
 
     override fun onGetScheduleBooking(responseData: ScheduleBookingResponse) {

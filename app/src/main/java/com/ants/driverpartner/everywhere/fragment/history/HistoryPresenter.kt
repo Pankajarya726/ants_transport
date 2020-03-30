@@ -32,13 +32,13 @@ class HistoryPresenter(private var view: HistoryView, private var context: Conte
 
             input.addProperty(
                 "userid",
-                Utility.getSharedPreferences(context, Constant.USER_ID).toString()
+                Utility.getSharedPreferences(context, Constant.USER_ID)!!.toInt()
             )
 
 
             var headers = HashMap<String, String?>()
 
-            headers["api_key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
+            headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
             headers["userid"] = Utility.getSharedPreferences(context, Constant.USER_ID)
 
 

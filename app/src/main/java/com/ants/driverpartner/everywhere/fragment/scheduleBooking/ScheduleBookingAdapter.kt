@@ -50,6 +50,11 @@ class ScheduleBookingAdapter(context:Context, scheduleList: ArrayList<ScheduleBo
             listener.onViewClick(data)
 
         })
+
+
+        holder.binding.btnStartBooking.setOnClickListener(View.OnClickListener {
+            listener.onStartClick(data)
+        })
     }
 
 
@@ -61,6 +66,7 @@ class ScheduleBookingAdapter(context:Context, scheduleList: ArrayList<ScheduleBo
 
     interface ScheduleListener{
         fun onViewClick(data:ScheduleBookingResponse.Data)
+        fun onStartClick(data: ScheduleBookingResponse.Data)
     }
 
 }

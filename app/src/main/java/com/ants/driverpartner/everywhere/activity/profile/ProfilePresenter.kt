@@ -161,4 +161,90 @@ class ProfilePresenter(private var view: ProfileView, context: Context) {
             view.validateError(context!!.getString(R.string.check_internet))
         }
     }
+
+    /*fun updateProfile() {
+        view.showProgressbar()
+        if (view.checkInternet()) {
+
+
+
+            var input = JsonObject()
+
+            {
+                "device_token" : "123",
+                "device_type" : "1",
+                "name" : "Virat",
+                "mobile" : "9713516724",
+                "email" : "both@gmail.com",
+                "password" : "123456",
+                "residential_address" :"sector e",
+                "postal_address" :"vijay nagar",
+                "account_type"  :"3"
+            }
+
+            input.addProperty("userid", Utility.getSharedPreferences(view.getContext(), Constant.USER_ID).toString())
+
+            input.addProperty("device_token", Utility.getSharedPreferences(view.getContext(), Constant.D_TOKEN))
+
+            input.addProperty("device_type",2)
+
+            input.addProperty("mobile",view.getMobile())
+            input.addProperty("email",view.getMobile())
+
+
+            var headers = HashMap<String, String?>()
+
+
+            headers["api-key"] =
+                Utility.getSharedPreferences(context!!, Constant.API_KEY)
+
+            Log.e(javaClass.simpleName, headers.toString())
+
+
+            disposable = ApiClient.instance.getProfile(headers, input)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response: Response<GetProfileResponse> ->
+                    view.hideProgressbar()
+                    val responseCode = response.code()
+                    when (responseCode) {
+                        200 -> {
+                            val responseData: GetProfileResponse? = response.body()
+                            Log.e(javaClass.simpleName, response.body().toString())
+
+
+                            if (responseData != null) {
+                                when (responseData.status) {
+
+                                    0 -> {
+                                        view.validateError(responseData.message)
+                                    }
+
+                                    1 -> {
+                                        view.onGetProfile(responseData.data)
+                                    }
+
+                                    2 -> {
+                                        view.validateError(responseData.message)
+                                    }
+
+
+                                }
+
+
+                            }
+
+                        }
+                    }
+                }, { error ->
+                    view.hideProgressbar()
+                    view.validateError(error.message.toString())
+                })
+        } else {
+            view.hideProgressbar()
+            view.validateError(context!!.getString(R.string.check_internet))
+        }
+    }*/
+
+
 }

@@ -2,7 +2,9 @@ package com.tekzee.mallortaxi.network
 
 
 import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverListResponse
+import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPassResponse
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
+import com.ants.driverpartner.everywhere.activity.notification.NotificationResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
@@ -10,11 +12,14 @@ import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInfor
 import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
+import com.ants.driverpartner.everywhere.activity.splash.ValidateAppResponse
 import com.ants.driverpartner.everywhere.activity.vehicleDetails.GetVehicleListResponse
 import com.ants.driverpartner.everywhere.activity.webView.GetWebViewResponse
+import com.ants.driverpartner.everywhere.fragment.currentBooking.model.GetCurrentBookingRespone
 import com.ants.driverpartner.everywhere.fragment.history.model.GetHistroyBookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.BookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
+import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ChangeBookingStatusResponse
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ScheduleBookingResponse
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
@@ -100,12 +105,15 @@ class ApiClient {
         headers: HashMap<String, String?>,
         userId: RequestBody, image: MultipartBody.Part, type: RequestBody, driver_id: RequestBody
     ): Observable<Response<UploadImageResponse>> {
-        return apiService.uploadImage(headers,userId,image,type,driver_id)
+        return apiService.uploadImage(headers, userId, image, type, driver_id)
     }
 
 
-    fun getVehicleCategory(headers: HashMap<String, String?>, userid: String):Observable<Response<VehicleCategory>>{
-return  apiService.getVehicleCategory(headers,userid)
+    fun getVehicleCategory(
+        headers: HashMap<String, String?>,
+        userid: String
+    ): Observable<Response<VehicleCategory>> {
+        return apiService.getVehicleCategory(headers, userid)
     }
 
     fun callRegisterVehicleApi(
@@ -126,8 +134,8 @@ return  apiService.getVehicleCategory(headers,userid)
         vehicleBackImage: MultipartBody.Part,
         vehicleLeftImage: MultipartBody.Part,
         vehicleRightImage: MultipartBody.Part
-    ): Observable<Response<RegisterVehicleResponse>>{
-        return  apiService.registerVehicleApi(
+    ): Observable<Response<RegisterVehicleResponse>> {
+        return apiService.registerVehicleApi(
             headers,
             userId,
             vehicleType,
@@ -146,12 +154,12 @@ return  apiService.getVehicleCategory(headers,userid)
             vehicleLeftImage,
             vehicleRightImage
 
-            )
+        )
     }
 
     fun getOwnerVehicle(headers: java.util.HashMap<String, String?>, input: JsonObject):
             Observable<Response<OwnersVehilce>> {
-        return apiService.getOwnerVehicle(headers,input)
+        return apiService.getOwnerVehicle(headers, input)
     }
 
     fun callRegisterDriverApi(
@@ -172,8 +180,8 @@ return  apiService.getVehicleCategory(headers,userid)
         bankLetterImage: MultipartBody.Part,
         bankStatementImage: MultipartBody.Part,
         profileImage: MultipartBody.Part
-    ):  Observable<Response<RegisterDriverResponse>>{
-        return  apiService.registerDriverApi(
+    ): Observable<Response<RegisterDriverResponse>> {
+        return apiService.registerDriverApi(
             headers,
             userId,
             name,
@@ -213,39 +221,48 @@ return  apiService.getVehicleCategory(headers,userid)
         bankLetterImage: MultipartBody.Part,
         bankStatementImage: MultipartBody.Part,
         profileImage: MultipartBody.Part
-    ): Observable<Response<RegisterDriverResponse>>{
-        return  apiService.registerDriverApi1(
+    ): Observable<Response<RegisterDriverResponse>> {
+        return apiService.registerDriverApi1(
             headers,
-        userId,
-        name,
-        email,
-        mobile,
-        residentialAddress,
-        postalAddress,
-        vehicleId,
-        password,
-        idproofFrontImage,
-        idproofBackImage,
-        driverLicenseFrontImage,
-        driverLicenseBackImage,
-        proofHomeAddImage,
-        bankLetterImage,
-        bankStatementImage,
-        profileImage
+            userId,
+            name,
+            email,
+            mobile,
+            residentialAddress,
+            postalAddress,
+            vehicleId,
+            password,
+            idproofFrontImage,
+            idproofBackImage,
+            driverLicenseFrontImage,
+            driverLicenseBackImage,
+            proofHomeAddImage,
+            bankLetterImage,
+            bankStatementImage,
+            profileImage
 
         )
     }
 
-    fun callVehicleListApi(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<GetVehicleListResponse>> {
-        return apiService.callVehicleListApi(headers,input)
+    fun callVehicleListApi(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<GetVehicleListResponse>> {
+        return apiService.callVehicleListApi(headers, input)
     }
 
-    fun callGetDriverListApi(headers: HashMap<String, String?>, input: JsonObject):Observable<Response<GetDriverListResponse>> {
-        return apiService.callGetDriverListApi(headers,input)
+    fun callGetDriverListApi(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<GetDriverListResponse>> {
+        return apiService.callGetDriverListApi(headers, input)
     }
 
-    fun callGetNewBookingApi(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<GetNewBookingResponse>> {
-        return apiService.callGetNewBookingApi(headers,input)
+    fun callGetNewBookingApi(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<GetNewBookingResponse>> {
+        return apiService.callGetNewBookingApi(headers, input)
     }
 
     fun getHistoryBooking(
@@ -255,21 +272,69 @@ return  apiService.getVehicleCategory(headers,userid)
         return apiService.getHistoryBooking(headers, input)
     }
 
-    fun getProfile(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<GetProfileResponse>> {
+    fun getProfile(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<GetProfileResponse>> {
         return apiService.getProfile(headers, input)
     }
 
-    fun callAcceptBookingApi(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<BookingResponse>> {
+    fun callAcceptBookingApi(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<BookingResponse>> {
         return apiService.callAcceptBookingApi(headers, input)
     }
 
-    fun callGetScheduleBookingApi(headers: HashMap<String, String?>, input: JsonObject):Observable<Response<ScheduleBookingResponse>> {
+    fun callGetScheduleBookingApi(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<ScheduleBookingResponse>> {
         return apiService.callGetScheduleBookingApi(headers, input)
     }
 
-    fun loadWebPages(headers: HashMap<String, String?>, userId: RequestBody, type: RequestBody, pageId: RequestBody):
-            Observable<Response<GetWebViewResponse>>{
-        return  apiService.laodWevPages(headers,userId,type,pageId)
+    fun loadWebPages(
+        headers: HashMap<String, String?>,
+        userId: RequestBody,
+        type: RequestBody,
+        pageId: RequestBody
+    ):
+            Observable<Response<GetWebViewResponse>> {
+        return apiService.laodWevPages(headers, userId, type, pageId)
+    }
+
+    fun callForgotPasswordApi(
+        headers: java.util.HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<ForgotPassResponse>> {
+        return apiService.callForgotPasswordApi(headers, input)
+    }
+
+    fun callverifyOptApi(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<ForgotPassResponse>> {
+        return apiService.callverifyOptApi(headers, input)
+    }
+
+    fun callGetCurrentBookingApi(headers: java.util.HashMap<String, String?>, input: JsonObject): Observable<Response<GetCurrentBookingRespone>> {
+        return apiService.callGetCurrentBookingApi(headers, input)
+    }
+
+    fun callChangeBookingStatusApi(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<ChangeBookingStatusResponse>> {
+        return apiService.callChangeBookingStatusApi(headers, input)
+    }
+
+    fun getNotification(headers: HashMap<String, String?>, pageno: RequestBody, userId: RequestBody):Observable<Response<NotificationResponse>> {
+        return apiService.getNotification(headers, pageno,userId)
+    }
+
+    fun validateAppVersion(headers: HashMap<String, String?>, input: JsonObject):Observable<Response<ValidateAppResponse>> {
+        return apiService.validateAppVersion(headers, input)
+    }
+
+    fun deleteNotification(headers: HashMap<String, String?>, notificationId: RequestBody, userId: RequestBody): Observable<Response<NotificationResponse>> {
+        return apiService.deleteNotification(headers, notificationId,userId)
     }
 
 
@@ -280,220 +345,6 @@ return  apiService.getVehicleCategory(headers,userid)
 //    }
 //
 //
-//    fun doLanguageConstantApi(
-//        headers: HashMap<String, String?>
-//    ): Observable<Response<JsonObject>> {
-//        return apiService.doLanguageConstantApi(headers)
-//    }
-//
-//    fun doCallLanguageApi(
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<LanguageResponse>> {
-//        return apiService.doCallLanguageApi(createHeaders)
-//    }
-//
-//    fun doCallSettingsApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<SettingsResponse>> {
-//        return apiService.doCallSettingsApi(input,createHeaders)
-//    }
-//
-//    fun doCallHelpCenterApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<HelpCenterResponse>> {
-//        return apiService.doCallHelpCenterApi(input,createHeaders)
-//    }
-//
-//    fun doUpdateSettings(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<UpdateSettingsResponse>> {
-//        return apiService.doUpdateSettings(input,createHeaders)
-//    }
-//
-//    fun doLoginApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<LoginResponse>> {
-//        return apiService.doLoginApi(input, createHeaders)
-//    }
-//
-//    fun callTurningUpApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<TurningUpResponse>> {
-//        return apiService.callTurningUpApi(input, createHeaders)
-//    }
-//
-//    fun doCallReferalApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<ReferalCodeResponse>> {
-//        return apiService.doCallReferalApi(input, createHeaders)
-//    }
-//
-//    fun doCallCheckVenueApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<VenueResponse>> {
-//        return apiService.doCallCheckVenueApi(input, createHeaders)
-//    }
-//
-//    fun doCallAgeGroupApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<AgeGroupResponse>> {
-//        return apiService.doCallAgeGroupApi(input, createHeaders)
-//    }
-//
-//
-//    fun doCallOnlineFriendApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<OnlineFriendResponse>> {
-//        return apiService.doCallOnlineFriendApi(input, createHeaders)
-//    }
-//
-//    fun doCallRealFriendApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<RealFriendResponse>> {
-//        return apiService.doCallRealFriendApi(input, createHeaders)
-//    }
-//
-//    fun doGetMyStories(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<GetMyStoriesResponse>> {
-//        return apiService.doGetMyStories(input, createHeaders)
-//    }
-//
-//    fun doGetDashboardMapApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<DashboardReponse>> {
-//        return apiService.doGetDashboardMapApi(input, createHeaders)
-//    }
-//
-//    fun doUpdateFriendCount(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<UpdateFriendCountResponse>> {
-//        return apiService.doUpdateFriendCount(input, createHeaders)
-//    }
-//
-//    fun doCallGetSettings(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<MyPreferenceResponse>> {
-//        return apiService.doCallGetSettings(input, createHeaders)
-//    }
-//
-//    fun doCallPartyInviteApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<PartyInvitesResponse>> {
-//        return apiService.doCallPartyInviteApi(input, createHeaders)
-//    }
-//
-//
-//    fun doCallInvitationApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<InvitationResponse>> {
-//        return apiService.doCallInvitationApi(input, createHeaders)
-//    }
-//
-//
-//    fun doAcceptInvitationApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<CommonResponse>> {
-//        return apiService.doAcceptInvitationApi(input, createHeaders)
-//    }
-//
-//
-//    fun doRejectInvitationApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<CommonResponse>> {
-//        return apiService.doRejectInvitationApi(input, createHeaders)
-//    }
-//
-//
-//    fun doCallGuestListApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<GuestListResponse>> {
-//        return apiService.doCallGuestListApi(input, createHeaders)
-//    }
-//
-//    fun doCallGetFriendProfileApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<FriendProfileResponse>> {
-//        return apiService.doCallGetFriendProfileApi(input, createHeaders)
-//    }
-//
-//    fun doCallGetNotification(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<OnlineFriendResponse>> {
-//        return apiService.doCallGetNotification(input, createHeaders)
-//    }
-//
-//    fun doCallJoinPartyInvites(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<CommonResponse>> {
-//        return apiService.doCallJoinPartyInvites(input, createHeaders)
-//    }
-//
-//    fun doCallDeclinePartyInvites(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<CommonResponse>> {
-//        return apiService.doCallDeclinePartyInvites(input, createHeaders)
-//    }
-//
-//    fun docallPastPartyApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<PastPartyResponse>> {
-//        return apiService.docallPastPartyApi(input, createHeaders)
-//    }
-//
-//    fun doCallUpcomingPartyApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<PastPartyResponse>> {
-//        return apiService.doCallUpcomingPartyApi(input, createHeaders)
-//    }
-//
-//    fun docallSaveSettings(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<PreferenceSavedResponse>> {
-//        return apiService.docallSaveSettings(input, createHeaders)
-//    }
-//
-//    fun doGetVenueApi(
-//        input: JsonObject,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<com.tekzee.amiggos.ui.home.model.VenueResponse>> {
-//        return apiService.doGetVenueApi(input, createHeaders)
-//    }
-//
-//    fun doCallAttachIdApi(
-//        file: MultipartBody.Part?,
-//        valueInt: RequestBody,
-//        date: RequestBody,
-//        createHeaders: HashMap<String, String?>
-//    ): Observable<Response<AttachIdResponse>> {
-//        return apiService.doCallAttachIdApi(file, valueInt, date, createHeaders)
-//    }
 
 
 }

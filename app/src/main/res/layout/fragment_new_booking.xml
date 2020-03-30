@@ -48,7 +48,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/current_booking_background" />
+                android:src="@drawable/hand" />
 
             <com.an.customfontview.CustomTextView
                 android:layout_width="match_parent"

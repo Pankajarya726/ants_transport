@@ -1,6 +1,7 @@
 package com.ants.driverpartner.everywhere.fragment.account
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,10 +16,11 @@ import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.Home.Homeview
 import com.ants.driverpartner.everywhere.activity.base.BaseMainFragment
 import com.ants.driverpartner.everywhere.activity.driverDetails.DriverListActivity
+import com.ants.driverpartner.everywhere.activity.login.LoginActivity
 import com.ants.driverpartner.everywhere.activity.notification.NotificationActivity
 import com.ants.driverpartner.everywhere.activity.profile.ProfileActivity
-import com.ants.driverpartner.everywhere.activity.vehicleDetails.VehicleListPresenter
 import com.ants.driverpartner.everywhere.activity.vehicleDetails.VehilcleListActivity
+import com.ants.driverpartner.everywhere.activity.webView.WebViewActivity
 import com.ants.driverpartner.everywhere.databinding.FragmentAccountBinding
 import com.ants.driverpartner.everywhere.utils.DialogUtils
 import com.ants.driverpartner.everywhere.utils.Utility
@@ -72,6 +74,17 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
             .load(Utility.getSharedPreferences(activity!!, Constant.PROFILE_IMAGE_URL))
             .into(binding.imgProfile)
 
+
+        binding.tvLogout.setOnClickListener(View.OnClickListener {
+            val intent = Intent(activity!!,LoginActivity::class.java)
+            startActivity(intent)
+
+            Utility.clearSharedPreference(activity!!.applicationContext)
+
+            activity!!.finish()
+
+        })
+
     }
 
 
@@ -111,21 +124,41 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
 
 
             getString(R.string.faq) -> {
-//                val intent = Intent(activity, WebVeiwActivity::class.java)
-//                intent.putExtra(Constant.WEB_URL, "http://dev.tekzee.in/Ants/get_staticPage/20/2")
-//                startActivity(intent)
+
+
+                var title = "FAQ"
+                var page_id = 21
+
+                val intent = Intent(activity!!, WebViewActivity::class.java)
+                intent.putExtra(Constant.WEB_VIEW_TITLE, title)
+                intent.putExtra(Constant.WEB_VIEW_PAGE_ID, page_id)
+
+                startActivity(intent)
             }
 
             getString(R.string.term_condition) -> {
-//                val intent = Intent(activity, WebVeiwActivity::class.java)
-//                intent.putExtra(Constant.WEB_URL, "http://dev.tekzee.in/Ants/get_staticPage/18/2")
-//                startActivity(intent)
+
+                var title = "Term and Condition"
+                var page_id = 18
+
+                val intent = Intent(activity!!, WebViewActivity::class.java)
+                intent.putExtra(Constant.WEB_VIEW_TITLE, title)
+                intent.putExtra(Constant.WEB_VIEW_PAGE_ID, page_id)
+
+                startActivity(intent)
+
             }
 
             getString(R.string.privacy_policy) -> {
-//                val intent = Intent(activity, WebVeiwActivity::class.java)
-//                intent.putExtra(Constant.WEB_URL, "http://dev.tekzee.in/Ants/get_staticPage/19/2")
-//                startActivity(intent)
+
+                var title = "Privacy Policy"
+                var page_id = 19
+                val intent = Intent(activity!!, WebViewActivity::class.java)
+                intent.putExtra(Constant.WEB_VIEW_TITLE, title)
+                intent.putExtra(Constant.WEB_VIEW_PAGE_ID, page_id)
+                startActivity(intent)
+
+
             }
 
         }

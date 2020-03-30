@@ -2,7 +2,9 @@ package com.tekzee.mallortaxi.network
 
 
 import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverListResponse
+import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPassResponse
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
+import com.ants.driverpartner.everywhere.activity.notification.NotificationResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
@@ -10,11 +12,14 @@ import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInfor
 import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
+import com.ants.driverpartner.everywhere.activity.splash.ValidateAppResponse
 import com.ants.driverpartner.everywhere.activity.vehicleDetails.GetVehicleListResponse
 import com.ants.driverpartner.everywhere.activity.webView.GetWebViewResponse
+import com.ants.driverpartner.everywhere.fragment.currentBooking.model.GetCurrentBookingRespone
 import com.ants.driverpartner.everywhere.fragment.history.model.GetHistroyBookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.BookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
+import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ChangeBookingStatusResponse
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ScheduleBookingResponse
 import com.google.gson.JsonObject
 import io.reactivex.Observable
@@ -162,19 +167,20 @@ interface ApiService {
 
     @POST("get_booking_request")
     fun callGetNewBookingApi(
-        @HeaderMap  headers: java.util.HashMap<String, String?>,
+        @HeaderMap headers: java.util.HashMap<String, String?>,
         @Body input: JsonObject
     ): Observable<Response<GetNewBookingResponse>>
 
 
-    @POST("get_booking_request")
+    @POST("get_booking_history")
     fun getHistoryBooking(
         @HeaderMap createHeaders: HashMap<String, String?>,
         @Body input: JsonObject
     ): Observable<Response<GetHistroyBookingResponse>>
 
+
     @POST("getProfile")
-    fun getProfile(@HeaderMap headers: HashMap<String, String?>,@Body input: JsonObject): Observable<Response<GetProfileResponse>>
+    fun getProfile(@HeaderMap headers: HashMap<String, String?>, @Body input: JsonObject): Observable<Response<GetProfileResponse>>
 
 
     @POST("accept_booking_request")
@@ -200,6 +206,60 @@ interface ApiService {
         @Part("pageid") pageId: RequestBody
     ): Observable<Response<GetWebViewResponse>>
 
+
+    @POST("forgot_password")
+    fun callForgotPasswordApi(
+        @HeaderMap headers: HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<ForgotPassResponse>>
+
+
+    @POST("verifyOTP")
+    fun callverifyOptApi(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<ForgotPassResponse>>
+
+
+    @POST("get_current_booking")
+    fun callGetCurrentBookingApi(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<GetCurrentBookingRespone>>
+
+
+    @POST("changeBookingStatus")
+    fun callChangeBookingStatusApi(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<ChangeBookingStatusResponse>>
+
+
+    @Multipart
+    @POST("getAllNotification")
+    fun getNotification(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Part("page_no") pageno: RequestBody,
+        @Part("userid") userId: RequestBody
+    ): Observable<Response<NotificationResponse>>
+
+
+    @POST("validateAppVersion")
+    fun validateAppVersion(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<ValidateAppResponse>>
+
+
+    @Multipart
+    @POST("deleteNotification")
+    fun deleteNotification(
+        @HeaderMap  headers: java.util.HashMap<String, String?>,
+        @Part("notification_id") notificationId: RequestBody,
+        @Part("userid") userId: RequestBody
+    ): Observable<Response<NotificationResponse>>
+
+
 //    @Multipart
 //    @POST("user/save_photoid")
 //    fun doCallAttachIdApi(
@@ -210,4 +270,4 @@ interface ApiService {
 //    ): Observable<Response<AttachIdResponse>>
 
 
-    }
+}

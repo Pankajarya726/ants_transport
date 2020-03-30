@@ -20,7 +20,7 @@ import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.webView.WebViewActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityHomeBinding
-import com.ants.driverpartner.everywhere.fragment.CurrentBookingFragment
+import com.ants.driverpartner.everywhere.fragment.currentBooking.CurrentBookingFragment
 import com.ants.driverpartner.everywhere.fragment.history.HistoryFragment
 import com.ants.driverpartner.everywhere.fragment.newBooking.NewBooking
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.ScheduleFragment
@@ -29,6 +29,7 @@ import com.ants.driverpartner.everywhere.fragment.contactUs.ContactFragmant
 import com.ants.driverpartner.everywhere.utils.SnackbarUtils.snackBarBottom
 
 class HomeActivity : AppCompatActivity(), Homeview {
+
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var drawer: DrawerLayout? = null
@@ -91,14 +92,17 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
         when (position) {
             0 -> {
-                newBookingFragment = NewBooking.newInstance()
+                newBookingFragment = NewBooking()
                 fragment = newBookingFragment
                 title = "New Booking"
             }
 
             1 -> {
 
-                fragment = CurrentBookingFragment(this)
+                fragment =
+                    CurrentBookingFragment(
+                        this
+                    )
                 title = "Current Booking"
                 isActivityRefreshed = true
             }
@@ -201,6 +205,9 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
     }
 
+    override fun changeFragment(i: Int) {
+        replaceFragment(i)
+    }
     fun replaceFragment(fragment: Fragment, fragmentPosition: String, title: String) {
         setToolbarTitle(title)
         closeNavigationDrawer()

@@ -35,7 +35,7 @@ interface Constant {
         val MAP_ZOOM_LEVEL = 14.0f
         val REQUEST_PERMISSION_SETTING = 333
         val profilePermissionsRequired =
-            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
         val CURRENCY = "R"
         /**
          * Shared preference constant data

@@ -162,6 +162,7 @@ class DriverDocumentsActivity : BaseMainActivity(),DriverDocumentView , BSImageP
             requestPermission()
         }
     }
+
     private fun requestPermission() {
         if (!checkProfilePermissions()) {
             Log.e("Permission ", "Not Granted")
@@ -254,9 +255,11 @@ class DriverDocumentsActivity : BaseMainActivity(),DriverDocumentView , BSImageP
             //proceedAfterPermission()
         }
     }
+
     override fun onImageUploadSuccess(responseData: UploadImageResponse) {
         DialogUtils.showSuccessDialog(this, responseData.message)
     }
+
     private fun checkProfilePermissions(): Boolean {
         return (ActivityCompat.checkSelfPermission(
             applicationContext,
@@ -330,11 +333,6 @@ class DriverDocumentsActivity : BaseMainActivity(),DriverDocumentView , BSImageP
         //updateParentProfileImage();
 
     }
-
-//    override fun createPresenter(): DocumentPresenter {
-//        return DocumentPresenter(this)
-//    }
-
 
     override fun onSingleImageSelected(uri: Uri) {
 
@@ -440,5 +438,11 @@ class DriverDocumentsActivity : BaseMainActivity(),DriverDocumentView , BSImageP
 
             }
         }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter!!.onStop()
     }
 }

@@ -64,7 +64,7 @@
 
 
                 <com.an.customfontview.CustomButton
-                    android:id="@+id/btn_detail"
+                    android:id="@+id/btn_start_booking"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_alignParentRight="true"

@@ -19,15 +19,11 @@ import com.ants.driverpartner.everywhere.utils.DialogUtils
 import com.google.gson.Gson
 
 
-class NewBooking : BaseMainFragment(),NewBookingView,NewBookingAdapter.NewBookingListener {
+class NewBooking : BaseMainFragment(), NewBookingView, NewBookingAdapter.NewBookingListener {
 
     lateinit var binding: FragmentNewBookingBinding
-    private var presenter : NewBookingPresenter?=null
+    private var presenter: NewBookingPresenter? = null
     private var bookingList = ArrayList<GetNewBookingResponse.Data>()
-    companion object {
-        fun newInstance() =
-            NewBooking()
-    }
 
 
     override fun onCreateView(
@@ -36,16 +32,21 @@ class NewBooking : BaseMainFragment(),NewBookingView,NewBookingAdapter.NewBookin
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_booking, container, false)
-        presenter = NewBookingPresenter(this,activity!!)
-        init()
+        presenter = NewBookingPresenter(this, activity!!)
+
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+    }
 
-    fun init(){
+
+    fun init() {
         binding.rvNewBooking.visibility = View.GONE
         binding.rvNewBooking.visibility = View.GONE
-        Log.e(javaClass.simpleName,"get Current Booking")
+        Log.e(javaClass.simpleName, "get Current Booking")
         presenter!!.getCurrentBooking()
     }
 
@@ -53,10 +54,9 @@ class NewBooking : BaseMainFragment(),NewBookingView,NewBookingAdapter.NewBookin
     override fun onGetNewBooking(responseData: GetNewBookingResponse) {
 
 
+        if (responseData.data.isNotEmpty()) {
 
-        if(responseData.data.isNotEmpty()){
-
-            for(data in responseData.data){
+            for (data in responseData.data) {
                 bookingList.add(data)
             }
 
@@ -68,7 +68,7 @@ class NewBooking : BaseMainFragment(),NewBookingView,NewBookingAdapter.NewBookin
             binding.rvNewBooking.hasFixedSize()
             binding.rvNewBooking.adapter = currentBookingAdapter
 
-        }else{
+        } else {
 
             binding.rvNewBooking.visibility = View.GONE
             binding.rlNewBooking.visibility = View.VISIBLE
@@ -92,35 +92,37 @@ class NewBooking : BaseMainFragment(),NewBookingView,NewBookingAdapter.NewBookin
 
     override fun onViewClivk(data: GetNewBookingResponse.Data, position: Int) {
 
-        var packageDetail :String
+        var packageDetail: String
         packageDetail = Gson().toJson(data)
 
-        val intent = Intent(activity!!,PackageDetailActivity::class.java)
+        val intent = Intent(activity!!, PackageDetailActivity::class.java)
 
-        intent.putExtra(Constant.PACKAGE_DETAIL,packageDetail)
+        intent.putExtra(Constant.PACKAGE_DETAIL, packageDetail)
         startActivity(intent)
-
-
 
 
     }
 
     override fun onAcceptBooking(responseData: BookingResponse) {
-        DialogUtils.showSuccessDialog(activity!! ,responseData.message)
+        DialogUtils.showSuccessDialog(activity!!, responseData.message)
 
     }
 
     override fun onDeclineBooking(responseData: BookingResponse) {
 
-        DialogUtils.showSuccessDialog(activity!! ,responseData.message)
+        DialogUtils.showSuccessDialog(activity!!, responseData.message)
     }
 
 
     override fun validateError(message: String) {
-       DialogUtils.showSuccessDialog(activity!!,message)
+        DialogUtils.showSuccessDialog(activity!!, message)
     }
 
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter!!.onStop()
+    }
 
 
 }

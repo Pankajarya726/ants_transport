@@ -88,6 +88,15 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.0'
 
+    //google map service
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+
+
+    implementation 'com.google.maps:google-maps-services:0.2.5'
+    implementation 'com.akexorcist:googledirectionlibrary:1.1.1'
+
 
     //for image loding
     implementation 'com.github.bumptech.glide:glide:4.8.0'

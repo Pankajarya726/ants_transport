@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragment.CurrentBookingFragment">
+    tools:context=".fragment.currentBooking.CurrentBookingFragment"
 
-    <LinearLayout
-        android:background="@color/colorWhite"
+    >
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="match_parent">
 
-    </LinearLayout>
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+
+          <com.an.customfontview.CustomTextView
+              android:id="@+id/tv_booking_info"
+              android:layout_width="match_parent"
+              android:layout_height="50dp"
+              android:layout_margin="30dp"
+              android:layout_alignParentBottom="true"
+              android:background="@color/colorAccent"
+              android:gravity="center"
+              android:text="@string/current_booking_info"
+              android:textColor="@color/colorBlack"
+              android:textSize="18sp" />
+
+
+
+
+       <!-- <include
+
+            android:id="@+id/layout_bottom"
+            layout="@layout/bottom_sheet" />-->
+
+
+
+
+
+    </RelativeLayout>
 </layout>
