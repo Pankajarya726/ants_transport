@@ -7,4 +7,5 @@ import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.Schedule
 interface ScheduleView:BaseMainView {
     fun onGetScheduleBooking(responseData: ScheduleBookingResponse)
     fun onStatusChange(responseData: ChangeBookingStatusResponse)
+    fun onFailure(message: String)
 }

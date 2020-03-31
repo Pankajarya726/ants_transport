@@ -2,9 +2,8 @@ package com.ants.driverpartner.everywhere.activity.resetPassword
 
 import android.content.Context
 import android.util.Log
-import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverListResponse
-import com.ants.driverpartner.everywhere.utils.Utility
+import com.ants.driverpartner.everywhere.activity.otp.VerifyOtpResponse
 import com.google.gson.JsonObject
 import com.tekzee.mallortaxi.network.ApiClient
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,17 +11,17 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
 
-class ResetPasswordPresenter(private var view: ResetPasswordView,context: Context){
-
+class ResetPasswordPresenter(private var view: ResetPasswordView, context: Context) {
 
 
     var context: Context? = context
-    private var disposable: Disposable? =null
+    private var disposable: Disposable? = null
     fun onStop() {
         if (disposable != null) {
             disposable!!.dispose()
         }
     }
+
     fun callResetPasswrodApi() {
 
         if (view.checkInternet()) {
@@ -31,25 +30,29 @@ class ResetPasswordPresenter(private var view: ResetPasswordView,context: Contex
 
             var input = JsonObject()
             input.addProperty(
-                "userid",
-                Utility.getSharedPreferences(context!!, Constant.USER_ID).toString()
+                "email",
+                view.getEmail()
+            )
+
+            input.addProperty(
+                "new_password",
+                view.getNewPassword()
             )
 
 
             var headers = HashMap<String, String?>()
 
-            headers["api-key"] = Utility.getSharedPreferences(context!!, Constant.API_KEY)
-            headers["userid"] = Utility.getSharedPreferences(context!!, Constant.USER_ID)
+            headers["Content-Type"] = "application/json"
 
-            disposable = ApiClient.instance.callGetDriverListApi(headers, input)
+            disposable = ApiClient.instance.callResetPasswrodApi(headers, input)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response: Response<GetDriverListResponse> ->
+                .subscribe({ response: Response<VerifyOtpResponse> ->
                     view.hideProgressbar()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
-                            val responseData: GetDriverListResponse? = response.body()
+                            val responseData: VerifyOtpResponse? = response.body()
                             Log.e(javaClass.simpleName, response.body().toString())
 
                             if (responseData != null) {
@@ -58,7 +61,7 @@ class ResetPasswordPresenter(private var view: ResetPasswordView,context: Contex
                                         view.validateError(responseData.message)
                                     }
                                     1 -> {
-//                                        view.onGetDriverList(responseData)
+                                        view.onSuccess(responseData)
                                     }
                                     2 -> {
                                         view.validateError(responseData.message)
@@ -80,8 +83,6 @@ class ResetPasswordPresenter(private var view: ResetPasswordView,context: Contex
             view.validateError("Please Check Internet Connection!")
         }
     }
-
-
 
 
 }

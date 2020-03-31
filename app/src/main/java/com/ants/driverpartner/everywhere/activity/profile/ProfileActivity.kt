@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -20,10 +19,10 @@ import com.ants.driverpartner.everywhere.Constant.Companion.REQUEST_PERMISSION_S
 import com.ants.driverpartner.everywhere.Constant.Companion.profilePermissionsRequired
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
+import com.ants.driverpartner.everywhere.activity.profile.model.UpdateProfileResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityProfileBinding
-import com.ants.driverpartner.everywhere.databinding.FragmentAccountBinding
 import com.ants.driverpartner.everywhere.utils.DialogUtils
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.asksira.bsimagepicker.BSImagePicker
@@ -33,7 +32,8 @@ import com.squareup.picasso.Picasso
 import java.io.File
 import java.io.InputStream
 
-class ProfileActivity : BaseMainActivity(),ProfileView , BSImagePicker.OnSingleImageSelectedListener{
+class ProfileActivity : BaseMainActivity(), ProfileView,
+    BSImagePicker.OnSingleImageSelectedListener {
 
 
     lateinit var binding: ActivityProfileBinding
@@ -45,8 +45,8 @@ class ProfileActivity : BaseMainActivity(),ProfileView , BSImagePicker.OnSingleI
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_profile)
-        presenter = ProfilePresenter(this,this)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_profile)
+        presenter = ProfilePresenter(this, this)
         initVeiw()
     }
 
@@ -83,9 +83,9 @@ class ProfileActivity : BaseMainActivity(),ProfileView , BSImagePicker.OnSingleI
         if (binding.edtName.text.trim().toString().isEmpty()) {
             DialogUtils.showSuccessDialog(this, "Please Enter Name")
         } else if (binding.edtEmail.text.trim().toString().isEmpty()) {
-            DialogUtils.showSuccessDialog(this,"Please Enter Email")
+            DialogUtils.showSuccessDialog(this, "Please Enter Email")
         } else if (binding.edtMobile.text.trim().toString().isEmpty()) {
-            DialogUtils.showSuccessDialog(this,"Please Enter Mobile Number")
+            DialogUtils.showSuccessDialog(this, "Please Enter Mobile Number")
         } else {
 
             var jsonInput = JsonObject()
@@ -125,8 +125,32 @@ class ProfileActivity : BaseMainActivity(),ProfileView , BSImagePicker.OnSingleI
 //    }
 
 
+    override fun getEmail(): String {
+        return binding.edtEmail.text.trim().toString()
+    }
+
+    override fun getMobile(): String {
+        return binding.edtMobile.text.trim().toString()
+    }
+
+
+    override fun getName(): String {
+        return binding.edtName.text.trim().toString()
+    }
+
+    override fun getPostalAddress(): String {
+        return binding.edtPostalAddress.text.toString()
+    }
+
+    override fun getResidentialAddress(): String {
+        return binding.edtResidentialAddress.text.toString()
+    }
 
     override fun onImageUploadSuccess(responseData: UploadImageResponse) {
+        DialogUtils.showSuccessDialog(this, responseData.message)
+    }
+
+    override fun onUpdateProfile(responseData: UpdateProfileResponse) {
         DialogUtils.showSuccessDialog(this, responseData.message)
     }
 
@@ -288,15 +312,14 @@ class ProfileActivity : BaseMainActivity(),ProfileView , BSImagePicker.OnSingleI
 
     override fun validateError(message: String) {
 
-        DialogUtils.showSuccessDialog(this,message)
+        DialogUtils.showSuccessDialog(this, message)
 
 
     }
 
 
-
     override fun getContext(): Context {
 
-       return this
+        return this
     }
 }

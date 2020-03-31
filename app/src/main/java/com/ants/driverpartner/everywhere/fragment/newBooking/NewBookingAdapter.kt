@@ -87,6 +87,11 @@ class NewBookingAdapter(
     }
 
 
+    fun removeItems(position: Int) {
+        this.bookingList.removeAt(position)
+
+        notifyDataSetChanged()
+    }
     interface NewBookingListener {
         fun onAccepted(
             data: GetNewBookingResponse.Data,

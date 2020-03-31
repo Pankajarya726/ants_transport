@@ -7,5 +7,8 @@ import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBooking
 interface NewBookingView :BaseMainView {
     fun onGetNewBooking(responseData: GetNewBookingResponse)
     fun onAcceptBooking(responseData: BookingResponse)
-    fun onDeclineBooking(responseData: BookingResponse)
+    fun onDeclineBooking(
+        responseData: BookingResponse,
+        position: Int
+    )
 }

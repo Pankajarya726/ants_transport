@@ -5,6 +5,7 @@ import android.util.Log
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
+import com.ants.driverpartner.everywhere.activity.profile.model.UpdateProfileResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.gson.JsonObject
@@ -162,34 +163,26 @@ class ProfilePresenter(private var view: ProfileView, context: Context) {
         }
     }
 
-    /*fun updateProfile() {
+    fun updateProfile() {
         view.showProgressbar()
         if (view.checkInternet()) {
 
 
-
             var input = JsonObject()
 
-            {
-                "device_token" : "123",
-                "device_type" : "1",
-                "name" : "Virat",
-                "mobile" : "9713516724",
-                "email" : "both@gmail.com",
-                "password" : "123456",
-                "residential_address" :"sector e",
-                "postal_address" :"vijay nagar",
-                "account_type"  :"3"
-            }
 
-            input.addProperty("userid", Utility.getSharedPreferences(view.getContext(), Constant.USER_ID).toString())
+            input.addProperty("name", view.getName())
 
-            input.addProperty("device_token", Utility.getSharedPreferences(view.getContext(), Constant.D_TOKEN))
+            input.addProperty("mobile", view.getMobile())
 
-            input.addProperty("device_type",2)
+            input.addProperty("email", view.getEmail())
 
-            input.addProperty("mobile",view.getMobile())
-            input.addProperty("email",view.getMobile())
+            input.addProperty("residential_address", view.getResidentialAddress())
+            input.addProperty("postal_address", view.getPostalAddress())
+            input.addProperty(
+                "userid",
+                Utility.getSharedPreferences(view.getContext(), Constant.USER_ID).toString()
+            )
 
 
             var headers = HashMap<String, String?>()
@@ -201,15 +194,15 @@ class ProfilePresenter(private var view: ProfileView, context: Context) {
             Log.e(javaClass.simpleName, headers.toString())
 
 
-            disposable = ApiClient.instance.getProfile(headers, input)
+            disposable = ApiClient.instance.updateProfile(headers, input)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response: Response<GetProfileResponse> ->
+                .subscribe({ response: Response<UpdateProfileResponse> ->
                     view.hideProgressbar()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
-                            val responseData: GetProfileResponse? = response.body()
+                            val responseData: UpdateProfileResponse? = response.body()
                             Log.e(javaClass.simpleName, response.body().toString())
 
 
@@ -221,7 +214,7 @@ class ProfilePresenter(private var view: ProfileView, context: Context) {
                                     }
 
                                     1 -> {
-                                        view.onGetProfile(responseData.data)
+                                        view.onUpdateProfile(responseData)
                                     }
 
                                     2 -> {
@@ -244,7 +237,7 @@ class ProfilePresenter(private var view: ProfileView, context: Context) {
             view.hideProgressbar()
             view.validateError(context!!.getString(R.string.check_internet))
         }
-    }*/
+    }
 
 
 }

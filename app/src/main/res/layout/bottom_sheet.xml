@@ -365,7 +365,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:background="@color/colorAccent"
-                    android:text="Open Collection"
+                    android:text="Collection Details"
                     android:gravity="center"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"

@@ -2,10 +2,7 @@ package com.ants.driverpartner.everywhere.activity.otp
 
 import android.content.Context
 import android.util.Log
-import com.ants.driverpartner.everywhere.Constant
-import com.ants.driverpartner.everywhere.activity.base.BaseMainView
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPassResponse
-import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.gson.JsonObject
 import com.tekzee.mallortaxi.network.ApiClient
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -53,12 +50,12 @@ class OtpPresenter(private var view: OtpView, private var context: Context){
             disposable = ApiClient.instance.callverifyOptApi(headers, input)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response: Response<ForgotPassResponse> ->
+                .subscribe({ response: Response<VerifyOtpResponse> ->
                     view.hideProgressbar()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
-                            val responseData: ForgotPassResponse? = response.body()
+                            val responseData: VerifyOtpResponse? = response.body()
                             Log.e(javaClass.simpleName, response.body().toString())
 
                             if (responseData != null) {
@@ -67,7 +64,7 @@ class OtpPresenter(private var view: OtpView, private var context: Context){
                                         view.validateError(responseData.message)
                                     }
                                     1 -> {
-                                        view.onSuccess(responseData)
+                                        view.onVerifyOtp(responseData)
                                     }
                                     2 -> {
                                         view.validateError(responseData.message)

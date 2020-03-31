@@ -137,13 +137,13 @@ class SchedulePresenter(private var view: ScheduleView,private var context: Cont
                             if (responseData != null) {
                                 when (responseData.status) {
                                     0 -> {
-                                        view.validateError(responseData.message)
+                                        view.onFailure(responseData.message)
                                     }
                                     1 -> {
                                         view.onStatusChange(responseData)
                                     }
                                     2 -> {
-                                        view.validateError(responseData.message)
+                                        view.onFailure(responseData.message)
                                     }
                                 }
                             } else {

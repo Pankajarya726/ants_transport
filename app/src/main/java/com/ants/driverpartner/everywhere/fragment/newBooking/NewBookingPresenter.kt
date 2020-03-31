@@ -93,10 +93,13 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
 
 
             var input = JsonObject()
-            input.addProperty("userid", Utility.getSharedPreferences(context!!, Constant.USER_ID).toString())
+            input.addProperty(
+                "userid",
+                Utility.getSharedPreferences(context!!, Constant.USER_ID).toString()
+            )
 
-            input.addProperty("booking_id",bookingId)
-            input.addProperty("status",1)
+            input.addProperty("booking_id", bookingId)
+            input.addProperty("status", 1)
 
 
             var headers = HashMap<String, String?>()
@@ -145,7 +148,7 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
 
     }
 
-    fun callDeclineBookingApi(bookingId: Int) {
+    fun callDeclineBookingApi(bookingId: Int, position: Int) {
         if (view.checkInternet()) {
 
 
@@ -153,10 +156,13 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
 
 
             var input = JsonObject()
-            input.addProperty("userid", Utility.getSharedPreferences(context!!, Constant.USER_ID).toString())
+            input.addProperty(
+                "userid",
+                Utility.getSharedPreferences(context!!, Constant.USER_ID).toString()
+            )
 
-            input.addProperty("booking_id",bookingId)
-            input.addProperty("status",2)
+            input.addProperty("booking_id", bookingId)
+            input.addProperty("status", 2)
 
 
             var headers = HashMap<String, String?>()
@@ -181,14 +187,14 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                                         view.validateError(responseData.message)
                                     }
                                     1 -> {
-                                        view.onDeclineBooking(responseData)
+                                        view.onDeclineBooking(responseData, position)
                                     }
                                     2 -> {
                                         view.validateError(responseData.message)
                                     }
                                 }
                             } else {
-                                view.validateError("Something went wrong!")
+                                view.validateError("Something went wrong! Please try after some time")
                             }
 
                         }
@@ -196,7 +202,7 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
 
                 }, { error ->
                     Utility.hideProgressbar()
-                    view.validateError(error.toString())
+                    view.validateError("Something went wrong! Please try after some time")
                 })
 
 

@@ -24,7 +24,7 @@ class NewBooking : BaseMainFragment(), NewBookingView, NewBookingAdapter.NewBook
     lateinit var binding: FragmentNewBookingBinding
     private var presenter: NewBookingPresenter? = null
     private var bookingList = ArrayList<GetNewBookingResponse.Data>()
-
+    private var newBookingAdapter: NewBookingAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,10 +63,10 @@ class NewBooking : BaseMainFragment(), NewBookingView, NewBookingAdapter.NewBook
             binding.rvNewBooking.visibility = View.VISIBLE
             binding.rlNewBooking.visibility = View.GONE
 
-            val currentBookingAdapter = NewBookingAdapter(bookingList, activity!!, this)
+            newBookingAdapter = NewBookingAdapter(bookingList, activity!!, this)
             binding.rvNewBooking.layoutManager = LinearLayoutManager(context)
             binding.rvNewBooking.hasFixedSize()
-            binding.rvNewBooking.adapter = currentBookingAdapter
+            binding.rvNewBooking.adapter = newBookingAdapter
 
         } else {
 
@@ -86,7 +86,8 @@ class NewBooking : BaseMainFragment(), NewBookingView, NewBookingAdapter.NewBook
     }
 
     override fun onDecline(data: GetNewBookingResponse.Data, position: Int) {
-        presenter!!.callDeclineBookingApi(data.bookingId)
+        presenter!!.callDeclineBookingApi(data.bookingId, position)
+
 
     }
 
@@ -108,9 +109,12 @@ class NewBooking : BaseMainFragment(), NewBookingView, NewBookingAdapter.NewBook
 
     }
 
-    override fun onDeclineBooking(responseData: BookingResponse) {
+    override fun onDeclineBooking(responseData: BookingResponse, position: Int) {
 
         DialogUtils.showSuccessDialog(activity!!, responseData.message)
+        newBookingAdapter!!.removeItems(position)
+
+
     }
 
 

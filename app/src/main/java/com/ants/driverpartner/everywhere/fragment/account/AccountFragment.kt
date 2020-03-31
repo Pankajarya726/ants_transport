@@ -1,7 +1,6 @@
 package com.ants.driverpartner.everywhere.fragment.account
 
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,6 +18,7 @@ import com.ants.driverpartner.everywhere.activity.driverDetails.DriverListActivi
 import com.ants.driverpartner.everywhere.activity.login.LoginActivity
 import com.ants.driverpartner.everywhere.activity.notification.NotificationActivity
 import com.ants.driverpartner.everywhere.activity.profile.ProfileActivity
+import com.ants.driverpartner.everywhere.activity.resetPassword.ResetPasswordActivity
 import com.ants.driverpartner.everywhere.activity.vehicleDetails.VehilcleListActivity
 import com.ants.driverpartner.everywhere.activity.webView.WebViewActivity
 import com.ants.driverpartner.everywhere.databinding.FragmentAccountBinding
@@ -76,7 +76,7 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
 
 
         binding.tvLogout.setOnClickListener(View.OnClickListener {
-            val intent = Intent(activity!!,LoginActivity::class.java)
+            val intent = Intent(activity!!, LoginActivity::class.java)
             startActivity(intent)
 
             Utility.clearSharedPreference(activity!!.applicationContext)
@@ -167,7 +167,11 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
     }
 
     private fun resetPassword() {
-        //homeView.startResetPasswordActivity()
+
+        val intent = Intent(activity!!, ResetPasswordActivity::class.java)
+        intent.putExtra(Constant.FORGOT_PASSWORD, false)
+        intent.putExtra(Constant.EMAIL, Utility.getSharedPreferences(activity!!, Constant.EMAIL))
+        startActivity(intent)
 
     }
 

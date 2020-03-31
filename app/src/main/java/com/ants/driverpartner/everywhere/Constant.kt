@@ -13,6 +13,7 @@ interface Constant {
     }
 
     companion object {
+        val FORGOT_PASSWORD = "FORGOT_PASSWORD"
         val ADDING_DRIVER = "ADDING_DRIVER"
         val ADDING_VEHICLE = "ADDING_VEHICLE"
         val PACKAGE_DETAIL= "PACKAGE_DETAIL"

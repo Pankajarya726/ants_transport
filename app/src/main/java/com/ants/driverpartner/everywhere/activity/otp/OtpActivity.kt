@@ -1,5 +1,6 @@
 package com.ants.driverpartner.everywhere.activity.otp
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPassResponse
+import com.ants.driverpartner.everywhere.activity.resetPassword.ResetPasswordActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityOtpBinding
 import com.ants.driverpartner.everywhere.utils.DialogUtils
@@ -157,10 +159,18 @@ class OtpActivity : BaseMainActivity(), OtpView {
         return userid.toString()
     }
 
-    override fun onSuccess(action: ForgotPassResponse) {
+    override fun onSuccess(action: ForgotPassResponse?) {
 
         validateError("OTP Resent Success")
 
+
+    }
+
+    override fun onVerifyOtp(responseData: VerifyOtpResponse) {
+        val intent = Intent(this,ResetPasswordActivity::class.java)
+        intent.putExtra(Constant.FORGOT_PASSWORD,true)
+        intent.putExtra(Constant.EMAIL,email)
+        startActivity(intent)
 
     }
 

@@ -5,11 +5,13 @@ import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverL
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPassResponse
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.notification.NotificationResponse
+import com.ants.driverpartner.everywhere.activity.otp.VerifyOtpResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
+import com.ants.driverpartner.everywhere.activity.profile.model.UpdateProfileResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.activity.splash.ValidateAppResponse
@@ -218,7 +220,7 @@ interface ApiService {
     fun callverifyOptApi(
         @HeaderMap headers: java.util.HashMap<String, String?>,
         @Body input: JsonObject
-    ): Observable<Response<ForgotPassResponse>>
+    ): Observable<Response<VerifyOtpResponse>>
 
 
     @POST("get_current_booking")
@@ -254,10 +256,23 @@ interface ApiService {
     @Multipart
     @POST("deleteNotification")
     fun deleteNotification(
-        @HeaderMap  headers: java.util.HashMap<String, String?>,
+        @HeaderMap headers: java.util.HashMap<String, String?>,
         @Part("notification_id") notificationId: RequestBody,
         @Part("userid") userId: RequestBody
     ): Observable<Response<NotificationResponse>>
+
+
+    @POST("reset_password")
+    fun callResetPasswrodApi(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<VerifyOtpResponse>>
+
+    @POST("updateProfile")
+    fun updateProfile(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
+    ): Observable<Response<UpdateProfileResponse>>
 
 
 //    @Multipart

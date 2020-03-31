@@ -5,11 +5,13 @@ import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverL
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPassResponse
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.notification.NotificationResponse
+import com.ants.driverpartner.everywhere.activity.otp.VerifyOtpResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
+import com.ants.driverpartner.everywhere.activity.profile.model.UpdateProfileResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.activity.splash.ValidateAppResponse
@@ -313,7 +315,7 @@ class ApiClient {
     fun callverifyOptApi(
         headers: HashMap<String, String?>,
         input: JsonObject
-    ): Observable<Response<ForgotPassResponse>> {
+    ): Observable<Response<VerifyOtpResponse>> {
         return apiService.callverifyOptApi(headers, input)
     }
 
@@ -335,6 +337,16 @@ class ApiClient {
 
     fun deleteNotification(headers: HashMap<String, String?>, notificationId: RequestBody, userId: RequestBody): Observable<Response<NotificationResponse>> {
         return apiService.deleteNotification(headers, notificationId,userId)
+    }
+
+    fun callResetPasswrodApi(headers: java.util.HashMap<String, String?>, input: JsonObject): Observable<Response<VerifyOtpResponse>> {
+        return apiService.callResetPasswrodApi(headers, input)
+    }
+
+    fun updateProfile(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<UpdateProfileResponse>> {
+
+
+        return apiService.updateProfile(headers,input)
     }
 
 
