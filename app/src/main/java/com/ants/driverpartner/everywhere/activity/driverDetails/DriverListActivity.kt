@@ -2,6 +2,7 @@ package com.ants.driverpartner.everywhere.activity.driverDetails
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,20 +12,21 @@ import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverL
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.DriverDocActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityDriverListBinding
+import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.gson.Gson
 
-class DriverListActivity : BaseMainActivity(),DriverListView ,DriverListAdapter.DriverListener{
+class DriverListActivity : BaseMainActivity(), DriverListView, DriverListAdapter.DriverListener {
 
-    lateinit var binding:  ActivityDriverListBinding
+    lateinit var binding: ActivityDriverListBinding
 
-    private var presenter : DriverListPresenter?=null
+    private var presenter: DriverListPresenter? = null
 
     private var driverList = ArrayList<GetDriverListResponse.Data>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       binding= DataBindingUtil
-           .setContentView(this,R.layout.activity_driver_list)
+        binding = DataBindingUtil
+            .setContentView(this, R.layout.activity_driver_list)
 
         presenter = DriverListPresenter(this, this)
 
@@ -32,7 +34,17 @@ class DriverListActivity : BaseMainActivity(),DriverListView ,DriverListAdapter.
         init()
 
     }
+
     fun init() {
+
+        var type = Utility.getSharedPreferences(this, Constant.ACCOUNT_TYPE)
+
+        if (type.equals(Constant.DRIVER)) {
+            binding.imgAdd.visibility = View.GONE
+        }
+
+        Log.e(javaClass.simpleName, type)
+
 
         presenter!!.callDriverListApi()
 
@@ -48,24 +60,24 @@ class DriverListActivity : BaseMainActivity(),DriverListView ,DriverListAdapter.
 
     private fun addDriver() {
 
-        val intent = Intent(this,DriverDocActivity::class.java)
-        intent.putExtra(Constant.ADDING_DRIVER,Constant.ADDING_DRIVER)
+        val intent = Intent(this, DriverDocActivity::class.java)
+        intent.putExtra(Constant.ADDING_DRIVER, Constant.ADDING_DRIVER)
         startActivity(intent)
     }
 
     override fun onGetDriverList(responseData: GetDriverListResponse) {
 
-        if(responseData.data.isNotEmpty()){
+        if (responseData.data.isNotEmpty()) {
 
             driverList.clear()
 
-            for (data in responseData.data){
+            for (data in responseData.data) {
                 driverList.add(data)
             }
 
             binding.rvDriverList.layoutManager = LinearLayoutManager(this)
             binding.rvDriverList.hasFixedSize()
-            var adapter = DriverListAdapter(driverList,this,this)
+            var adapter = DriverListAdapter(driverList, this, this)
             binding.rvDriverList.adapter = adapter
             adapter.notifyDataSetChanged()
         }
@@ -84,7 +96,6 @@ class DriverListActivity : BaseMainActivity(),DriverListView ,DriverListAdapter.
         startActivity(intent)
 
 
-
     }
 
     override fun onDeleteClick(data: GetDriverListResponse.Data, position: Int) {
@@ -92,10 +103,11 @@ class DriverListActivity : BaseMainActivity(),DriverListView ,DriverListAdapter.
 
 
     }
+
     override fun validateError(message: String) {
 
 
-        com.ants.driverpartner.everywhere.utils.DialogUtils.showSuccessDialog(this,message)
+        com.ants.driverpartner.everywhere.utils.DialogUtils.showSuccessDialog(this, message)
 
     }
 
@@ -104,6 +116,7 @@ class DriverListActivity : BaseMainActivity(),DriverListView ,DriverListAdapter.
         super.onBackPressed()
         this.finish()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter!!.onStop()

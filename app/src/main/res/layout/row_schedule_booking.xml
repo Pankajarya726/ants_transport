@@ -261,11 +261,14 @@
                     android:gravity="center|left"
                     android:text="Payment Status"
                     android:textColor="@color/colorBlack"
+                    android:visibility="gone"
                     android:textSize="16sp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
                     android:id="@+id/tv_status"
+                    android:visibility="gone"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"

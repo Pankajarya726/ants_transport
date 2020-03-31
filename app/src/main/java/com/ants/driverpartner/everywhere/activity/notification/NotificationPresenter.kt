@@ -10,9 +10,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
+
 
 class NotificationPresenter(private var view: NotificationView, private var context: Context) {
 
@@ -33,22 +33,28 @@ class NotificationPresenter(private var view: NotificationView, private var cont
             Log.e("Internet Connection", view.checkInternet().toString())
 
 
-            val pageno = RequestBody.create(MultipartBody.FORM, "1")
+            val pageno = "1".toRequestBody(MultipartBody.FORM)
+            val userId = Utility.getSharedPreferences(context, Constant.USER_ID)!!.toRequestBody(
+                MultipartBody.FORM
+            )
 
-            val userId = Utility.getSharedPreferences(context ,  Constant.USER_ID).let {
-                it.toString()
-                    .toRequestBody(MultipartBody.FORM)
-            }
+//            val pageno = "1".toRequestBody(MultipartBody.FORM)
+
+//            val userId = Utility.getSharedPreferences(context ,  Constant.USER_ID).let {
+//                it.toString()
+//                    .toRequestBody(MultipartBody.FORM)
+//            }
 
 
             var headers = HashMap<String, String?>()
 
 
-            headers["Content-Type"] = "application/json"
+//            headers["Content-Type"] = "application/json"
 
             headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
+            headers["userid"] = Utility.getSharedPreferences(context, Constant.USER_ID)
 
-            disposable = ApiClient.instance.getNotification(headers, pageno,userId)
+            disposable = ApiClient.instance.getNotification(headers, pageno, userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<NotificationResponse> ->
@@ -62,16 +68,26 @@ class NotificationPresenter(private var view: NotificationView, private var cont
 
                             Log.e(javaClass.simpleName, response.body().toString())
 
+                            if (responseData != null) {
+                                when (responseData.status) {
 
-                            if (responseData!!.status == 1) {
-                                view.onGetNotification(responseData)
-                            } else if (responseData.status == 0) {
-                                Log.e(
-                                    javaClass.simpleName + "\tApi output\n\n",
-                                    responseData.status.toString()
-                                )
-                                view.validateError(responseData.message)
+                                    0 -> {
+                                        view.onFailure(responseData.message)
+                                    }
+
+                                    1 -> {
+                                        view.onGetNotification(responseData)
+                                    }
+
+                                    2 -> {
+                                        view.validateError(responseData.message)
+
+                                    }
+
+                                }
+
                             } else {
+                                view.validateError(context.getString(R.string.error_message))
 
                             }
                         }
@@ -82,15 +98,15 @@ class NotificationPresenter(private var view: NotificationView, private var cont
                         "jhagdfhjgsd"
                     )
                     view.hideProgressbar()
-                    view.validateError(error.message.toString())
+                    view.validateError(context.getString(R.string.error_message))
                 })
         } else {
             view.hideProgressbar()
-            view.validateError(context.getString(R.string.check_internet))
+            view.validateError(context.getString(com.ants.driverpartner.everywhere.R.string.check_internet))
         }
     }
 
-    fun deleteNotification(notification_id: Int) {
+    fun deleteNotification(notification_id: Int, position: Int) {
         view.showProgressbar()
         if (view.checkInternet()) {
 
@@ -100,7 +116,7 @@ class NotificationPresenter(private var view: NotificationView, private var cont
 
             val notification_id = notification_id.toString().toRequestBody(MultipartBody.FORM)
 
-            val userId = Utility.getSharedPreferences(context ,  Constant.USER_ID).let {
+            val userId = Utility.getSharedPreferences(context, Constant.USER_ID).let {
                 it.toString()
                     .toRequestBody(MultipartBody.FORM)
             }
@@ -113,7 +129,7 @@ class NotificationPresenter(private var view: NotificationView, private var cont
 
             headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
 
-            disposable = ApiClient.instance.deleteNotification(headers, notification_id,userId)
+            disposable = ApiClient.instance.deleteNotification(headers, notification_id, userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<NotificationResponse> ->
@@ -127,17 +143,27 @@ class NotificationPresenter(private var view: NotificationView, private var cont
 
                             Log.e(javaClass.simpleName, response.body().toString())
 
+                            if (responseData != null) {
+                                when (responseData.status) {
 
-                            if (responseData!!.status == 1) {
-                                view.onRemoveNotification(responseData)
-                            } else if (responseData.status == 0) {
-                                Log.e(
-                                    javaClass.simpleName + "\tApi output\n\n",
-                                    responseData.status.toString()
-                                )
-                                view.validateError(responseData.message)
-                            } else {
 
+                                    0 -> {
+                                        view.validateError(responseData.message)
+                                    }
+
+                                    1 -> {
+                                        view.onRemoveNotification(responseData, position)
+                                    }
+                                    2 -> {
+
+                                        view.validateError(responseData.message)
+                                    }
+
+
+                                }
+                            }
+                            else {
+                                view.validateError(context.getString(R.string.error_message))
                             }
                         }
                     }
@@ -147,11 +173,11 @@ class NotificationPresenter(private var view: NotificationView, private var cont
                         "jhagdfhjgsd"
                     )
                     view.hideProgressbar()
-                    view.validateError(error.message.toString())
+                    view.validateError(context.getString(R.string.error_message))
                 })
         } else {
             view.hideProgressbar()
-            view.validateError(context.getString(R.string.check_internet))
+            view.validateError(context.getString(com.ants.driverpartner.everywhere.R.string.check_internet))
         }
     }
 }

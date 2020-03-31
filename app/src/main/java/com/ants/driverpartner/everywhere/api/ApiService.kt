@@ -237,13 +237,25 @@ interface ApiService {
     ): Observable<Response<ChangeBookingStatusResponse>>
 
 
+
+
+
     @Multipart
     @POST("getAllNotification")
     fun getNotification(
         @HeaderMap headers: java.util.HashMap<String, String?>,
-        @Part("page_no") pageno: RequestBody,
-        @Part("userid") userId: RequestBody
+        @Part("userid") userId: RequestBody,
+        @Part("page_no") pageId: RequestBody
     ): Observable<Response<NotificationResponse>>
+
+
+//    @Multipart
+//    @POST("getAllNotification")
+//    fun getNotification(
+//        @HeaderMap headers: java.util.HashMap<String, String?>,
+//        @Part("page_no") pageno: RequestBody,
+//        @Part("userid") userId: RequestBody
+//    ): Observable<Response<NotificationResponse>>
 
 
     @POST("validateAppVersion")

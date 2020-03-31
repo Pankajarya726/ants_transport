@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.Home.Homeview
 import com.ants.driverpartner.everywhere.activity.base.BaseMainFragment
 import com.ants.driverpartner.everywhere.activity.packageDetailActivity.PackageDetailActivity
 import com.ants.driverpartner.everywhere.databinding.FragmentNewBookingBinding
@@ -19,7 +20,7 @@ import com.ants.driverpartner.everywhere.utils.DialogUtils
 import com.google.gson.Gson
 
 
-class NewBooking : BaseMainFragment(), NewBookingView, NewBookingAdapter.NewBookingListener {
+class NewBooking(private var view: Homeview) : BaseMainFragment(), NewBookingView, NewBookingAdapter.NewBookingListener {
 
     lateinit var binding: FragmentNewBookingBinding
     private var presenter: NewBookingPresenter? = null

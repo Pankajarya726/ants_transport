@@ -328,7 +328,7 @@ class ApiClient {
     }
 
     fun getNotification(headers: HashMap<String, String?>, pageno: RequestBody, userId: RequestBody):Observable<Response<NotificationResponse>> {
-        return apiService.getNotification(headers, pageno,userId)
+        return apiService.getNotification(headers, userId, pageno)
     }
 
     fun validateAppVersion(headers: HashMap<String, String?>, input: JsonObject):Observable<Response<ValidateAppResponse>> {

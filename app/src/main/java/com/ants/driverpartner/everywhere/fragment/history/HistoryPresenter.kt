@@ -25,7 +25,7 @@ class HistoryPresenter(private var view: HistoryView, private var context: Conte
     fun getBookingHistory() {
 
         if (view.checkInternet()) {
-            Utility.showProgressBar(context)
+            Utility.showDialog(context)
 
 
             var input = JsonObject()
@@ -46,7 +46,7 @@ class HistoryPresenter(private var view: HistoryView, private var context: Conte
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<GetHistroyBookingResponse> ->
-                    Utility.hideProgressbar()
+                    Utility.hideDialog()
 
                     val responseCode = response.code()
                     Log.e(javaClass.simpleName, responseCode.toString())
@@ -81,8 +81,9 @@ class HistoryPresenter(private var view: HistoryView, private var context: Conte
                         javaClass.simpleName + "\tApi output\n\n",
                         "jhagdfhjgsd"
                     )
-                    view.hideProgressbar()
-                    view.validateError(error.message.toString())
+                    Utility.hideDialog()
+                    view.validateError(context.getString(R.string.error_message))
+
                 })
         } else {
             view.validateError(context!!.getString(R.string.check_internet))

@@ -99,4 +99,10 @@ class HistoryFragment(view: Homeview) : BaseMainFragment(), HistoryView,
 
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter!!.onStop()
+    }
+
 }

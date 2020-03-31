@@ -86,16 +86,13 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
             DialogUtils.showSuccessDialog(this, "Please Enter Email")
         } else if (binding.edtMobile.text.trim().toString().isEmpty()) {
             DialogUtils.showSuccessDialog(this, "Please Enter Mobile Number")
+        } else if (binding.edtResidentialAddress.text.trim().toString().isEmpty()) {
+            DialogUtils.showSuccessDialog(this, "Please Residential Address")
+        } else if (binding.edtPostalAddress.text.trim().toString().isEmpty()) {
+            DialogUtils.showSuccessDialog(this, "Please Enter Postal Address")
         } else {
 
-            var jsonInput = JsonObject()
-            jsonInput.addProperty("userid", Utility.getSharedPreferences(this, Constant.USER_ID))
-            jsonInput.addProperty("name", binding.edtName.text.trim().toString())
-            jsonInput.addProperty("mobile", binding.edtMobile.text.trim().toString())
-            jsonInput.addProperty("email", binding.edtEmail.text.trim().toString())
-
-
-//            presenter!!.updateProfile(jsonInput)
+            presenter!!.updateProfile()
 
         }
     }

@@ -3,6 +3,7 @@ package com.ants.driverpartner.everywhere.fragment.newBooking
 import android.content.Context
 import android.util.Log
 import com.ants.driverpartner.everywhere.Constant
+import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.BookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
 import com.ants.driverpartner.everywhere.utils.Utility
@@ -28,7 +29,7 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
         if (view.checkInternet()) {
 
 
-            Utility.showProgressBar(context)
+            Utility.showDialog(context)
 
 
             var input = JsonObject()
@@ -48,7 +49,7 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<GetNewBookingResponse> ->
-                    Utility.hideProgressbar()
+                    Utility.hideDialog()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
@@ -68,15 +69,15 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                                     }
                                 }
                             } else {
-                                view.validateError("Something went wrong!")
+                                view.validateError(context.getString(R.string.error_message))
                             }
 
                         }
                     }
 
                 }, { error ->
-                    Utility.hideProgressbar()
-                    view.validateError(error.message.toString())
+                    Utility.hideDialog()
+                    view.validateError(context.getString(R.string.error_message))
                 })
 
 
@@ -86,10 +87,11 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
     }
 
     fun callAcceptBookingApi(bookingId: Int) {
+
         if (view.checkInternet()) {
 
 
-            Utility.showProgressBar(context)
+            Utility.showDialog(context)
 
 
             var input = JsonObject()
@@ -109,7 +111,7 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<BookingResponse> ->
-                    Utility.hideProgressbar()
+                    Utility.hideDialog()
                     val responseCode = response.code()
                     Log.e(javaClass.simpleName, response.body().toString())
                     when (responseCode) {
@@ -137,22 +139,21 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                     }
 
                 }, { error ->
-                    Utility.hideProgressbar()
-                    view.validateError(error.toString())
+                    Utility.hideDialog()
+                    view.validateError(context.getString(R.string.error_message))
                 })
 
 
         } else {
             view.validateError("Please Check Internet Connection!")
         }
-
     }
 
     fun callDeclineBookingApi(bookingId: Int, position: Int) {
         if (view.checkInternet()) {
 
 
-            Utility.showProgressBar(context)
+            Utility.showDialog(context)
 
 
             var input = JsonObject()
@@ -174,7 +175,7 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<BookingResponse> ->
-                    Utility.hideProgressbar()
+                    Utility.hideDialog()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
@@ -201,8 +202,8 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                     }
 
                 }, { error ->
-                    Utility.hideProgressbar()
-                    view.validateError("Something went wrong! Please try after some time")
+                    Utility.hideDialog()
+                    view.validateError(context.getString(R.string.error_message))
                 })
 
 

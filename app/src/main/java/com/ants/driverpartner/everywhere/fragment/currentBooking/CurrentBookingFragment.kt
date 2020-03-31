@@ -506,4 +506,12 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
     }
 
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter!!.onStop()
+    }
+
+
+
+
 }

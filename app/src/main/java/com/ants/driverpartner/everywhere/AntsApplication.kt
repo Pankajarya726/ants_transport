@@ -30,7 +30,7 @@ class AntsApplication : Application() {
                 val token = task.result?.token
 
                 Log.e(TAG, token!!)
-                Utility.setSharedPreference(applicationContext,Constant.D_TOKEN,token.toString())
+                Utility.setDeviceToken(applicationContext,Constant.D_TOKEN,token.toString())
                 // Log and toast
                 //val msg =  token
               //  Log.e(TAG, msg!!)

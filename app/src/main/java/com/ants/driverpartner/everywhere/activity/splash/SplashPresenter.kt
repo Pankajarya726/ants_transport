@@ -33,7 +33,7 @@ class SplashPresenter(private var view: SplashView, private var context: Context
             var input = JsonObject()
             input.addProperty(
                 "device_token",
-                Utility.getSharedPreferences(
+                Utility.getDeviceToken(
                     context!!, Constant.D_TOKEN
                 ).toString()
             )

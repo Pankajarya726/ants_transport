@@ -39,13 +39,59 @@
         </RelativeLayout>
 
 
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_notification"
             android:layout_width="match_parent"
             android:layout_margin="15sp"
+            android:visibility="gone"
             android:layout_height="wrap_content">
 
         </androidx.recyclerview.widget.RecyclerView>
+
+        <RelativeLayout
+
+            android:background="@color/colorBlackGrey"
+            android:id="@+id/layout_notification"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone">
+
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="No Notification Found"
+                android:textColor="@color/colorWhite"
+                android:textSize="20dp"
+                app:textFontPath="fonts/poppins_regular.otf"/>
+
+            <ImageView
+                android:id="@+id/iv_booking"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_below="@id/tv_1"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/notification_backgroung" />
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_booking"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:textColor="@color/colorAccent"
+                app:textFontPath="fonts/poppins_regular.otf"
+                android:text="if something popup\nwe'llbe sure to let you know" />
+
+
+        </RelativeLayout>
 
 
 

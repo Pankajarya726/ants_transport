@@ -29,7 +29,8 @@ class CurrentPresenter(private var view:Currentview,private var context: Context
         if (view.checkInternet()) {
 
 
-            Utility.showProgressBar(context)
+//            Utility.showProgressBar(context)
+            Utility.showDialog(context)
 
 
             var input = JsonObject()
@@ -49,7 +50,8 @@ class CurrentPresenter(private var view:Currentview,private var context: Context
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<GetCurrentBookingRespone> ->
-                    Utility.hideProgressbar()
+//                    Utility.hideProgressbar()
+                    Utility.hideDialog()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
@@ -76,7 +78,8 @@ class CurrentPresenter(private var view:Currentview,private var context: Context
                     }
 
                 }, { error ->
-                    Utility.hideProgressbar()
+//                    Utility.hideProgressbar()
+                    Utility.hideDialog()
                     view.validateError(error.message.toString())
                 })
 
@@ -92,7 +95,7 @@ class CurrentPresenter(private var view:Currentview,private var context: Context
         if (view.checkInternet()) {
 
 
-            Utility.showProgressBar(context)
+            Utility.showDialog(context)
 
 
             var input = JsonObject()
@@ -124,7 +127,7 @@ class CurrentPresenter(private var view:Currentview,private var context: Context
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<ChangeBookingStatusResponse> ->
-                    Utility.hideProgressbar()
+                    Utility.hideDialog()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
@@ -151,7 +154,7 @@ class CurrentPresenter(private var view:Currentview,private var context: Context
                     }
 
                 }, { error ->
-                    Utility.hideProgressbar()
+                    Utility.hideDialog()
                     view.validateError(error.message.toString())
                 })
 

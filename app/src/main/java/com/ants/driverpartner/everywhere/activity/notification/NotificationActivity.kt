@@ -15,10 +15,11 @@ class NotificationActivity : BaseMainActivity(), NotificationView,
 
     lateinit var binding: ActivityNotificationBinding
 
-    private var currentPage = 1
     var layoutManager: LinearLayoutManager? = null
 
     private var presenter: NotificationPresenter? = null
+
+    private var adapter: NotificationAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +43,6 @@ class NotificationActivity : BaseMainActivity(), NotificationView,
 
     private fun doApiCall() {
 
-
         presenter!!.getNotification()
 
 
@@ -50,35 +50,58 @@ class NotificationActivity : BaseMainActivity(), NotificationView,
 
     override fun validateError(message: String) {
 
-        DialogUtils
-            .showSuccessDialog(this, message)
+        DialogUtils.showSuccessDialog(this, message)
     }
 
     override fun onGetNotification(responseData: NotificationResponse) {
 
         var notificatonList = ArrayList<NotificationResponse.Data.Notification>()
-        for (i in responseData.data.notificationList) {
-            notificatonList.add(i)
 
+
+        if (responseData.data.notificationList.isNotEmpty()) {
+
+
+            binding.rvNotification.visibility = View.VISIBLE
+            binding.layoutNotification.visibility = View.GONE
+
+            for (i in responseData.data.notificationList) {
+                notificatonList.add(i)
+
+            }
+
+            layoutManager = LinearLayoutManager(this)
+            binding.rvNotification.setHasFixedSize(true)
+            binding.rvNotification.setLayoutManager(layoutManager)
+
+            var adapter = NotificationAdapter(notificatonList, this, this)
+            binding.rvNotification.setAdapter(adapter)
+        } else {
+            binding.rvNotification.visibility = View.GONE
+            binding.layoutNotification.visibility = View.VISIBLE
         }
 
-        layoutManager = LinearLayoutManager(this)
-        binding.rvNotification.setHasFixedSize(true)
-        binding.rvNotification.setLayoutManager(layoutManager)
 
-        var adapter = NotificationAdapter(notificatonList, this, this)
-        binding.rvNotification.setAdapter(adapter)
     }
 
     override fun removeNotification(position: Int, item: NotificationResponse.Data.Notification) {
 
-        presenter!!.deleteNotification(item.id)
+        presenter!!.deleteNotification(item.id, position)
 
 
     }
 
-    override fun onRemoveNotification(responseData: NotificationResponse) {
+    override fun onRemoveNotification(responseData: NotificationResponse, position: Int) {
         validateError(responseData.message)
+
+
+        adapter!!.removeItem(position)
+    }
+
+    override fun onFailure(message: String) {
+
+        validateError(message)
+        binding.rvNotification.visibility = View.GONE
+        binding.layoutNotification.visibility = View.VISIBLE
 
     }
 

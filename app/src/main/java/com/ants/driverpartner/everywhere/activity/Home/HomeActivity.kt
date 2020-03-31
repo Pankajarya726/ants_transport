@@ -18,15 +18,18 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.an.customfontview.CustomTextView
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.login.LoginActivity
 import com.ants.driverpartner.everywhere.activity.webView.WebViewActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityHomeBinding
+import com.ants.driverpartner.everywhere.fragment.account.AccountFragment
+import com.ants.driverpartner.everywhere.fragment.contactUs.ContactFragmant
 import com.ants.driverpartner.everywhere.fragment.currentBooking.CurrentBookingFragment
 import com.ants.driverpartner.everywhere.fragment.history.HistoryFragment
 import com.ants.driverpartner.everywhere.fragment.newBooking.NewBooking
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.ScheduleFragment
-import com.ants.driverpartner.everywhere.fragment.account.AccountFragment
-import com.ants.driverpartner.everywhere.fragment.contactUs.ContactFragmant
 import com.ants.driverpartner.everywhere.utils.SnackbarUtils.snackBarBottom
+import com.ants.driverpartner.everywhere.utils.Utility
+import com.ants.driverpartner.everywhere.utils.Utility.hideProgressbar
 
 class HomeActivity : AppCompatActivity(), Homeview {
 
@@ -92,7 +95,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
         when (position) {
             0 -> {
-                newBookingFragment = NewBooking()
+                newBookingFragment = NewBooking(this)
                 fragment = newBookingFragment
                 title = "New Booking"
             }
@@ -208,6 +211,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
     override fun changeFragment(i: Int) {
         replaceFragment(i)
     }
+
     fun replaceFragment(fragment: Fragment, fragmentPosition: String, title: String) {
         setToolbarTitle(title)
         closeNavigationDrawer()
@@ -309,6 +313,19 @@ class HomeActivity : AppCompatActivity(), Homeview {
         setToolbarTitle(s)
     }
 
+
+    override fun logout() {
+
+
+        Utility.clearSharedPreference(this)
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        this.finish()
+
+
+    }
+
     override fun onBackPressed() {
 
         if (drawer!!.isDrawerOpen(Gravity.LEFT)) {
@@ -340,5 +357,14 @@ class HomeActivity : AppCompatActivity(), Homeview {
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Utility.hideDialog()
+        Utility.hideProgressbar()
+        hideProgressbar()
+
+    }
+
 
 }

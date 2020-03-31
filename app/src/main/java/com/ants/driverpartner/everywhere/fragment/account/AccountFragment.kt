@@ -76,12 +76,8 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
 
 
         binding.tvLogout.setOnClickListener(View.OnClickListener {
-            val intent = Intent(activity!!, LoginActivity::class.java)
-            startActivity(intent)
 
-            Utility.clearSharedPreference(activity!!.applicationContext)
-
-            activity!!.finish()
+            logout()
 
         })
 
@@ -230,6 +226,20 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
 
     override fun validateError(message: String) {
         DialogUtils.showSuccessDialog(activity!!, message)
+    }
+
+    fun logout() {
+
+        DialogUtils.showLogoutDialog(
+            activity!!,
+            "Are you sure, you want to logout?",
+            object : DialogUtils.CustomDialogClick {
+                override fun onOkClick() {
+                   view.logout()
+
+                }
+            })
+
     }
 
 }

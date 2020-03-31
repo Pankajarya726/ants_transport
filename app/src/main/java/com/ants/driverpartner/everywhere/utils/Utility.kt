@@ -8,23 +8,32 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.ants.driverpartner.everywhere.Constant
-import com.google.android.material.snackbar.Snackbar
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
 object Utility {
     private val ANTS = "ANTS"
+    private val DEVICE_TOKEN = "DEVICE_TOKEN"
     private var sentToSettings = false
     var progressDialog: ProgressDialog? = null
     private var builder: AlertDialog.Builder? = null
     private var dialog: AlertDialog? = null
+
+    fun setDeviceToken(context: Context, name: String, value: String) {
+        val settings = context.getSharedPreferences(DEVICE_TOKEN, 0)
+        val editor = settings.edit()
+        editor.putString(name, value)
+        editor.commit()
+    }
+
+    fun getDeviceToken(context: Context, name: String): String? {
+        val settings = context.getSharedPreferences(DEVICE_TOKEN, 0)
+        return settings.getString(name, "")
+    }
 
     fun setSharedPreference(context: Context, name: String, value: String) {
         val settings = context.getSharedPreferences(ANTS, 0)
@@ -78,10 +87,6 @@ object Utility {
     }
 
 
-
-
-
-
     fun isNetworkConnected(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -91,7 +96,6 @@ object Utility {
         return isConnected
 
     }
-
 
 
     fun checkProfilePermissions(context: Context): Boolean {
@@ -105,16 +109,19 @@ object Utility {
 
     }
 
-    fun showProgressDialog(context: Context?, message: String) {
+    fun showDialog(context: Context?) {
         if (progressDialog == null) {
             progressDialog = ProgressDialog(context)
         }
 
-        progressDialog!!.setMessage(message)
-        progressDialog!!.setCancelable(false)
+        progressDialog!!.setMessage("Please Wait...")
+        progressDialog!!.setCancelable(true)
         progressDialog!!.show()
     }
 
+    fun hideDialog() {
+        progressDialog!!.dismiss()
+    }
 
 
     fun log(tag: String, message: String) {
@@ -123,8 +130,6 @@ object Utility {
 
 
     fun showProgressBar(context: Context) {
-
-
         if (dialog == null) {
             builder = AlertDialog.Builder(context)
             builder!!.setCancelable(false) // if you want user to wait for some process to finish,

@@ -10,13 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.databinding.RowNotificationBinding
 
-class NotificationAdapter(notificationList: ArrayList<NotificationResponse.Data.Notification>, context: Context, listner:NotificaionClickListener) :
-    RecyclerView.Adapter<NotificationAdapter.ViewHolder>()  {
+class NotificationAdapter(
+    notificationList: ArrayList<NotificationResponse.Data.Notification>,
+    context: Context,
+    listner: NotificaionClickListener
+) :
+    RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
 
     var notificationList = notificationList
 
-    var listener  = listner
+    var listener = listner
     private var context = context
 
     lateinit var notificationBinding: RowNotificationBinding
@@ -26,7 +30,12 @@ class NotificationAdapter(notificationList: ArrayList<NotificationResponse.Data.
         viewType: Int
     ): NotificationAdapter.ViewHolder {
 
-        notificationBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.row_notification,parent,false)
+        notificationBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(context),
+            R.layout.row_notification,
+            parent,
+            false
+        )
 
 
         return ViewHolder(notificationBinding)
@@ -34,7 +43,7 @@ class NotificationAdapter(notificationList: ArrayList<NotificationResponse.Data.
     }
 
     override fun getItemCount(): Int {
-        return  notificationList.size
+        return notificationList.size
     }
 
     override fun onBindViewHolder(holder: NotificationAdapter.ViewHolder, position: Int) {
@@ -48,22 +57,29 @@ class NotificationAdapter(notificationList: ArrayList<NotificationResponse.Data.
         holder.binding.tvDate.setText(item.createdAt)
         holder.binding.ivClose.setOnClickListener(View.OnClickListener {
 
-            listener.removeNotification(position,item)
+            listener.removeNotification(position, item)
 
         })
 
 
     }
 
+    fun removeItem(position: Int) {
+
+        notificationList.removeAt(position)
+        notifyDataSetChanged()
+
+    }
 
 
-    class  ViewHolder(itemRowBinding: RowNotificationBinding) : RecyclerView.ViewHolder(itemRowBinding.root){
+    class ViewHolder(itemRowBinding: RowNotificationBinding) :
+        RecyclerView.ViewHolder(itemRowBinding.root) {
 
         var binding = itemRowBinding
 
     }
 
-    interface NotificaionClickListener{
+    interface NotificaionClickListener {
         fun removeNotification(
             position: Int,
             item: NotificationResponse.Data.Notification

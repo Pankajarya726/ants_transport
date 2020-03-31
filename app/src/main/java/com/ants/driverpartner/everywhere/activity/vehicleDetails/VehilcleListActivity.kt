@@ -5,16 +5,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.afollestad.materialdialogs.util.DialogUtils
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.VehicleActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityVehilcleListBinding
+import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.gson.Gson
-import java.util.ArrayList
+import java.util.*
 
-class VehilcleListActivity : BaseMainActivity(), VehicleListView,VehicleListAdapter.VehicleClickListner {
+class VehilcleListActivity : BaseMainActivity(), VehicleListView,
+    VehicleListAdapter.VehicleClickListner {
 
 
     lateinit var binding: ActivityVehilcleListBinding
@@ -31,7 +32,6 @@ class VehilcleListActivity : BaseMainActivity(), VehicleListView,VehicleListAdap
         init()
 
 
-
     }
 
 
@@ -39,13 +39,20 @@ class VehilcleListActivity : BaseMainActivity(), VehicleListView,VehicleListAdap
 
         presenter!!.callVehicleListApi()
 
+        var type = Utility.getSharedPreferences(this, Constant.ACCOUNT_TYPE)
+
+        if (type.equals(Constant.DRIVER)) {
+            binding.imgAdd.visibility = View.GONE
+        }
+
+
         binding.back.setOnClickListener(View.OnClickListener {
             onBackPressed()
         })
 
         binding.imgAdd.setOnClickListener(View.OnClickListener {
-            val intent =Intent(this,VehicleActivity::class.java)
-            intent.putExtra(Constant.ADDING_VEHICLE,Constant.ADDING_VEHICLE)
+            val intent = Intent(this, VehicleActivity::class.java)
+            intent.putExtra(Constant.ADDING_VEHICLE, Constant.ADDING_VEHICLE)
             startActivity(intent)
         })
 
@@ -53,21 +60,19 @@ class VehilcleListActivity : BaseMainActivity(), VehicleListView,VehicleListAdap
 
     override fun onGetVehicleList(responseData: GetVehicleListResponse) {
 
-        if(responseData.data.isNotEmpty()){
+        if (responseData.data.isNotEmpty()) {
 
             vehicleList.clear()
 
-            for (data in responseData.data){
+            for (data in responseData.data) {
                 vehicleList.add(data)
             }
 
             binding.rvVehicleList.layoutManager = LinearLayoutManager(this)
             binding.rvVehicleList.hasFixedSize()
-            var adapter = VehicleListAdapter(vehicleList,this,this)
+            var adapter = VehicleListAdapter(vehicleList, this, this)
             binding.rvVehicleList.adapter = adapter
             adapter.notifyDataSetChanged()
-
-
 
 
         }
@@ -86,7 +91,6 @@ class VehilcleListActivity : BaseMainActivity(), VehicleListView,VehicleListAdap
         startActivity(intent)
 
 
-
     }
 
     override fun onDeleteClick(data: GetVehicleListResponse.Data, position: Int) {
@@ -94,10 +98,11 @@ class VehilcleListActivity : BaseMainActivity(), VehicleListView,VehicleListAdap
 
 
     }
+
     override fun validateError(message: String) {
 
 
-        com.ants.driverpartner.everywhere.utils.DialogUtils.showSuccessDialog(this,message)
+        com.ants.driverpartner.everywhere.utils.DialogUtils.showSuccessDialog(this, message)
 
     }
 
@@ -106,6 +111,7 @@ class VehilcleListActivity : BaseMainActivity(), VehicleListView,VehicleListAdap
         super.onBackPressed()
         this.finish()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter!!.onStop()

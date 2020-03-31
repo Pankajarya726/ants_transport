@@ -260,6 +260,7 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center|left"
                     android:text="Payment Status"
+                    android:visibility="gone"
                     android:textColor="@color/colorBlack"
                     android:textSize="16sp"
                     app:textFontPath="fonts/poppins_regular.otf" />
@@ -275,6 +276,7 @@
                     android:gravity="center|left"
                     android:textColor="@color/colorAccent"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView

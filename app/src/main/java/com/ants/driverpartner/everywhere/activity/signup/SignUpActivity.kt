@@ -408,7 +408,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             )
             json.addProperty(
                 "device_token",
-                Utility.getSharedPreferences(this,Constant.D_TOKEN)
+                Utility.getDeviceToken(this,Constant.D_TOKEN)
             )
             presenter!!.signupApi(json)
             Log.e("Input JsonObject", json.toString())

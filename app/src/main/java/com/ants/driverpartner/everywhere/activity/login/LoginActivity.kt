@@ -11,6 +11,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.ants.driverpartner.everywhere.AntsApplication
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.Home.HomeActivity
@@ -160,7 +161,8 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
             input.addProperty("email", binding.edtEmail.text.toString().trim())
             input.addProperty("password", binding.edtPassword.text.toString())
             input.addProperty("device_type", 1)
-            input.addProperty("device_token", Utility.getSharedPreferences(this,Constant.D_TOKEN))
+            input.addProperty("device_token", Utility.getDeviceToken(this, Constant.D_TOKEN))
+
 
             presenter!!.login(input)
         }
@@ -178,9 +180,14 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
         Utility.setSharedPreference(this, Constant.EMAIL, responseData.data.email)
         Utility.setSharedPreference(this, Constant.MOBILE, responseData.data.mobile)
         Utility.setSharedPreference(this, Constant.NAME, responseData.data.name)
-        Utility.setSharedPreference(this, Constant.PROFILE_IMAGE_URL, responseData.data.profileImage)
+        Utility.setSharedPreference(
+            this,
+            Constant.PROFILE_IMAGE_URL,
+            responseData.data.profileImage
+        )
         Utility.setSharedPreference(this, Constant.S_TOKEN, responseData.data.stoken)
-        Utility.setSharedPreference(this,Constant.API_KEY, responseData.data.stoken)
+        Utility.setSharedPreference(this, Constant.API_KEY, responseData.data.stoken)
+
 
         Utility.setSharedPreference(
             this,
@@ -214,7 +221,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
         var intent = Intent(applicationContext, DriverDocActivity::class.java)
 
-        intent.putExtra(Constant.ADDING_DRIVER,"")
+        intent.putExtra(Constant.ADDING_DRIVER, "")
         when (accountType) {
             1 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
             2 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
@@ -226,9 +233,12 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
     private fun gotoHomeActivity() {
 
+
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         this.finish()
+
+
 
 
 
@@ -241,7 +251,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
     private fun gotoVehicleActivity(accountType: Int) {
         var intent = Intent(applicationContext, VehicleActivity::class.java)
-        intent.putExtra(Constant.ADDING_VEHICLE,"")
+        intent.putExtra(Constant.ADDING_VEHICLE, "")
         startActivity(intent)
     }
 
@@ -259,5 +269,6 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
 
     }
+
 
 }

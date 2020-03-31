@@ -96,8 +96,9 @@ class ScheduleFragment(private var view: Homeview) : BaseMainFragment(), Schedul
 
 
     override fun onFailure(message: String) {
-        DialogUtils.showSuccessDialog(activity!!,message)
+        DialogUtils.showSuccessDialog(activity!!, message)
     }
+
     override fun onGetScheduleBooking(responseData: ScheduleBookingResponse) {
         if (responseData.data.isNotEmpty()) {
 
@@ -123,6 +124,11 @@ class ScheduleFragment(private var view: Homeview) : BaseMainFragment(), Schedul
         com.ants.driverpartner.everywhere.utils.DialogUtils.showSuccessDialog(activity!!, message)
         binding.rlScheduleBooking.visibility = View.VISIBLE
         binding.rvScheduleBooking.visibility = View.GONE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter!!.onStop()
     }
 
 
