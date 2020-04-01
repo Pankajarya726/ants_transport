@@ -62,6 +62,8 @@ class DriverListActivity : BaseMainActivity(), DriverListView, DriverListAdapter
 
         val intent = Intent(this, DriverDocActivity::class.java)
         intent.putExtra(Constant.ADDING_DRIVER, Constant.ADDING_DRIVER)
+        intent.putExtra(Constant.PROFILE_TYPE,Constant.OWNER)
+
         startActivity(intent)
     }
 

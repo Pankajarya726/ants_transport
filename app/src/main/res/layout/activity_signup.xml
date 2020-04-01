@@ -24,7 +24,7 @@
                 android:layout_height="20dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
-                android:src="@drawable/back_icon" />
+                android:src="@drawable/arrow_back" />
 
             <com.an.customfontview.CustomTextView
                 android:id="@+id/tv_title"
@@ -222,7 +222,7 @@
                         android:layout_marginRight="50dp"
                         android:background="@color/colorWhite"
                         android:gravity="center|left"
-                        android:hint="Confirm Password"
+                        android:hint="Enter Confirm Password"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:paddingLeft="10dp"

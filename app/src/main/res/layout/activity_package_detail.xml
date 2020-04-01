@@ -36,7 +36,7 @@
                     android:layout_centerInParent="true"
                     android:text="@string/package_detail"
                     android:textColor="@color/colorBlack"
-                    android:textSize="25dp"
+                    android:textSize="20sp"
                     app:textFontPath="fonts/poppins_regular.otf">
 
                 </com.an.customfontview.CustomTextView>

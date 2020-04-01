@@ -106,7 +106,12 @@ class NewBooking(private var view: Homeview) : BaseMainFragment(), NewBookingVie
     }
 
     override fun onAcceptBooking(responseData: BookingResponse) {
-        DialogUtils.showSuccessDialog(activity!!, responseData.message)
+        DialogUtils.showCustomAlertDialog(activity!!, responseData.message,object :DialogUtils.CustomDialogClick{
+            override fun onOkClick() {
+
+                view.changeFragment(2)
+            }
+        })
 
     }
 

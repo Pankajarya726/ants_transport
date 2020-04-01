@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Transporter</string>
-<!--    <string name="app_name">Ant Driver</string>-->
+    <!--    <string name="app_name">Ant Driver</string>-->
 
     <string name="sign_up"><u> Sign Up</u></string>
     <string name="sign_in"><u> Sign In</u></string>
@@ -35,10 +35,10 @@
     <string name="reset_password">Reset Password</string>
     <string name="notification">Notification</string>
 
-    <string name="abount_ants">Abount ants</string>
-    <string name="contact_ants">Contact ants</string>
+    <string name="abount_ants">About Ants</string>
+    <string name="contact_ants">Contact Ants</string>
     <string name="faq">FAQ</string>
-    <string name="term_condition">Term &amp; Condition</string>
+    <string name="term_condition">Terms &amp; Condition</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="no">No</string>
 
@@ -51,7 +51,7 @@
     <string name="residential_address">Residential Address</string>
     <string name="gross_vehicle_mass">Gross Vehicle Mass</string>
     <string name="vehicle_registration_number">Vehicle Registration Number</string>
-    <string name="vehicle_identifaction_number">Vehicle Indification Number</string>
+    <string name="vehicle_identifaction_number">Vehicle Identification Number</string>
     <string name="assign_this_vehicle_to">Assign this Vehicle to</string>
     <string name="address2">Indore</string>
     <string name="package_detail">Package Detail</string>

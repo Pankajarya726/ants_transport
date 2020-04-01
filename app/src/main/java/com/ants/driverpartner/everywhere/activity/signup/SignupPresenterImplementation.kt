@@ -47,28 +47,36 @@ class SignupPresenterImplementation(
                             Log.e(javaClass.simpleName, response.body().toString())
 
 
-                            if (responseData != null) {
-                                Log.e(javaClass.simpleName, responseData.status.toString())
-                            }
 
-                            if (responseData!!.status == 1) {
-                                mainView.onRegisterSuccess(responseData)
+
+                            if (responseData != null) {
+                                when (responseData.status) {
+
+                                    0 -> {
+                                        mainView.validateError(responseData.message)
+                                    }
+                                    1 -> {
+                                        mainView.onRegisterSuccess(responseData)
+                                    }
+                                    2 -> {
+                                        mainView.validateError(responseData.message)
+                                    }
+
+
+                                }
+
+
+                                Log.e(javaClass.simpleName, responseData.status.toString())
                             } else {
-                                Log.e(
-                                    javaClass.simpleName + "\tApi output\n\n",
-                                    responseData.status.toString()
-                                )
-                                mainView.validateError(responseData.message)
+                                mainView.validateError(context!!.getString(R.string.error_message))
+
                             }
                         }
                     }
                 }, { error ->
-                    Log.e(
-                        javaClass.simpleName + "\tApi output\n\n",
-                        "jhagdfhjgsd"
-                    )
+
                     mainView.hideProgressbar()
-                    mainView.validateError(error.message.toString())
+                    mainView.validateError(context!!.getString(R.string.error_message))
                 })
         } else {
             mainView.hideProgressbar()
@@ -84,8 +92,9 @@ class SignupPresenterImplementation(
             Log.e("Internet Connection", mainView.checkInternet().toString())
             val type = RequestBody.create(MultipartBody.FORM, Constant.PROFILE)
 
-            val userId = Utility.getSharedPreferences(mainView.getContext(),Constant.USER_ID).let {
-                RequestBody.create(MultipartBody.FORM,
+            val userId = Utility.getSharedPreferences(mainView.getContext(), Constant.USER_ID).let {
+                RequestBody.create(
+                    MultipartBody.FORM,
                     it.toString()
                 )
             }

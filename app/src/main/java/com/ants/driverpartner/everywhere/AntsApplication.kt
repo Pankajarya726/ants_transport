@@ -4,15 +4,13 @@ import android.app.Application
 import android.util.Log
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
 
 class AntsApplication : Application() {
-    private val  TAG = javaClass.simpleName
+    private val TAG = javaClass.simpleName
 
     override fun onCreate() {
         super.onCreate()
-//        FirebaseApp.initializeApp(this);
         genrateFirbaseToken()
     }
 
@@ -30,11 +28,8 @@ class AntsApplication : Application() {
                 val token = task.result?.token
 
                 Log.e(TAG, token!!)
-                Utility.setDeviceToken(applicationContext,Constant.D_TOKEN,token.toString())
-                // Log and toast
-                //val msg =  token
-              //  Log.e(TAG, msg!!)
-                //Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                Utility.setDeviceToken(applicationContext, Constant.D_TOKEN, token.toString())
+
             })
 
     }

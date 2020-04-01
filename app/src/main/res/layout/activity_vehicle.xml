@@ -310,7 +310,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="false"
                         android:layout_alignParentTop="true"
-                        android:text="Upload Picture Proof of Insurence"
+                        android:text="Upload Picture Proof of insurance"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
                         app:textFontPath="fonts/poppins_regular.otf" />

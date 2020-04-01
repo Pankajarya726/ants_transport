@@ -349,6 +349,16 @@ class ApiClient {
         return apiService.updateProfile(headers,input)
     }
 
+    fun callChangePasswrodApi(
+        headers: java.util.HashMap<String, String?>,
+        userId: RequestBody,
+        oldPassword: RequestBody,
+        newPassword: RequestBody
+    ):  Observable<Response<VerifyOtpResponse>> {
+        return apiService.callChangePasswrodApi(headers, userId,oldPassword,newPassword)
+    }
+
+
 
 //    fun doValidateAppVersionApi(
 //        input: JsonObject

@@ -132,7 +132,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
             5 -> {
                 fragment = ContactFragmant(this)
                 var page_id = 13
-                title = "Contact ants"
+                title = "Contact Ants"
                 isActivityRefreshed = true
             }
 
@@ -360,8 +360,6 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
     override fun onDestroy() {
         super.onDestroy()
-        Utility.hideDialog()
-        Utility.hideProgressbar()
         hideProgressbar()
 
     }

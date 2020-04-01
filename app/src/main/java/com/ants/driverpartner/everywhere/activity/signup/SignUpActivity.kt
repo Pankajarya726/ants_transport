@@ -358,7 +358,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             binding.edtMobile.setError("Invalid Mobile Number")
         } else if (binding.edtEmail.text.toString().trim().isEmpty()) {
             showSuccessDialog(this, "Enter Email")
-            binding.edtMobile.setError("Enter Email")
+            binding.edtEmail.setError("Enter Email")
         } else if (!Utility.emailValidator(binding.edtEmail.text.toString().trim())) {
             showSuccessDialog(this, "Invalid Email")
             binding.edtEmail.setError("Invalid Email")
@@ -366,8 +366,8 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             SnackbarUtils.snackBarBottom(binding.edtName, "Enter Password")
             binding.edtPassword.setError("Enter Password")
         } else if (binding.edtComfirmPassword.text.toString().isEmpty()) {
-            showSuccessDialog(this, "Enter Password")
-            binding.edtPassword.setError("Enter Password")
+            showSuccessDialog(this, "Enter Confirm Password")
+            binding.edtComfirmPassword.setError("Enter Confirm Password")
         } else if (!binding.edtComfirmPassword.text.toString().equals(binding.edtPassword.text.toString())) {
             showSuccessDialog(this, "Password not match")
             binding.edtComfirmPassword.setError("Password not match")
@@ -398,7 +398,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             when (title) {
                 Constant.OWNER ->
                     json.addProperty("account_type", "1")
-                Constant.PARTNER ->
+                Constant.DRIVER ->
                     json.addProperty("account_type", "2")
             }
 
@@ -408,7 +408,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             )
             json.addProperty(
                 "device_token",
-                Utility.getDeviceToken(this,Constant.D_TOKEN)
+                Utility.getDeviceToken(this, Constant.D_TOKEN)
             )
             presenter!!.signupApi(json)
             Log.e("Input JsonObject", json.toString())
@@ -460,7 +460,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     override fun onImageUploadSuccess(responseData: UploadImageResponse) {
         //Toast.makeText(applicationContext, responseData.message, Toast.LENGTH_LONG).show()
 
-        showCustomAlertDialog(this,"You fave successfully registered", object : DialogUtils.CustomDialogClick {
+        showCustomAlertDialog(this, responseData.message, object : DialogUtils.CustomDialogClick {
             override fun onOkClick() {
                 gotoDocumentActivity()
             }
@@ -468,9 +468,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
         })
 
 
-
     }
-
 
 
     private fun gotoDocumentActivity() {

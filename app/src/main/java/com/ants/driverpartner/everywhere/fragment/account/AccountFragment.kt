@@ -96,8 +96,10 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
 
             getString(R.string.driver_information) -> {
                 val intent = Intent(activity!!, DriverListActivity::class.java)
+
                 startActivity(intent)
             }
+
             getString(R.string.vehicle_information) -> {
                 val intent = Intent(activity!!, VehilcleListActivity::class.java)
                 startActivity(intent)
@@ -113,9 +115,22 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
             }
 
             getString(R.string.abount_ants) -> {
-//                val intent = Intent(activity, WebVeiwActivity::class.java)
-//                intent.putExtra(Constant.WEB_URL, "http://dev.tekzee.in/Ants/get_staticPage/20/2")
-//                startActivity(intent)
+
+                var title = getString(R.string.abount_ants)
+                var page_id = 20
+
+                val intent = Intent(activity!!, WebViewActivity::class.java)
+                intent.putExtra(Constant.WEB_VIEW_TITLE, title)
+                intent.putExtra(Constant.WEB_VIEW_PAGE_ID, page_id)
+
+                startActivity(intent)
+            }
+
+            getString(R.string.contact_ants)->{
+
+
+                view.changeFragment(5)
+
             }
 
 

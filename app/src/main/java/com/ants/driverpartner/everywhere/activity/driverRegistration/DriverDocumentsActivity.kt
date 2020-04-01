@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -31,10 +30,11 @@ import com.asksira.bsimagepicker.Utils
 import com.bumptech.glide.Glide
 import java.io.File
 
-class DriverDocumentsActivity : BaseMainActivity(),DriverDocumentView , BSImagePicker.OnSingleImageSelectedListener{
+class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
+    BSImagePicker.OnSingleImageSelectedListener {
 
 
-    lateinit var binding :ActivityDriverDocumentsBinding
+    lateinit var binding: ActivityDriverDocumentsBinding
     private var presenter: DriverDocumentsPresenter? = null
     private var sentToSettings = false
     private var upload_type: String? = null
@@ -53,10 +53,10 @@ class DriverDocumentsActivity : BaseMainActivity(),DriverDocumentView , BSImageP
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this , R.layout.activity_driver_documents)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_driver_documents)
 
 
-
+        presenter = DriverDocumentsPresenter(this, this)
         title = intent.getStringExtra(Constant.PROFILE_TYPE)
 
 
@@ -109,26 +109,26 @@ class DriverDocumentsActivity : BaseMainActivity(),DriverDocumentView , BSImageP
 
         if (file_id_front == null) {
 
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
 
         } else if (file_id_back == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_licence_front == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_licence_back == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_home_address == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_ownership == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_bank_letter == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_bank_statement == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else {
             val intent = Intent(applicationContext, VehicleActivity::class.java)
-            intent.putExtra(Constant.ADDING_VEHICLE,"")
-            intent.putExtra(Constant.PROFILE_TYPE,title)
+            intent.putExtra(Constant.ADDING_VEHICLE, "")
+            intent.putExtra(Constant.PROFILE_TYPE, title)
             startActivity(intent)
         }
     }
@@ -136,7 +136,7 @@ class DriverDocumentsActivity : BaseMainActivity(),DriverDocumentView , BSImageP
 
     override fun validateError(message: String) {
 
-        DialogUtils.showSuccessDialog(this,message)
+        DialogUtils.showSuccessDialog(this, message)
     }
 
     private fun uploadDocument(uploadType: String) {
@@ -434,7 +434,7 @@ class DriverDocumentsActivity : BaseMainActivity(),DriverDocumentView , BSImageP
 
                 this.file_ownership = File(uri.path)
 
-                presenter!!.uploadDocument(Constant.UploadType.OWNERSHIP, file_ownership!!)
+                presenter!!.uploadDocument("owner_license_document", file_ownership!!)
 
             }
         }

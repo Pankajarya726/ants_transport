@@ -86,6 +86,8 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
             DialogUtils.showSuccessDialog(this, "Please Enter Email")
         } else if (binding.edtMobile.text.trim().toString().isEmpty()) {
             DialogUtils.showSuccessDialog(this, "Please Enter Mobile Number")
+        }  else if (binding.edtMobile.text.trim().toString().length!=10) {
+            DialogUtils.showSuccessDialog(this, "Please Enter Valid Mobile Number")
         } else if (binding.edtResidentialAddress.text.trim().toString().isEmpty()) {
             DialogUtils.showSuccessDialog(this, "Please Residential Address")
         } else if (binding.edtPostalAddress.text.trim().toString().isEmpty()) {

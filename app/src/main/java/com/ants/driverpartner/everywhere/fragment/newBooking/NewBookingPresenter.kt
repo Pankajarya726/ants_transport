@@ -29,8 +29,9 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
         if (view.checkInternet()) {
 
 
-            Utility.showDialog(context)
+//            Utility.showDialog(context)
 
+            view.showProgressbar()
 
             var input = JsonObject()
             input.addProperty(
@@ -49,7 +50,8 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<GetNewBookingResponse> ->
-                    Utility.hideDialog()
+                    //                    Utility.hideDialog()
+                    view.hideProgressbar()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
@@ -76,7 +78,8 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                     }
 
                 }, { error ->
-                    Utility.hideDialog()
+                    view.hideProgressbar()
+//                    Utility.hideDialog()
                     view.validateError(context.getString(R.string.error_message))
                 })
 
@@ -91,8 +94,8 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
         if (view.checkInternet()) {
 
 
-            Utility.showDialog(context)
-
+//            Utility.showDialog(context)
+            view.showProgressbar()
 
             var input = JsonObject()
             input.addProperty(
@@ -111,7 +114,8 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<BookingResponse> ->
-                    Utility.hideDialog()
+                    //                    Utility.hideDialog()
+                    view.hideProgressbar()
                     val responseCode = response.code()
                     Log.e(javaClass.simpleName, response.body().toString())
                     when (responseCode) {
@@ -139,7 +143,8 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                     }
 
                 }, { error ->
-                    Utility.hideDialog()
+                    view.hideProgressbar()
+//                    Utility.hideDialog()
                     view.validateError(context.getString(R.string.error_message))
                 })
 
@@ -153,8 +158,8 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
         if (view.checkInternet()) {
 
 
-            Utility.showDialog(context)
-
+//            Utility.showDialog(context)
+            view.showProgressbar()
 
             var input = JsonObject()
             input.addProperty(
@@ -175,7 +180,8 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<BookingResponse> ->
-                    Utility.hideDialog()
+                    view.hideProgressbar()
+//                    Utility.hideDialog()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
@@ -202,7 +208,8 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                     }
 
                 }, { error ->
-                    Utility.hideDialog()
+                    view.hideProgressbar()
+//                    Utility.hideDialog()
                     view.validateError(context.getString(R.string.error_message))
                 })
 

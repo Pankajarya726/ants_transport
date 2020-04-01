@@ -237,9 +237,6 @@ interface ApiService {
     ): Observable<Response<ChangeBookingStatusResponse>>
 
 
-
-
-
     @Multipart
     @POST("getAllNotification")
     fun getNotification(
@@ -285,6 +282,16 @@ interface ApiService {
         @HeaderMap headers: java.util.HashMap<String, String?>,
         @Body input: JsonObject
     ): Observable<Response<UpdateProfileResponse>>
+
+
+    @Multipart
+    @POST("changePassword")
+    fun callChangePasswrodApi(
+        @HeaderMap headers: HashMap<String, String?>,
+        @Part ("userid")userId: RequestBody,
+        @Part("old_password") oldPassword: RequestBody,
+        @Part("new_password") newPassword: RequestBody
+    ):Observable<Response<VerifyOtpResponse>>
 
 
 //    @Multipart

@@ -1,6 +1,7 @@
 package com.ants.driverpartner.everywhere.activity.base
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,20 +12,25 @@ import com.ants.driverpartner.everywhere.utils.Utility
 
 abstract class BaseMainFragment:Fragment(),BaseMainView {
 
-    var progressDialog: ProgressBar? = null
+//    var progressDialog: ProgressBar? = null
     lateinit var mActivity: Activity
 
     private var builder: AlertDialog.Builder? = null
     private var dialog: AlertDialog? = null
+     var progressDialog: ProgressDialog?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         mActivity = this.getActivity()!!
-        builder = AlertDialog.Builder(this.context!!)
-        builder!!.setCancelable(false) // if you want user to wait for some process to finish,
-        builder!!.setView(com.ants.driverpartner.everywhere.R.layout.layout_loading_dialog)
-        dialog = builder!!.create()
+//        builder = AlertDialog.Builder(this.context!!)
+//        builder!!.setCancelable(true) // if you want user to wait for some process to finish,
+//        builder!!.setView(com.ants.driverpartner.everywhere.R.layout.layout_loading_dialog)
+//        dialog = builder!!.create
+
+//        progressDialog = ProgressDialog(context)
+//        progressDialog!!.setMessage("Please wait...")
+//        progressDialog!!.setCancelable(false)
     }
 
     override fun onDestroy() {
@@ -34,16 +40,22 @@ abstract class BaseMainFragment:Fragment(),BaseMainView {
 
     override fun showProgressbar() {
 
-        Log.e(javaClass.simpleName, "Showing Alert Dialog1")
-        hideKeyboard()
-
-        if (dialog == null) {
-            builder = AlertDialog.Builder(this.context!!)
-            builder!!.setCancelable(false) // if you want user to wait for some process to finish,
-            builder!!.setView(com.ants.driverpartner.everywhere.R.layout.layout_loading_dialog)
-            dialog = builder!!.create()
+        if(progressDialog==null){
+            progressDialog = ProgressDialog(context)
+            progressDialog!!.setMessage("Please wait...")
+            progressDialog!!.setCancelable(false)
         }
-        dialog!!.show()
+
+
+        progressDialog!!.show()
+
+//        if (dialog == null) {
+//            builder = AlertDialog.Builder(this.context!!)
+//            builder!!.setCancelable(true) // if you want user to wait for some process to finish,
+//            builder!!.setView(com.ants.driverpartner.everywhere.R.layout.layout_loading_dialog)
+//            dialog = builder!!.create()
+//        }
+//        dialog!!.show()
 
 
 //        builder = AlertDialog.Builder(mActivity)
@@ -60,8 +72,10 @@ abstract class BaseMainFragment:Fragment(),BaseMainView {
 
     override fun hideProgressbar() {
         Log.e(javaClass.simpleName, "Dismiss Alert Dialog")
-        Log.e(javaClass.simpleName, dialog!!.isShowing.toString())
-        dialog!!.dismiss()
+//        Log.e(javaClass.simpleName, dialog!!.isShowing.toString())
+//        dialog!!.dismiss()
+
+        progressDialog!!.dismiss()
     }
 
     override fun checkInternet(): Boolean {

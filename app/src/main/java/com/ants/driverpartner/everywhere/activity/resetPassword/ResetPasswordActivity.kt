@@ -2,6 +2,7 @@ package com.ants.driverpartner.everywhere.activity.resetPassword
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
@@ -29,6 +30,8 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
 
         binding.btnSubmit.setOnClickListener(this)
         binding.imgBack.setOnClickListener(this)
+        binding.imgConfirmPassword.setOnClickListener(this)
+        binding.imgPassword.setOnClickListener(this)
 
     }
 
@@ -48,6 +51,30 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
             R.id.img_back -> {
                 onBackPressed()
             }
+
+
+            R.id.img_password -> {
+                if (binding.edtPassword.transformationMethod == null) {
+                    binding.edtPassword.transformationMethod = PasswordTransformationMethod()
+                    binding.imgPassword.setImageResource(R.drawable.eye_grey)
+
+                } else {
+                    binding.edtPassword.transformationMethod = null
+                    binding.imgPassword.setImageResource(R.drawable.eye_green)
+                }
+            }
+
+            R.id.img__confirm_password -> {
+                if (binding.edtConfirmPassword.transformationMethod == null) {
+                    binding.edtConfirmPassword.transformationMethod = PasswordTransformationMethod()
+                    binding.imgConfirmPassword.setImageResource(R.drawable.eye_grey)
+
+                } else {
+                    binding.edtConfirmPassword.transformationMethod = null
+                    binding.imgConfirmPassword.setImageResource(R.drawable.eye_green)
+                }
+            }
+
         }
     }
 
@@ -55,9 +82,9 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
 
         if (isForgotPass) {
             if (binding.edtConfirmPassword.text.toString().isEmpty()) {
-                DialogUtils.showSuccessDialog(this, "Please Enter Cunfirm Password")
-            } else if (getNewPassword() != binding.edtConfirmPassword.text.toString()) {
-                DialogUtils.showSuccessDialog(this, "Password not Match")
+                DialogUtils.showSuccessDialog(this, "Please Enter Confirm Password")
+            } else if (!getNewPassword().equals(binding.edtConfirmPassword.text.toString())) {
+                DialogUtils.showSuccessDialog(this, "Confirm Password not Match")
             } else {
                 presenter!!.callResetPasswrodApi()
             }
@@ -68,13 +95,11 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
             } else if (getNewPassword().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Please Enter the New Password")
             } else if (binding.edtConfirmPassword.text.toString().isEmpty()) {
-                DialogUtils.showSuccessDialog(this, "Please Enter Cunfirm Password")
-            } else if (getNewPassword() != binding.edtConfirmPassword.text.toString()) {
-                DialogUtils.showSuccessDialog(this, "Password not Match")
+                DialogUtils.showSuccessDialog(this, "Please Enter Confirm Password")
+            } else if (!getNewPassword().equals(binding.edtConfirmPassword.text.toString())) {
+                DialogUtils.showSuccessDialog(this, "Confirm Password not Match")
             } else {
-
-
-                presenter!!.callResetPasswrodApi()
+                presenter!!.callChangePasswrodApi()
             }
         }
 

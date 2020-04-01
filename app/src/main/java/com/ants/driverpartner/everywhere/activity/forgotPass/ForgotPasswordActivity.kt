@@ -2,6 +2,7 @@ package com.ants.driverpartner.everywhere.activity.forgotPass
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
@@ -25,6 +26,12 @@ class ForgotPasswordActivity : BaseMainActivity(), ForgotPasswordView {
         binding.btnResetPassword.setOnClickListener(View.OnClickListener { v ->
             resetPassword()
         })
+
+        binding.imgBack.setOnClickListener(View.OnClickListener {
+            onBackPressed()
+        })
+
+
 
     }
 
@@ -77,6 +84,11 @@ class ForgotPasswordActivity : BaseMainActivity(), ForgotPasswordView {
     override fun onDestroy() {
         super.onDestroy()
         presenter!!.onStop()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finish()
     }
 
 

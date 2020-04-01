@@ -46,7 +46,7 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
     private var upload_type: String? = null
     private var file_img_license: File? = null
     private var filr_img_odometer: File? = null
-    private var file_img_insuranse: File? = null
+    private var file_img_insurance: File? = null
     private var file_img_vehicle_front: File? = null
     private var file_img_vehicle_back: File? = null
     private var file_img_vehicle_right: File? = null
@@ -64,7 +64,7 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
         binding.tvSignup.setOnClickListener(this)
         binding.imgLicensePic.setOnClickListener(this)
         binding.imgOdometer.setOnClickListener(this)
-        binding.imgInsurence.setOnClickListener(this)
+        binding.imginsurance.setOnClickListener(this)
         binding.imgVehicleRight.setOnClickListener(this)
         binding.imgVehicleLeft.setOnClickListener(this)
         binding.imgVehicleFront.setOnClickListener(this)
@@ -143,9 +143,9 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
         }else */
         if (binding.edtRegDate.text.trim().isEmpty()) {
             DialogUtils.showAlertDialog(this, "Select Registration Date")
-        } else if (binding.edtTire.text.trim().isEmpty()) {
-            DialogUtils.showAlertDialog(this, "Enter Tire")
-            binding.edtTire.setError("")
+        } else if (binding.edtTare.text.trim().isEmpty()) {
+            DialogUtils.showAlertDialog(this, "Enter Tare")
+            binding.edtTare.setError("")
         } else if (binding.edtMass.text.trim().isEmpty()) {
             DialogUtils.showAlertDialog(this, "Enter Gross Vehicle Mass")
             binding.edtMass.setError("")
@@ -165,8 +165,8 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
             DialogUtils.showAlertDialog(this, "Select picture of vehicle license")
         } else if (filr_img_odometer == null) {
             DialogUtils.showAlertDialog(this, "Select picture of vehicle odometer")
-        } else if (file_img_insuranse == null) {
-            DialogUtils.showAlertDialog(this, "Select picture of vehicle insuranse")
+        } else if (file_img_insurance == null) {
+            DialogUtils.showAlertDialog(this, "Select picture of vehicle insurance")
         } else if (file_img_vehicle_front == null) {
             DialogUtils.showAlertDialog(this, "Select picture of vehicle front side")
         } else if (file_img_vehicle_back == null) {
@@ -408,13 +408,13 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
 
             Constant.UploadType.VEHICLE_INSURANCE -> {
 
-                binding.imgInsurence.scaleType = ImageView.ScaleType.FIT_XY
+                binding.imginsurance.scaleType = ImageView.ScaleType.FIT_XY
 
-                Glide.with(applicationContext).load(uri).into(binding.imgInsurence)
+                Glide.with(applicationContext).load(uri).into(binding.imginsurance)
 
-                this.file_img_insuranse = File(uri?.path)
+                this.file_img_insurance = File(uri?.path)
 
-                // presenter!!.uploadDocument(Constant.UploadType.LICENCE_FRONT, file_img_insuranse!!)
+                // presenter!!.uploadDocument(Constant.UploadType.LICENCE_FRONT, file_img_insurance!!)
 
             }
 

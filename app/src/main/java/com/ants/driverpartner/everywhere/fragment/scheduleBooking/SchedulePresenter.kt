@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
-import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ChangeBookingStatusResponse
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ScheduleBookingResponse
 import com.ants.driverpartner.everywhere.utils.Utility
@@ -15,8 +14,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
 
-class SchedulePresenter(private var view: ScheduleView,private var context: Context) {
-
+class SchedulePresenter(private var view: ScheduleView, private var context: Context) {
 
 
     private var disposable: Disposable? = null
@@ -33,8 +31,9 @@ class SchedulePresenter(private var view: ScheduleView,private var context: Cont
 
 //            Utility.showProgressBar(context)
 
-            Utility.showDialog(context)
+//            Utility.showDialog(context)
 
+            view.showProgressbar()
             var input = JsonObject()
             input.addProperty(
                 "userid",
@@ -54,7 +53,8 @@ class SchedulePresenter(private var view: ScheduleView,private var context: Cont
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<ScheduleBookingResponse> ->
-                    Utility.hideDialog()
+                    view.hideProgressbar()
+//                    Utility.hideDialog()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
@@ -81,7 +81,8 @@ class SchedulePresenter(private var view: ScheduleView,private var context: Cont
                     }
 
                 }, { error ->
-                    Utility.hideDialog()
+                    view.hideProgressbar()
+//                    Utility.hideDialog()
                     view.validateError(context.getString(R.string.error_message))
                 })
 
@@ -97,8 +98,8 @@ class SchedulePresenter(private var view: ScheduleView,private var context: Cont
         if (view.checkInternet()) {
 
 
-            Utility.showDialog(context)
-
+//            Utility.showDialog(context)
+            view.showProgressbar()
 
             var input = JsonObject()
             input.addProperty(
@@ -113,7 +114,7 @@ class SchedulePresenter(private var view: ScheduleView,private var context: Cont
 
             input.addProperty(
                 "booking_status",
-               2
+                2
             )
 
 
@@ -129,7 +130,9 @@ class SchedulePresenter(private var view: ScheduleView,private var context: Cont
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<ChangeBookingStatusResponse> ->
-                    Utility.hideDialog()
+                    //                    Utility.hideDialog()
+                    view
+                        .hideProgressbar()
                     val responseCode = response.code()
                     when (responseCode) {
                         200 -> {
@@ -156,7 +159,9 @@ class SchedulePresenter(private var view: ScheduleView,private var context: Cont
                     }
 
                 }, { error ->
-                    Utility.hideDialog()
+
+                    view.hideProgressbar()
+//                    Utility.hideDialog()
                     view.validateError(context.getString(R.string.error_message))
                 })
 

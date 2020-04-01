@@ -47,7 +47,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
     private var upload_type: String? = null
     private var file_img_license: File? = null
     private var filr_img_odometer: File? = null
-    private var file_img_insuranse: File? = null
+    private var file_img_insurance: File? = null
     private var file_img_vehicle_front: File? = null
     private var file_img_vehicle_back: File? = null
     private var file_img_vehicle_right: File? = null
@@ -155,6 +155,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
         super.onBackPressed()
         this.finish()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         presenter!!.onStop()
@@ -168,29 +169,23 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
             if (binding.edtRegDate.text.trim().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Select Registration Date")
             } else if (binding.edtTire.text.trim().isEmpty()) {
-                DialogUtils.showSuccessDialog(this, "Enter Tire")
-                binding.edtTire.setError("")
+                DialogUtils.showSuccessDialog(this, "Enter Tare")
             } else if (binding.edtMass.text.trim().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Enter Gross Vehicle Mass")
-                binding.edtMass.setError("")
             } else if (binding.edtRegNumber.text.trim().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Enter Vehicle  Registration Number")
-                binding.edtRegNumber.setError("")
             } else if (binding.edtModel.text.trim().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Enter Vehicle  Model")
-                binding.edtModel.setError("")
             } else if (binding.edtManufacture.text.trim().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Enter Vehicle  Manufacture")
-                binding.edtManufacture.setError("")
             } else if (binding.edtVin.text.trim().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Enter Vehicle  VIN Number")
-                binding.edtVin.setError("")
             } else if (file_img_license == null) {
                 DialogUtils.showSuccessDialog(this, "Select picture of vehicle license")
             } else if (filr_img_odometer == null) {
                 DialogUtils.showSuccessDialog(this, "Select picture of vehicle odometer")
-            } else if (file_img_insuranse == null) {
-                DialogUtils.showSuccessDialog(this, "Select picture of vehicle insuranse")
+            } else if (file_img_insurance == null) {
+                DialogUtils.showSuccessDialog(this, "Select picture of vehicle insurance")
             } else if (file_img_vehicle_front == null) {
                 DialogUtils.showSuccessDialog(this, "Select picture of vehicle front side")
             } else if (file_img_vehicle_back == null) {
@@ -263,7 +258,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
     }
 
     override fun getInsuranceImage(): File? {
-        return file_img_insuranse
+        return file_img_insurance
 
     }
 
@@ -291,8 +286,10 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
     }
 
     private fun updateDateInView() {
-        val myFormat = "MM/dd/yyyy" // mention the format you need
+        val myFormat = "yyyy-MM-dd" // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
+
+
         binding.edtRegDate!!.text = sdf.format(cal.getTime())
     }
 
@@ -355,20 +352,18 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
         } else {
 
 
-
-            if(title.equals(Constant.DRIVER)){
+            if (title.equals(Constant.DRIVER)) {
                 val intent = Intent(this, OwnerDocActivity::class.java)
-                intent.putExtra(Constant.ADDING_DRIVER,"")
-                intent.putExtra(Constant.PROFILE_TYPE,title)
+                intent.putExtra(Constant.ADDING_DRIVER, "")
+                intent.putExtra(Constant.PROFILE_TYPE, title)
                 startActivity(intent)
                 this.finish()
-            }else{
+            } else {
                 val intent = Intent(this, DriverDocActivity::class.java)
-                intent.putExtra(Constant.ADDING_DRIVER,"")
+                intent.putExtra(Constant.ADDING_DRIVER, "")
                 startActivity(intent)
                 this.finish()
             }
-
 
 
         }
@@ -593,9 +588,9 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
                 Glide.with(applicationContext).load(uri).into(binding.imgInsurence)
 
-                this.file_img_insuranse = File(uri?.path)
+                this.file_img_insurance = File(uri?.path)
 
-                // presenter!!.uploadDocument(Constant.UploadType.LICENCE_FRONT, file_img_insuranse!!)
+                // presenter!!.uploadDocument(Constant.UploadType.LICENCE_FRONT, file_img_insurance!!)
 
             }
 

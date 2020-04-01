@@ -11,10 +11,10 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.ants.driverpartner.everywhere.AntsApplication
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.Home.HomeActivity
+import com.ants.driverpartner.everywhere.activity.driverRegistration.DriverDocumentsActivity
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPasswordActivity
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.DriverDocActivity
@@ -160,7 +160,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
             var input = JsonObject()
             input.addProperty("email", binding.edtEmail.text.toString().trim())
             input.addProperty("password", binding.edtPassword.text.toString())
-            input.addProperty("device_type", 1)
+            input.addProperty("device_type", 2)
             input.addProperty("device_token", Utility.getDeviceToken(this, Constant.D_TOKEN))
 
 
@@ -204,8 +204,6 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
         when (responseData.data.driverStatus.toString()) {
 
-
-//            "1" -> gotoDriverDocActivity(responseData.data.accountType)
             "1" -> gotoDocumentActivity(responseData.data.accountType)
 
             "2" -> gotoVehicleActivity(responseData.data.accountType)
@@ -219,16 +217,24 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
     private fun gotoDriverDocActivity(accountType: Int) {
 
-        var intent = Intent(applicationContext, DriverDocActivity::class.java)
 
-        intent.putExtra(Constant.ADDING_DRIVER, "")
         when (accountType) {
-            1 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
-            2 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
+            1 -> {
+                var intent = Intent(applicationContext, DriverDocActivity::class.java)
+                intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
+                intent.putExtra(Constant.ADDING_DRIVER, "")
+                startActivity(intent)
+
+            }
+            2 -> {
+                var intent = Intent(applicationContext, OwnerDocActivity::class.java)
+                intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
+
+                startActivity(intent)
+            }
         }
 
 
-        startActivity(intent)
     }
 
     private fun gotoHomeActivity() {
@@ -237,9 +243,6 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         this.finish()
-
-
-
 
 
     }
@@ -251,21 +254,43 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
     private fun gotoVehicleActivity(accountType: Int) {
         var intent = Intent(applicationContext, VehicleActivity::class.java)
+
+        when (accountType) {
+            1 -> {
+
+                intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
+            }
+
+
+            2 -> {
+                intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
+            }
+        }
+
         intent.putExtra(Constant.ADDING_VEHICLE, "")
+
         startActivity(intent)
     }
 
     private fun gotoDocumentActivity(accountType: Int) {
 
-        var intent = Intent(applicationContext, OwnerDocActivity::class.java)
 
         when (accountType) {
-            1 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
-            2 -> intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
+            1 -> {
+
+                var intent = Intent(applicationContext, OwnerDocActivity::class.java)
+                intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
+                startActivity(intent)
+            }
+
+
+            2 -> {
+                var intent = Intent(applicationContext, DriverDocumentsActivity::class.java)
+                intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
+                startActivity(intent)
+
+            }
         }
-
-
-        startActivity(intent)
 
 
     }

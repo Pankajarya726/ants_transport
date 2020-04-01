@@ -53,6 +53,8 @@ class VehilcleListActivity : BaseMainActivity(), VehicleListView,
         binding.imgAdd.setOnClickListener(View.OnClickListener {
             val intent = Intent(this, VehicleActivity::class.java)
             intent.putExtra(Constant.ADDING_VEHICLE, Constant.ADDING_VEHICLE)
+            intent.putExtra(Constant.PROFILE_TYPE,Constant.OWNER)
+
             startActivity(intent)
         })
 

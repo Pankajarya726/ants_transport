@@ -2,15 +2,15 @@
 <resources>
 
     <string-array name="title_array_navigation">
-        <item>Create New Booking</item>
+        <item>New Booking</item>
         <item>Current Booking</item>
         <item>Scheduled Booking</item>
         <item>Booking History</item>
         <item>Account Information</item>
-        <item>Contact ants</item>
+        <item>Contact Ants</item>
         <item>FAQ</item>
         <item>Terms and Condition</item>
-          <item>Privcy Policy</item>
+          <item>Privacy Policy</item>
         <!--  <item>Logout</item>-->
 
     </string-array>

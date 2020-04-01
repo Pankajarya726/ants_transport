@@ -3,6 +3,7 @@ package com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocum
 import android.content.Context
 import android.util.Log
 import com.ants.driverpartner.everywhere.Constant
+import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
 import com.ants.driverpartner.everywhere.utils.Utility
@@ -76,7 +77,7 @@ class DriverDocPresenter(private var view: DriverDocView, context: Context) {
                     }
                 }, { error ->
                     view.hideProgressbar()
-                    view.validateError(error.message.toString())
+                    view.validateError(context.getString(R.string.error_message))
                 })
 
 

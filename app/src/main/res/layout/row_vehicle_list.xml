@@ -87,9 +87,9 @@
                 android:background="@drawable/button_theam"
                 android:layout_below="@+id/tv_vehicle_no"
                 android:layout_toRightOf="@+id/img_vehicle"
-                android:text="Veiw"
+                android:text="View"
                 android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorBlack"
                 app:textFontPath="fonts/poppins_regular.otf" />
             <com.an.customfontview.CustomButton
                 android:id="@+id/btn_delete"
@@ -101,6 +101,7 @@
                 android:layout_below="@+id/tv_vehicle_no"
                 android:layout_toRightOf="@+id/btn_view"
                 android:text="Delete"
+                android:visibility="gone"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 app:textFontPath="fonts/poppins_regular.otf" />

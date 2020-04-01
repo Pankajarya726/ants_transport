@@ -553,7 +553,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_centerVertical="false"
-                        android:text="Latter from the Bank Confirming the Account (Not older then one month)"
+                        android:text="Letter from the bank, Not older then one month!"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
                         app:textFontPath="fonts/poppins_regular.otf" />
