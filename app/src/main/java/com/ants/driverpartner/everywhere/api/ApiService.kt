@@ -18,6 +18,7 @@ import com.ants.driverpartner.everywhere.activity.splash.ValidateAppResponse
 import com.ants.driverpartner.everywhere.activity.vehicleDetails.GetVehicleListResponse
 import com.ants.driverpartner.everywhere.activity.webView.GetWebViewResponse
 import com.ants.driverpartner.everywhere.fragment.currentBooking.model.GetCurrentBookingRespone
+import com.ants.driverpartner.everywhere.fragment.currentBooking.model.UpdateLatLongResposse
 import com.ants.driverpartner.everywhere.fragment.history.model.GetHistroyBookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.BookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
@@ -288,11 +289,16 @@ interface ApiService {
     @POST("changePassword")
     fun callChangePasswrodApi(
         @HeaderMap headers: HashMap<String, String?>,
-        @Part ("userid")userId: RequestBody,
+        @Part("userid") userId: RequestBody,
         @Part("old_password") oldPassword: RequestBody,
         @Part("new_password") newPassword: RequestBody
-    ):Observable<Response<VerifyOtpResponse>>
+    ): Observable<Response<VerifyOtpResponse>>
 
+    @POST("updateDriverLatlong")
+    fun updateDriverLatLong(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body json: JsonObject
+    ): Observable<Response<UpdateLatLongResposse>>
 
 //    @Multipart
 //    @POST("user/save_photoid")

@@ -37,16 +37,17 @@
 
             <ImageView
                 android:id="@+id/img_owner"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="5dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/owner" />
 
             <ImageView
                 android:id="@+id/img_partner"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="30dp"
@@ -64,11 +65,14 @@
 
             <com.an.customfontview.CustomTextView
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="30dp"
                 android:layout_toRightOf="@id/img_owner"
                 android:gravity="center"
+
+                android:layout_marginTop="5dp"
+
                 android:text="Owner/ Driver"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp"
@@ -78,7 +82,7 @@
 
             <com.an.customfontview.CustomTextView
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
@@ -103,12 +107,15 @@
 
             <RadioButton
                 android:id="@+id/radio_owner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="5dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:button="@drawable/button_radio"
                 android:checked="true"
+                android:layout_marginTop="5dp"
+
                 android:gravity="center"
 
                 />
@@ -116,8 +123,10 @@
 
             <RadioButton
                 android:id="@+id/radio_partner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="5dp"
+
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="27dp"

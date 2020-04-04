@@ -32,7 +32,7 @@ class WebViewPresenter(private var view: WebView, private var context: Context) 
         if (view.checkInternet()) {
 
             Log.e("Internet Connection", view.checkInternet().toString())
-            val type = "2".toRequestBody(MultipartBody.FORM)
+            val type = "1".toRequestBody(MultipartBody.FORM)
             val userId = Utility.getSharedPreferences(context, Constant.USER_ID).toString()
                 .toRequestBody(MultipartBody.FORM)
 
@@ -61,17 +61,39 @@ class WebViewPresenter(private var view: WebView, private var context: Context) 
 
                             if (responseData != null) {
                                 Log.e(javaClass.simpleName, responseData.status.toString())
+
+
+                                when(responseData.status){
+
+                                    1->{
+                                        view.onPageLoad(responseData.data)
+                                    }
+
+                                    0->{
+                                        view.validateError(responseData.message)
+                                    }
+
+                                    2->{
+                                        view.validateError(responseData.message)
+                                    }
+
+                                }
+
+
+
+
+
                             }
 
-                            if (responseData!!.status == 1) {
-                                view.onPageLoad(responseData.data)
-                            } else {
-                                Log.e(
-                                    javaClass.simpleName + "\tApi output\n\n",
-                                    responseData.status.toString()
-                                )
-                                view.validateError(responseData.message)
-                            }
+//                            if (responseData!!.status == 1) {
+//                                view.onPageLoad(responseData.data)
+//                            } else {
+//                                Log.e(
+//                                    javaClass.simpleName + "\tApi output\n\n",
+//                                    responseData.status.toString()
+//                                )
+//                                view.validateError(responseData.message)
+//                            }
                         }
                     }
                 }, { error ->

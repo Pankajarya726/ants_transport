@@ -23,6 +23,7 @@ import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInfor
 import com.ants.driverpartner.everywhere.activity.signup.SignUpActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.LoginBinding
+import com.ants.driverpartner.everywhere.utils.DialogUtils
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -139,7 +140,9 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
 
     override fun validateError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+
+        DialogUtils.showSuccessDialog(this,message)
+//        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
 
@@ -174,7 +177,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
         Log.e(javaClass.simpleName, responseData.data.driverStatus.toString())
 
-        Utility.setSharedPreferenceBoolean(applicationContext, Constant.IS_LOGIN, true)
+
 //        Utility.setSharedPreference(this, Constant.API_KEY, responseData.data.a)
         Utility.setSharedPreference(this, Constant.USER_ID, responseData.data.userid.toString())
         Utility.setSharedPreference(this, Constant.EMAIL, responseData.data.email)
@@ -238,7 +241,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
     }
 
     private fun gotoHomeActivity() {
-
+        Utility.setSharedPreferenceBoolean(applicationContext, Constant.IS_LOGIN, true)
 
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
@@ -257,10 +260,8 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
         when (accountType) {
             1 -> {
-
                 intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
             }
-
 
             2 -> {
                 intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)

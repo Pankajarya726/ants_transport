@@ -132,18 +132,20 @@ class SignupPresenterImplementation(
 
 
                             if (responseData != null) {
-                                Log.e(javaClass.simpleName, responseData.status.toString())
+                                when (responseData.status) {
+                                    0 -> {
+                                        mainView.validateError(responseData.message)
+                                    }
+                                    1 -> {
+                                        mainView.onImageUploadSuccess(responseData)
+                                    }
+                                    2 -> {
+                                        mainView.validateError(responseData.message)
+                                    }
+                                }
                             }
 
-                            if (responseData!!.status == 1) {
-                                mainView.onImageUploadSuccess(responseData)
-                            } else {
-                                Log.e(
-                                    javaClass.simpleName + "\tApi output\n\n",
-                                    responseData.status.toString()
-                                )
-                                mainView.validateError(responseData.message)
-                            }
+
                         }
                     }
                 }, { error ->

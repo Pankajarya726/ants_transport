@@ -124,7 +124,6 @@
                     android:gravity="center|left"
                     android:hint="@string/enter_tare"
                     android:inputType="number"
-                    android:maxLength="3"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
                     android:textColor="@color/colorBlack"
@@ -504,6 +503,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
                     android:layout_marginTop="15sp"
+                    android:layout_marginBottom="20sp"
+
                     android:background="@drawable/button_theam"
                     android:text="@string/save_continue"
                     android:textColor="@color/colorBlack"
@@ -520,6 +521,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <com.an.customfontview.CustomTextView

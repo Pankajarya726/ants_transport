@@ -109,6 +109,8 @@ class DriverDocActivity : BaseMainActivity(),
 
     override fun validateError(message: String) {
 
+        DialogUtils.showSuccessDialog(this,message)
+
 
     }
 
@@ -141,35 +143,34 @@ class DriverDocActivity : BaseMainActivity(),
 
     private fun submit() {
 
-
         if (getName().isEmpty()) {
             DialogUtils.showSuccessDialog(this, "Please Enter Name")
         } else if (getEmail().isEmpty()) {
-            DialogUtils.showAlertDialog(this, "Please Enter Email")
+            DialogUtils.showSuccessDialog(this, "Please Enter Email")
         } else if (getMobileNumber().isEmpty()) {
-            DialogUtils.showAlertDialog(this, "Please Enter Mobile Number")
+            DialogUtils.showSuccessDialog(this, "Please Enter Mobile Number")
         } else if (getPassword().isEmpty()) {
-            DialogUtils.showAlertDialog(this, "Please Enter Password")
+            DialogUtils.showSuccessDialog(this, "Please Enter Password")
         } else if (getResidentialAddress().isEmpty()) {
-            DialogUtils.showAlertDialog(this, "Please Enter Residential Address")
+            DialogUtils.showSuccessDialog(this, "Please Enter Residential Address")
         } else if (getPostalAddress().isEmpty()) {
-            DialogUtils.showAlertDialog(this, "Please Enter Postal Address")
+            DialogUtils.showSuccessDialog(this, "Please Enter Postal Address")
         } else if (binding.edtVehicleType.text.toString().isEmpty()) {
-            DialogUtils.showAlertDialog(this, "Please Select Vehicle Type")
+            DialogUtils.showSuccessDialog(this, "Please Select Vehicle Type")
         } else if (getIdProofFrontImage() == null) {
-            DialogUtils.showAlertDialog(this, "Please Upload All Document")
+            DialogUtils.showSuccessDialog(this, "Please Upload All Document")
         } else if (getIdProofBackImage() == null) {
-            DialogUtils.showAlertDialog(this, "Please Upload All Document")
+            DialogUtils.showSuccessDialog(this, "Please Upload All Document")
         } else if (getLicenceFrontImage() == null) {
-            DialogUtils.showAlertDialog(this, "Please Upload All Document")
+            DialogUtils.showSuccessDialog(this, "Please Upload All Document")
         } else if (getLicenceBackImage() == null) {
-            DialogUtils.showAlertDialog(this, "Please Upload All Document")
+            DialogUtils.showSuccessDialog(this, "Please Upload All Document")
         } else if (getHomeAddressImage() == null) {
-            DialogUtils.showAlertDialog(this, "Please Upload All Document")
+            DialogUtils.showSuccessDialog(this, "Please Upload All Document")
         } else if (getBankLatterImage() == null) {
-            DialogUtils.showAlertDialog(this, "Please Upload All Document")
+            DialogUtils.showSuccessDialog(this, "Please Upload All Document")
         } else if (getBankStatementImage() == null) {
-            DialogUtils.showAlertDialog(this, "Please Upload All Document")
+            DialogUtils.showSuccessDialog(this, "Please Upload All Document")
         } else {
             presenter!!.registerDriver()
 

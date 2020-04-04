@@ -101,10 +101,18 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 //            gotoDocumentActivity()
         })
 
+        binding.tvSignin.setOnClickListener(View.OnClickListener {
+            onBackPressed()
+        })
+
 
     }
 
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finish()
+    }
     override fun onResume() {
         super.onResume()
         if (sentToSettings) {

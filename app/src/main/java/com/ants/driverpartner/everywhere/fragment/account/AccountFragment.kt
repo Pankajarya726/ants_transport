@@ -15,7 +15,6 @@ import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.Home.Homeview
 import com.ants.driverpartner.everywhere.activity.base.BaseMainFragment
 import com.ants.driverpartner.everywhere.activity.driverDetails.DriverListActivity
-import com.ants.driverpartner.everywhere.activity.login.LoginActivity
 import com.ants.driverpartner.everywhere.activity.notification.NotificationActivity
 import com.ants.driverpartner.everywhere.activity.profile.ProfileActivity
 import com.ants.driverpartner.everywhere.activity.resetPassword.ResetPasswordActivity
@@ -149,7 +148,7 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
 
             getString(R.string.term_condition) -> {
 
-                var title = "Term and Condition"
+                var title = "Terms and Conditions"
                 var page_id = 18
 
                 val intent = Intent(activity!!, WebViewActivity::class.java)

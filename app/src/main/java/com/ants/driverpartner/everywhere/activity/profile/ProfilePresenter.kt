@@ -139,18 +139,19 @@ class ProfilePresenter(private var view: ProfileView, context: Context) {
 
 
                             if (responseData != null) {
-                                Log.e(javaClass.simpleName, responseData.status.toString())
+                                when (responseData.status) {
+                                    0 -> {
+                                        view.validateError(responseData.message)
+                                    }
+                                    1 -> {
+                                        view.onImageUploadSuccess(responseData)
+                                    }
+                                    2 -> {
+                                        view.validateError(responseData.message)
+                                    }
+                                }
                             }
 
-                            if (responseData!!.status == 1) {
-                                view.onImageUploadSuccess(responseData)
-                            } else {
-                                Log.e(
-                                    javaClass.simpleName + "\tApi output\n\n",
-                                    responseData.status.toString()
-                                )
-                                view.validateError(responseData.message)
-                            }
                         }
                     }
                 }, { error ->

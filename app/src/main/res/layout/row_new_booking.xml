@@ -47,8 +47,8 @@
                             android:id="@+id/iv_image"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            app:civ_border_width="0dp"
                             android:src="@drawable/profile_edit_pic"
+                            app:civ_border_width="0dp"
 
                             />
 
@@ -244,11 +244,50 @@
             </LinearLayout>
 
 
+            <LinearLayout
+                android:id="@+id/layout_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/layout2"
+                android:orientation="horizontal">
+
+                <com.an.customfontview.CustomTextView
+                    android:id="@+id/cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Cost:"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:paddingTop="5dp"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:id="@+id/tv_pirce"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                   android:layout_marginLeft="10dp"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    android:paddingTop="5dp"
+                    android:text="500"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+            </LinearLayout>
+
+
             <com.an.customfontview.CustomButton
                 android:id="@+id/btn_open"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_below="@+id/layout2"
+                android:layout_below="@+id/layout_price"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="30dp"
@@ -270,32 +309,32 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:weightSum="2"
                 android:layout_marginBottom="10dp"
-                android:background="@color/colorWhite">
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
                 <com.an.customfontview.CustomButton
                     android:id="@+id/btn_accept"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
                     android:background="@drawable/button_theam"
                     android:text="Accept"
                     android:textColor="@color/colorBlack"
                     android:textSize="16sp"
-                    android:layout_marginRight="10dp"
                     app:textFontPath="fonts/poppins_regular.otf"
 
                     />
 
 
-
                 <com.an.customfontview.CustomButton
                     android:id="@+id/btn_decline"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
                     android:background="@drawable/button_red"
                     android:text="Decline"
                     android:textColor="@color/colorBlack"

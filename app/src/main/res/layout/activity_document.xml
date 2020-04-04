@@ -379,6 +379,8 @@
                     android:layout_marginTop="15sp"
                     android:background="@drawable/button_theam"
                     android:text="upload"
+                    android:layout_marginBottom="20sp"
+
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/tv_size"
                     app:btnFontPath="fonts/poppins_regular.otf" />
@@ -392,6 +394,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <com.an.customfontview.CustomTextView

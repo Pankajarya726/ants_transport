@@ -3,6 +3,7 @@ package com.ants.driverpartner.everywhere.activity.resetPassword
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.ants.driverpartner.everywhere.Constant
@@ -28,10 +29,18 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
         email = intent.getStringExtra(Constant.EMAIL)
         isForgotPass = intent.getBooleanExtra(Constant.FORGOT_PASSWORD, false)
 
+
+        if (isForgotPass) {
+            binding.edtCurrentPassword.visibility = View.GONE
+        }
+
         binding.btnSubmit.setOnClickListener(this)
         binding.imgBack.setOnClickListener(this)
         binding.imgConfirmPassword.setOnClickListener(this)
         binding.imgPassword.setOnClickListener(this)
+        binding.edtPassword.transformationMethod = PasswordTransformationMethod()
+        binding.edtConfirmPassword.transformationMethod = PasswordTransformationMethod()
+
 
     }
 
@@ -66,6 +75,7 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
 
             R.id.img__confirm_password -> {
                 if (binding.edtConfirmPassword.transformationMethod == null) {
+
                     binding.edtConfirmPassword.transformationMethod = PasswordTransformationMethod()
                     binding.imgConfirmPassword.setImageResource(R.drawable.eye_grey)
 
@@ -124,18 +134,24 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
 
     override fun onSuccess(action: VerifyOtpResponse) {
 
+        Log.e(javaClass.simpleName + 1, isForgotPass.toString())
 
         DialogUtils.showCustomAlertDialog(
             this,
             action.message,
             object : DialogUtils.CustomDialogClick {
-
-
                 override fun onOkClick() {
 
+                    Log.e(javaClass.simpleName + 1, isForgotPass.toString())
+
+
                     if (isForgotPass) {
+                        Log.e(javaClass.simpleName + 2, isForgotPass.toString())
                         goToLoginActivity()
+                        onBackPressed()
+
                     } else {
+                        Log.e(javaClass.simpleName + 3, isForgotPass.toString())
                         onBackPressed()
                     }
 

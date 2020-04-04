@@ -18,6 +18,7 @@ import com.ants.driverpartner.everywhere.activity.splash.ValidateAppResponse
 import com.ants.driverpartner.everywhere.activity.vehicleDetails.GetVehicleListResponse
 import com.ants.driverpartner.everywhere.activity.webView.GetWebViewResponse
 import com.ants.driverpartner.everywhere.fragment.currentBooking.model.GetCurrentBookingRespone
+import com.ants.driverpartner.everywhere.fragment.currentBooking.model.UpdateLatLongResposse
 import com.ants.driverpartner.everywhere.fragment.history.model.GetHistroyBookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.BookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
@@ -358,7 +359,9 @@ class ApiClient {
         return apiService.callChangePasswrodApi(headers, userId,oldPassword,newPassword)
     }
 
-
+    fun updateDriverLatLong(headers: java.util.HashMap<String, String?>, json: JsonObject):Observable<Response<UpdateLatLongResposse>>{
+        return  apiService.updateDriverLatLong(headers,json)
+    }
 
 //    fun doValidateAppVersionApi(
 //        input: JsonObject

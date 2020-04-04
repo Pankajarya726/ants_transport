@@ -68,7 +68,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
     fun init() {
         fragmentManager = supportFragmentManager
         toolbar = findViewById(R.id.layout_toolbar)
-        setToolbarTitle("New Booking")
+        setToolbarTitle("New Available Booking")
         toolbar!!.navigationIcon = null
         setSupportActionBar(toolbar)
         drawer = findViewById(R.id.drawerLayout)
@@ -97,7 +97,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
             0 -> {
                 newBookingFragment = NewBooking(this)
                 fragment = newBookingFragment
-                title = "New Booking"
+                title = "New Available Booking"
             }
 
             1 -> {
@@ -114,6 +114,8 @@ class HomeActivity : AppCompatActivity(), Homeview {
                 fragment =
                     ScheduleFragment(this)
                 title = "Schedule Booking"
+
+
                 isActivityRefreshed = true
             }
 
@@ -154,7 +156,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
             7 -> {
 
                 fragment = null
-                title = "Term and Condition"
+                title = "Terms and Conditions"
                 var page_id = 18
                 openCloseDrawer()
 

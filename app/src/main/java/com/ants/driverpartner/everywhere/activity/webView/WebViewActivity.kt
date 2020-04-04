@@ -85,4 +85,9 @@ class WebViewActivity : BaseMainActivity(),
 
        DialogUtils.showSuccessDialog(this, message)
     }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        presenter!!.onStop()
+    }
 }

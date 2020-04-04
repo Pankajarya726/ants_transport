@@ -2,12 +2,18 @@ package com.ants.driverpartner.everywhere.fragment.currentBooking
 
 
 import android.Manifest
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.animation.Animator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.Location
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -37,7 +43,10 @@ import com.ants.driverpartner.everywhere.utils.DialogUtils
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -45,11 +54,12 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 
 class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), OnMapReadyCallback,
+    com.google.android.gms.location.LocationListener,
     GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,
     DirectionCallback, Currentview, CustomInterface {
-
 
 
     lateinit var binding: FragmentCurrentBookingBinding
@@ -65,6 +75,16 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
     var bottomSheetDialogFragment: BottomSheetDialogFragment? = null
     private var presenter: CurrentPresenter? = null
     var getData: GetCurrentBookingRespone.Data? = null
+    private var bookingId = 0
+
+
+    private val SMALLEST_DISPLACEMENT: Long = 5
+    private var mLocationRequest: LocationRequest? = null
+    val PERMISSION_REQUEST_CODE = 200
+    val REQUEST_CHECK_SETTINGS = 101
+
+    private val INTERVAL = (1000 * 10).toLong()
+    private val FASTEST_INTERVAL = (1000 / 2).toLong()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,7 +96,6 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
             DataBindingUtil.inflate(inflater, R.layout.fragment_current_booking, container, false)
         presenter = CurrentPresenter(this, activity!!)
         view.setHeaderTitle(getString(R.string.current_fragment))
-
         init()
         return binding.root
 
@@ -85,11 +104,12 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
 
     fun init() {
         presenter!!.getCurrentBooking()
-
-
     }
 
+
     override fun onGetCurrentBooking(responseData: GetCurrentBookingRespone) {
+
+        bookingId = responseData.data[0].bookingId
 
         getData = responseData.data[0]
 
@@ -113,16 +133,37 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
 
     override fun onStatusChange(responseData: ChangeBookingStatusResponse) {
 
-        DialogUtils.showCustomAlertDialog(activity!!,responseData.message,object :DialogUtils.CustomDialogClick{
-            override fun onOkClick() {
+        stopLocationUpdates()
 
-                goToHistoryFragment()
-            }
-        })
+        DialogUtils.showCustomAlertDialog(
+            activity!!,
+            responseData.message,
+            object : DialogUtils.CustomDialogClick {
+                override fun onOkClick() {
+
+                    goToHistoryFragment()
+                }
+            })
 
     }
 
-    fun goToHistoryFragment(){
+    override fun onLocationChanged(location: Location?) {
+        if (location != null) {
+            updateDriverLocation(location)
+        }
+
+    }
+
+    @SuppressLint("RestrictedApi")
+    protected fun createLocationRequest() {
+        mLocationRequest = LocationRequest()
+        mLocationRequest!!.setInterval(INTERVAL)
+        mLocationRequest!!.setSmallestDisplacement(SMALLEST_DISPLACEMENT.toFloat())
+        mLocationRequest!!.setFastestInterval(FASTEST_INTERVAL)
+        mLocationRequest!!.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+    }
+
+    fun goToHistoryFragment() {
 
         view.changeFragment(3)
 
@@ -180,7 +221,11 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
+
+
             Log.e(javaClass.simpleName, "Premission Granted")
+
+            createLocationRequest()
             mGoogleApiClient = GoogleApiClient.Builder(activity!!)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -192,6 +237,61 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
             Log.e(javaClass.simpleName, "Premission Not Granted")
             requestPermission()
         }
+    }
+
+    fun startLocationUpdates() {
+        val lm = activity!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        var gps_enabled = false
+        var network_enabled = false
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+
+        if (!gps_enabled && !network_enabled) {
+            //        if (!gps_enabled) {
+            //        if (!network_enabled) {
+            displayLocationSettingsRequest(activity!!.applicationContext)
+        } else if (!checkPermissions()) {
+            requestPermission()
+        } else {
+
+
+            if (ActivityCompat.checkSelfPermission(
+                    activity!!.applicationContext,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) !== PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    activity!!.applicationContext,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) !== PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request_old the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                mGoogleApiClient,
+                mLocationRequest,
+                this
+            )
+
+
+
+            Log.e(javaClass.simpleName, "Location update started ..............: ")
+        }
+    }
+
+    private fun checkPermissions(): Boolean {
+        val permissionState =
+            ActivityCompat.checkSelfPermission(activity!!.applicationContext, ACCESS_FINE_LOCATION)
+        return permissionState == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestPermission() {
@@ -318,7 +418,8 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
 
 
         val markerOptions = MarkerOptions().position(pickupLatLng)
-            .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_pickup)).title("Pickup")
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_pickup))
+            .title("Begin Current Trip Navigation")
         val markerOptions1 = MarkerOptions().position(dropLatLng)
             .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_drop)).title("Drop")
 
@@ -337,6 +438,7 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
             )
         )
         drawRouteOnMap(pickupLatLng, dropLatLng)
+
 
     }
 
@@ -419,7 +521,11 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 
         mapFragment!!.getMapAsync(this)
+
+        startLocationUpdates()
+
     }
+
 
     override fun onConnectionFailed(p0: ConnectionResult) {
 
@@ -508,10 +614,96 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
 
     override fun onDestroy() {
         super.onDestroy()
+        stopLocationUpdates()
         presenter!!.onStop()
+
+    }
+
+    fun stopLocationUpdates() {
+        try {
+            if (mGoogleApiClient != null) {
+                LocationServices.FusedLocationApi.removeLocationUpdates(
+                    mGoogleApiClient, this
+                )
+                Log.e(javaClass.simpleName, "Location update stopped .......................")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+
+//        progressDialog.dismiss()
+    }
+
+    fun updateDriverLocation(mCurrentLocation: Location) {
+        var json = JsonObject()
+        json.addProperty(
+            "userid",
+            Utility.getSharedPreferences(activity!!.applicationContext, Constant.USER_ID)
+        )
+        json.addProperty("latitude", mCurrentLocation.latitude)
+        json.addProperty("longitude", mCurrentLocation.longitude)
+        json.addProperty("booking_id", bookingId)
+
+        presenter!!.updateDriverLatLong(json)
+
     }
 
 
 
 
+    override fun onPause() {
+        super.onPause()
+        stopLocationUpdates()
+    }
+
+    private fun displayLocationSettingsRequest(context: Context) {
+        val googleApiClient = GoogleApiClient.Builder(context).addApi(LocationServices.API).build()
+        googleApiClient.connect()
+
+        val locationRequest = LocationRequest.create()
+
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = INTERVAL
+        locationRequest.fastestInterval = FASTEST_INTERVAL
+        locationRequest.smallestDisplacement = SMALLEST_DISPLACEMENT.toFloat()
+
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+        builder.setAlwaysShow(true)
+        val result =
+            LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build())
+
+
+        result.setResultCallback { result ->
+            val status = result.status
+            when (status.statusCode) {
+                LocationSettingsStatusCodes.SUCCESS -> Log.e(
+                    javaClass.simpleName,
+                    "All location settings are satisfied."
+                )
+                LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> {
+                    Log.e(
+                        javaClass.simpleName,
+                        "Location settings are not satisfied. Show the user a dialog to upgrade location settings "
+                    )
+
+                    try {
+                        status.startResolutionForResult(
+                            activity!!,
+                            REQUEST_CHECK_SETTINGS
+                        )
+                    } catch (e: IntentSender.SendIntentException) {
+                        Log.e(javaClass.simpleName, "PendingIntent unable to execute request_old.")
+                    }
+
+                }
+                LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> Log.e(
+                    javaClass.simpleName,
+                    "Location settings are inadequate, and cannot be fixed here. Dialog not created."
+                )
+            }
+        }
+    }
+
 }
+

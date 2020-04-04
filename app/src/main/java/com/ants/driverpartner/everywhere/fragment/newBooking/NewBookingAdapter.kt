@@ -50,6 +50,8 @@ class NewBookingAdapter(
         Picasso.with(ctx).load(data.packageDetail.custImage).into(holder.itemRowBinding.ivImage)
 
 
+        holder.itemRowBinding.tvPirce.text = data.packageDetail.finalAmount.toString() + " " + data.packageDetail.currency
+
         holder.itemRowBinding.tvName.text = data.packageDetail.senderName
         holder.itemRowBinding.tvPickup.text = data.packageDetail.senderAddressLine1
         holder.itemRowBinding.tvDrop.text = data.packageDetail.receiverAddressLine1

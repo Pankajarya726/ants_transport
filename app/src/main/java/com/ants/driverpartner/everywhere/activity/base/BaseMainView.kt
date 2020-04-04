@@ -1,7 +1,5 @@
 package com.ants.driverpartner.everywhere.activity.base
 
-import android.app.ProgressDialog
-import android.widget.EditText
 import com.ants.driverpartner.everywhere.Constant
 
 
@@ -15,5 +13,6 @@ interface BaseMainView : Constant {
         fun checkInternet(): Boolean
         fun validateError(message: String)
 
+//        fun logout(message: String)
 
 }

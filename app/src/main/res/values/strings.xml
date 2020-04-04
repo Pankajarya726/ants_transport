@@ -38,13 +38,13 @@
     <string name="abount_ants">About Ants</string>
     <string name="contact_ants">Contact Ants</string>
     <string name="faq">FAQ</string>
-    <string name="term_condition">Terms &amp; Condition</string>
+    <string name="term_condition">Terms &amp; Conditions</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="no">No</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="current_fragment">Current Fragment</string>
+    <string name="current_fragment">Current Trip</string>
     <string name="notification_setting">Notification</string>
     <string name="support">Support</string>
     <string name="postal_address">Postal Address</string>
@@ -63,5 +63,6 @@
     <string name="user_email">adityasengar2011@gmail.com</string>
     <string name="current_booking_info">Current Booking Info</string>
     <string name="error_message">Something went wrong. Please try again letter!</string>
+    <string name="start_navigation">Start Navigation</string>
 
 </resources>

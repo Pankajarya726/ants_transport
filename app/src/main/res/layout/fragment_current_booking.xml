@@ -28,7 +28,7 @@
               android:layout_alignParentBottom="true"
               android:background="@color/colorAccent"
               android:gravity="center"
-              android:text="@string/current_booking_info"
+              android:text="@string/start_navigation"
               android:textColor="@color/colorBlack"
               android:textSize="18sp" />
 

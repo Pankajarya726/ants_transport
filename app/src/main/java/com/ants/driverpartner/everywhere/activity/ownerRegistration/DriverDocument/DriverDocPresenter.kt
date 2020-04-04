@@ -225,7 +225,7 @@ class DriverDocPresenter(private var view: DriverDocView, context: Context) {
                     }
                 }, { error ->
                     view.hideProgressbar()
-                    view.validateError(error.message.toString())
+                    view.validateError(context.getString(R.string.error_message))
                 })
 
 

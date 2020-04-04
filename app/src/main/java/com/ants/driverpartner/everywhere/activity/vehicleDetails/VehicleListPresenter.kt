@@ -3,7 +3,6 @@ package com.ants.driverpartner.everywhere.activity.vehicleDetails
 import android.content.Context
 import android.util.Log
 import com.ants.driverpartner.everywhere.Constant
-import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.gson.JsonObject
 import com.tekzee.mallortaxi.network.ApiClient

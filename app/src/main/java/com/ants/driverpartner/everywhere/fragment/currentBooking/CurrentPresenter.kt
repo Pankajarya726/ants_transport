@@ -5,7 +5,7 @@ import android.util.Log
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.fragment.currentBooking.model.GetCurrentBookingRespone
-import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
+import com.ants.driverpartner.everywhere.fragment.currentBooking.model.UpdateLatLongResposse
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ChangeBookingStatusResponse
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.gson.JsonObject
@@ -15,7 +15,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
 
-class CurrentPresenter(private var view:Currentview,private var context: Context) {
+class CurrentPresenter(private var view: Currentview, private var context: Context) {
 
 
     private var disposable: Disposable? = null
@@ -52,7 +52,7 @@ class CurrentPresenter(private var view:Currentview,private var context: Context
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<GetCurrentBookingRespone> ->
-//                    Utility.hideProgressbar()
+                    //                    Utility.hideProgressbar()
 //                    Utility.hideDialog()
 
                     view.hideProgressbar()
@@ -83,7 +83,7 @@ class CurrentPresenter(private var view:Currentview,private var context: Context
                     }
 
                 }, { error ->
-//                    Utility.hideProgressbar()
+                    //                    Utility.hideProgressbar()
                     view.hideProgressbar()
                     view.validateError(error.message.toString())
                 })
@@ -133,7 +133,7 @@ class CurrentPresenter(private var view:Currentview,private var context: Context
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<ChangeBookingStatusResponse> ->
-//                    Utility.hideDialog()
+                    //                    Utility.hideDialog()
                     view.hideProgressbar()
                     val responseCode = response.code()
                     when (responseCode) {
@@ -161,9 +161,64 @@ class CurrentPresenter(private var view:Currentview,private var context: Context
                     }
 
                 }, { error ->
-//                    Utility.hideDialog()
+                    //                    Utility.hideDialog()
                     view.hideProgressbar()
                     view.validateError(context.getString(R.string.error_message))
+                })
+
+
+        } else {
+            view.validateError("Please Check Internet Connection!")
+        }
+
+    }
+
+    fun updateDriverLatLong(json: JsonObject) {
+        if (view.checkInternet()) {
+
+
+//            view.showProgressbar()
+
+
+            var headers = HashMap<String, String?>()
+
+            headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
+
+            disposable = ApiClient.instance.updateDriverLatLong(headers, json)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response: Response<UpdateLatLongResposse> ->
+                    //                    Utility.hideDialog()
+//                    view.hideProgressbar()
+                    val responseCode = response.code()
+                    when (responseCode) {
+                        200 -> {
+                            val responseData: UpdateLatLongResposse? = response.body()
+                            Log.e(javaClass.simpleName, response.body().toString())
+
+                            if (responseData != null) {
+                                when (responseData.status) {
+                                    0 -> {
+//                                        view.validateError(responseData.message)
+                                    }
+                                    1 -> {
+//                                        view.onStatusChange(responseData)
+                                    }
+                                    2 -> {
+//                                        view.validateError(responseData.message)
+                                    }
+                                }
+                            } else {
+//                                view.validateError("Something went wrong!")
+                            }
+
+                        }
+                    }
+
+                }, { error ->
+                    //                    Utility.hideDialog()
+//                    view.hideProgressbar()
+//                    view.validateError(context.getString(R.string.error_message))
                 })
 
 
