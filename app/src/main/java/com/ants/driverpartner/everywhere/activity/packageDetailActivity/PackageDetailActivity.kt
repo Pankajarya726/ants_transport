@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.databinding.ActivityPackageDetailBinding
@@ -15,25 +16,33 @@ class PackageDetailActivity : AppCompatActivity() {
 
 
     lateinit var binding: ActivityPackageDetailBinding
+
+    private var from = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_package_detail)
 
         var packageDetail = intent.getStringExtra(Constant.PACKAGE_DETAIL)
 
+        from = intent.getIntExtra(Constant.FROM,0)
+
 
         var jsonObject = Gson().fromJson(packageDetail, JsonObject::class.java)
 
-        var data: GetNewBookingResponse.Data = Gson().fromJson(jsonObject, GetNewBookingResponse.Data::class.java )
+        var data: GetNewBookingResponse.Data =
+            Gson().fromJson(jsonObject, GetNewBookingResponse.Data::class.java)
 
         init(data)
 
     }
 
-    fun init(data :GetNewBookingResponse.Data){
+    fun init(data: GetNewBookingResponse.Data) {
+
+
 
         binding.tvSenderName.text = data.packageDetail.senderName
-        binding.tvSenderNumber.text = data.packageDetail.senderNumber
+        binding.tvSenderNumber.text = data.packageDetail.senderPhone
         binding.tvSenderCollectionFloor.text = data.packageDetail.senderFloor.toString()
 
         binding.tvPickupAddress.text = data.packageDetail.senderAddressLine1
@@ -53,7 +62,7 @@ class PackageDetailActivity : AppCompatActivity() {
 
 
         binding.tvReceiverName.text = data.packageDetail.receiverName
-        binding.tvReceiverNumber.text = data.packageDetail.receiverNumber
+        binding.tvReceiverNumber.text = data.packageDetail.receiverPhone
         binding.tvReceiverFloor.text = data.packageDetail.receiverFloor
 
 
@@ -70,7 +79,26 @@ class PackageDetailActivity : AppCompatActivity() {
 
         binding.tvLoadType.text = data.packageDetail.loadType
 
-        binding.tvPackageType.text = data.packageDetail.itemDetail[0].whatLikeDelivered
+
+        try {
+            if (data.packageDetail.itemDetail.size > 0) {
+
+                var itemDetail = ArrayList<GetNewBookingResponse.Data.PackageDetail.ItemDetail>()
+                itemDetail.addAll(data.packageDetail.itemDetail)
+
+                var adapter = PackageAdapter(itemDetail, this)
+                binding.rvItemDetails.layoutManager = LinearLayoutManager(this)
+                binding.rvItemDetails.hasFixedSize()
+                binding.rvItemDetails.adapter = adapter
+
+
+            }
+        } catch (e: Exception) {
+
+        }
+
+
+       /* binding.tvPackageType.text = data.packageDetail.itemDetail[0].whatLikeDelivered
 
         binding.tvNumberUnits.text = data.packageDetail.itemDetail[0].noUnits.toString()
 
@@ -130,7 +158,7 @@ class PackageDetailActivity : AppCompatActivity() {
             binding.tvCallBeforeDelivery.text = "No"
         else
             binding.tvCallBeforeDelivery.text = "Yes"
-
+*/
 
         binding.imgBack.setOnClickListener(View.OnClickListener {
             onBackPressed()

@@ -17,6 +17,7 @@ import com.ants.driverpartner.everywhere.databinding.FragmentNewBookingBinding
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.BookingResponse
 import com.ants.driverpartner.everywhere.fragment.newBooking.model.GetNewBookingResponse
 import com.ants.driverpartner.everywhere.utils.DialogUtils
+import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.gson.Gson
 
 
@@ -100,18 +101,14 @@ class NewBooking(private var view: Homeview) : BaseMainFragment(), NewBookingVie
         val intent = Intent(activity!!, PackageDetailActivity::class.java)
 
         intent.putExtra(Constant.PACKAGE_DETAIL, packageDetail)
+        intent.putExtra(Constant.FROM, 1)
         startActivity(intent)
 
 
     }
 
     override fun onAcceptBooking(responseData: BookingResponse) {
-        DialogUtils.showCustomAlertDialog(activity!!, responseData.message,object :DialogUtils.CustomDialogClick{
-            override fun onOkClick() {
-
-                view.changeFragment(2)
-            }
-        })
+        view.changeFragment(2)
 
     }
 
@@ -133,6 +130,16 @@ class NewBooking(private var view: Homeview) : BaseMainFragment(), NewBookingVie
         super.onDestroy()
         presenter!!.onStop()
     }
+    override fun onResume() {
+        super.onResume()
+        if(Utility.getSharedPreferences(activity!!,"booking_complete").equals("booking_complete")){
+            Utility.setSharedPreference(activity!!, "booking_complete","not_complete")
+            view.changeFragment(3)
+        }
+
+
+    }
+
 
 
 }

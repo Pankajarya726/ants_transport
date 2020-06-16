@@ -31,7 +31,6 @@ import com.ants.driverpartner.everywhere.databinding.ActivitySignupBinding
 import com.ants.driverpartner.everywhere.utils.DialogUtils
 import com.ants.driverpartner.everywhere.utils.DialogUtils.showCustomAlertDialog
 import com.ants.driverpartner.everywhere.utils.DialogUtils.showSuccessDialog
-import com.ants.driverpartner.everywhere.utils.SnackbarUtils
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.asksira.bsimagepicker.BSImagePicker
 import com.asksira.bsimagepicker.Utils
@@ -65,6 +64,8 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
     private fun init() {
 
+        binding.edtPassword.transformationMethod = PasswordTransformationMethod()
+        binding.edtComfirmPassword.transformationMethod = PasswordTransformationMethod()
         binding.imgPassword.setOnClickListener(View.OnClickListener { v ->
 
             if (binding.edtPassword.transformationMethod == null) {
@@ -108,19 +109,184 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
     }
 
+    private fun registerUser() {
+
+
+        if (binding.edtName.text.toString().trim().isEmpty()) {
+
+            showSuccessDialog(this, "Enter name")
+
+        } else if (binding.edtMobile.text.toString().trim().isEmpty()) {
+
+            showSuccessDialog(this, "Enter Mobile Number")
+        } else if (binding.edtMobile.text.toString().trim().length != 10) {
+            showSuccessDialog(this, "Invalid Mobile Number")
+
+        } else if (binding.edtEmail.text.toString().trim().isEmpty()) {
+            showSuccessDialog(this, "Enter Email")
+        } else if (!Utility.emailValidator(binding.edtEmail.text.toString().trim())) {
+            showSuccessDialog(this, "Invalid Email")
+        } else if (binding.edtPassword.text.toString().isEmpty()) {
+            showSuccessDialog(this, "Enter Password")
+
+        } else if (!Utility.passwordValidator(binding.edtPassword.text.trim().toString())) {
+            showSuccessDialog(this, "Password Must contain at least 1 number, 1 uppercase ,1 lowercase ,1 special character and at least 6 characters")
+
+        } else if (binding.edtComfirmPassword.text.trim().toString().isEmpty()) {
+            showSuccessDialog(this, "Enter Confirm Password")
+        } else if (!binding.edtComfirmPassword.text.trim().toString().equals(binding.edtPassword.text.trim().toString())) {
+            showSuccessDialog(this, "Passwords do not match")
+        } else if (binding.edtResAddress.text.toString().trim().isEmpty()) {
+            showSuccessDialog(this, "Enter Residential Address")
+        } else if (binding.edtPostAddress.text.toString().trim().isEmpty()) {
+            showSuccessDialog(this, "Enter Postal Address")
+        } else if (file == null) {
+            showSuccessDialog(this, "Select Image")
+        } else {
+            var json = JsonObject()
+
+            json.addProperty("name", binding.edtName.text.toString().trim())
+            json.addProperty("mobile", binding.edtMobile.text.toString().trim())
+            json.addProperty("email", binding.edtEmail.text.toString().trim())
+            json.addProperty("password", binding.edtPassword.text.trim().toString())
+            json.addProperty(
+                "residential_address",
+                binding.edtResAddress.text.toString().trim()
+            )
+            json.addProperty(
+                "postal_address",
+                binding.edtPostAddress.text.toString().trim()
+            )
+
+            when (title) {
+                Constant.OWNER ->
+                    json.addProperty("account_type", "1")
+                Constant.DRIVER ->
+                    json.addProperty("account_type", "2")
+            }
+
+            json.addProperty(
+                "device_type",
+                "2"
+            )
+            json.addProperty(
+                "device_token",
+                Utility.getDeviceToken(this, Constant.D_TOKEN)
+            )
+            presenter!!.signupApi(json)
+            Log.e("Input JsonObject", json.toString())
+        }
+//        gotoDocumentActivity()
+    }
+
+
+    override fun validateError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onRegisterSuccess(responseData: RegisterResponse) {
+//        Toast.makeText(this, responseData.message, Toast.LENGTH_LONG).show()
+        Utility.setSharedPreference(getContext(), Constant.NAME, responseData.data.name)
+        Utility.setSharedPreference(getContext(), Constant.MOBILE, responseData.data.mobile)
+        Utility.setSharedPreference(getContext(), Constant.EMAIL, responseData.data.email)
+        Utility.setSharedPreference(
+            getContext(),
+            Constant.RESIDENTIAL_ADDRESS,
+            responseData.data.residentialAddress
+        )
+        Utility.setSharedPreference(
+            getContext(),
+            Constant.POSTAL_ADDRESS,
+            responseData.data.postalAddress
+        )
+        Utility.setSharedPreference(getContext(), Constant.S_TOKEN, responseData.data.deviceToken)
+        Utility.setSharedPreference(getContext(), Constant.USER_ID, responseData.data.userid)
+        Utility.setSharedPreference(getContext(), Constant.API_KEY, responseData.data.stoken)
+
+        if (responseData.data.accountType == 1) {
+            Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.OWNER)
+        } else {
+            Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.PARTNER)
+        }
+
+
+        if (file != null) {
+            presenter!!.uploadProfileImage(file!!)
+        }
+
+    }
+
+    override fun onRegisterFailure(message: String) {
+
+        DialogUtils.showSuccessDialog(this, message)
+    }
+
+    override fun getContext(): Context {
+        return this
+    }
+
+    override fun onImageUploadSuccess(responseData: UploadImageResponse) {
+
+        gotoDocumentActivity()
+
+    }
+
+
+    private fun gotoDocumentActivity() {
+
+        when (title) {
+
+            Constant.OWNER -> {
+                val intent = Intent(this, OwnerDocActivity::class.java)
+                intent.putExtra(Constant.PROFILE_TYPE, title)
+                startActivity(intent)
+            }
+
+            Constant.DRIVER -> {
+                val intent = Intent(this, DriverDocumentsActivity::class.java)
+                intent.putExtra(Constant.PROFILE_TYPE, title)
+                intent.putExtra("value", 1)
+                startActivity(intent)
+            }
+
+
+        }
+
+
+    }
+
+    fun showAlertDialog(context: Context, msg: String) {
+
+        try {
+
+            SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText(msg)
+                .setConfirmText("Ok")
+                .setConfirmClickListener { sDialog ->
+                    sDialog.dismissWithAnimation()
+                }
+                .show()
+        } catch (e: java.lang.Exception) {
+            Log.e(javaClass.simpleName, "" + e.toString())
+
+        }
+
+
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()
         this.finish()
     }
+
     override fun onResume() {
         super.onResume()
         if (sentToSettings) {
             if (ActivityCompat.checkSelfPermission(
-                    applicationContext,
+                    this,
                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) === PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    applicationContext,
+                    this,
                     Manifest.permission.CAMERA
                 ) === PackageManager.PERMISSION_GRANTED
             ) {
@@ -133,8 +299,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     private fun uploadDocument(type: String) {
 
 
-        if (checkProfilePermissions()
-        ) {
+        if (checkProfilePermissions()) {
             this.upload_type = type
             val singleSelectionPicker = BSImagePicker.Builder(Constant.PROVIDE_AUTHORITY)
                 .setMaximumDisplayingImages(Integer.MAX_VALUE)
@@ -157,10 +322,10 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     private fun checkProfilePermissions(): Boolean {
 
         return (ActivityCompat.checkSelfPermission(
-            this.applicationContext,
+            this,
             profilePermissionsRequired[0]
         ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-            applicationContext,
+            this,
             profilePermissionsRequired[1]
         ) == PackageManager.PERMISSION_GRANTED)
 
@@ -182,8 +347,8 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
                 ))
             ) {
 
-                val builder = AlertDialog.Builder(applicationContext)
-                builder.setTitle("Permission request_old")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton(
                     "Grant"
@@ -191,7 +356,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
                     dialogInterface.cancel()
                     ActivityCompat.requestPermissions(
                         this,
-                        profilePermissionsRequired,
+                        arrayOf(Constant.profilePermissionsRequired[0],Constant.profilePermissionsRequired[1]),
                         PROFILE_PERMISSION_CALLBACK
                     )
                 }
@@ -205,14 +370,14 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
                 builder.show()
             } else if (
                 Utility.getSharedPreferencesBoolean(
-                    applicationContext,
+                    this,
                     profilePermissionsRequired[0]
                 )
             ) {
                 //Previously Permission Request was cancelled with 'Dont Ask Again',
                 //Redirect to Settings after showing Information about why you need the permission
-                val builder = AlertDialog.Builder(applicationContext)
-                builder.setTitle("Permission request_old")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton("Grant", object : DialogInterface.OnClickListener {
                     override fun onClick(dialogInterface: DialogInterface, i: Int) {
@@ -221,7 +386,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                         val uri =
-                            Uri.fromParts("package", applicationContext.getPackageName(), null)
+                            Uri.fromParts("package", applicationContext.packageName, null)
                         intent.data = uri
                         startActivityForResult(intent, REQUEST_PERMISSION_SETTING)
 
@@ -245,13 +410,13 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
                 //just request_old the permission
                 ActivityCompat.requestPermissions(
                     this,
-                    profilePermissionsRequired,
+                    arrayOf(Constant.profilePermissionsRequired[0],Constant.profilePermissionsRequired[1]),
                     PROFILE_PERMISSION_CALLBACK
                 )
             }
 
             Utility.setSharedPreferenceBoolean(
-                applicationContext,
+                this,
                 profilePermissionsRequired[0],
                 true
             )
@@ -292,7 +457,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
                     //Show Information about why you need the permission
                     val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Permission request_old")
+                    builder.setTitle("Permission request")
                     builder.setMessage("This app needs storage and camera permission for captured and save image.")
                     builder.setPositiveButton("Grant") { dialog, which ->
                         dialog.cancel()
@@ -317,7 +482,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
 
     private fun proceedAfterPermission() {
         Toast.makeText(
-            applicationContext,
+            this,
             "We got required permissions for profile.",
             Toast.LENGTH_LONG
         ).show()
@@ -333,14 +498,20 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             this.file = File(uri.path)
             binding.imgUser1.visibility = View.GONE
             binding.imgUser.visibility = View.VISIBLE
+            try {
+                Picasso.with(this).load(uri).into(binding.imgUser)
+                inputStream = this.contentResolver.openInputStream(uri)
+            } catch (e: java.lang.Exception) {
 
-            Picasso.with(applicationContext).load(uri).into(binding.imgUser)
-            inputStream = applicationContext.getContentResolver().openInputStream(uri)
+            }
+
+
+
 
 
             try {
                 var licenceBackInputStream =
-                    applicationContext.getContentResolver().openInputStream(uri)
+                    this.contentResolver.openInputStream(uri)
                 Log.e("licenceBackInputStream", licenceBackInputStream.toString())
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -351,175 +522,6 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
     }
 
 
-    private fun registerUser() {
-
-
-        if (binding.edtName.text.toString().trim().isEmpty()) {
-            binding.edtName.setError("Enter name")
-            showSuccessDialog(this, "Enter name")
-
-        } else if (binding.edtMobile.text.toString().trim().isEmpty()) {
-            binding.edtMobile.setError("Enter Mobile Number")
-            showSuccessDialog(this, "Enter Mobile Number")
-        } else if (binding.edtMobile.text.toString().trim().length != 10) {
-            showSuccessDialog(this, "Invalid Mobile Number")
-            binding.edtMobile.setError("Invalid Mobile Number")
-        } else if (binding.edtEmail.text.toString().trim().isEmpty()) {
-            showSuccessDialog(this, "Enter Email")
-            binding.edtEmail.setError("Enter Email")
-        } else if (!Utility.emailValidator(binding.edtEmail.text.toString().trim())) {
-            showSuccessDialog(this, "Invalid Email")
-            binding.edtEmail.setError("Invalid Email")
-        } else if (binding.edtPassword.text.toString().isEmpty()) {
-            SnackbarUtils.snackBarBottom(binding.edtName, "Enter Password")
-            binding.edtPassword.setError("Enter Password")
-        } else if (binding.edtComfirmPassword.text.toString().isEmpty()) {
-            showSuccessDialog(this, "Enter Confirm Password")
-            binding.edtComfirmPassword.setError("Enter Confirm Password")
-        } else if (!binding.edtComfirmPassword.text.toString().equals(binding.edtPassword.text.toString())) {
-            showSuccessDialog(this, "Password not match")
-            binding.edtComfirmPassword.setError("Password not match")
-        } else if (binding.edtResAddress.text.toString().trim().isEmpty()) {
-            showSuccessDialog(this, "Enter Residential Address")
-            binding.edtResAddress.setError("Enter Residential Address")
-        } else if (binding.edtPostAddress.text.toString().trim().isEmpty()) {
-            showSuccessDialog(this, "Enter Postal Address")
-            binding.edtPostAddress.setError("Enter Postal Address")
-        } else if (file == null) {
-            showSuccessDialog(this, "Select Image")
-        } else {
-            var json = JsonObject()
-
-            json.addProperty("name", binding.edtName.text.toString().trim())
-            json.addProperty("mobile", binding.edtMobile.text.toString().trim())
-            json.addProperty("email", binding.edtEmail.text.toString().trim())
-            json.addProperty("password", binding.edtPassword.text.toString())
-            json.addProperty(
-                "residential_address",
-                binding.edtResAddress.text.toString().trim()
-            )
-            json.addProperty(
-                "postal_address",
-                binding.edtPostAddress.text.toString().trim()
-            )
-
-            when (title) {
-                Constant.OWNER ->
-                    json.addProperty("account_type", "1")
-                Constant.DRIVER ->
-                    json.addProperty("account_type", "2")
-            }
-
-            json.addProperty(
-                "device_type",
-                "2"
-            )
-            json.addProperty(
-                "device_token",
-                Utility.getDeviceToken(this, Constant.D_TOKEN)
-            )
-            presenter!!.signupApi(json)
-            Log.e("Input JsonObject", json.toString())
-        }
-//        gotoDocumentActivity()
-    }
-
-
-    override fun validateError(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
-    }
-
-    override fun onRegisterSuccess(responseData: RegisterResponse) {
-        Toast.makeText(applicationContext, responseData.message, Toast.LENGTH_LONG).show()
-        Utility.setSharedPreference(getContext(), Constant.NAME, responseData.data.name)
-        Utility.setSharedPreference(getContext(), Constant.MOBILE, responseData.data.mobile)
-        Utility.setSharedPreference(getContext(), Constant.EMAIL, responseData.data.email)
-        Utility.setSharedPreference(
-            getContext(),
-            Constant.RESIDENTIAL_ADDRESS,
-            responseData.data.residentialAddress
-        )
-        Utility.setSharedPreference(
-            getContext(),
-            Constant.POSTAL_ADDRESS,
-            responseData.data.postalAddress
-        )
-        Utility.setSharedPreference(getContext(), Constant.S_TOKEN, responseData.data.deviceToken)
-        Utility.setSharedPreference(getContext(), Constant.USER_ID, responseData.data.userid)
-        Utility.setSharedPreference(getContext(), Constant.API_KEY, responseData.data.stoken)
-
-        if (responseData.data.accountType == 1) {
-            Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.OWNER)
-        } else {
-            Utility.setSharedPreference(getContext(), Constant.ACCOUNT_TYPE, Constant.PARTNER)
-        }
-
-
-        if (file != null) {
-            presenter!!.uploadProfileImage(file!!)
-        }
-
-    }
-
-    override fun getContext(): Context {
-        return this
-    }
-
-    override fun onImageUploadSuccess(responseData: UploadImageResponse) {
-        //Toast.makeText(applicationContext, responseData.message, Toast.LENGTH_LONG).show()
-
-        showCustomAlertDialog(this, responseData.message, object : DialogUtils.CustomDialogClick {
-            override fun onOkClick() {
-                gotoDocumentActivity()
-            }
-
-        })
-
-
-    }
-
-
-    private fun gotoDocumentActivity() {
-
-        when (title) {
-
-            Constant.OWNER -> {
-                val intent = Intent(applicationContext, OwnerDocActivity::class.java)
-                intent.putExtra(Constant.PROFILE_TYPE, title)
-                startActivity(intent)
-            }
-
-            Constant.DRIVER -> {
-                val intent = Intent(applicationContext, DriverDocumentsActivity::class.java)
-                intent.putExtra(Constant.PROFILE_TYPE, title)
-                intent.putExtra("value", 1)
-                startActivity(intent)
-            }
-
-
-        }
-
-
-    }
-
-    fun showAlertDialog(context: Context, msg: String) {
-
-        try {
-
-            SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText(msg)
-                .setConfirmText("Ok")
-                .setConfirmClickListener { sDialog ->
-                    sDialog.dismissWithAnimation()
-                }
-                .show()
-        } catch (e: java.lang.Exception) {
-            Log.e(javaClass.simpleName, "" + e.toString())
-
-        }
-
-
-    }
 }
 
 

@@ -12,6 +12,7 @@ import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInfor
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
 import com.ants.driverpartner.everywhere.activity.profile.model.UpdateProfileResponse
+import com.ants.driverpartner.everywhere.activity.signature.UploadSignatureResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.activity.splash.ValidateAppResponse
@@ -154,7 +155,8 @@ interface ApiService {
         @Part proofHomeAddImage: MultipartBody.Part,
         @Part bankLetterImage: MultipartBody.Part,
         @Part bankStatementImage: MultipartBody.Part,
-        @Part profileImage: MultipartBody.Part
+        @Part profileImage: MultipartBody.Part,
+        @Part proffesionalDriverFace: MultipartBody.Part
     ): Observable<Response<RegisterDriverResponse>>
 
     @POST("get_vehicle_driver")
@@ -298,6 +300,23 @@ interface ApiService {
     fun updateDriverLatLong(
         @HeaderMap headers: java.util.HashMap<String, String?>,
         @Body json: JsonObject
+    ): Observable<Response<UpdateLatLongResposse>>
+
+
+    @Multipart
+    @POST("booking_signature")
+    fun uploadSignature(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Part("userid") userId: RequestBody,
+        @Part("booking_id") bookingId: RequestBody,
+        @Part image: MultipartBody.Part
+    ): Observable<Response<UploadSignatureResponse>>
+
+
+    @POST("checked_pickedUp")
+    fun updateBookingStatus(
+        @HeaderMap headers: java.util.HashMap<String, String?>,
+        @Body input: JsonObject
     ): Observable<Response<UpdateLatLongResposse>>
 
 //    @Multipart

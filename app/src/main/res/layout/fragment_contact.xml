@@ -92,7 +92,7 @@
             android:gravity="center|top"
             android:maxLines="1"
             android:minLines="1"
-            android:text="+27XXXXXXXX"
+            android:text="+27739651026"
             android:textColor="@color/colorAccent"
             android:textSize="20sp"
             app:textFontPath="fonts/poppins_regular.otf" />

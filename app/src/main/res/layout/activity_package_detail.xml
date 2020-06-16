@@ -99,7 +99,7 @@
                         android:layout_weight="1"
                         android:background="@color/colorWhite"
                         android:gravity="center_vertical"
-                        android:text="pankaj"
+                        android:text=""
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -204,7 +204,7 @@
                         android:layout_weight="1"
                         android:background="@color/colorWhite"
                         android:gravity="center_vertical"
-                        android:text="Lift/Elevator to available"
+                        android:text="Lift/Elevator available?"
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -235,6 +235,7 @@
                     android:minHeight="45dp"
                     android:orientation="horizontal"
                     android:padding="10dp"
+                    android:visibility="gone"
                     android:weightSum="2">
 
                     <com.an.customfontview.CustomTextView
@@ -306,7 +307,7 @@
                         android:layout_weight="1"
                         android:background="@color/colorWhite"
                         android:gravity="center_vertical"
-                        android:text="pankaj"
+                        android:text=""
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -411,7 +412,7 @@
                         android:layout_weight="1"
                         android:background="@color/colorWhite"
                         android:gravity="center_vertical"
-                        android:text="Lift/Elevator to available"
+                        android:text="Lift/Elevator available?"
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -442,6 +443,7 @@
                     android:minHeight="45dp"
                     android:orientation="horizontal"
                     android:padding="10dp"
+                    android:visibility="gone"
                     android:weightSum="2">
 
                     <com.an.customfontview.CustomTextView
@@ -502,7 +504,7 @@
                         android:layout_weight="1"
                         android:background="@color/colorWhite"
                         android:gravity="center_vertical"
-                        android:text="YES"
+                        android:text="Full Load"
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -513,6 +515,7 @@
 
 
                 <com.an.customfontview.CustomTextView
+                    android:id="@+id/txt_driver_name"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@color/colorAccent"
@@ -522,10 +525,13 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    android:visibility="gone"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
 
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layout_driver_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorWhite"
@@ -564,6 +570,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layout_driver_contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -603,6 +611,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layout_vehicle_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -642,6 +652,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/layout_registration_no"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
@@ -671,7 +683,6 @@
                         android:layout_weight="1"
                         android:background="@color/colorWhite"
                         android:gravity="center_vertical"
-                        android:text="YES"
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -772,7 +783,13 @@
                     app:textFontPath="fonts/poppins_regular.otf" />
 
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_item_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+             <!--   <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorWhite"
@@ -1316,7 +1333,7 @@
                         app:textFontPath="fonts/poppins_regular.otf" />
 
 
-                </LinearLayout>
+                </LinearLayout>-->
 
 
             </LinearLayout>

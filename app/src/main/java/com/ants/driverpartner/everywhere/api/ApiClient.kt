@@ -12,6 +12,7 @@ import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInfor
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.activity.profile.model.GetProfileResponse
 import com.ants.driverpartner.everywhere.activity.profile.model.UpdateProfileResponse
+import com.ants.driverpartner.everywhere.activity.signature.UploadSignatureResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.RegisterResponse
 import com.ants.driverpartner.everywhere.activity.signup.model.UploadImageResponse
 import com.ants.driverpartner.everywhere.activity.splash.ValidateAppResponse
@@ -223,7 +224,8 @@ class ApiClient {
         proofHomeAddImage: MultipartBody.Part,
         bankLetterImage: MultipartBody.Part,
         bankStatementImage: MultipartBody.Part,
-        profileImage: MultipartBody.Part
+        profileImage: MultipartBody.Part,
+        proffesionalDriverFace: MultipartBody.Part
     ): Observable<Response<RegisterDriverResponse>> {
         return apiService.registerDriverApi1(
             headers,
@@ -242,7 +244,8 @@ class ApiClient {
             proofHomeAddImage,
             bankLetterImage,
             bankStatementImage,
-            profileImage
+            profileImage,
+            proffesionalDriverFace
 
         )
     }
@@ -320,34 +323,57 @@ class ApiClient {
         return apiService.callverifyOptApi(headers, input)
     }
 
-    fun callGetCurrentBookingApi(headers: java.util.HashMap<String, String?>, input: JsonObject): Observable<Response<GetCurrentBookingRespone>> {
+    fun callGetCurrentBookingApi(
+        headers: java.util.HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<GetCurrentBookingRespone>> {
         return apiService.callGetCurrentBookingApi(headers, input)
     }
 
-    fun callChangeBookingStatusApi(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<ChangeBookingStatusResponse>> {
+    fun callChangeBookingStatusApi(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<ChangeBookingStatusResponse>> {
         return apiService.callChangeBookingStatusApi(headers, input)
     }
 
-    fun getNotification(headers: HashMap<String, String?>, pageno: RequestBody, userId: RequestBody):Observable<Response<NotificationResponse>> {
+    fun getNotification(
+        headers: HashMap<String, String?>,
+        pageno: RequestBody,
+        userId: RequestBody
+    ): Observable<Response<NotificationResponse>> {
         return apiService.getNotification(headers, userId, pageno)
     }
 
-    fun validateAppVersion(headers: HashMap<String, String?>, input: JsonObject):Observable<Response<ValidateAppResponse>> {
+    fun validateAppVersion(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<ValidateAppResponse>> {
         return apiService.validateAppVersion(headers, input)
     }
 
-    fun deleteNotification(headers: HashMap<String, String?>, notificationId: RequestBody, userId: RequestBody): Observable<Response<NotificationResponse>> {
-        return apiService.deleteNotification(headers, notificationId,userId)
+    fun deleteNotification(
+        headers: HashMap<String, String?>,
+        notificationId: RequestBody,
+        userId: RequestBody
+    ): Observable<Response<NotificationResponse>> {
+        return apiService.deleteNotification(headers, notificationId, userId)
     }
 
-    fun callResetPasswrodApi(headers: java.util.HashMap<String, String?>, input: JsonObject): Observable<Response<VerifyOtpResponse>> {
+    fun callResetPasswrodApi(
+        headers: java.util.HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<VerifyOtpResponse>> {
         return apiService.callResetPasswrodApi(headers, input)
     }
 
-    fun updateProfile(headers: HashMap<String, String?>, input: JsonObject): Observable<Response<UpdateProfileResponse>> {
+    fun updateProfile(
+        headers: HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<UpdateProfileResponse>> {
 
 
-        return apiService.updateProfile(headers,input)
+        return apiService.updateProfile(headers, input)
     }
 
     fun callChangePasswrodApi(
@@ -355,12 +381,31 @@ class ApiClient {
         userId: RequestBody,
         oldPassword: RequestBody,
         newPassword: RequestBody
-    ):  Observable<Response<VerifyOtpResponse>> {
-        return apiService.callChangePasswrodApi(headers, userId,oldPassword,newPassword)
+    ): Observable<Response<VerifyOtpResponse>> {
+        return apiService.callChangePasswrodApi(headers, userId, oldPassword, newPassword)
     }
 
-    fun updateDriverLatLong(headers: java.util.HashMap<String, String?>, json: JsonObject):Observable<Response<UpdateLatLongResposse>>{
-        return  apiService.updateDriverLatLong(headers,json)
+    fun updateDriverLatLong(
+        headers: java.util.HashMap<String, String?>,
+        json: JsonObject
+    ): Observable<Response<UpdateLatLongResposse>> {
+        return apiService.updateDriverLatLong(headers, json)
+    }
+
+    fun uploadSignature(
+        headers: java.util.HashMap<String, String?>,
+        userId: RequestBody,
+        bookingId: RequestBody,
+        image: MultipartBody.Part
+    ): Observable<Response<UploadSignatureResponse>> {
+        return apiService.uploadSignature(headers, userId, bookingId, image)
+    }
+
+    fun updateBookingStatus(
+        headers: java.util.HashMap<String, String?>,
+        input: JsonObject
+    ): Observable<Response<UpdateLatLongResposse>> {
+        return apiService.updateBookingStatus(headers, input)
     }
 
 //    fun doValidateAppVersionApi(

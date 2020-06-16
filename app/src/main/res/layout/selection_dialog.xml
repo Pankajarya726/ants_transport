@@ -35,8 +35,16 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_category"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_below="@+id/tv_header" />
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+
+            android:layout_below="@+id/tv_header"
+            android:scrollbars="vertical"
+            app:fastScrollEnabled="true"
+            app:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
+            app:fastScrollHorizontalTrackDrawable="@drawable/line_drawable"
+            app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
+            app:fastScrollVerticalTrackDrawable="@drawable/line_drawable"/>
 
 
         <com.an.customfontview.CustomTextView

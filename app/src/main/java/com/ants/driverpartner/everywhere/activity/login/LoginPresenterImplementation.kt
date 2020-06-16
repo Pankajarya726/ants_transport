@@ -42,10 +42,13 @@ class LoginPresenterImplementation(
 
 
                         }
+                        500->{
+                            mainView.validateError(context!!.getString(R.string.error_message))
+                        }
                     }
                 }, { error ->
                     mainView.hideProgressbar()
-                    mainView.validateError(error.message.toString())
+                    mainView.validateError(context!!.getString(R.string.error_message))
                 })
         } else {
             mainView.hideProgressbar()

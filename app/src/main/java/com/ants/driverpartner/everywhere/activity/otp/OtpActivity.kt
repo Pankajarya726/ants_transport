@@ -46,7 +46,7 @@ class OtpActivity : BaseMainActivity(), OtpView {
         })
 
         binding.btnSubmit.setOnClickListener(View.OnClickListener { v ->
-            //            val intent = Intent(applicationContext, ResetPasswordActivity::class.java)
+            //            val intent = Intent(this, ResetPasswordActivity::class.java)
 //            startActivity(intent)
 //            finish()
 

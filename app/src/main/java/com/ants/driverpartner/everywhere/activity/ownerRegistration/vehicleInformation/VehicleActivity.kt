@@ -26,6 +26,7 @@ import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocume
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments.OwnerDocActivity
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.RegisterVehicleResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
+import com.ants.driverpartner.everywhere.activity.vehicleDetails.VehilcleListActivity
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityVehicleBinding
 import com.ants.driverpartner.everywhere.utils.DialogUtils
@@ -94,6 +95,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
         binding.tvVehicleType.setOnClickListener(this)
         binding.tvType.setOnClickListener(this)
         binding.back.setOnClickListener(this)
+
     }
 
     override fun onClick(v: View?) {
@@ -122,6 +124,9 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
                         cal.set(Calendar.YEAR, year)
                         cal.set(Calendar.MONTH, monthOfYear)
                         cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+
+
                         updateDateInView()
                     }
 
@@ -136,7 +141,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
             }
 
             R.id.tv_signup -> {
-                val intent = Intent(applicationContext, LoginActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -144,7 +149,15 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
             R.id.btn_upload -> submit()
 
-            R.id.back -> onBackPressed()
+            R.id.back -> {
+                if (isAddVehicle.equals(Constant.ADDING_VEHICLE)) {
+                    val intent = Intent(this, VehilcleListActivity::class.java)
+                    startActivity(intent)
+                    this.finish()
+                } else {
+                    onBackPressed()
+                }
+            }
 
         }
 
@@ -196,21 +209,8 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
                 DialogUtils.showSuccessDialog(this, "Select picture of vehicle right side")
             } else {
 
-
                 presenter!!.callRegisterVehicleApi()
 
-
-//                if (Utility.getSharedPreferences(this, Constant.ACCOUNT_TYPE) == Constant.OWNER) {
-//                    val intent = Intent(this, DriverDocActivity::class.java)
-//                    startActivity(intent)
-//                } else if (Utility.getSharedPreferences(
-//                        this,
-//                        Constant.ACCOUNT_TYPE
-//                    ) == Constant.PARTNER
-//                ) {
-//                    val intent = Intent(this, OwnerDocActivity::class.java)
-//                    startActivity(intent)
-//                }
 
             }
     }
@@ -248,37 +248,37 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
     override fun getLicenceImage(): File? {
 
 
-        return file_img_license
+        return file_img_license!!
     }
 
     override fun getOdometerImage(): File? {
 
-        return filr_img_odometer
+        return filr_img_odometer!!
 
     }
 
     override fun getInsuranceImage(): File? {
-        return file_img_insurance
+        return file_img_insurance!!
 
     }
 
     override fun getVehicleFontImage(): File? {
-        return file_img_vehicle_front
+        return file_img_vehicle_front!!
 
     }
 
     override fun getVehicelBackImage(): File? {
-        return file_img_vehicle_back
+        return file_img_vehicle_back!!
 
     }
 
     override fun getVehicleLeftImage(): File? {
-        return file_img_vehicle_right
+        return file_img_vehicle_right!!
 
     }
 
     override fun getVehicleRightImage(): File? {
-        return file_img_vehicle_left
+        return file_img_vehicle_left!!
     }
 
     override fun getVinNumber(): String {
@@ -345,8 +345,23 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
     override fun onRegisterSuccess(responseData: RegisterVehicleResponse) {
 
+        DialogUtils.showCustomAlertDialog(
+            this,
+            responseData.message,
+            object : DialogUtils.CustomDialogClick {
+
+                override fun onOkClick() {
+
+                    gotoNextActivity()
+                }
+            })
+
+
+    }
+
+    fun gotoNextActivity() {
         if (isAddVehicle.equals(Constant.ADDING_VEHICLE)) {
-            val intent = Intent(this, DriverListActivity::class.java)
+            val intent = Intent(this, VehilcleListActivity::class.java)
             startActivity(intent)
             this.finish()
         } else {
@@ -371,12 +386,14 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
     override fun validateError(message: String) {
 
+
+        DialogUtils.showSuccessDialog(this, message)
     }
 
     private fun uploadDocument(idFront: String) {
 
 
-        if (Utility.checkProfilePermissions(applicationContext)
+        if (Utility.checkProfilePermissions(this)
         ) {
             this.upload_type = idFront
             val singleSelectionPicker = BSImagePicker.Builder(Constant.PROVIDE_AUTHORITY)
@@ -398,7 +415,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
     }
 
     private fun requestPermission() {
-        if (!Utility.checkProfilePermissions(applicationContext)) {
+        if (!Utility.checkProfilePermissions(this)) {
             Log.e("Permission ", "Not Granted")
 
 
@@ -410,8 +427,8 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
                     Constant.profilePermissionsRequired[1]
                 ))
             ) {
-                val builder = AlertDialog.Builder(applicationContext)
-                builder.setTitle("Permission request_old")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton(
                     "Grant"
@@ -433,14 +450,14 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
                 builder.show()
             } else if (
                 Utility.getSharedPreferencesBoolean(
-                    applicationContext,
+                    this,
                     Constant.profilePermissionsRequired[0]
                 )
             ) {
                 //Previously Permission Request was cancelled with 'Dont Ask Again',
                 //Redirect to Settings after showing Information about why you need the permission
-                val builder = AlertDialog.Builder(applicationContext)
-                builder.setTitle("Permission request_old")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton("Grant", object : DialogInterface.OnClickListener {
                     override fun onClick(dialogInterface: DialogInterface, i: Int) {
@@ -479,7 +496,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
             }
 
             Utility.setSharedPreferenceBoolean(
-                applicationContext,
+                this,
                 Constant.profilePermissionsRequired[0],
                 true
             )
@@ -520,7 +537,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
                     //Show Information about why you need the permission
                     val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Permission request_old")
+                    builder.setTitle("Permission request")
                     builder.setMessage("This app needs storage and camera permission for captured and save image.")
                     builder.setPositiveButton("Grant") { dialog, which ->
                         dialog.cancel()
@@ -545,7 +562,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
     private fun proceedAfterPermission() {
         Toast.makeText(
-            applicationContext,
+            this,
             "We got required permissions for profile.",
             Toast.LENGTH_LONG
         ).show()
@@ -564,7 +581,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
                     this.file_img_license = File(uri.path)
                 }
 
-                Glide.with(applicationContext).load(uri).into(binding.imgLicensePic)
+                Glide.with(this).load(uri).into(binding.imgLicensePic)
 
                 //  presenter!!.uploadDocument(Constant.UploadType.ID_FRONT, file_img_license!!)
 
@@ -574,7 +591,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
                 binding.imgOdometer.scaleType = ImageView.ScaleType.FIT_XY
 
-                Glide.with(applicationContext).load(uri).into(binding.imgOdometer)
+                Glide.with(this).load(uri).into(binding.imgOdometer)
 
                 this.filr_img_odometer = File(uri?.path)
 
@@ -586,7 +603,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
                 binding.imgInsurence.scaleType = ImageView.ScaleType.FIT_XY
 
-                Glide.with(applicationContext).load(uri).into(binding.imgInsurence)
+                Glide.with(this).load(uri).into(binding.imgInsurence)
 
                 this.file_img_insurance = File(uri?.path)
 
@@ -598,7 +615,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
                 binding.imgVehicleFront.scaleType = ImageView.ScaleType.FIT_XY
 
-                Glide.with(applicationContext).load(uri).into(binding.imgVehicleFront)
+                Glide.with(this).load(uri).into(binding.imgVehicleFront)
 
                 this.file_img_vehicle_front = File(uri?.path)
 
@@ -610,7 +627,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
                 binding.imgVehicleBack.scaleType = ImageView.ScaleType.FIT_XY
 
-                Glide.with(applicationContext).load(uri).into(binding.imgVehicleBack)
+                Glide.with(this).load(uri).into(binding.imgVehicleBack)
 
                 this.file_img_vehicle_back = File(uri?.path)
 
@@ -622,7 +639,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
                 binding.imgVehicleLeft.setScaleType(ImageView.ScaleType.FIT_XY)
 
-                Glide.with(applicationContext).load(uri).into(binding.imgVehicleLeft)
+                Glide.with(this).load(uri).into(binding.imgVehicleLeft)
 
                 this.file_img_vehicle_left = File(uri?.path)
 
@@ -634,7 +651,7 @@ class VehicleActivity : BaseMainActivity(), View.OnClickListener,
 
                 binding.imgVehicleRight.setScaleType(ImageView.ScaleType.FIT_XY)
 
-                Glide.with(applicationContext).load(uri).into(binding.imgVehicleRight)
+                Glide.with(this).load(uri).into(binding.imgVehicleRight)
 
                 this.file_img_vehicle_right = File(uri?.path)
 

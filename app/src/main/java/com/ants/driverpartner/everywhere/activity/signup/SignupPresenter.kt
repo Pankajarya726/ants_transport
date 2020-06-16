@@ -25,6 +25,7 @@ class SignupPresenter {
         fun onRegisterSuccess(responseData: RegisterResponse)
         fun getContext(): Context
         fun onImageUploadSuccess(responseData: UploadImageResponse)
+        fun onRegisterFailure(message: String)
     }
 
 }

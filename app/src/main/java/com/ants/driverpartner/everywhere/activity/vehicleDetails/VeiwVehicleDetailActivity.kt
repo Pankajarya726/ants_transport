@@ -39,15 +39,24 @@ class VeiwVehicleDetailActivity : AppCompatActivity() {
 
     fun initView(data: GetVehicleListResponse.Data) {
 
-        Picasso.with(this).load(data.vehicleFrontImage).into(binding.imgVehicle)
+        try {
+            Picasso.with(this).load(data.vehicleFrontImage).into(binding.imgVehicle)
+
+        } catch (e: Exception) {
+
+        }
+
         binding.tvVehicleType.text = data.vehicleType
         binding.tvRegDate.text = data.registrationDate
         binding.tvTare.text = data.tare
         binding.tvVehicleMass.text = data.grossVehMass
         binding.tvRegNo.text = data.registrationNumber
         binding.tvIdentificationNumber.text = data.vehicleIdentificationNumber
-        binding.tvDriverName.text = data.name
 
+        if (data.name.isNotEmpty())
+            binding.tvDriverName.text = data.name
+        else
+            binding.tvDriverName.text = "This Vehicle Not assign to any driver"
 
     }
 

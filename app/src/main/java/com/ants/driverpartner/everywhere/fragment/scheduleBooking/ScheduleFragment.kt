@@ -18,6 +18,7 @@ import com.ants.driverpartner.everywhere.databinding.FragmentScheduleBinding
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ChangeBookingStatusResponse
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ScheduleBookingResponse
 import com.ants.driverpartner.everywhere.utils.DialogUtils
+import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.gson.Gson
 
 /**
@@ -29,6 +30,7 @@ class ScheduleFragment(private var view: Homeview) : BaseMainFragment(), Schedul
     lateinit var binding: FragmentScheduleBinding
     private var presenter: SchedulePresenter? = null
     private var scheduleList = ArrayList<ScheduleBookingResponse.Data>()
+    private var scheduleBookingAdapter : ScheduleBookingAdapter?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,37 +65,52 @@ class ScheduleFragment(private var view: Homeview) : BaseMainFragment(), Schedul
         val intent = Intent(activity!!, PackageDetailActivity::class.java)
 
         intent.putExtra(Constant.PACKAGE_DETAIL, packageDetail)
+        intent.putExtra(Constant.FROM, 2)
         startActivity(intent)
     }
 
 
-    override fun onStartClick(data: ScheduleBookingResponse.Data) {
+    override fun onStartClick(
+        data: ScheduleBookingResponse.Data,
+        position: Int
+    ) {
 
-
-        presenter!!.changeBookingStatus(data.bookingId)
-
+        presenter!!.changeBookingStatus(data.bookingId,position)
 
     }
 
 
-    override fun onStatusChange(responseData: ChangeBookingStatusResponse) {
+    override fun onStatusChange(
+        responseData: ChangeBookingStatusResponse,
+        position: Int
+    ) {
 
+        scheduleBookingAdapter!!.removeItem(position)
+        scheduleBookingAdapter!!.notifyDataSetChanged()
 
-        com.ants.driverpartner.everywhere.utils.DialogUtils.showCustomAlertDialog(
-            activity!!,
-            "Booking Started",
-            object : com.ants.driverpartner.everywhere.utils.DialogUtils.CustomDialogClick {
-                override fun onOkClick() {
-                    view.changeFragment(1)
-                }
-            })
+        view.changeFragment(1)
 
-        com.ants.driverpartner.everywhere.utils.DialogUtils.showSuccessDialog(
-            activity!!,
-            responseData.message
-        )
+//        DialogUtils.showCustomAlertDialog(
+//            activity!!,
+//            "Booking Started",
+//            object : DialogUtils.CustomDialogClick {
+//                override fun onOkClick() {
+//
+//                }
+//            })
+
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        if(Utility.getSharedPreferences(activity!!,"booking_complete").equals("booking_complete")){
+            Utility.setSharedPreference(activity!!, "booking_complete","not_complete")
+            view.changeFragment(3)
+        }
+
+
+    }
 
     override fun onFailure(message: String) {
         DialogUtils.showSuccessDialog(activity!!, message)
@@ -109,10 +126,10 @@ class ScheduleFragment(private var view: Homeview) : BaseMainFragment(), Schedul
 
             binding.rlScheduleBooking.visibility = View.GONE
             binding.rvScheduleBooking.visibility = View.VISIBLE
-            val scheduleBookingAdapter = ScheduleBookingAdapter(activity!!, scheduleList, this)
+            scheduleBookingAdapter = ScheduleBookingAdapter(activity!!, scheduleList, this)
             binding.rvScheduleBooking.layoutManager = LinearLayoutManager(context)
             binding.rvScheduleBooking.hasFixedSize()
-            binding.rvScheduleBooking.adapter = scheduleBookingAdapter
+            binding.rvScheduleBooking.adapter = scheduleBookingAdapter!!
         } else {
             binding.rlScheduleBooking.visibility = View.VISIBLE
             binding.rvScheduleBooking.visibility = View.GONE

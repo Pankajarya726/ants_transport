@@ -162,8 +162,8 @@ data class GetNewBookingResponse(
                 var packagingType: String = "",
                 @SerializedName("vehicle_category")
                 var vehicleCategory: Any? = Any(),
-                @SerializedName("weight")
-                var weight: Int = 0,
+//                @SerializedName("weight")
+//                var weight: String = "",
                 @SerializedName("what_like_delivered")
                 var whatLikeDelivered: String = ""
             )

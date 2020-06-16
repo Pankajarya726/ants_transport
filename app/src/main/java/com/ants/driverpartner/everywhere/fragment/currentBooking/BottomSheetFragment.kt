@@ -13,16 +13,18 @@ import com.squareup.picasso.Picasso
 
 class BottomSheetFragment(
     customInterface: CustomInterface,
-    var packageDetail: GetCurrentBookingRespone.Data
+    var packageDetail: GetCurrentBookingRespone.Data,
+    var bookingStatus: Int
 ) : BottomSheetDialogFragment(), View.OnClickListener {
 
     var customInterface = customInterface
 
+
     private var data = packageDetail
 
+    private var status = bookingStatus
 
     lateinit var binding: BottomSheetBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,20 +33,31 @@ class BottomSheetFragment(
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.bottom_sheet, container, false)
         val view = binding.root
-
         init()
         return view
     }
 
     fun init() {
         binding.imgDrop.setOnClickListener(this)
-        binding.imgCall.setOnClickListener(this)
+
         binding.btnArrived.setOnClickListener(this)
         binding.btnOpen.setOnClickListener(this)
 
 
+        if (status == 2) {
+            binding.btnArrived.text = "Arrived at Pickup Location"
+        } else {
+            binding.btnArrived.text = "Arrived At Dropoff location"
+        }
 
-        Picasso.with(activity!!).load(data.packageDetail.custImage).into(binding.ivImage)
+
+        try {
+            Picasso.with(activity!!).load(data.packageDetail.custImage).into(binding.ivImage)
+
+        } catch (e: Exception) {
+
+        }
+
 
 
         binding.tvVehicleNo.text = data.packageDetail.vehicleRegistrationNumber
@@ -59,6 +72,11 @@ class BottomSheetFragment(
         binding.tvDate.text = data.packageDetail.senderDate
         binding.tvDistance.text =
             data.packageDetail.distance.toString() + " " + data.packageDetail.distanceUnit
+
+        binding.imgCall.setOnClickListener(View.OnClickListener {
+            customInterface.onCallClick(data.packageDetail.receiverPhone)
+        })
+
     }
 
 
@@ -73,13 +91,13 @@ class BottomSheetFragment(
                 customInterface.onOpenclick()
             }
 
+
             R.id.btn_arrived -> {
-                customInterface.onArrivedClick()
-            }
-
-
-            R.id.img_call -> {
-                customInterface.onCallClick()
+                if (status == 2) {
+                    customInterface.onArrivedAtCollection()
+                } else {
+                    customInterface.onArrivedClick()
+                }
             }
 
 

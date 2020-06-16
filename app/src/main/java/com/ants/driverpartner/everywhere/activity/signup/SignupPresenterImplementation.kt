@@ -16,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 import java.io.File
 
@@ -53,7 +54,7 @@ class SignupPresenterImplementation(
                                 when (responseData.status) {
 
                                     0 -> {
-                                        mainView.validateError(responseData.message)
+                                        mainView.onRegisterFailure(responseData.message)
                                     }
                                     1 -> {
                                         mainView.onRegisterSuccess(responseData)
@@ -90,13 +91,11 @@ class SignupPresenterImplementation(
         if (mainView.checkInternet()) {
 
             Log.e("Internet Connection", mainView.checkInternet().toString())
-            val type = RequestBody.create(MultipartBody.FORM, Constant.PROFILE)
+            val type = "profile".toRequestBody(MultipartBody.FORM)
 
             val userId = Utility.getSharedPreferences(mainView.getContext(), Constant.USER_ID).let {
-                RequestBody.create(
-                    MultipartBody.FORM,
-                    it.toString()
-                )
+                it.toString()
+                    .toRequestBody(MultipartBody.FORM)
             }
 
 

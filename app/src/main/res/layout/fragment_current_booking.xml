@@ -2,9 +2,7 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragment.currentBooking.CurrentBookingFragment"
-
-    >
+    tools:context=".fragment.currentBooking.CurrentBookingFragment">
 
 
     <RelativeLayout
@@ -17,31 +15,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <com.an.customfontview.CustomTextView
+            android:id="@+id/btn_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="30dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="@string/start_navigation"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
 
 
+        <RelativeLayout
+            android:id="@+id/tv_booking_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"
+            android:background="@color/colorAccent">
 
-          <com.an.customfontview.CustomTextView
-              android:id="@+id/tv_booking_info"
-              android:layout_width="match_parent"
-              android:layout_height="50dp"
-              android:layout_margin="30dp"
-              android:layout_alignParentBottom="true"
-              android:background="@color/colorAccent"
-              android:gravity="center"
-              android:text="@string/start_navigation"
-              android:textColor="@color/colorBlack"
-              android:textSize="18sp" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:rotation="180"
+                android:src="@drawable/arrow_drop_down" />
 
-
-
-
-       <!-- <include
-
-            android:id="@+id/layout_bottom"
-            layout="@layout/bottom_sheet" />-->
+        </RelativeLayout>
 
 
+        <!-- <include
 
+             android:id="@+id/layout_bottom"
+             layout="@layout/bottom_sheet" />-->
 
 
     </RelativeLayout>

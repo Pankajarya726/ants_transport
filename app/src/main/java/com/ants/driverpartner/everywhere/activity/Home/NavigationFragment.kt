@@ -76,4 +76,9 @@ class NavigationFragment : Fragment(), NavigationAdapter.INavigation {
         Log.e(TAG, "View$position")
         replaceFragment(position)
     }
+
+    override fun onResume() {
+        super.onResume()
+        adapter!!.notifyDataSetChanged()
+    }
 }

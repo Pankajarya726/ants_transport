@@ -14,6 +14,8 @@ data class GetCurrentBookingRespone(
     data class Data(
         @SerializedName("booking_id")
         var bookingId: Int = 0,
+        @SerializedName("booking_status")
+        var bookingStatus: Int = 0,
         @SerializedName("is_cancelled_driver")
         var isCancelledDriver: Int = 0,
         @SerializedName("package_detail")
@@ -163,7 +165,7 @@ data class GetCurrentBookingRespone(
                 @SerializedName("vehicle_category")
                 var vehicleCategory: Any? = Any(),
                 @SerializedName("weight")
-                var weight: Int = 0,
+                var weight: String = "",
                 @SerializedName("what_like_delivered")
                 var whatLikeDelivered: String = ""
             )

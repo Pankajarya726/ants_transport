@@ -30,7 +30,7 @@ class OwnerDocPresenterImplementation(private var mainView: OwnerDocPresenter.Do
 
         if (mainView.checkInternet()) {
             mainView.showProgressbar()
-           // Utility.showProgressDialog(context,"Uploading image please wait...")
+           // Utility.showProgressDialog(context,"Uploading image Please wait...")
 
             Log.e("Internet Connection", mainView.checkInternet().toString())
             val type = uploadType.toRequestBody(MultipartBody.FORM)

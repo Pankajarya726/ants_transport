@@ -42,12 +42,16 @@ class HistoryAdapter(
         holder.binding.tvName.text = data.packageDetail.senderName
         holder.binding.tvTime.text = data.packageDetail.senderDate + " " + data.packageDetail.time
         holder.binding.tvVehicleType.text = data.packageDetail.vehicleName
-        holder.binding.tvBookingId.text = data.bookingId.toString()
+        holder.binding.tvBookingId.text =
+            data.packageDetail.distance.toString() + " " + data.packageDetail.distanceUnit
         holder.binding.tvPickup.text = data.packageDetail.senderAddressLine1
         holder.binding.tvDrop.text = data.packageDetail.receiverAddressLine1
         holder.binding.tvStatus.text = data.isCancelledDriver.toString()
         holder.binding.tvCost.text =
             data.packageDetail.finalAmount.toString() + " " + data.packageDetail.currency
+
+        holder.binding.simpleRatingBar.isEnabled = false
+        holder.binding.simpleRatingBar.rating = data.customerRating.toFloat()
 
 
         holder.binding.btnDetail.setOnClickListener(View.OnClickListener {
@@ -62,7 +66,7 @@ class HistoryAdapter(
         var binding = binding
     }
 
-    interface HistoryListener{
-        fun onViewClick(data:GetHistroyBookingResponse.Data)
+    interface HistoryListener {
+        fun onViewClick(data: GetHistroyBookingResponse.Data)
     }
 }

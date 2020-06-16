@@ -42,8 +42,8 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@color/colorAccent"
-            android:text="Current Delivery information"
             android:gravity="center"
+            android:text="Current Delivery information"
             android:textColor="@color/colorBlack"
             android:textSize="17sp"
             app:textFontPath="fonts/poppins_regular.otf"
@@ -78,7 +78,7 @@
                         android:gravity="center"
                         android:orientation="vertical">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
+                        <com.ants.driverpartner.everywhere.custom.CircleImageView
                             android:id="@+id/iv_image"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
@@ -110,7 +110,7 @@
                             android:hint="Name"
                             android:maxLines="1"
                             android:minLines="1"
-                            android:text="Pankaj"
+                            android:text=""
                             android:textColor="@color/colorBlack"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -128,7 +128,7 @@
                             android:hint="MP09PA2020"
                             android:maxLines="1"
                             android:minLines="1"
-                            android:text="Pankaj"
+                            android:text=""
                             android:textColor="@color/colorBlack"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -146,7 +146,8 @@
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="5dp"
                             android:scaleType="fitCenter"
-                            android:src="@drawable/call" />
+                            android:src="@drawable/call"
+                            android:visibility="gone" />
                     </RelativeLayout>
 
 
@@ -298,7 +299,7 @@
                         android:minLines="1"
                         android:text="03-03-2020"
                         android:textColor="@color/colorGrey"
-                        android:textSize="15sp"
+                        android:textSize="12dp"
                         android:textStyle="bold"
                         app:textFontPath="fonts/poppins_regular.otf" />
                 </LinearLayout>
@@ -333,8 +334,7 @@
             </LinearLayout>
 
 
-
-            <LinearLayout
+            <RelativeLayout
 
                 android:id="@+id/rl_accept_decline"
                 android:layout_width="match_parent"
@@ -342,38 +342,50 @@
                 android:layout_below="@+id/layout2"
                 android:layout_marginTop="15dp"
                 android:background="@color/colorWhite"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:orientation="horizontal">
 
                 <com.an.customfontview.CustomTextView
                     android:id="@+id/btn_arrived"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@+id/btn_open"
                     android:background="@color/blue_btn_bg_color"
-                    android:text="Arrived at Destination"
+                    android:gravity="center"
+                    android:text="Arrived at Pickup Location"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"
-                    app:textFontPath="fonts/poppins_regular.otf"
-                    />
+                    app:textFontPath="fonts/poppins_regular.otf" />
+                <!--
+                                <com.an.customfontview.CustomTextView
+                                    android:id="@+id/btn_collected"
+                                    android:layout_width="0dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:background="@color/blue_btn_bg_color"
+                                    android:gravity="center"
+                                    android:text="Arrived at Collection"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="15sp"
+                                    app:textFontPath="fonts/poppins_regular.otf" />-->
 
 
                 <com.an.customfontview.CustomTextView
                     android:id="@+id/btn_open"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:layout_weight="1"
+                    android:layout_alignParentRight="true"
                     android:background="@color/colorAccent"
-                    android:text="Collection Details"
                     android:gravity="center"
+                    android:paddingHorizontal="15dp"
+                    android:text="Collection Details"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"
                     app:textFontPath="fonts/poppins_regular.otf"
 
                     />
 
-            </LinearLayout>
+            </RelativeLayout>
 
 
         </RelativeLayout>

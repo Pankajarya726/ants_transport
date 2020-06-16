@@ -5,8 +5,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:background="@color/colorWhite"
@@ -33,7 +33,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="Pankaj"
+                    android:text=""
                     android:textColor="@color/colorBlack"
                     android:textSize="20sp"
                     app:textFontPath="fonts/poppins_regular.otf" />
@@ -62,6 +62,16 @@
                 android:orientation="horizontal"
                 android:weightSum="5">
 
+                <RatingBar
+                    android:id="@+id/simpleRatingBar"
+                    style="@style/customRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentLeft="true"
+                    android:numStars="5"
+                    android:paddingStart="2dp"
+                    android:rating="2.5" />
 
                 <com.an.customfontview.CustomButton
                     android:id="@+id/btn_detail"
@@ -129,7 +139,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="Booking ID"
+                    android:text="Distance"
                     android:textColor="@color/colorBlack"
                     android:textSize="16sp"
                     app:textFontPath="fonts/poppins_regular.otf" />
@@ -148,108 +158,88 @@
 
             </LinearLayout>
 
+
             <RelativeLayout
                 android:id="@+id/layout5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout4">
+                android:layout_below="@+id/layout4"
+                android:layout_marginTop="8dp">
 
-                <LinearLayout
-                    android:id="@+id/layout6"
+
+                <com.an.customfontview.CustomTextView
+                    android:id="@+id/txt_pickup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center|left"
+                    android:text="Pick Up"
+
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_pickup"
+                    android:layout_alignParentLeft="true"
+
+                    android:layout_marginTop="10dp"
+                    android:gravity="center|left"
+                    android:text="Drop"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+
+
+                <ImageView
+
+                    android:id="@+id/iv_pin"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@+id/txt_pickup"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/distance" />
+
+                <com.an.customfontview.CustomTextView
+                    android:id="@+id/tv_pickup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/iv_pin"
+                    android:gravity="center|left"
+                    android:minLines="1"
+                    android:textColor="@color/colorBlackGrey"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:textFontPath="fonts/poppins_regular.otf" />
+
+                <com.an.customfontview.CustomTextView
+                    android:id="@+id/tv_drop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_pickup"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <com.an.customfontview.CustomTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="top|left"
-                            android:maxLines="2"
-                            android:minLines="2"
-                            android:text="Pick Up"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="16sp"
-                            app:textFontPath="fonts/poppins_regular.otf" />
-
-                        <com.an.customfontview.CustomTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:gravity="top|left"
-                            android:maxLines="2"
-                            android:minLines="2"
-                            android:text="Drop"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="16sp"
-                            app:textFontPath="fonts/poppins_regular.otf" />
-
-
-                    </LinearLayout>
-
-                    <ImageView
-
-                        android:layout_width="10dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginBottom="15sp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/distance" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:orientation="vertical">
-
-
-                        <com.an.customfontview.CustomTextView
-                            android:id="@+id/tv_pickup"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="top|left"
-                            android:maxLines="2"
-                            android:minLines="2"
-                            android:text="@string/pickup_address"
-                            android:textColor="@color/colorBlackGrey"
-                            android:textSize="15sp"
-                            app:textFontPath="fonts/poppins_regular.otf" />
-
-                        <com.an.customfontview.CustomTextView
-                            android:id="@+id/tv_drop"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:gravity="top|left"
-                            android:maxLines="2"
-                            android:minLines="2"
-                            android:text="drop Address"
-                            android:textColor="@color/colorBlackGrey"
-                            android:textSize="15sp"
-                            app:textFontPath="fonts/poppins_regular.otf" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
+                    android:layout_toRightOf="@+id/iv_pin"
+                    android:gravity="center|left"
+                    android:minLines="1"
+                    android:textColor="@color/colorBlackGrey"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
 
             </RelativeLayout>
 
-
             <RelativeLayout
-                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout5">
+                android:layout_below="@+id/layout5"
+                android:layout_marginTop="15dp">
 
                 <com.an.customfontview.CustomTextView
                     android:id="@+id/status"
@@ -260,9 +250,9 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center|left"
                     android:text="Payment Status"
-                    android:visibility="gone"
                     android:textColor="@color/colorBlack"
                     android:textSize="16sp"
+                    android:visibility="gone"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
@@ -288,8 +278,9 @@
                     android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/tv_cost"
                     android:gravity="center|left"
-                    android:text="Cost"
+                    android:text="YOU MADE"
                     android:textColor="@color/colorGrey"
+                    android:textStyle="bold"
                     android:textSize="16sp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -300,11 +291,11 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginTop="10dp"
+                    android:background="@drawable/button_theam"
                     android:gravity="center|left"
+                    android:paddingHorizontal="10dp"
                     android:text="500"
                     android:textColor="@color/colorBlack"
-                    android:paddingHorizontal="10dp"
-                    android:background="@drawable/button_theam"
                     android:textSize="16sp"
                     app:textFontPath="fonts/poppins_regular.otf" />
             </RelativeLayout>

@@ -101,22 +101,6 @@ class NavigationAdapter(private val listener: INavigation) :
             ivNavigation.setImageResource(navigationData.drawableId)
 
             ivNavigation.tag = position
-
-          //  rl_row.setBackgroundResource(if (navigationData.isSelected) R.drawable.watch else android.R.color.transparent)
-//            tvNavigationName.setTextColor(
-//                if (navigationData.isSelected) mContext!!.resources.getColor(
-//                    R.color.colorLightGrey
-//                ) else mContext!!.resources.getColor(R.color.colorAccent)
-//            )
-//
-//            ivNavigation.setColorFilter(
-//                if (navigationData.isSelected) mContext!!.resources.getColor(
-//                    R.color.colorLightGrey
-//                ) else mContext!!.resources.getColor(R.color.colorAccent)
-//            )
-
-            //            ivNavigation.setColorFilter(mContext.getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
-
             tvNavigationName.setOnClickListener(View.OnClickListener { listener.onItemClick(position) })
 
             ivNavigation.setOnClickListener { listener.onItemClick(position) }
@@ -165,9 +149,9 @@ class NavigationAdapter(private val listener: INavigation) :
         fun bind() {
 
 
-            System.out.println(Utility.getSharedPreferences(mContext!!, Constant.NAME))
-            System.out.println(Utility.getSharedPreferences(mContext!!, Constant.MOBILE))
-            System.out.println(Utility.getSharedPreferences(mContext!!, Constant.PROFILE_IMAGE_URL))
+           Log.e(javaClass.simpleName,Utility.getSharedPreferences(mContext!!, Constant.NAME))
+            Log.e(javaClass.simpleName,Utility.getSharedPreferences(mContext!!, Constant.MOBILE))
+            Log.e(javaClass.simpleName,Utility.getSharedPreferences(mContext!!, Constant.PROFILE_IMAGE_URL))
 
 
             tv_profile_name.text = Utility.getSharedPreferences(mContext!!, Constant.NAME)

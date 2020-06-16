@@ -3,6 +3,7 @@ package com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocum
 import com.ants.driverpartner.everywhere.activity.base.BaseMainView
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import java.io.File
 
 interface DriverDocView: BaseMainView {
@@ -25,6 +26,7 @@ interface DriverDocView: BaseMainView {
     fun getDriverImage(): File?
     fun onGetVehicleCategory(responseData: OwnersVehilce)
     fun onRegisterSuccess(responseData: RegisterDriverResponse)
+    fun onGetVehicleType(responseData: VehicleCategory)
 
 
 }

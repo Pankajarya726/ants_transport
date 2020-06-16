@@ -47,8 +47,11 @@ class DriverListAdapter(
 
         val data = driverList[position]
 
+        try {
+            Picasso.with(ctx).load(data.profileImage).into(holder.itemRowBinding.imgDriver)
 
-        Picasso.with(ctx).load(data.profileImage).into(holder.itemRowBinding.imgDriver)
+        } catch (e: Exception) {
+        }
         holder.itemRowBinding.tvEmail.text = data.email
         holder.itemRowBinding.tvName.text = data.name
         holder.itemRowBinding.tvMobile.text = data.mobile
@@ -60,7 +63,7 @@ class DriverListAdapter(
 
         })
         holder.itemRowBinding.btnDelete.setOnClickListener(View.OnClickListener {
-            listener.onDeleteClick(data,position)
+            listener.onDeleteClick(data, position)
         })
 
 
@@ -76,11 +79,11 @@ class DriverListAdapter(
     }
 
 
-    interface  DriverListener{
+    interface DriverListener {
 
 
-        fun onViewClick(data:GetDriverListResponse.Data)
-        fun  onDeleteClick(data: GetDriverListResponse.Data,index: Int)
+        fun onViewClick(data: GetDriverListResponse.Data)
+        fun onDeleteClick(data: GetDriverListResponse.Data, index: Int)
 
     }
 }

@@ -13,6 +13,7 @@ import com.ants.driverpartner.everywhere.databinding.ActivityViewDriverDetailBin
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
+import java.lang.Exception
 
 class ViewDriverDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityViewDriverDetailBinding
@@ -39,7 +40,12 @@ class ViewDriverDetailActivity : AppCompatActivity() {
 
     fun initView(data: GetDriverListResponse.Data) {
 
-        Picasso.with(this).load(data.vehicleFrontImage).into(binding.imgProfile)
+        try {
+            Picasso.with(this).load(data.profileImage).into(binding.imgProfile)
+
+        }catch (e:Exception){
+
+        }
         binding.edtName.setText(data.name.toString())
         binding.edtEmail.setText ( data.email)
         binding.edtMobile.setText(data.mobile)

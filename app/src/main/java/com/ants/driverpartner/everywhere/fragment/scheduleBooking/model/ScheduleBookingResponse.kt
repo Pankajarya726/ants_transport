@@ -163,7 +163,7 @@ data class ScheduleBookingResponse(
                 @SerializedName("vehicle_category")
                 var vehicleCategory: Any? = Any(),
                 @SerializedName("weight")
-                var weight: Int = 0,
+                var weight: String = "",
                 @SerializedName("what_like_delivered")
                 var whatLikeDelivered: String = ""
             )

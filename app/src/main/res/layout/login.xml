@@ -151,7 +151,7 @@
                         android:gravity="center|left"
                         android:hint="Enter Password"
                         android:text=""
-                        android:inputType="textPassword"
+                        android:inputType="text"
                         android:maxLines="1"
                         android:padding="10dp"
                         android:textColor="@color/colorBlack"

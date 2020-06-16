@@ -9,7 +9,9 @@ import com.afollestad.materialdialogs.DialogAction
 import com.afollestad.materialdialogs.MaterialDialog
 import com.ants.driverpartner.everywhere.R
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog
+import kotlinx.android.synthetic.main.logout_dialog.view.*
 import kotlinx.android.synthetic.main.success_dialog.view.*
+import kotlinx.android.synthetic.main.success_dialog.view.tv_message
 
 object DialogUtils {
 
@@ -33,39 +35,92 @@ object DialogUtils {
     }
 
     fun showLogoutDialog(context: Context, message: String, listner: CustomDialogClick) {
-        MaterialStyledDialog.Builder(context)
-            .setIcon(R.drawable.ants_icon)
-            .withDialogAnimation(true)
-            .setCancelable(false)
-            .setDescription(message)
-            .setHeaderColor(R.color.colorAccent)
-            .setPositiveText("OK")
-            .setNegativeText("No")
-            .onNegative(
-                object : MaterialDialog.SingleButtonCallback {
-                    override fun onClick(dialog: MaterialDialog, which: DialogAction) {
 
-                        dialog.dismiss()
-                    }
-                }
-            )
-            .onPositive(
-                object : MaterialDialog.SingleButtonCallback {
-                    override fun onClick(@NonNull dialog: MaterialDialog, @NonNull which: DialogAction) {
-                        dialog.dismiss()
-                        listner.onOkClick()
-                    }
-                })
-            .show()
+        var builder: AlertDialog.Builder?
+        var dialog: AlertDialog?
+
+        var logoutView = LayoutInflater.from(context).inflate(R.layout.logout_dialog, null)
+
+        builder = AlertDialog.Builder(context)
+        builder.setCancelable(false) // if you want user to wait for some process to finish,
+        builder.setView(logoutView)
+        dialog = builder.create()
+        dialog.show()
+
+        logoutView.tv_message.text = message
+        logoutView.tv_yes.setOnClickListener(View.OnClickListener {
+            dialog.dismiss()
+            listner.onOkClick()
+        })
+        logoutView.tv_no.setOnClickListener(View.OnClickListener {
+            dialog.dismiss()
+        })
+
     }
 
 
 
+    fun showMandetoryDialog(context: Context, message: String, listner: UpdateListener) {
 
+        var builder: AlertDialog.Builder?
+        var dialog: AlertDialog?
+
+        var logoutView = LayoutInflater.from(context).inflate(R.layout.logout_dialog, null)
+
+        builder = AlertDialog.Builder(context)
+        builder.setCancelable(false) // if you want user to wait for some process to finish,
+        builder.setView(logoutView)
+        dialog = builder.create()
+        dialog.show()
+
+        logoutView.tv_message.text = message
+        logoutView.tv_yes.text = "Update"
+        logoutView.tv_yes.setOnClickListener(View.OnClickListener {
+            dialog.dismiss()
+            listner.onUpdate()
+
+
+        })
+        logoutView.tv_no.visibility= View.GONE
+
+    }
+
+    fun showNonMandetoryDialog(context: Context, message: String, listner: UpdateListener) {
+
+        var builder: AlertDialog.Builder?
+        var dialog: AlertDialog?
+
+        var logoutView = LayoutInflater.from(context).inflate(R.layout.logout_dialog, null)
+
+        builder = AlertDialog.Builder(context)
+        builder.setCancelable(false) // if you want user to wait for some process to finish,
+        builder.setView(logoutView)
+        dialog = builder.create()
+        dialog.show()
+
+        logoutView.tv_message.text = message
+        logoutView.tv_yes.text = "Update Now"
+        logoutView.tv_no.text = "Update Later"
+
+        logoutView.tv_yes.setOnClickListener(View.OnClickListener {
+            dialog.dismiss()
+            listner.onUpdate()
+        })
+        logoutView.tv_no.setOnClickListener(View.OnClickListener {
+            dialog.dismiss()
+            listner.noUpdate()
+        })
+
+    }
 
     interface CustomDialogClick {
         fun onOkClick()
     }
+    interface UpdateListener {
+        fun onUpdate()
+        fun noUpdate()
+    }
+
     fun showSuccessDialog(context: Context, message: String) {
 
 
@@ -84,7 +139,9 @@ object DialogUtils {
         view.iv_check.setOnClickListener(View.OnClickListener {
             dialog.dismiss()
         })
-
+        view.layout_check.setOnClickListener(View.OnClickListener {
+            dialog.dismiss()
+        })
 
     }
 
@@ -102,6 +159,10 @@ object DialogUtils {
 
         view.tv_message.text = message
         view.iv_check.setOnClickListener(View.OnClickListener {
+            dialog.dismiss()
+            listner.onOkClick()
+        })
+        view.layout_check.setOnClickListener(View.OnClickListener {
             dialog.dismiss()
             listner.onOkClick()
         })

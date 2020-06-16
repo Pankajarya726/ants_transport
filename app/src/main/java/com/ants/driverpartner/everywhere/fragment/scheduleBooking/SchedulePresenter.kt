@@ -64,7 +64,7 @@ class SchedulePresenter(private var view: ScheduleView, private var context: Con
                             if (responseData != null) {
                                 when (responseData.status) {
                                     0 -> {
-                                        view.validateError(responseData.message)
+                                        view.validateError("No scheduled bookings found")
                                     }
                                     1 -> {
                                         view.onGetScheduleBooking(responseData)
@@ -92,7 +92,7 @@ class SchedulePresenter(private var view: ScheduleView, private var context: Con
         }
     }
 
-    fun changeBookingStatus(bookingId: Int) {
+    fun changeBookingStatus(bookingId: Int, position: Int) {
 
 
         if (view.checkInternet()) {
@@ -145,7 +145,7 @@ class SchedulePresenter(private var view: ScheduleView, private var context: Con
                                         view.onFailure(responseData.message)
                                     }
                                     1 -> {
-                                        view.onStatusChange(responseData)
+                                        view.onStatusChange(responseData,position)
                                     }
                                     2 -> {
                                         view.onFailure(responseData.message)

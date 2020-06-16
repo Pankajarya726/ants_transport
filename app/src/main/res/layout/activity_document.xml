@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Owner Doucment"
+                android:text="Owner Documents"
                 android:textColor="@color/colorBlack"
                 android:textSize="20sp"
                 app:textFontPath="fonts/poppins_regular.otf" />
@@ -313,7 +313,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_centerVertical="false"
-                        android:text="Letter from the bank, Not older then one month!"
+                        android:text="Letter from the bank, Not older than one month!"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
                         app:textFontPath="fonts/poppins_regular.otf" />
@@ -348,7 +348,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_centerVertical="false"
-                        android:text="The most recent page of your bank statement (Not older then one month)"
+                        android:text="The most recent page of your bank statement (Not older than one month)"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
                         app:textFontPath="fonts/poppins_regular.otf" />

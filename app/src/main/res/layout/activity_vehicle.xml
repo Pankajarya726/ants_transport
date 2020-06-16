@@ -147,6 +147,7 @@
                     android:background="@drawable/rectangular_bg"
                     android:gravity="center|left"
                     android:hint="Mass"
+                    android:inputType="number"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"

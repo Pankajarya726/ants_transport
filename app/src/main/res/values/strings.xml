@@ -64,5 +64,6 @@
     <string name="current_booking_info">Current Booking Info</string>
     <string name="error_message">Something went wrong. Please try again letter!</string>
     <string name="start_navigation">Start Navigation</string>
+    <string name="logout_text">Are you sure, you want to logout?</string>
 
 </resources>

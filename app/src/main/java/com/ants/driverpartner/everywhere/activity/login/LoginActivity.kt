@@ -72,7 +72,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
             R.id.tv_signup -> showDialog()
 
             R.id.tv_forgot_password -> {
-                val intent = Intent(applicationContext, ForgotPasswordActivity::class.java)
+                val intent = Intent(this, ForgotPasswordActivity::class.java)
                 startActivity(intent)
             }
 
@@ -116,14 +116,14 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
             when (selected) {
                 dialog.findViewById(R.id.radio_owner) as RadioButton -> {
                     Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.OWNER)
-                    val intent = Intent(applicationContext, SignUpActivity::class.java)
+                    val intent = Intent(this, SignUpActivity::class.java)
                     intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
                     startActivity(intent)
                 }
 
                 dialog.findViewById(R.id.radio_partner) as RadioButton -> {
                     Utility.setSharedPreference(this, Constant.ACCOUNT_TYPE, Constant.DRIVER)
-                    val intent = Intent(applicationContext, SignUpActivity::class.java)
+                    val intent = Intent(this, SignUpActivity::class.java)
                     intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
                     startActivity(intent)
                 }
@@ -149,15 +149,15 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
     private fun login() {
 
         if (binding.edtEmail.text.toString().trim().isEmpty()) {
-            //Toast.makeText(applicationContext, "Enter Email", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Enter Email", Toast.LENGTH_LONG).show()
             binding.edtEmail.setError("Enter Email")
 
         } else if (!Utility.emailValidator(binding.edtEmail.text.toString().trim())) {
-            //Toast.makeText(applicationContext, "Invalid Email", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "Invalid Email", Toast.LENGTH_LONG).show()
             binding.edtEmail.setError("Invalid Email")
 
         } else if (binding.edtPassword.text.toString().trim().isEmpty()) {
-            Toast.makeText(applicationContext, "Enter Password", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Enter Password", Toast.LENGTH_LONG).show()
             binding.edtPassword.setError("Enter password")
         } else {
             var input = JsonObject()
@@ -223,14 +223,14 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
         when (accountType) {
             1 -> {
-                var intent = Intent(applicationContext, DriverDocActivity::class.java)
+                var intent = Intent(this, DriverDocActivity::class.java)
                 intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
                 intent.putExtra(Constant.ADDING_DRIVER, "")
                 startActivity(intent)
 
             }
             2 -> {
-                var intent = Intent(applicationContext, OwnerDocActivity::class.java)
+                var intent = Intent(this, OwnerDocActivity::class.java)
                 intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
 
                 startActivity(intent)
@@ -241,7 +241,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
     }
 
     private fun gotoHomeActivity() {
-        Utility.setSharedPreferenceBoolean(applicationContext, Constant.IS_LOGIN, true)
+        Utility.setSharedPreferenceBoolean(this, Constant.IS_LOGIN, true)
 
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
@@ -256,7 +256,7 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
     }
 
     private fun gotoVehicleActivity(accountType: Int) {
-        var intent = Intent(applicationContext, VehicleActivity::class.java)
+        var intent = Intent(this, VehicleActivity::class.java)
 
         when (accountType) {
             1 -> {
@@ -279,14 +279,14 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
         when (accountType) {
             1 -> {
 
-                var intent = Intent(applicationContext, OwnerDocActivity::class.java)
+                var intent = Intent(this, OwnerDocActivity::class.java)
                 intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
                 startActivity(intent)
             }
 
 
             2 -> {
-                var intent = Intent(applicationContext, DriverDocumentsActivity::class.java)
+                var intent = Intent(this, DriverDocumentsActivity::class.java)
                 intent.putExtra(Constant.PROFILE_TYPE, Constant.DRIVER)
                 startActivity(intent)
 

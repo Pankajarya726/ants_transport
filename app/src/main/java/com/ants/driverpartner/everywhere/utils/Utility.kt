@@ -86,6 +86,16 @@ object Utility {
         return matcher.matches()
     }
 
+    fun passwordValidator(email: String): Boolean {
+        val pattern: Pattern
+        val matcher: Matcher
+        val PASSWORD_PATTERN =
+            "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"
+        pattern = Pattern.compile(PASSWORD_PATTERN)
+        matcher = pattern.matcher(email)
+        return matcher.matches()
+    }
+
 
     fun isNetworkConnected(context: Context): Boolean {
         val connectivityManager =
@@ -114,7 +124,7 @@ object Utility {
             progressDialog = ProgressDialog(context)
         }
 
-        progressDialog!!.setMessage("Please Wait...")
+        progressDialog!!.setMessage("Please wait...")
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
     }
@@ -151,5 +161,19 @@ object Utility {
         Log.e(javaClass.simpleName, dialog!!.isShowing.toString())
 
         dialog!!.dismiss()
+    }
+
+    fun setUserName(name: String, context: Context) {
+
+        setSharedPreference(context, Constant.NAME, name)
+    }
+
+    fun setUserEmail(email: String, context: Context) {
+        setSharedPreference(context, Constant.EMAIL, email)
+
+    }
+
+    fun setUserImage(image: String, context: Context) {
+        setSharedPreference(context, Constant.PROFILE_IMAGE_URL, image)
     }
 }

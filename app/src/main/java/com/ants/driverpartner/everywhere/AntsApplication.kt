@@ -28,7 +28,7 @@ class AntsApplication : Application() {
                 val token = task.result?.token
 
                 Log.e(TAG, token!!)
-                Utility.setDeviceToken(applicationContext, Constant.D_TOKEN, token.toString())
+                Utility.setDeviceToken(this, Constant.D_TOKEN, token.toString())
 
             })
 

@@ -62,9 +62,9 @@ class DriverListActivity : BaseMainActivity(), DriverListView, DriverListAdapter
 
         val intent = Intent(this, DriverDocActivity::class.java)
         intent.putExtra(Constant.ADDING_DRIVER, Constant.ADDING_DRIVER)
-        intent.putExtra(Constant.PROFILE_TYPE,Constant.OWNER)
-
+        intent.putExtra(Constant.PROFILE_TYPE, Constant.OWNER)
         startActivity(intent)
+        this.finish()
     }
 
     override fun onGetDriverList(responseData: GetDriverListResponse) {
@@ -102,15 +102,10 @@ class DriverListActivity : BaseMainActivity(), DriverListView, DriverListAdapter
 
     override fun onDeleteClick(data: GetDriverListResponse.Data, position: Int) {
 //        presenter!!.deleteVehicle()
-
-
-    }
+            }
 
     override fun validateError(message: String) {
-
-
         com.ants.driverpartner.everywhere.utils.DialogUtils.showSuccessDialog(this, message)
-
     }
 
 

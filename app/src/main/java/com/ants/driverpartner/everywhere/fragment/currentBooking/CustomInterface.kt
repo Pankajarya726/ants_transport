@@ -4,9 +4,10 @@ interface CustomInterface {
 
     fun onCancle()
     fun onItemSelected(item: String)
-    fun onCallClick()
+    fun onCallClick(receiverPhone: String)
     fun onArrivedClick()
     fun onOpenclick()
+    fun onArrivedAtCollection()
 
 
 }

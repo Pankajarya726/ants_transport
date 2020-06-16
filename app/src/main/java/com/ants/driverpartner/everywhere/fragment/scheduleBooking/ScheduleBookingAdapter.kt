@@ -38,12 +38,11 @@ class ScheduleBookingAdapter(context:Context, scheduleList: ArrayList<ScheduleBo
         holder.binding.tvName.text = data.packageDetail.senderName
         holder.binding.tvTime.text = data.packageDetail.senderDate + " " + data.packageDetail.time
         holder.binding.tvVehicleType.text = data.packageDetail.vehicleName
-        holder.binding.tvBookingId.text = data.bookingId.toString()
+        holder.binding.tvBookingId.text = data.packageDetail.distance.toString() + " " + data.packageDetail.distanceUnit.toString()
         holder.binding.tvPickup.text = data.packageDetail.senderAddressLine1
         holder.binding.tvDrop.text = data.packageDetail.receiverAddressLine1
         holder.binding.tvStatus.text = data.isCancelledDriver.toString()
-        holder.binding.tvCost.text =
-            data.packageDetail.finalAmount.toString() + " " + data.packageDetail.currency
+        holder.binding.tvCost.text = data.packageDetail.finalAmount.toString() + " " + data.packageDetail.currency
 
 
         holder.binding.cardScheduleBooking.setOnClickListener(View.OnClickListener {
@@ -53,11 +52,16 @@ class ScheduleBookingAdapter(context:Context, scheduleList: ArrayList<ScheduleBo
 
 
         holder.binding.btnStartBooking.setOnClickListener(View.OnClickListener {
-            listener.onStartClick(data)
+            listener.onStartClick(data, position)
         })
     }
 
+    fun removeItem(position: Int) {
+        scheduleList.removeAt(position)
+        notifyDataSetChanged()
 
+
+    }
 
     class ViewHolder(binding:RowScheduleBookingBinding):RecyclerView.ViewHolder(binding.root){
         var binding = binding
@@ -66,7 +70,10 @@ class ScheduleBookingAdapter(context:Context, scheduleList: ArrayList<ScheduleBo
 
     interface ScheduleListener{
         fun onViewClick(data:ScheduleBookingResponse.Data)
-        fun onStartClick(data: ScheduleBookingResponse.Data)
+        fun onStartClick(
+            data: ScheduleBookingResponse.Data,
+            position: Int
+        )
     }
 
 }

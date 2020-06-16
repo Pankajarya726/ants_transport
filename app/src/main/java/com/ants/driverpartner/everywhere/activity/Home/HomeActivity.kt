@@ -1,6 +1,7 @@
 package com.ants.driverpartner.everywhere.activity.Home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -18,7 +19,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.an.customfontview.CustomTextView
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
+import com.ants.driverpartner.everywhere.activity.NavigationActivity.CurrentActivity
 import com.ants.driverpartner.everywhere.activity.login.LoginActivity
+import com.ants.driverpartner.everywhere.activity.signature.SignatureActivity
 import com.ants.driverpartner.everywhere.activity.webView.WebViewActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityHomeBinding
 import com.ants.driverpartner.everywhere.fragment.account.AccountFragment
@@ -30,6 +33,7 @@ import com.ants.driverpartner.everywhere.fragment.scheduleBooking.ScheduleFragme
 import com.ants.driverpartner.everywhere.utils.SnackbarUtils.snackBarBottom
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.ants.driverpartner.everywhere.utils.Utility.hideProgressbar
+
 
 class HomeActivity : AppCompatActivity(), Homeview {
 
@@ -90,7 +94,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
             return
 
         var fragment: Fragment? = null
-        val fragmentPosition = position.toString() + ""
+        val fragmentPosition = position.toString()
         var title: String? = null
 
         when (position) {
@@ -102,12 +106,21 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
             1 -> {
 
-                fragment =
-                    CurrentBookingFragment(
-                        this
-                    )
-                title = "Current Booking"
-                isActivityRefreshed = true
+//                fragment =
+//                    CurrentBookingFragment(
+//                        this
+//                    )
+//                title = "Current Booking"
+//                isActivityRefreshed = true
+
+
+                fragment = null
+                title = "FAQ"
+                openCloseDrawer()
+
+                val intent = Intent(this, CurrentActivity::class.java)
+//                val intent = Intent(this, SignatureActivity::class.java)
+                startActivity(intent)
             }
 
             2 -> {
@@ -142,7 +155,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
                 fragment = null
                 title = "FAQ"
-                var page_id = 21
+                var page_id = 6
                 openCloseDrawer()
 
                 val intent = Intent(this, WebViewActivity::class.java)
@@ -157,7 +170,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
                 fragment = null
                 title = "Terms and Conditions"
-                var page_id = 18
+                var page_id = 2
                 openCloseDrawer()
 
                 val intent = Intent(this, WebViewActivity::class.java)
@@ -172,7 +185,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
                 fragment = null
                 title = "Privacy Policy"
-                var page_id = 19
+                var page_id = 3
                 openCloseDrawer()
 
                 val intent = Intent(this, WebViewActivity::class.java)
@@ -182,6 +195,7 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
 
             }
+
 
             9 -> {
                 /**
@@ -198,6 +212,8 @@ class HomeActivity : AppCompatActivity(), Homeview {
                     .setTitle(R.string.app_name)
                     .show()
             }
+
+
         }// onResume();
         //onLogout();
 
@@ -210,8 +226,63 @@ class HomeActivity : AppCompatActivity(), Homeview {
 
     }
 
-    override fun changeFragment(i: Int) {
-        replaceFragment(i)
+    override fun changeFragment(position: Int) {
+//        replaceFragment(i)
+
+        var fragment: Fragment? = null
+        val fragmentPosition = position.toString()
+        var title: String? = null
+
+        when (position) {
+            1 -> {
+
+//                fragment =
+//                    CurrentBookingFragment(this)
+//                title = "Current Booking"
+////                isActivityRefreshed = true
+
+
+                fragment = null
+                title = "FAQ"
+                openCloseDrawer()
+
+                val intent = Intent(this, CurrentActivity::class.java)
+                startActivity(intent)
+            }
+
+            2 -> {
+                fragment =
+                    ScheduleFragment(this)
+                title = "Schedule Booking"
+                isActivityRefreshed = true
+            }
+
+            3 -> {
+                fragment = HistoryFragment(this)
+                title = "Booking History"
+                isActivityRefreshed = true
+            }
+
+            4 -> {
+                fragment = AccountFragment(this)
+                title = "Account Info"
+                isActivityRefreshed = true
+            }
+//
+            5 -> {
+                fragment = ContactFragmant(this)
+                var page_id = 13
+                title = "Contact Ants"
+                isActivityRefreshed = true
+            }
+
+        }// onResume();
+
+
+        if (fragment != null && fragmentPosition != null) {
+            replaceFragment(fragment, fragmentPosition, title!!)
+
+        }
     }
 
     fun replaceFragment(fragment: Fragment, fragmentPosition: String, title: String) {
@@ -242,8 +313,6 @@ class HomeActivity : AppCompatActivity(), Homeview {
         backPressed = false
         var isFragmentFound = true
 
-        Log.e(javaClass.simpleName, "fragmentPosition==> $fragmentPosition")
-        Log.e(javaClass.simpleName, "flag count==> " + fragmentManager!!.getBackStackEntryCount())
 
         val transaction = fragmentManager!!.beginTransaction()
 
@@ -265,7 +334,6 @@ class HomeActivity : AppCompatActivity(), Homeview {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-
                 break
             }
         }
@@ -279,7 +347,8 @@ class HomeActivity : AppCompatActivity(), Homeview {
             for (i in 0 until fragmentManager!!.getBackStackEntryCount()) {
                 fragmentManager!!.popBackStack()
             }
-            transaction.replace(R.id.frm_container, fragment).commit()
+            transaction.replace(com.ants.driverpartner.everywhere.R.id.frm_container, fragment)
+                .commit()
 
             if (isActivityRefreshed) {
                 finish()
@@ -326,6 +395,21 @@ class HomeActivity : AppCompatActivity(), Homeview {
         this.finish()
 
 
+    }
+
+    override fun doCall(phoneNumber: String) {
+
+        try {
+
+
+            var number = phoneNumber
+            var callIntent = Intent(Intent.ACTION_DIAL, Uri.parse(number))
+            startActivity(callIntent)
+        } catch (e: java.lang.Exception) {
+
+            Log.e(javaClass.simpleName, e.toString())
+            Log.e(javaClass.simpleName, e.localizedMessage)
+        }
     }
 
     override fun onBackPressed() {

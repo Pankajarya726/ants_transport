@@ -35,8 +35,12 @@ class VehicleListAdapter(vehicleList: ArrayList<GetVehicleListResponse.Data>,con
         holder.itemRowBinding.tvVehicleType.text = data.vehicleType
         holder.itemRowBinding.tvVehicleModel.text = data.model
         holder.itemRowBinding.tvVehicleNo.text = data.vehicleIdentificationNumber
-        Picasso.with(ctx).load(data.vehicleFrontImage).into(holder.itemRowBinding.imgVehicle)
 
+        try {
+            Picasso.with(ctx).load(data.vehicleFrontImage).into(holder.itemRowBinding.imgVehicle)
+        }catch (e:Exception){
+           holder.itemRowBinding.imgVehicle.setImageResource(R.drawable.ants)
+        }
 
         holder.itemRowBinding.btnView.setOnClickListener(View.OnClickListener {
 

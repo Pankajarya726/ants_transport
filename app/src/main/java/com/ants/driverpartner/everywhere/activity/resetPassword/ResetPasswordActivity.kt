@@ -13,6 +13,7 @@ import com.ants.driverpartner.everywhere.activity.otp.VerifyOtpResponse
 import com.ants.driverpartner.everywhere.base.BaseMainActivity
 import com.ants.driverpartner.everywhere.databinding.ActivityResetPasswordBinding
 import com.ants.driverpartner.everywhere.utils.DialogUtils
+import com.ants.driverpartner.everywhere.utils.Utility
 
 class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
     View.OnClickListener {
@@ -104,10 +105,12 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
                 DialogUtils.showSuccessDialog(this, "Please Enter Current Password")
             } else if (getNewPassword().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Please Enter the New Password")
-            } else if (binding.edtConfirmPassword.text.toString().isEmpty()) {
+            } else if (!Utility.passwordValidator(getNewPassword())) {
+                DialogUtils.showSuccessDialog(this, "Password Must contain at least 1 number, 1 uppercase ,1 lowercase ,1 special character and at least 6 characters")
+            } else if (binding.edtConfirmPassword.text.trim().toString().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Please Enter Confirm Password")
-            } else if (!getNewPassword().equals(binding.edtConfirmPassword.text.toString())) {
-                DialogUtils.showSuccessDialog(this, "Confirm Password not Match")
+            } else if (!getNewPassword().equals(binding.edtConfirmPassword.text.trim().toString())) {
+                DialogUtils.showSuccessDialog(this, "Passwords do not match")
             } else {
                 presenter!!.callChangePasswrodApi()
             }
@@ -118,13 +121,13 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
 
     override fun getCurrentPassword(): String {
 
-        return binding.edtCurrentPassword.text.toString()
+        return binding.edtCurrentPassword.text.trim().toString()
     }
 
 
     override fun getNewPassword(): String {
 
-        return binding.edtPassword.text.toString()
+        return binding.edtPassword.text.trim().toString()
     }
 
     override fun getEmail(): String {
@@ -148,7 +151,6 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
                     if (isForgotPass) {
                         Log.e(javaClass.simpleName + 2, isForgotPass.toString())
                         goToLoginActivity()
-                        onBackPressed()
 
                     } else {
                         Log.e(javaClass.simpleName + 3, isForgotPass.toString())
@@ -167,11 +169,11 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
 
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
-        this.finish()
+        finishAffinity()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        this.finish()
+        finish()
     }
 }

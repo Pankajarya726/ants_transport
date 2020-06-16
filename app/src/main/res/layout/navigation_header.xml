@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_profile_image"
                 android:layout_centerVertical="true"
-                android:text="Pankaj Arya"
+                android:text=""
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
                 />

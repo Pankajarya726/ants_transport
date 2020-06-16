@@ -2,21 +2,21 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.account.AccountFragment">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/splash_background"
+        android:background="@drawable/rsz_background"
         android:orientation="vertical"
+        tools:context=".fragment.account.AccountFragment"
        >
-
 
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             >
 
 
@@ -67,7 +67,66 @@
             </RelativeLayout>
 
 
-            <ScrollView
+
+            <androidx.cardview.widget.CardView
+                android:layout_below="@+id/layout_profile"
+                android:id="@+id/card_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="30dp"
+                app:cardCornerRadius="0dp"
+                app:cardBackgroundColor="@color/colorWhite"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <!-- <com.an.customfontview.CustomTextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="5dp"
+                         android:layout_toRightOf="@+id/img_profile"
+                         android:text="ACCOUNT SETTINGS"
+                         android:textColor="@color/colorBlack"
+                         android:textSize="@dimen/textview_size"
+                         app:textFontPath="fonts/poppins_regular.otf" />
+-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_account_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <com.an.customfontview.CustomTextView
+                android:id="@+id/tv_logout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:text="Log Out"
+                android:gravity="center"
+                android:layout_alignParentBottom="true"
+                android:textColor="@color/colorAccent"
+                android:background="#393e41"
+                android:textSize="@dimen/textview_size"
+                android:textStyle="bold"
+                app:textFontPath="fonts/poppins_regular.otf"/>
+
+
+          <!--  <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/layout_profile"
@@ -97,7 +156,7 @@
                             android:orientation="vertical"
                             android:padding="15dp">
 
-                            <!-- <com.an.customfontview.CustomTextView
+                            &lt;!&ndash; <com.an.customfontview.CustomTextView
                                  android:layout_width="match_parent"
                                  android:layout_height="wrap_content"
                                  android:layout_marginTop="5dp"
@@ -106,7 +165,7 @@
                                  android:textColor="@color/colorBlack"
                                  android:textSize="@dimen/textview_size"
                                  app:textFontPath="fonts/poppins_regular.otf" />
- -->
+ &ndash;&gt;
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rv_account_setting"
                                 android:layout_width="match_parent"
@@ -117,44 +176,7 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <!-- <androidx.cardview.widget.CardView
-                         android:id="@+id/card_suppord"
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_below="@+id/card_account"
-                         android:layout_marginLeft="15dp"
-                         android:layout_marginTop="15dp"
-                         android:layout_marginRight="15dp"
-                         app:cardCornerRadius="10dp">
 
-                         <LinearLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:background="@color/colorWhite"
-                             android:orientation="vertical"
-                             android:padding="15dp"
-
-                             app:cardElevation="5dp">
-
-                             <com.an.customfontview.CustomTextView
-                                 android:layout_width="match_parent"
-                                 android:layout_height="wrap_content"
-                                 android:layout_marginTop="5dp"
-                                 android:layout_toRightOf="@+id/img_profile"
-                                 android:text="SUPPORT"
-                                 android:textColor="@color/colorBlack"
-                                 android:textSize="@dimen/textview_size"
-                                 app:textFontPath="fonts/poppins_regular.otf" />
-
-                             <androidx.recyclerview.widget.RecyclerView
-                                 android:id="@+id/rv_support"
-                                 android:layout_width="match_parent"
-                                 android:layout_height="wrap_content"
-                                 android:scrollbars="none" />
-
-                         </LinearLayout>
-
-                     </androidx.cardview.widget.CardView>-->
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_about"
@@ -166,6 +188,7 @@
                         android:layout_marginRight="30dp"
                         app:cardBackgroundColor="@color/colorWhite"
                         android:layout_marginBottom="5dp"
+                        android:visibility="gone"
                         >
 
                         <RelativeLayout
@@ -177,7 +200,7 @@
 
                             app:cardElevation="5dp">
 
-                            <!--    <com.an.customfontview.CustomTextView
+                            &lt;!&ndash;    <com.an.customfontview.CustomTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
@@ -187,7 +210,7 @@
                                     android:textSize="@dimen/textview_size"
                                     app:textFontPath="fonts/poppins_regular.otf" />
 
-             -->
+             &ndash;&gt;
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rv_about"
                                 android:layout_width="match_parent"
@@ -220,7 +243,7 @@
 
 
                 </LinearLayout>
-            </ScrollView>
+            </ScrollView>-->
         </RelativeLayout>
 
 

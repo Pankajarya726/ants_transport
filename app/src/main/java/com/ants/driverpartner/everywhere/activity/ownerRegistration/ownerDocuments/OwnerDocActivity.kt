@@ -1,13 +1,11 @@
 package com.ants.driverpartner.everywhere.activity.ownerRegistration.ownerDocuments
 
-import android.Manifest
 import android.Manifest.permission.CAMERA
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.net.Uri
 import android.os.Bundle
@@ -75,7 +73,7 @@ class OwnerDocActivity : BaseMainActivity(),
 
     }
 
-    fun init(){
+    fun init() {
 
         requestPermission()
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
@@ -125,39 +123,50 @@ class OwnerDocActivity : BaseMainActivity(),
 
         if (file_id_front == null) {
 
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
 
         } else if (file_id_back == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_licence_front == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_licence_back == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_home_address == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_ownership == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_bank_letter == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else if (file_bank_statement == null) {
-            DialogUtils.showSuccessDialog(this,"Please upload all documents")
+            DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else {
 
 
+            if (title.equals(Constant.DRIVER)) {
+                DialogUtils.showCustomAlertDialog(
+                    this,
+                    "Registration Success",
+                    object : DialogUtils.CustomDialogClick {
+                        override fun onOkClick() {
+                            startLoginActivity()
+                        }
+                    })
 
-            if(title.equals(Constant.DRIVER)){
-                val intent = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(intent)
-                this.finish()
-            }else{
-                val intent = Intent(applicationContext, VehicleActivity::class.java)
-                intent.putExtra(Constant.ADDING_VEHICLE,"")
-                intent.putExtra(Constant.PROFILE_TYPE,title)
+            } else {
+                val intent = Intent(this, VehicleActivity::class.java)
+                intent.putExtra(Constant.ADDING_VEHICLE, "")
+                intent.putExtra(Constant.PROFILE_TYPE, title)
                 startActivity(intent)
                 this.finish()
             }
 
         }
+    }
+
+    private fun startLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        this.finish()
     }
 
 
@@ -204,10 +213,10 @@ class OwnerDocActivity : BaseMainActivity(),
 
     private fun checkProfilePermissions(): Boolean {
         return (checkSelfPermission(
-            applicationContext,
+            this,
             profilePermissionsRequired[0]
         ) == PERMISSION_GRANTED && checkSelfPermission(
-            applicationContext,
+            this,
             profilePermissionsRequired[1]
         ) == PERMISSION_GRANTED)
 
@@ -226,8 +235,8 @@ class OwnerDocActivity : BaseMainActivity(),
                     profilePermissionsRequired[1]
                 ))
             ) {
-                val builder = AlertDialog.Builder(applicationContext)
-                builder.setTitle("Permission request_old")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton(
                     "Grant"
@@ -249,14 +258,14 @@ class OwnerDocActivity : BaseMainActivity(),
                 builder.show()
             } else if (
                 Utility.getSharedPreferencesBoolean(
-                    applicationContext,
+                    this,
                     profilePermissionsRequired[0]
                 )
             ) {
                 //Previously Permission Request was cancelled with 'Dont Ask Again',
                 //Redirect to Settings after showing Information about why you need the permission
-                val builder = AlertDialog.Builder(applicationContext)
-                builder.setTitle("Permission request_old")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton("Grant", object : DialogInterface.OnClickListener {
                     override fun onClick(dialogInterface: DialogInterface, i: Int) {
@@ -265,7 +274,7 @@ class OwnerDocActivity : BaseMainActivity(),
 
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                         val uri =
-                            Uri.fromParts("package", applicationContext.getPackageName(), null)
+                            Uri.fromParts("package", applicationContext.packageName, null)
                         intent.data = uri
                         startActivityForResult(intent, REQUEST_PERMISSION_SETTING)
 
@@ -295,7 +304,7 @@ class OwnerDocActivity : BaseMainActivity(),
             }
 
             Utility.setSharedPreferenceBoolean(
-                applicationContext,
+                this,
                 profilePermissionsRequired[0],
                 true
             )
@@ -336,7 +345,7 @@ class OwnerDocActivity : BaseMainActivity(),
 
                     //Show Information about why you need the permission
                     val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Permission request_old")
+                    builder.setTitle("Permission request")
                     builder.setMessage("This app needs storage and camera permission for captured and save image.")
                     builder.setPositiveButton("Grant") { dialog, which ->
                         dialog.cancel()
@@ -361,7 +370,7 @@ class OwnerDocActivity : BaseMainActivity(),
 
     private fun proceedAfterPermission() {
         Toast.makeText(
-            applicationContext,
+            this,
             "We got required permissions for profile.",
             Toast.LENGTH_LONG
         ).show()
@@ -383,7 +392,7 @@ class OwnerDocActivity : BaseMainActivity(),
 
                 this.file_id_front = File(uri.path)
 
-                Glide.with(applicationContext).load(uri).into(binding.imgIdFront)
+                Glide.with(this).load(uri).into(binding.imgIdFront)
 
                 presenter!!.uploadDocument("idproof_front", file_id_front!!)
             }
@@ -391,7 +400,7 @@ class OwnerDocActivity : BaseMainActivity(),
             Constant.UploadType.ID_BACK -> {
                 binding.imgIdBack.setScaleType(ImageView.ScaleType.FIT_XY)
 
-                Glide.with(applicationContext).load(uri).into(binding.imgIdBack)
+                Glide.with(this).load(uri).into(binding.imgIdBack)
 
                 this.file_id_back = File(uri.path)
 
@@ -401,7 +410,7 @@ class OwnerDocActivity : BaseMainActivity(),
             Constant.UploadType.LICENCE_FRONT -> {
                 binding.imgLicenseFront.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgLicenseFront)
+                Glide.with(this).load(uri).into(binding.imgLicenseFront)
 
                 this.file_licence_front = File(uri.path)
 
@@ -412,7 +421,7 @@ class OwnerDocActivity : BaseMainActivity(),
 
                 binding.imgLicenseBack.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgLicenseBack)
+                Glide.with(this).load(uri).into(binding.imgLicenseBack)
 
                 this.file_licence_back = File(uri.path)
 
@@ -423,7 +432,7 @@ class OwnerDocActivity : BaseMainActivity(),
 
                 binding.imgDriverPic.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgDriverPic)
+                Glide.with(this).load(uri).into(binding.imgDriverPic)
 
                 this.file_driver = File(uri.path)
 
@@ -435,7 +444,7 @@ class OwnerDocActivity : BaseMainActivity(),
 
                 binding.imgHomeAddress.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgHomeAddress)
+                Glide.with(this).load(uri).into(binding.imgHomeAddress)
 
                 this.file_home_address = File(uri.path)
 
@@ -448,7 +457,7 @@ class OwnerDocActivity : BaseMainActivity(),
 
                 binding.imgBankLatter.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgBankLatter)
+                Glide.with(this).load(uri).into(binding.imgBankLatter)
 
                 this.file_bank_letter = File(uri.path)
 
@@ -459,7 +468,7 @@ class OwnerDocActivity : BaseMainActivity(),
 
                 binding.imgBankStatement.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgBankStatement)
+                Glide.with(this).load(uri).into(binding.imgBankStatement)
 
                 this.file_bank_statement = File(uri.path)
 
@@ -468,13 +477,13 @@ class OwnerDocActivity : BaseMainActivity(),
             }
             Constant.UploadType.OWNERSHIP -> {
 
-                binding.imgOwnership.setScaleType(ImageView.ScaleType.FIT_XY);
+                binding.imgOwnership.setScaleType(ImageView.ScaleType.FIT_XY)
 
-                Glide.with(applicationContext).load(uri).into(binding.imgOwnership)
+                Glide.with(this).load(uri).into(binding.imgOwnership)
 
                 this.file_ownership = File(uri.path)
 
-                presenter!!.uploadDocument(Constant.UploadType.OWNERSHIP, file_ownership!!)
+                presenter!!.uploadDocument("owner_license_document" ,file_ownership!!)
 
             }
         }
@@ -491,6 +500,7 @@ class OwnerDocActivity : BaseMainActivity(),
     }
 
     override fun onImageUploadSuccess(responseData: UploadImageResponse) {
-        DialogUtils.showSuccessDialog(this, responseData.message)
+        Toast.makeText(this,responseData.message,Toast.LENGTH_SHORT).show()
+//        DialogUtils.showSuccessDialog(this, responseData.message)x
     }
 }

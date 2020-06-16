@@ -6,6 +6,7 @@ import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -15,7 +16,10 @@ import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.SystemClock
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -36,6 +40,7 @@ import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.Home.Homeview
 import com.ants.driverpartner.everywhere.activity.base.BaseMainFragment
 import com.ants.driverpartner.everywhere.activity.packageDetailActivity.PackageDetailActivity
+import com.ants.driverpartner.everywhere.activity.signature.SignatureActivity
 import com.ants.driverpartner.everywhere.databinding.FragmentCurrentBookingBinding
 import com.ants.driverpartner.everywhere.fragment.currentBooking.model.GetCurrentBookingRespone
 import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ChangeBookingStatusResponse
@@ -61,36 +66,45 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
     GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,
     DirectionCallback, Currentview, CustomInterface {
 
-
     lateinit var binding: FragmentCurrentBookingBinding
-    private lateinit var mMap: GoogleMap
+    private var mMap: GoogleMap? = null
     private var mGoogleApiClient: GoogleApiClient? = null
-    private var marker: Marker? = null
-    private var marker1: Marker? = null
+
     private var bluePolyline: Polyline? = null
     private var lightBluePolyline: Polyline? = null
-    var pickupLatLng = LatLng(28.61, 77.22)
-    var dropLatLng = LatLng(28.61, 76.22)
-    var mapFragment: SupportMapFragment? = null
+    private var pickupLatLng = LatLng(28.61, 77.22)
+    private var dropLatLng = LatLng(28.61, 76.22)
+    private var mapFragment: SupportMapFragment? = null
+    private var driverLatLong = LatLng(0.0, 0.0)
+    private var previousLatLong: LatLng? = null
+    private var pickUpMarker: Marker? = null
+    private var dropMarker: Marker? = null
+    private var driverMaker: Marker? = null
+    private var pickMarkerOption: MarkerOptions? = null
+    private var dropMarkerOption: MarkerOptions? = null
+    private var driverMakerOption: MarkerOptions? = null
     var bottomSheetDialogFragment: BottomSheetDialogFragment? = null
     private var presenter: CurrentPresenter? = null
     var getData: GetCurrentBookingRespone.Data? = null
     private var bookingId = 0
-
-
+    private var arrivedAtCollection = false
     private val SMALLEST_DISPLACEMENT: Long = 5
     private var mLocationRequest: LocationRequest? = null
     val PERMISSION_REQUEST_CODE = 200
     val REQUEST_CHECK_SETTINGS = 101
+    private val MAP_ZOOM_LEVEL = 16.5f
+    private var bearing = 0.0f
+    private var isFirstTime = true
+    private var updateLocation = false
 
     private val INTERVAL = (1000 * 10).toLong()
     private val FASTEST_INTERVAL = (1000 / 2).toLong()
+    private var bookingStatus = 2
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_current_booking, container, false)
@@ -103,35 +117,89 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
 
 
     fun init() {
-        presenter!!.getCurrentBooking()
-    }
 
-
-    override fun onGetCurrentBooking(responseData: GetCurrentBookingRespone) {
-
-        bookingId = responseData.data[0].bookingId
-
-        getData = responseData.data[0]
-
-        pickupLatLng = LatLng(
-            responseData.data[0].packageDetail.senderLat.toDouble(),
-            responseData.data[0].packageDetail.senderLong.toDouble()
-        )
-        dropLatLng = LatLng(
-            responseData.data[0].packageDetail.receiverLat.toDouble(),
-            responseData.data[0].packageDetail.receiverLong.toDouble()
-        )
         chekLocationPermission()
 
 
         binding.tvBookingInfo.setOnClickListener(View.OnClickListener {
 
-            bottomSheetDialogFragment = BottomSheetFragment(this, responseData.data[0])
-            bottomSheetDialogFragment!!.show(childFragmentManager, "Bottomsheet")
+            if (getData != null) {
+                bottomSheetDialogFragment =
+                    BottomSheetFragment(this, getData!!, bookingStatus)
+                bottomSheetDialogFragment!!.show(childFragmentManager, "Bottomsheet")
+            }
+
         })
+
+//        presenter!!.getCurrentBooking()
     }
 
-    override fun onStatusChange(responseData: ChangeBookingStatusResponse) {
+
+    override fun onGetCurrentBooking(responseData: GetCurrentBookingRespone) {
+
+        Log.e(javaClass.simpleName,"onGetCurrentBooking")
+
+        bookingId = responseData.data[0].bookingId
+
+        getData = responseData.data[0]
+
+        bookingStatus = responseData.data[0].bookingStatus
+
+        if (bookingStatus == 2) {
+
+            if (driverLatLong != null) {
+                updatePickUpLatiLong(driverLatLong.latitude, driverLatLong.longitude)
+            }
+
+            updateDropLatiLong(
+                responseData.data[0].packageDetail.senderLat.toDouble(),
+                responseData.data[0].packageDetail.senderLong.toDouble()
+            )
+
+        } else {
+
+            updatePickUpLatiLong(
+                responseData.data[0].packageDetail.senderLat.toDouble(),
+                responseData.data[0].packageDetail.senderLong.toDouble()
+            )
+
+            updateDropLatiLong(
+                responseData.data[0].packageDetail.receiverLat.toDouble(),
+                responseData.data[0].packageDetail.receiverLong.toDouble()
+            )
+        }
+
+
+        pickMarkerOption = MarkerOptions().position(pickupLatLng)
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_pickup))
+
+        dropMarkerOption = MarkerOptions().position(dropLatLng)
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_drop))
+
+
+        driverMakerOption = MarkerOptions().position(driverLatLong)
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.nav_arrow)).title("You")
+
+        pickUpMarker = mMap!!.addMarker(pickMarkerOption)
+        dropMarker = mMap!!.addMarker(dropMarkerOption)
+
+        mMap!!.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                pickupLatLng,
+                Constant.MAP_ZOOM_LEVEL
+            )
+        )
+
+        drawRouteOnMap(pickupLatLng, dropLatLng)
+        updateLocation = true
+
+
+    }
+
+    override fun onStatusChange(
+        responseData: ChangeBookingStatusResponse,
+        bookingStatus: Int
+    ) {
 
         stopLocationUpdates()
 
@@ -141,13 +209,63 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
             object : DialogUtils.CustomDialogClick {
                 override fun onOkClick() {
 
-                    goToHistoryFragment()
+                    if (bookingStatus == 3) {
+                        goToSignatureFragment()
+                    } else {
+                        goToHistoryFragment()
+                    }
                 }
             })
+    }
 
+
+    override fun onUpdateStatus(message: String) {
+
+
+        Log.e(javaClass.simpleName, "Pankaj" + message)
+
+        DialogUtils.showSuccessDialog(activity!!, "Load successfully collected")
+
+
+        this.bookingStatus = 6
+
+        updatePickUpLatiLong(
+            getData!!.packageDetail.senderLat.toDouble(),
+            getData!!.packageDetail.senderLong.toDouble()
+        )
+
+        updateDropLatiLong(
+            getData!!.packageDetail.receiverLat.toDouble(),
+            getData!!.packageDetail.receiverLong.toDouble()
+        )
+
+        pickMarkerOption = MarkerOptions().position(pickupLatLng)
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_pickup))
+
+        dropMarkerOption = MarkerOptions().position(dropLatLng)
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_drop))
+
+        driverMakerOption = MarkerOptions().position(driverLatLong)
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.nav_arrow)).title("You")
+
+        pickUpMarker = mMap!!.addMarker(pickMarkerOption)
+        dropMarker = mMap!!.addMarker(dropMarkerOption)
+        mMap!!.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                pickupLatLng,
+                Constant.MAP_ZOOM_LEVEL
+            )
+        )
+        drawRouteOnMap(pickupLatLng, dropLatLng)
     }
 
     override fun onLocationChanged(location: Location?) {
+
+        Log.e(
+            javaClass.simpleName,
+            "Latitude : " + location!!.latitude + "Longitude :" + location!!.longitude
+        )
+
         if (location != null) {
             updateDriverLocation(location)
         }
@@ -169,18 +287,108 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
 
     }
 
-    override fun onCallClick() {
+    fun goToSignatureFragment() {
+
+//        view.changeFragment(10)
+
+        var intent = Intent(activity!!, SignatureActivity::class.java)
+        intent.putExtra(Constant.BOOKING_ID, bookingId)
+
+        startActivityForResult(intent, 101)
+
+    }
+
+    override fun onCallClick(receiverPhone: String) {
         if (getData != null) {
             bottomSheetDialogFragment!!.dismiss()
+
+
+            if (receiverPhone != null) {
+                view.doCall(receiverPhone)
+            }
+
+
         }
 
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        Utility.log(javaClass.simpleName, requestCode.toString())
+        Utility.log(javaClass.simpleName, resultCode.toString())
+        Utility.log(javaClass.simpleName, data!!.getData().toString())
+
+        if (resultCode == RESULT_OK) {
+
+
+            Utility.log(javaClass.simpleName, data!!.getData().toString())
+            goToHistoryFragment()
+
+            /*  DialogUtils.showCustomAlertDialog(
+                  activity!!,
+                  data!!.getData().toString(),
+                  object : DialogUtils.CustomDialogClick {
+                      override fun onOkClick() {
+                          view.changeFragment(3)
+
+                      }
+                  }
+              )*/
+        }
     }
 
     override fun onArrivedClick() {
         bottomSheetDialogFragment!!.dismiss()
         if (getData != null) {
-            presenter!!.changeBookingStatus(getData!!.bookingId)
+
+
+            var input = JsonObject()
+            input.addProperty(
+                "userid",
+                Utility.getSharedPreferences(context!!, Constant.USER_ID).toString()
+            )
+            input.addProperty(
+                "booking_id",
+                getData!!.bookingId
+            )
+
+
+            input.addProperty(
+                "booking_status",
+                3
+            )
+
+
+//            goToSignatureFragment()
+
+            presenter!!.changeBookingStatus(input, 3)
         }
+    }
+
+
+    override fun onArrivedAtCollection() {
+
+        bottomSheetDialogFragment!!.dismiss()
+
+
+        var input = JsonObject()
+        input.addProperty(
+            "userid",
+            Utility.getSharedPreferences(context!!, Constant.USER_ID).toString()
+        )
+        input.addProperty(
+            "booking_id",
+            getData!!.bookingId
+        )
+
+
+
+        pickUpMarker!!.remove()
+        dropMarker!!.remove()
+
+        presenter!!.updateBookingStatus(input)
+
     }
 
     override fun onOpenclick() {
@@ -195,6 +403,7 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
             val intent = Intent(activity!!, PackageDetailActivity::class.java)
 
             intent.putExtra(Constant.PACKAGE_DETAIL, packageDetail)
+            intent.putExtra(Constant.FROM, 3)
             startActivity(intent)
 
         }
@@ -217,15 +426,11 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
                 activity!!,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                activity!!,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                activity!!, Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-
-
             Log.e(javaClass.simpleName, "Premission Granted")
 
-            createLocationRequest()
             mGoogleApiClient = GoogleApiClient.Builder(activity!!)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -253,17 +458,17 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
         if (!gps_enabled && !network_enabled) {
             //        if (!gps_enabled) {
             //        if (!network_enabled) {
-            displayLocationSettingsRequest(activity!!.applicationContext)
+            displayLocationSettingsRequest(activity!!)
         } else if (!checkPermissions()) {
             requestPermission()
         } else {
 
 
             if (ActivityCompat.checkSelfPermission(
-                    activity!!.applicationContext,
+                    activity!!,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) !== PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    activity!!.applicationContext,
+                    activity!!,
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) !== PackageManager.PERMISSION_GRANTED
             ) {
@@ -282,23 +487,21 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
                 this
             )
 
-
-
             Log.e(javaClass.simpleName, "Location update started ..............: ")
         }
     }
 
+
     private fun checkPermissions(): Boolean {
         val permissionState =
-            ActivityCompat.checkSelfPermission(activity!!.applicationContext, ACCESS_FINE_LOCATION)
+            ActivityCompat.checkSelfPermission(activity!!, ACCESS_FINE_LOCATION)
+
         return permissionState == PackageManager.PERMISSION_GRANTED
     }
 
     private fun requestPermission() {
+
         if (!checkProfilePermissions()) {
-            Log.e("Permission ", "Not Granted")
-
-
             if ((ActivityCompat.shouldShowRequestPermissionRationale(
                     activity!!,
                     Constant.profilePermissionsRequired[2]
@@ -309,13 +512,16 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
             ) {
 
                 val builder = AlertDialog.Builder(activity!!)
-                builder.setTitle("Permission request_old")
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs Location permission to access your location")
                 builder.setPositiveButton("Grant") { dialogInterface, i ->
                     dialogInterface.cancel()
                     ActivityCompat.requestPermissions(
                         activity!!,
-                        Constant.profilePermissionsRequired,
+                        arrayOf(
+                            Constant.profilePermissionsRequired[2],
+                            Constant.profilePermissionsRequired[3]
+                        ),
                         Constant.PROFILE_PERMISSION_CALLBACK
                     )
                 }
@@ -336,7 +542,7 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
                 //Previously Permission Request was cancelled with 'Dont Ask Again',
                 //Redirect to Settings after showing Information about why you need the permission
                 val builder = AlertDialog.Builder(activity!!)
-                builder.setTitle("Permission request_old")
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton("Grant", object : DialogInterface.OnClickListener {
                     override fun onClick(dialogInterface: DialogInterface, i: Int) {
@@ -369,7 +575,10 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
                 //just request_old the permission
                 ActivityCompat.requestPermissions(
                     activity!!,
-                    Constant.profilePermissionsRequired,
+                    arrayOf(
+                        Constant.profilePermissionsRequired[2],
+                        Constant.profilePermissionsRequired[3]
+                    ),
                     Constant.PROFILE_PERMISSION_CALLBACK
                 )
             }
@@ -382,6 +591,7 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
 
         } else {
 
+
             mGoogleApiClient = GoogleApiClient.Builder(activity!!)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -392,6 +602,101 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
         }
     }
 
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            PERMISSION_REQUEST_CODE -> if (grantResults.size > 0) {
+                val locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
+
+                if (locationAccepted) {
+                    allowedLocation()
+
+//                    presenter!!.getCurrentBooking()
+                } else {
+                    deniedLocation()
+
+
+                    showMessageOK("Permission Denied, You cannot access location data",
+                        DialogInterface.OnClickListener { dialog, which ->
+                            Log.e(javaClass.simpleName, "GOTO settings")
+
+                            val intent = Intent()
+                            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                            val uri = Uri.fromParts("package", activity!!.packageName, null)
+                            intent.data = uri
+                            startActivity(intent)
+                        })
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (shouldShowRequestPermissionRationale(ACCESS_FINE_LOCATION)) {
+                            showMessageOKCancel("You need to allow access to both the permissions",
+                                DialogInterface.OnClickListener { dialog, which ->
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                        requestPermissions(
+                                            arrayOf(ACCESS_FINE_LOCATION),
+                                            PERMISSION_REQUEST_CODE
+                                        )
+                                    }
+                                })
+                            return
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    private fun showMessageOKCancel(message: String, okListener: DialogInterface.OnClickListener) {
+        AlertDialog.Builder(activity!!)
+            .setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton("OK", okListener)
+            .setNegativeButton("Cancel", null)
+            .create()
+            .show()
+    }
+
+    private fun showgotoSettingDialog() {
+        DialogUtils.showCustomAlertDialog(activity!!,
+            "Permission Denied, You cannot access location data",
+            object : DialogUtils.CustomDialogClick {
+                override fun onOkClick() {
+                    Log.e(javaClass.simpleName, "GOTO settings")
+
+                    val intent = Intent()
+                    intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                    val uri = Uri.fromParts("package", activity!!.packageName, null)
+                    intent.data = uri
+                    startActivity(intent)
+
+
+                }
+            })
+
+
+    }
+
+    private fun showMessageOK(message: String, okListener: DialogInterface.OnClickListener) {
+        AlertDialog.Builder(activity!!)
+            .setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton("OK", okListener)
+            .create()
+            .show()
+    }
+
+    fun allowedLocation() {
+        Log.e(javaClass.simpleName, "allowedLocation")
+    }
+
+    fun deniedLocation() {
+        Log.e(javaClass.simpleName, "deniedLocation")
+    }
 
     private fun checkProfilePermissions(): Boolean {
 
@@ -410,36 +715,40 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
         Log.e(javaClass.simpleName, "onMapReady")
         mMap = googleMap
 
-        mMap.mapType = GoogleMap.MAP_TYPE_NORMAL
-        mMap.uiSettings.isMapToolbarEnabled = false
-        mMap.isTrafficEnabled = false
-
-        mMap.isMyLocationEnabled = true
-
-
-        val markerOptions = MarkerOptions().position(pickupLatLng)
-            .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_pickup))
-            .title("Begin Current Trip Navigation")
-        val markerOptions1 = MarkerOptions().position(dropLatLng)
-            .icon(BitmapDescriptorFactory.fromResource(R.drawable.location_drop)).title("Drop")
+        mMap!!.mapType = GoogleMap.MAP_TYPE_NORMAL
+        mMap!!.uiSettings.isMapToolbarEnabled = false
+        mMap!!.isTrafficEnabled = false
+        mMap!!.isMyLocationEnabled = false
 
 
+    }
 
-        marker = mMap.addMarker(markerOptions)
+    private fun updateDriverLatLong(latitude: Double, longitude: Double) {
 
-        marker1 = mMap.addMarker(markerOptions1)
+        driverLatLong = LatLng(latitude, longitude)
 
+    }
 
+    private fun updatePickUpLatiLong(latitude: Double, longitude: Double) {
 
-        mMap.animateCamera(
-            CameraUpdateFactory.newLatLngZoom(
-                pickupLatLng,
-                Constant.MAP_ZOOM_LEVEL
-            )
-        )
-        drawRouteOnMap(pickupLatLng, dropLatLng)
+        pickupLatLng = LatLng(latitude, longitude)
 
 
+    }
+
+    private fun updateDropLatiLong(latitude: Double, longitude: Double) {
+        dropLatLng = LatLng(latitude, longitude)
+    }
+
+    private fun onUpdateDriverMarker(newPosition: LatLng) {
+        if (driverMaker == null) {
+
+            driverMakerOption = MarkerOptions().position(driverLatLong)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.nav_arrow))
+            driverMaker = mMap!!.addMarker(driverMakerOption!!.position(newPosition))
+        } else {
+            driverMaker!!.setPosition(newPosition)
+        }
     }
 
 
@@ -461,12 +770,12 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
         /**
          * Set marker for driver
          */
-        //  onUpdateDriverMarker(currentLatLng)
+        onUpdateDriverMarker(driverLatLong)
 
         /**
          * Set marker for user/customer
          */
-        //  onUpdateUserMarker(dropLatLng)
+//          onUpdateUserMarker(dropLatLng)
 
 
         if (direction.isOK) {
@@ -485,7 +794,7 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
 
 
 
-            bluePolyline = mMap.addPolyline(
+            bluePolyline = mMap!!.addPolyline(
                 DirectionConverter.createPolyline(
                     activity!!,
                     directionPositionList,
@@ -493,7 +802,7 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
                     Color.parseColor("#2196F3")
                 )
             )
-            lightBluePolyline = mMap.addPolyline(
+            lightBluePolyline = mMap!!.addPolyline(
                 DirectionConverter.createPolyline(
                     activity!!,
                     directionPositionList,
@@ -501,8 +810,34 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
                     Color.parseColor("#702196F3")
                 )
             )
+
             animatePolyLine(directionPositionList, bluePolyline!!, lightBluePolyline!!)
 
+            if (previousLatLong != null) {
+
+
+                animateMarkerAndZoomCamera(
+                    mMap!!,
+                    driverMaker,
+                    previousLatLong!!,
+                    driverLatLong,
+                    MAP_ZOOM_LEVEL
+                )
+
+                previousLatLong = driverLatLong
+
+
+            } else {
+
+                previousLatLong = driverLatLong
+                animateMarkerAndZoomCamera(
+                    mMap!!,
+                    driverMaker,
+                    previousLatLong!!,
+                    driverLatLong,
+                    MAP_ZOOM_LEVEL
+                )
+            }
 
         } else {
             //            Log.view(TAG, direction.getErrorMessage());
@@ -514,31 +849,37 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
     override fun onDirectionFailure(t: Throwable) {
         Log.e(javaClass.simpleName, "onDirectionSuccess : " + t.localizedMessage!!)
 
-
     }
 
     override fun onConnected(p0: Bundle?) {
-        mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 
+        Log.e(javaClass.simpleName, "Connected")
+
+
+        mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment!!.getMapAsync(this)
 
+        createLocationRequest()
         startLocationUpdates()
+
+        presenter!!.getCurrentBooking()
+
 
     }
 
-
     override fun onConnectionFailed(p0: ConnectionResult) {
 
-
+        Log.e(javaClass.simpleName, "onConnectionFailed")
     }
 
     override fun onConnectionSuspended(p0: Int) {
 
-        Log.e(javaClass.simpleName, "" + p0)
+        Log.e(javaClass.simpleName, "onConnectionSuspended : " + p0)
     }
 
     override fun validateError(message: String) {
 
+        Log.e(javaClass.simpleName,"validateError1")
         DialogUtils.showSuccessDialog(activity!!, message)
 
     }
@@ -611,6 +952,103 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
 
     }
 
+    fun animateMarkerAndZoomCamera(
+        googleMap: GoogleMap,
+        marker: Marker?,
+        previousLatLng: LatLng,
+        currentLatLng: LatLng?,
+        MAP_ZOOM_LEVEL: Float
+    ) {
+        if (marker != null && currentLatLng != null) {
+            val handler = Handler()
+            val start = SystemClock.uptimeMillis()
+            val proj = googleMap.projection
+            val startPoint = proj.toScreenLocation(marker.position)
+            val startLatLng = proj.fromScreenLocation(startPoint)
+            val duration: Long = 1000
+
+            val interpolator = LinearInterpolator()
+
+            try {
+                handler.post(object : Runnable {
+                    override fun run() {
+                        val elapsed = SystemClock.uptimeMillis() - start
+                        val t = interpolator.getInterpolation(elapsed.toFloat() / duration)
+                        val lng = t * currentLatLng.longitude + (1 - t) * startLatLng.longitude
+                        val lat = t * currentLatLng.latitude + (1 - t) * startLatLng.latitude
+                        //                    marker.setPosition(new LatLng(lat, lng));
+
+                        val poitLat = LatLng(lat, lng)
+                        bearing = bearingBetweenLocations(previousLatLng, poitLat).toFloat()
+                        marker.setPosition(poitLat)
+                        marker.setAnchor(0.5f, 0.5f)
+                        marker.isDraggable = true
+
+                        if (t < 1.0) {
+                            /**
+                             * Post again 16ms later.
+                             */
+                            handler.postDelayed(this, 16)
+                        } else {
+
+
+                            //                        marker.setRotation(bearing);
+                            val cameraPosition = CameraPosition.Builder()
+                                .target(currentLatLng)             // Sets the center of the map to current location
+                                .zoom(MAP_ZOOM_LEVEL)                   // Sets the zoom
+                                .bearing(bearing) // Sets the orientation of the camera to east
+                                .tilt(45f)                   // Sets the tilt of the camera to 0 degrees
+                                .build()                   // Creates a CameraPosition from the builder
+                            googleMap.animateCamera(
+                                CameraUpdateFactory.newCameraPosition(
+                                    cameraPosition
+                                )
+                            )
+
+                            isFirstTime = false
+
+                        }
+                    }
+                })
+            } catch (e: Exception) {
+                Log.e(javaClass.simpleName, e.localizedMessage)
+            }
+
+
+
+            if (isFirstTime) {
+                googleMap.animateCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        currentLatLng,
+                        MAP_ZOOM_LEVEL
+                    )
+                )
+            }
+
+
+        }
+
+    }
+
+    fun bearingBetweenLocations(sourceLatLng: LatLng, destination: LatLng): Double {
+
+        val begin = Location(LocationManager.NETWORK_PROVIDER)
+        begin.latitude = sourceLatLng.latitude
+        begin.longitude = sourceLatLng.longitude
+
+        val end = Location(LocationManager.NETWORK_PROVIDER)
+        end.latitude = destination.latitude
+        end.longitude = destination.longitude
+
+
+        val bearing = begin.bearingTo(end)
+        //        bearing = (bearing > 0) ? bearing : 0;
+        Log.e(javaClass.simpleName, "BEARING : $bearing")
+
+        return bearing.toDouble()
+
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -620,6 +1058,8 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
     }
 
     fun stopLocationUpdates() {
+
+        updateLocation = false
         try {
             if (mGoogleApiClient != null) {
                 LocationServices.FusedLocationApi.removeLocationUpdates(
@@ -636,20 +1076,37 @@ class CurrentBookingFragment(private var view: Homeview) : BaseMainFragment(), O
     }
 
     fun updateDriverLocation(mCurrentLocation: Location) {
-        var json = JsonObject()
-        json.addProperty(
-            "userid",
-            Utility.getSharedPreferences(activity!!.applicationContext, Constant.USER_ID)
-        )
-        json.addProperty("latitude", mCurrentLocation.latitude)
-        json.addProperty("longitude", mCurrentLocation.longitude)
-        json.addProperty("booking_id", bookingId)
 
-        presenter!!.updateDriverLatLong(json)
+        updateDriverLatLong(mCurrentLocation.latitude, mCurrentLocation.longitude)
+
+        if (updateLocation) {
+            var json = JsonObject()
+            json.addProperty(
+                "userid",
+                Utility.getSharedPreferences(activity!!, Constant.USER_ID)
+            )
+            json.addProperty("latitude", mCurrentLocation.latitude)
+            json.addProperty("longitude", mCurrentLocation.longitude)
+            json.addProperty("booking_id", bookingId)
+            presenter!!.updateDriverLatLong(json)
+
+
+        }
+        if (mMap != null) {
+            /**
+             * Draw on map
+             */
+            if (driverLatLong != null && dropLatLng != null) {
+                drawRouteOnMap(pickupLatLng, dropLatLng)
+
+            }
+
+        } else {
+            Toast.makeText(activity!!, "Initializing map, Please wait...", Toast.LENGTH_SHORT)
+                .show()
+        }
 
     }
-
-
 
 
     override fun onPause() {

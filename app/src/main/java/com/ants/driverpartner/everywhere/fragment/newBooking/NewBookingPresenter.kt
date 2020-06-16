@@ -77,11 +77,14 @@ class NewBookingPresenter(private var view: NewBookingView, private var context:
                         }
                     }
 
-                }, { error ->
+                }/* { error ->
+
+
+                    Log.e("Errors ",error.toString())
                     view.hideProgressbar()
 //                    Utility.hideDialog()
                     view.validateError(context.getString(R.string.error_message))
-                })
+                }*/)
 
 
         } else {

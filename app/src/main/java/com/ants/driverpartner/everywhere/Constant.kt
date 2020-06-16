@@ -13,6 +13,7 @@ interface Constant {
     }
 
     companion object {
+        val FROM = "FROM"
         val LOGIN_TYPE = "LOGIN_TYPE"
         val FORGOT_PASSWORD = "FORGOT_PASSWORD"
         val ADDING_DRIVER = "ADDING_DRIVER"
@@ -34,10 +35,10 @@ interface Constant {
         val RC_SIGN_IN = 101
         val isLogEnable = true
         val PROFILE_PERMISSION_CALLBACK = 111
-        val MAP_ZOOM_LEVEL = 14.0f
+        val MAP_ZOOM_LEVEL = 8.0f
         val REQUEST_PERMISSION_SETTING = 333
         val profilePermissionsRequired =
-            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.CALL_PHONE)
         val CURRENCY = "R"
         /**
          * Shared preference constant data

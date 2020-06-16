@@ -6,6 +6,7 @@ import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.RegisterDriverResponse
+import com.ants.driverpartner.everywhere.activity.ownerRegistration.vehicleInformation.model.VehicleCategory
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.google.gson.JsonObject
 import com.tekzee.mallortaxi.network.ApiClient
@@ -14,6 +15,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
@@ -27,6 +29,63 @@ class DriverDocPresenter(private var view: DriverDocView, context: Context) {
             disposable!!.dispose()
         }
     }
+
+    fun getVechicleCategory() {
+
+        if (view.checkInternet()) {
+            view.showProgressbar()
+
+            val user_id = RequestBody.create(
+                MultipartBody.FORM,
+                Utility.getSharedPreferences(context!!, Constant.USER_ID).toString()
+            )
+
+            var headers = HashMap<String, String?>()
+
+            headers["api-key"] =
+                Utility.getSharedPreferences(context!!, Constant.API_KEY)
+
+            disposable = ApiClient.instance.getVehicleCategory(headers, user_id.toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response: Response<VehicleCategory> ->
+                    view.hideProgressbar()
+                    val responseCode = response.code()
+                    when (responseCode) {
+                        200 -> {
+                            val responseData: VehicleCategory? = response.body()
+                            Log.e(javaClass.simpleName, response.body().toString())
+
+                            if (responseData != null) {
+                                when (responseData.status) {
+                                    0 -> {
+                                        view.validateError(responseData.message)
+                                    }
+                                    1 -> {
+                                        view.onGetVehicleType(responseData)
+                                    }
+                                    2 -> {
+                                        view.validateError(responseData.message)
+                                    }
+                                }
+                            } else {
+                                view.validateError("Something went wrong!")
+                            }
+
+                        }
+                    }
+                }, { error ->
+                    view.hideProgressbar()
+                    view.validateError(context!!.getString(R.string.error_message))
+                })
+
+
+        } else {
+            view.validateError("Please Check Internet Connection!")
+        }
+
+    }
+
 
     fun getOwnerVehicel() {
 
@@ -105,6 +164,7 @@ class DriverDocPresenter(private var view: DriverDocView, context: Context) {
 
             val idproofFrontFile =
                 view.getIdProofFrontImage()!!.asRequestBody("image/jpeg".toMediaTypeOrNull())
+
             val idproofFrontImage = MultipartBody.Part.createFormData(
                 "idproof_front",
                 "image_" + System.currentTimeMillis() + ".jpg",
@@ -135,6 +195,8 @@ class DriverDocPresenter(private var view: DriverDocView, context: Context) {
                 driverLicenseBackFile
             )
 
+
+
             val proofHomeAddFile =
                 view.getHomeAddressImage()!!.asRequestBody("image/jpeg".toMediaTypeOrNull())
             val proofHomeAddImage = MultipartBody.Part.createFormData(
@@ -161,8 +223,16 @@ class DriverDocPresenter(private var view: DriverDocView, context: Context) {
 
             val profileFile =
                 view.getDriverImage()!!.asRequestBody("image/jpeg".toMediaTypeOrNull())
+
             val profileImage = MultipartBody.Part.createFormData(
                 "profile",
+                "image_" + System.currentTimeMillis() + ".jpg",
+                profileFile
+            )
+
+
+            val proffesionalDriverFace = MultipartBody.Part.createFormData(
+                "proffesional_driver_face",
                 "image_" + System.currentTimeMillis() + ".jpg",
                 profileFile
             )
@@ -192,7 +262,8 @@ class DriverDocPresenter(private var view: DriverDocView, context: Context) {
                 proofHomeAddImage,
                 bankLetterImage,
                 bankStatementImage,
-                profileImage
+                profileImage,
+                proffesionalDriverFace
 
             )
                 .subscribeOn(Schedulers.io())

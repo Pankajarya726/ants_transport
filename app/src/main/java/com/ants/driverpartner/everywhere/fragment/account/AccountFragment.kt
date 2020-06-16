@@ -3,13 +3,13 @@ package com.ants.driverpartner.everywhere.fragment.account
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ants.driverpartner.everywhere.Constant
 import com.ants.driverpartner.everywhere.R
 import com.ants.driverpartner.everywhere.activity.Home.Homeview
@@ -39,15 +39,6 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
     internal var aboutList: MutableList<AccountSetting> = ArrayList()
 
 
-    //    companion object{
-//        fun getInstance(view:Homeview){
-//
-//            return AccountFragment()
-//        }
-//
-//    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,15 +54,20 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
     private fun init() {
 
         loadAccountSettingList()
-        loadAboutList()
+        //loadAboutList()
 
         binding.tvEmail.text = Utility.getSharedPreferences(activity!!, Constant.EMAIL)
         binding.tvName.text = Utility.getSharedPreferences(activity!!, Constant.NAME)
 
+        try {
+            Picasso.with(activity)
+                .load(Utility.getSharedPreferences(activity!!, Constant.PROFILE_IMAGE_URL))
+                .into(binding.imgProfile)
+        } catch (e: Exception) {
+            Log.e(javaClass.simpleName, e.localizedMessage)
 
-        Picasso.with(activity)
-            .load(Utility.getSharedPreferences(activity!!, Constant.PROFILE_IMAGE_URL))
-            .into(binding.imgProfile)
+
+        }
 
 
         binding.tvLogout.setOnClickListener(View.OnClickListener {
@@ -116,7 +112,7 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
             getString(R.string.abount_ants) -> {
 
                 var title = getString(R.string.abount_ants)
-                var page_id = 20
+                var page_id = 4
 
                 val intent = Intent(activity!!, WebViewActivity::class.java)
                 intent.putExtra(Constant.WEB_VIEW_TITLE, title)
@@ -125,7 +121,7 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
                 startActivity(intent)
             }
 
-            getString(R.string.contact_ants)->{
+            getString(R.string.contact_ants) -> {
 
 
                 view.changeFragment(5)
@@ -137,7 +133,7 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
 
 
                 var title = "FAQ"
-                var page_id = 21
+                var page_id = 6
 
                 val intent = Intent(activity!!, WebViewActivity::class.java)
                 intent.putExtra(Constant.WEB_VIEW_TITLE, title)
@@ -149,7 +145,7 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
             getString(R.string.term_condition) -> {
 
                 var title = "Terms and Conditions"
-                var page_id = 18
+                var page_id = 2
 
                 val intent = Intent(activity!!, WebViewActivity::class.java)
                 intent.putExtra(Constant.WEB_VIEW_TITLE, title)
@@ -162,7 +158,7 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
             getString(R.string.privacy_policy) -> {
 
                 var title = "Privacy Policy"
-                var page_id = 19
+                var page_id = 3
                 val intent = Intent(activity!!, WebViewActivity::class.java)
                 intent.putExtra(Constant.WEB_VIEW_TITLE, title)
                 intent.putExtra(Constant.WEB_VIEW_PAGE_ID, page_id)
@@ -186,29 +182,29 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
     }
 
 
-    private fun loadAboutList() {
-
-
-        val about_array = getResources().getStringArray(R.array.about_array)
-        val img_array_about =
-            getResources().obtainTypedArray(R.array.img_array_about)
-
-        for (i in about_array.indices) {
-            val accountSetting = AccountSetting()
-            accountSetting.settingName = about_array[i]
-            accountSetting.settingImgae = img_array_about.getResourceId(i, -1)
-            aboutList.add(accountSetting)
-        }
-
-        val adapter = activity?.let { AccountSettingAdapter(aboutList, it, this) }
-        binding.rvAbout.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
-        binding.rvAbout.hasFixedSize()
-        binding.rvAbout.adapter = adapter
-        if (adapter != null) {
-            adapter.notifyDataSetChanged()
-        }
-
-    }
+//    private fun loadAboutList() {
+//
+//
+//        val about_array = getResources().getStringArray(R.array.about_array)
+//        val img_array_about =
+//            getResources().obtainTypedArray(R.array.img_array_about)
+//
+//        for (i in about_array.indices) {
+//            val accountSetting = AccountSetting()
+//            accountSetting.settingName = about_array[i]
+//            accountSetting.settingImgae = img_array_about.getResourceId(i, -1)
+//            aboutList.add(accountSetting)
+//        }
+//
+//        val adapter = activity?.let { AccountSettingAdapter(aboutList, it, this) }
+//        binding.rvAbout.layoutManager = LinearLayoutManager(activity) as RecyclerView.LayoutManager?
+//        binding.rvAbout.hasFixedSize()
+//        binding.rvAbout.adapter = adapter
+//        if (adapter != null) {
+//            adapter.notifyDataSetChanged()
+//        }
+//
+//    }
 
 
     private fun loadAccountSettingList() {
@@ -220,9 +216,24 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
 
         for (i in account_setting_array.indices) {
             val accountSetting = AccountSetting()
-            accountSetting.settingName = account_setting_array[i]
-            accountSetting.settingImgae = img_array_account.getResourceId(i, -1)
-            accountSettingList.add(accountSetting)
+
+
+
+            if(Constant.DRIVER==Utility.getSharedPreferences(activity!!,Constant.ACCOUNT_TYPE)){
+                accountSetting.settingName = account_setting_array[i]
+                accountSetting.settingImgae = img_array_account.getResourceId(i, -1)
+
+                if(accountSetting.settingName!=activity!!.getString(R.string.driver_information)){
+                    accountSettingList.add(accountSetting)
+                }
+
+            }else{
+                accountSetting.settingName = account_setting_array[i]
+                accountSetting.settingImgae = img_array_account.getResourceId(i, -1)
+                accountSettingList.add(accountSetting)
+            }
+
+
         }
 
 
@@ -249,10 +260,25 @@ class AccountFragment(private var view: Homeview) : BaseMainFragment(),
             "Are you sure, you want to logout?",
             object : DialogUtils.CustomDialogClick {
                 override fun onOkClick() {
-                   view.logout()
+                    view.logout()
 
                 }
             })
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        try {
+            Picasso.with(activity)
+                .load(Utility.getSharedPreferences(activity!!, Constant.PROFILE_IMAGE_URL))
+                .into(binding.imgProfile)
+        } catch (e: Exception) {
+            Log.e(javaClass.simpleName, e.localizedMessage)
+
+
+        }
 
     }
 

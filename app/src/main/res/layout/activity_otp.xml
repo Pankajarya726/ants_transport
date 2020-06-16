@@ -38,175 +38,182 @@
                 android:src="@drawable/arrow_back" />
 
         </RelativeLayout>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/img_mobile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/sms" />
 
-            <ImageView
-                android:id="@+id/img_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
-                android:src="@drawable/sms" />
+        <LinearLayout
+            android:id="@+id/layout_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter OTP"
+                android:textColor="@color/colorBlack"
+                android:textSize="20sp"
+                app:textFontPath="fonts/poppins_regular.otf" />
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Please enter the four digit code"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:textFontPath="fonts/poppins_regular.otf" />
+
+            <com.an.customfontview.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sent via Email to reset your password"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                app:textFontPath="fonts/poppins_regular.otf" />
+
 
             <LinearLayout
-                android:id="@+id/layout_otp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <com.an.customfontview.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Enter OTP"
+                <com.an.customfontview.CustomEditText
+                    android:id="@+id/et_pin_box_1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:padding="8dp"
                     android:textColor="@color/colorBlack"
-                    android:textSize="20sp"
-                    app:textFontPath="fonts/poppins_regular.otf" />
+                    android:textColorHint="#fff"
+                    android:textSize="18sp" />
 
-                <com.an.customfontview.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Please enter the four digit code"
+                <com.an.customfontview.CustomEditText
+                    android:id="@+id/et_pin_box_2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:padding="8dp"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
-                    app:textFontPath="fonts/poppins_regular.otf" />
+                    android:textColorHint="#fff"
+                    android:textSize="18sp" />
 
-                <com.an.customfontview.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="sent via Email to reset your password"
+                <com.an.customfontview.CustomEditText
+                    android:id="@+id/et_pin_box_3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:padding="8dp"
                     android:textColor="@color/colorBlack"
-                    android:textSize="18sp"
-                    app:textFontPath="fonts/poppins_regular.otf" />
+                    android:textColorHint="#fff"
+                    android:textSize="18sp" />
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <com.an.customfontview.CustomEditText
-                        android:id="@+id/et_pin_box_1"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/rectangular_bg"
-                        android:drawablePadding="10dp"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:maxLength="1"
-                        android:maxLines="1"
-                        android:padding="8dp"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="#fff"
-                        android:textSize="18sp" />
-
-                    <com.an.customfontview.CustomEditText
-                        android:id="@+id/et_pin_box_2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/rectangular_bg"
-                        android:drawablePadding="10dp"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:maxLength="1"
-                        android:maxLines="1"
-                        android:padding="8dp"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="#fff"
-                        android:textSize="18sp" />
-
-                    <com.an.customfontview.CustomEditText
-                        android:id="@+id/et_pin_box_3"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/rectangular_bg"
-                        android:drawablePadding="10dp"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:maxLength="1"
-                        android:maxLines="1"
-                        android:padding="8dp"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="#fff"
-                        android:textSize="18sp" />
-
-                    <com.an.customfontview.CustomEditText
-                        android:id="@+id/et_pin_box_4"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/rectangular_bg"
-                        android:drawablePadding="10dp"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:maxLength="1"
-                        android:maxLines="1"
-                        android:padding="8dp"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="#fff"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-
+                <com.an.customfontview.CustomEditText
+                    android:id="@+id/et_pin_box_4"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/rectangular_bg"
+                    android:drawablePadding="10dp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="#fff"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
 
-            <com.an.customfontview.CustomButton
-                android:id="@+id/btn_submit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_otp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/button_theam"
-                android:text="submit"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                app:textFontPath="fonts/poppins_regular.otf"/>
+        </LinearLayout>
 
 
-            <com.an.customfontview.CustomTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/tv_resent_otp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="30dp"
-                android:text="Did you not receive the One Time Password (OTP)?"
-                android:gravity="center"
-                android:textColor="@color/colorBlack"
-                app:textFontPath="fonts/poppins_regular.otf"/>
-
-            <com.an.customfontview.CustomTextView
-                android:id="@+id/tv_resent_otp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginBottom="40dp"
-                android:layout_marginRight="30dp"
-                android:text="Resend OTP"
-                android:textSize="18sp"
-                android:gravity="center_horizontal"
-                android:textColor="@color/colorAccent"
-                app:textFontPath="fonts/poppins_regular.otf" />
+        <com.an.customfontview.CustomButton
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_otp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/button_theam"
+            android:text="submit"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlack"
+            app:textFontPath="fonts/poppins_regular.otf"/>
 
 
-        </RelativeLayout>
+        <com.an.customfontview.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_resent_otp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:text="Did you not receive the One Time Password (OTP)?"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            app:textFontPath="fonts/poppins_regular.otf"/>
+
+        <com.an.customfontview.CustomTextView
+            android:id="@+id/tv_resent_otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginRight="30dp"
+            android:text="Resend OTP"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorAccent"
+            app:textFontPath="fonts/poppins_regular.otf" />
+
+
+    </LinearLayout>
+</ScrollView>
+
+
 
 
     </LinearLayout>

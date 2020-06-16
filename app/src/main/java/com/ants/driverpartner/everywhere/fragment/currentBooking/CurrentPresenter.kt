@@ -29,7 +29,6 @@ class CurrentPresenter(private var view: Currentview, private var context: Conte
 
         if (view.checkInternet()) {
 
-
 //            Utility.showProgressBar(context)
 //            Utility.showDialog(context)
 
@@ -52,12 +51,12 @@ class CurrentPresenter(private var view: Currentview, private var context: Conte
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ response: Response<GetCurrentBookingRespone> ->
-                    //                    Utility.hideProgressbar()
-//                    Utility.hideDialog()
 
                     view.hideProgressbar()
 
                     val responseCode = response.code()
+
+                    Log.e(javaClass.simpleName,"responseCode $responseCode")
                     when (responseCode) {
                         200 -> {
                             val responseData: GetCurrentBookingRespone? = response.body()
@@ -82,11 +81,14 @@ class CurrentPresenter(private var view: Currentview, private var context: Conte
                         }
                     }
 
-                }, { error ->
+                } /*{ error ->
                     //                    Utility.hideProgressbar()
                     view.hideProgressbar()
+
+                    Log.e(javaClass.simpleName, error.toString())
                     view.validateError(error.message.toString())
-                })
+                }*/
+                )
 
 
         } else {
@@ -94,7 +96,7 @@ class CurrentPresenter(private var view: Currentview, private var context: Conte
         }
     }
 
-    fun changeBookingStatus(bookingId: Int) {
+    fun changeBookingStatus(input: JsonObject, bookingStatus: Int) {
 
 
         if (view.checkInternet()) {
@@ -102,24 +104,6 @@ class CurrentPresenter(private var view: Currentview, private var context: Conte
 
 //            Utility.showDialog(context
             view.showProgressbar()
-
-
-            var input = JsonObject()
-            input.addProperty(
-                "userid",
-                Utility.getSharedPreferences(context!!, Constant.USER_ID).toString()
-            )
-            input.addProperty(
-                "booking_id",
-                bookingId
-            )
-
-
-            input.addProperty(
-                "booking_status",
-                3
-            )
-
 
             var headers = HashMap<String, String?>()
 
@@ -147,7 +131,7 @@ class CurrentPresenter(private var view: Currentview, private var context: Conte
                                         view.validateError(responseData.message)
                                     }
                                     1 -> {
-                                        view.onStatusChange(responseData)
+                                        view.onStatusChange(responseData, bookingStatus)
                                     }
                                     2 -> {
                                         view.validateError(responseData.message)
@@ -162,6 +146,9 @@ class CurrentPresenter(private var view: Currentview, private var context: Conte
 
                 }, { error ->
                     //                    Utility.hideDialog()
+
+                    Log.e(javaClass.simpleName, error.toString())
+
                     view.hideProgressbar()
                     view.validateError(context.getString(R.string.error_message))
                 })
@@ -225,6 +212,65 @@ class CurrentPresenter(private var view: Currentview, private var context: Conte
         } else {
             view.validateError("Please Check Internet Connection!")
         }
+
+    }
+
+    fun updateBookingStatus(input: JsonObject) {
+        if (view.checkInternet()) {
+
+
+            view.showProgressbar()
+
+            var headers = HashMap<String, String?>()
+
+            headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
+            headers["userid"] = Utility.getSharedPreferences(context, Constant.USER_ID)
+
+            disposable = ApiClient.instance.updateBookingStatus(headers, input)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response: Response<UpdateLatLongResposse> ->
+                    //                    Utility.hideDialog()
+                    view.hideProgressbar()
+
+                    val responseCode = response.code()
+                    when (responseCode) {
+                        200 -> {
+                            val responseData: UpdateLatLongResposse? = response.body()
+                            Log.e(javaClass.simpleName, response.body().toString())
+
+                            if (responseData != null) {
+                                when (responseData.status) {
+                                    0 -> {
+                                        view.validateError(responseData.message)
+                                    }
+                                    1 -> {
+                                        view.onUpdateStatus(responseData.message)
+                                    }
+                                    2 -> {
+                                        view.validateError(responseData.message)
+                                    }
+                                }
+                            } else {
+                                view.validateError("Something went wrong!")
+                            }
+
+                        }
+                    }
+
+                }, { error ->
+                    //                    Utility.hideDialog()
+
+                    Log.e(javaClass.simpleName,"PANKAJ1"+ error.localizedMessage)
+                    view.hideProgressbar()
+//                    view.validateError(context.getString(R.string.error_message))
+                })
+
+
+        } else {
+            view.validateError("Please Check Internet Connection!")
+        }
+
 
     }
 

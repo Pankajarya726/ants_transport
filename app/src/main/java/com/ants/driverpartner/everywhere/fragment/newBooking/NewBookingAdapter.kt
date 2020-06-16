@@ -26,7 +26,7 @@ class NewBookingAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): NewBookingAdapter.ViewHolder {
+    ): ViewHolder {
         binding = DataBindingUtil.inflate(
             LayoutInflater.from(ctx),
             R.layout.row_new_booking,
@@ -34,24 +34,25 @@ class NewBookingAdapter(
             false
         )
         return ViewHolder(binding)
-
-
     }
 
     override fun getItemCount(): Int {
         return bookingList.size
     }
 
-    override fun onBindViewHolder(holder: NewBookingAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val data = bookingList[position]
 
+        try {
+            Picasso.with(ctx).load(data.packageDetail.custImage).into(holder.itemRowBinding.ivImage)
 
-        Picasso.with(ctx).load(data.packageDetail.custImage).into(holder.itemRowBinding.ivImage)
+        } catch (e: Exception) {
 
+        }
 
-        holder.itemRowBinding.tvPirce.text = data.packageDetail.finalAmount.toString() + " " + data.packageDetail.currency
-
+        holder.itemRowBinding.tvPirce.text =
+            data.packageDetail.finalAmount.toString() + " " + data.packageDetail.currency
         holder.itemRowBinding.tvName.text = data.packageDetail.senderName
         holder.itemRowBinding.tvPickup.text = data.packageDetail.senderAddressLine1
         holder.itemRowBinding.tvDrop.text = data.packageDetail.receiverAddressLine1
@@ -64,41 +65,34 @@ class NewBookingAdapter(
             data.packageDetail.distance.toString() + " " + data.packageDetail.distanceUnit
 
         holder.itemRowBinding.btnAccept.setOnClickListener(View.OnClickListener {
-
-            listener.onAccepted(data,position)
+            listener.onAccepted(data, position)
         })
 
         holder.itemRowBinding.btnDecline.setOnClickListener(View.OnClickListener {
-            listener.onDecline(data,position)
-
+            listener.onDecline(data, position)
         })
 
         holder.itemRowBinding.btnOpen.setOnClickListener(View.OnClickListener {
             listener.onViewClivk(data, position)
-
         })
-
-
     }
 
-    class ViewHolder(itemRowBinding: RowNewBookingBinding) :
-        RecyclerView.ViewHolder(itemRowBinding.root) {
-
-
+    class ViewHolder(itemRowBinding: RowNewBookingBinding) : RecyclerView.ViewHolder(itemRowBinding.root) {
         var itemRowBinding = itemRowBinding
     }
-
 
     fun removeItems(position: Int) {
         this.bookingList.removeAt(position)
 
         notifyDataSetChanged()
     }
+
     interface NewBookingListener {
         fun onAccepted(
             data: GetNewBookingResponse.Data,
             position: Int
         )
+
         fun onDecline(
             data: GetNewBookingResponse.Data,
             position: Int
@@ -108,8 +102,5 @@ class NewBookingAdapter(
             data: GetNewBookingResponse.Data,
             position: Int
         )
-
     }
-
-
 }

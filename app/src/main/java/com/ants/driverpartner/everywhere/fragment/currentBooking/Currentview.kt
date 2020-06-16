@@ -6,5 +6,10 @@ import com.ants.driverpartner.everywhere.fragment.scheduleBooking.model.ChangeBo
 
 interface Currentview:BaseMainView {
     fun onGetCurrentBooking(responseData: GetCurrentBookingRespone)
-    fun onStatusChange(responseData: ChangeBookingStatusResponse)
+    fun onStatusChange(
+        responseData: ChangeBookingStatusResponse,
+        bookingStatus: Int
+    )
+
+    fun onUpdateStatus(message: String)
 }

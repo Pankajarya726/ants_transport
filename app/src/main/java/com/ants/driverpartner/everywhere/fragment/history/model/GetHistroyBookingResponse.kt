@@ -18,8 +18,17 @@ data class GetHistroyBookingResponse(
         var isCancelledDriver: Int = 0,
         @SerializedName("package_detail")
         var packageDetail: PackageDetail = PackageDetail(),
+
         @SerializedName("package_id")
-        var packageId: Int = 0
+        var packageId: Int = 0,
+
+        @SerializedName("customer_rating")
+        var customerRating: Int =0,
+
+        @SerializedName("customer_comment")
+        var customerComment: String = ""
+
+
     ) {
         data class PackageDetail(
             @SerializedName("currency")
@@ -163,7 +172,7 @@ data class GetHistroyBookingResponse(
                 @SerializedName("vehicle_category")
                 var vehicleCategory: Any? = Any(),
                 @SerializedName("weight")
-                var weight: Int = 0,
+                var weight: String = "",
                 @SerializedName("what_like_delivered")
                 var whatLikeDelivered: String = ""
             )

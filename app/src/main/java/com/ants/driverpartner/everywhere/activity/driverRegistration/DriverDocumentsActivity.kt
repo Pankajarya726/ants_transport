@@ -126,7 +126,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
         } else if (file_bank_statement == null) {
             DialogUtils.showSuccessDialog(this, "Please upload all documents")
         } else {
-            val intent = Intent(applicationContext, VehicleActivity::class.java)
+            val intent = Intent(this, VehicleActivity::class.java)
             intent.putExtra(Constant.ADDING_VEHICLE, "")
             intent.putExtra(Constant.PROFILE_TYPE, title)
             startActivity(intent)
@@ -176,8 +176,8 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
                     Constant.profilePermissionsRequired[1]
                 ))
             ) {
-                val builder = AlertDialog.Builder(applicationContext)
-                builder.setTitle("Permission request_old")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton(
                     "Grant"
@@ -199,14 +199,14 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
                 builder.show()
             } else if (
                 Utility.getSharedPreferencesBoolean(
-                    applicationContext,
+                    this,
                     Constant.profilePermissionsRequired[0]
                 )
             ) {
                 //Previously Permission Request was cancelled with 'Dont Ask Again',
                 //Redirect to Settings after showing Information about why you need the permission
-                val builder = AlertDialog.Builder(applicationContext)
-                builder.setTitle("Permission request_old")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton("Grant", object : DialogInterface.OnClickListener {
                     override fun onClick(dialogInterface: DialogInterface, i: Int) {
@@ -215,7 +215,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
 
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                         val uri =
-                            Uri.fromParts("package", applicationContext.getPackageName(), null)
+                            Uri.fromParts("package", applicationContext.packageName, null)
                         intent.data = uri
                         startActivityForResult(intent, Constant.REQUEST_PERMISSION_SETTING)
 
@@ -245,7 +245,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
             }
 
             Utility.setSharedPreferenceBoolean(
-                applicationContext,
+                this,
                 Constant.profilePermissionsRequired[0],
                 true
             )
@@ -257,15 +257,15 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
     }
 
     override fun onImageUploadSuccess(responseData: UploadImageResponse) {
-        DialogUtils.showSuccessDialog(this, responseData.message)
+        Toast.makeText(this,responseData.message,Toast.LENGTH_SHORT).show()
     }
 
     private fun checkProfilePermissions(): Boolean {
         return (ActivityCompat.checkSelfPermission(
-            applicationContext,
+            this,
             Constant.profilePermissionsRequired[0]
         ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-            applicationContext,
+            this,
             Constant.profilePermissionsRequired[1]
         ) == PackageManager.PERMISSION_GRANTED)
 
@@ -301,7 +301,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
 
                     //Show Information about why you need the permission
                     val builder = AlertDialog.Builder(this)
-                    builder.setTitle("Permission request_old")
+                    builder.setTitle("Permission request")
                     builder.setMessage("This app needs storage and camera permission for captured and save image.")
                     builder.setPositiveButton("Grant") { dialog, which ->
                         dialog.cancel()
@@ -326,7 +326,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
 
     private fun proceedAfterPermission() {
         Toast.makeText(
-            applicationContext,
+            this,
             "We got required permissions for profile.",
             Toast.LENGTH_LONG
         ).show()
@@ -343,7 +343,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
 
                 this.file_id_front = File(uri.path)
 
-                Glide.with(applicationContext).load(uri).into(binding.imgIdFront)
+                Glide.with(this).load(uri).into(binding.imgIdFront)
 
                 presenter!!.uploadDocument("idproof_front", file_id_front!!)
             }
@@ -351,7 +351,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
             Constant.UploadType.ID_BACK -> {
                 binding.imgIdBack.setScaleType(ImageView.ScaleType.FIT_XY)
 
-                Glide.with(applicationContext).load(uri).into(binding.imgIdBack)
+                Glide.with(this).load(uri).into(binding.imgIdBack)
 
                 this.file_id_back = File(uri.path)
 
@@ -361,7 +361,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
             Constant.UploadType.LICENCE_FRONT -> {
                 binding.imgLicenseFront.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgLicenseFront)
+                Glide.with(this).load(uri).into(binding.imgLicenseFront)
 
                 this.file_licence_front = File(uri.path)
 
@@ -372,7 +372,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
 
                 binding.imgLicenseBack.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgLicenseBack)
+                Glide.with(this).load(uri).into(binding.imgLicenseBack)
 
                 this.file_licence_back = File(uri.path)
 
@@ -383,7 +383,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
 
                 binding.imgUser.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgUser)
+                Glide.with(this).load(uri).into(binding.imgUser)
 
                 this.file_driver = File(uri.path)
 
@@ -395,7 +395,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
 
                 binding.imgHomeAddress.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgHomeAddress)
+                Glide.with(this).load(uri).into(binding.imgHomeAddress)
 
                 this.file_home_address = File(uri.path)
 
@@ -408,7 +408,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
 
                 binding.imgBankLatter.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgBankLatter)
+                Glide.with(this).load(uri).into(binding.imgBankLatter)
 
                 this.file_bank_letter = File(uri.path)
 
@@ -419,7 +419,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
 
                 binding.imgBankStatement.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgBankStatement)
+                Glide.with(this).load(uri).into(binding.imgBankStatement)
 
                 this.file_bank_statement = File(uri.path)
 
@@ -430,7 +430,7 @@ class DriverDocumentsActivity : BaseMainActivity(), DriverDocumentView,
 
                 binding.imgOwnership.setScaleType(ImageView.ScaleType.FIT_XY);
 
-                Glide.with(applicationContext).load(uri).into(binding.imgOwnership)
+                Glide.with(this).load(uri).into(binding.imgOwnership)
 
                 this.file_ownership = File(uri.path)
 

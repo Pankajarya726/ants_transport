@@ -86,6 +86,7 @@ class HistoryFragment(view: Homeview) : BaseMainFragment(), HistoryView,
         val intent = Intent(activity!!, PackageDetailActivity::class.java)
 
         intent.putExtra(Constant.PACKAGE_DETAIL, packageDetail)
+        intent.putExtra(Constant.FROM, 4)
         startActivity(intent)
 
 

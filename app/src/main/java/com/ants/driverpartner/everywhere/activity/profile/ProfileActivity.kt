@@ -27,7 +27,6 @@ import com.ants.driverpartner.everywhere.utils.DialogUtils
 import com.ants.driverpartner.everywhere.utils.Utility
 import com.asksira.bsimagepicker.BSImagePicker
 import com.asksira.bsimagepicker.Utils
-import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
 import java.io.File
 import java.io.InputStream
@@ -86,7 +85,7 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
             DialogUtils.showSuccessDialog(this, "Please Enter Email")
         } else if (binding.edtMobile.text.trim().toString().isEmpty()) {
             DialogUtils.showSuccessDialog(this, "Please Enter Mobile Number")
-        }  else if (binding.edtMobile.text.trim().toString().length!=10) {
+        } else if (binding.edtMobile.text.trim().toString().length != 10) {
             DialogUtils.showSuccessDialog(this, "Please Enter Valid Mobile Number")
         } else if (binding.edtResidentialAddress.text.trim().toString().isEmpty()) {
             DialogUtils.showSuccessDialog(this, "Please Residential Address")
@@ -109,8 +108,12 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
             binding.edtResidentialAddress.setText(data[0].residentialAddress)
             binding.edtPostalAddress.setText(data[0].postalAddress)
 
+            try {
+                Picasso.with(this).load(data[0].profileImage).into(binding.imgProfile)
 
-            Picasso.with(this).load(data[0].profileImage).into(binding.imgProfile)
+            } catch (e: Exception) {
+
+            }
 
 
         }
@@ -146,10 +149,26 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
     }
 
     override fun onImageUploadSuccess(responseData: UploadImageResponse) {
+
+        Utility.setSharedPreference(
+            this,
+            Constant.PROFILE_IMAGE_URL,
+            responseData.data.url
+        )
+//        Utility.setUserImage(responseData.data.url, this)/
         DialogUtils.showSuccessDialog(this, responseData.message)
     }
 
     override fun onUpdateProfile(responseData: UpdateProfileResponse) {
+        Utility.setUserName(binding.edtName.text.trim().toString(), this)
+        Utility.setUserEmail(binding.edtEmail.text.trim().toString(), this)
+        Utility.setSharedPreference(this, Constant.MOBILE, binding.edtMobile.text.trim().toString())
+
+
+        Log.e(binding.edtName.text.toString(), Utility.getSharedPreferences(this, Constant.NAME))
+        Log.e(binding.edtEmail.text.toString(), Utility.getSharedPreferences(this, Constant.EMAIL))
+
+
         DialogUtils.showSuccessDialog(this, responseData.message)
     }
 
@@ -178,10 +197,10 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
     private fun checkProfilePermissions(): Boolean {
 
         return (ActivityCompat.checkSelfPermission(
-            this.applicationContext,
+            this,
             profilePermissionsRequired[0]
         ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-            applicationContext,
+            this,
             profilePermissionsRequired[1]
         ) == PackageManager.PERMISSION_GRANTED)
 
@@ -201,8 +220,8 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
                 ))
             ) {
 
-                val builder = AlertDialog.Builder(applicationContext)
-                builder.setTitle("Permission request_old")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton(
                     "Grant"
@@ -224,14 +243,14 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
                 builder.show()
             } else if (
                 Utility.getSharedPreferencesBoolean(
-                    applicationContext,
+                    this,
                     profilePermissionsRequired[0]
                 )
             ) {
                 //Previously Permission Request was cancelled with 'Dont Ask Again',
                 //Redirect to Settings after showing Information about why you need the permission
-                val builder = AlertDialog.Builder(applicationContext)
-                builder.setTitle("Permission request_old")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Permission request")
                 builder.setMessage("This app needs storage and camera permission for captured and save image.")
                 builder.setPositiveButton("Grant", object : DialogInterface.OnClickListener {
                     override fun onClick(dialogInterface: DialogInterface, i: Int) {
@@ -240,7 +259,7 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
 
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                         val uri =
-                            Uri.fromParts("package", applicationContext.getPackageName(), null)
+                            Uri.fromParts("package", applicationContext.packageName, null)
                         intent.data = uri
                         startActivityForResult(intent, REQUEST_PERMISSION_SETTING)
 
@@ -270,7 +289,7 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
             }
 
             Utility.setSharedPreferenceBoolean(
-                applicationContext,
+                this,
                 profilePermissionsRequired[0],
                 true
             )
@@ -287,9 +306,9 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
 
             this.file = File(uri.path)
 
-            Picasso.with(applicationContext).load(uri).into(binding.imgProfile)
+            Picasso.with(this).load(uri).into(binding.imgProfile)
 
-            inputStream = applicationContext.getContentResolver().openInputStream(uri)
+            inputStream = this.contentResolver.openInputStream(uri)
 
             if (file != null) {
                 presenter!!.uploadProfileImage(file!!)
@@ -298,7 +317,7 @@ class ProfileActivity : BaseMainActivity(), ProfileView,
 
             try {
                 var licenceBackInputStream =
-                    applicationContext.getContentResolver().openInputStream(uri)
+                    this.contentResolver.openInputStream(uri)
                 Log.e("licenceBackInputStream", licenceBackInputStream.toString())
             } catch (e: Exception) {
                 e.printStackTrace()

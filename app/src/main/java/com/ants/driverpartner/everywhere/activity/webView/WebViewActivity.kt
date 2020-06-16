@@ -83,7 +83,7 @@ class WebViewActivity : BaseMainActivity(),
 
     override fun validateError(message: String) {
 
-       DialogUtils.showSuccessDialog(this, message)
+     //  DialogUtils.showSuccessDialog(this, message)
     }
 
     override fun onDetachedFromWindow() {
