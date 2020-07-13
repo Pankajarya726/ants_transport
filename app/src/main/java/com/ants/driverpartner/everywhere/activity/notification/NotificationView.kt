@@ -5,7 +5,7 @@ import com.ants.driverpartner.everywhere.activity.base.BaseMainView
 interface NotificationView:BaseMainView {
     fun onGetNotification(responseData: NotificationResponse)
     fun onRemoveNotification(
-        responseData: NotificationResponse,
+        responseData: String,
         position: Int
     )
     fun onFailure(action: String)

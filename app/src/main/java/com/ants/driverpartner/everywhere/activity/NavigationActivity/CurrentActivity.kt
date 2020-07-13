@@ -75,7 +75,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
     private var pickupLatLng = LatLng(28.61, 77.22)
     private var dropLatLng = LatLng(28.61, 76.22)
     private var mapFragment: SupportMapFragment? = null
-    private var driverLatLong = LatLng(22.74, 75.90)
+    private var driverLatLong = LatLng(33.96, 25.60)
     private var previousLatLong: LatLng? = null
     private var pickUpMarker: Marker? = null
     private var dropMarker: Marker? = null
@@ -486,7 +486,6 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
 
         Log.e(javaClass.simpleName, "onMapReady")
         mMap = googleMap
-
         mMap!!.mapType = GoogleMap.MAP_TYPE_NORMAL
         mMap!!.uiSettings.isMapToolbarEnabled = false
         mMap!!.isTrafficEnabled = false

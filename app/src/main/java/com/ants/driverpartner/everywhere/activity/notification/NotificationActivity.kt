@@ -45,7 +45,6 @@ class NotificationActivity : BaseMainActivity(), NotificationView,
 
         presenter!!.getNotification()
 
-
     }
 
     override fun validateError(message: String) {
@@ -90,11 +89,8 @@ class NotificationActivity : BaseMainActivity(), NotificationView,
 
     }
 
-    override fun onRemoveNotification(responseData: NotificationResponse, position: Int) {
-        validateError(responseData.message)
-
-
-        adapter!!.removeItem(position)
+    override fun onRemoveNotification(message: String, position: Int) {
+        validateError(message)
     }
 
     override fun onFailure(message: String) {

@@ -359,7 +359,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="5dp"
                         android:gravity="center"
-                        android:text="back"
+                        android:text="Back"
                         android:textColor="@color/colorBlack"
                         android:textSize="15sp"
                         app:textFontPath="fonts/poppins_regular.otf" />

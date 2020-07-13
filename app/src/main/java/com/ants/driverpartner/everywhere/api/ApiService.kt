@@ -4,6 +4,7 @@ package com.tekzee.mallortaxi.network
 import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverListResponse
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPassResponse
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
+import com.ants.driverpartner.everywhere.activity.notification.DeleteNotification
 import com.ants.driverpartner.everywhere.activity.notification.NotificationResponse
 import com.ants.driverpartner.everywhere.activity.otp.VerifyOtpResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
@@ -271,7 +272,7 @@ interface ApiService {
         @HeaderMap headers: java.util.HashMap<String, String?>,
         @Part("notification_id") notificationId: RequestBody,
         @Part("userid") userId: RequestBody
-    ): Observable<Response<NotificationResponse>>
+    ): Observable<Response<DeleteNotification>>
 
 
     @POST("reset_password")

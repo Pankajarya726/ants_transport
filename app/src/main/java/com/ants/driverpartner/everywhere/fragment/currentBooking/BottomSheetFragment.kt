@@ -47,7 +47,7 @@ class BottomSheetFragment(
         if (status == 2) {
             binding.btnArrived.text = "Arrived at Pickup Location"
         } else {
-            binding.btnArrived.text = "Arrived At Dropoff location"
+            binding.btnArrived.text = "Arrived At DropOff location"
         }
 
 

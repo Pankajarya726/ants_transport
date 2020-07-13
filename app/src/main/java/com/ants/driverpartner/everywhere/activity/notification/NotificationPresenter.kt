@@ -29,27 +29,14 @@ class NotificationPresenter(private var view: NotificationView, private var cont
         view.showProgressbar()
         if (view.checkInternet()) {
 
-
             Log.e("Internet Connection", view.checkInternet().toString())
 
-
-            val pageno = "1".toRequestBody(MultipartBody.FORM)
+            val pageno = "0".toRequestBody(MultipartBody.FORM)
             val userId = Utility.getSharedPreferences(context, Constant.USER_ID)!!.toRequestBody(
                 MultipartBody.FORM
             )
 
-//            val pageno = "1".toRequestBody(MultipartBody.FORM)
-
-//            val userId = Utility.getSharedPreferences(context ,  Constant.USER_ID).let {
-//                it.toString()
-//                    .toRequestBody(MultipartBody.FORM)
-//            }
-
-
             var headers = HashMap<String, String?>()
-
-
-//            headers["Content-Type"] = "application/json"
 
             headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
             headers["userid"] = Utility.getSharedPreferences(context, Constant.USER_ID)
@@ -125,21 +112,20 @@ class NotificationPresenter(private var view: NotificationView, private var cont
             var headers = HashMap<String, String?>()
 
 
-            headers["Content-Type"] = "application/json"
 
             headers["api-key"] = Utility.getSharedPreferences(context, Constant.API_KEY)
 
             disposable = ApiClient.instance.deleteNotification(headers, notification_id, userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response: Response<NotificationResponse> ->
+                .subscribe({ response: Response<DeleteNotification> ->
                     view.hideProgressbar()
                     val responseCode = response.code()
                     Log.e(javaClass.simpleName, responseCode.toString())
                     Log.e(javaClass.simpleName, response.toString())
                     when (responseCode) {
                         200 -> {
-                            val responseData: NotificationResponse? = response.body()
+                            val responseData: DeleteNotification? = response.body()
 
                             Log.e(javaClass.simpleName, response.body().toString())
 
@@ -152,7 +138,7 @@ class NotificationPresenter(private var view: NotificationView, private var cont
                                     }
 
                                     1 -> {
-                                        view.onRemoveNotification(responseData, position)
+                                        view.onRemoveNotification(responseData.message, position)
                                     }
                                     2 -> {
 
@@ -167,10 +153,10 @@ class NotificationPresenter(private var view: NotificationView, private var cont
                             }
                         }
                     }
-                }, { error ->
+                } ,{ error ->
                     Log.e(
                         javaClass.simpleName + "\tApi output\n\n",
-                        "jhagdfhjgsd"
+                       error.toString()
                     )
                     view.hideProgressbar()
                     view.validateError(context.getString(R.string.error_message))

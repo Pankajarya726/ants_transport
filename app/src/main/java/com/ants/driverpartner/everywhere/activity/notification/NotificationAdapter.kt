@@ -56,7 +56,7 @@ class NotificationAdapter(
         holder.binding.tvNotificationText.setText(item.message)
         holder.binding.tvDate.setText(item.createdAt)
         holder.binding.ivClose.setOnClickListener(View.OnClickListener {
-
+            removeItem(position)
             listener.removeNotification(position, item)
 
         })

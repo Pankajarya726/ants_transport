@@ -97,7 +97,7 @@
                         android:id="@+id/tv_idproof"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="ID Proof"
+                        android:text="ID Document"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:textColor="@color/colorBlack"
@@ -172,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:text="Valid Driver's License front and back"
+                        android:text="Valid Driver's License"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
                         app:textFontPath="fonts/poppins_regular.otf" />
@@ -274,7 +274,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="false"
-                        android:text="Proof of home address"
+                        android:text="Proof of home address (An account with your home address visible)"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
                         app:textFontPath="fonts/poppins_regular.otf" />
@@ -340,7 +340,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
                         android:layout_centerVertical="false"
-                        android:text="Letter from the bank, Not older than one month!"
+                        android:text="Letter from the bank (Not older than one month)"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/tv_size"
                         app:textFontPath="fonts/poppins_regular.otf" />

@@ -373,7 +373,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="5dp"
                         android:gravity="center"
-                        android:text="back"
+                        android:text="Back"
                         android:textColor="@color/colorBlack"
                         android:textSize="15sp"
                         app:textFontPath="fonts/poppins_regular.otf" />
@@ -510,7 +510,7 @@
                     android:text="@string/save_continue"
                     android:textColor="@color/colorBlack"
                     android:textSize="15sp"
-                    app:btnFontPath="fonts/poppins_regular.otf" />
+                    app:textFontPath="fonts/poppins_regular.otf" />
 
 
                 <LinearLayout

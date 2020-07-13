@@ -21,8 +21,8 @@ android {
         applicationId "com.ants.driverpartner.everywhere"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.2"
+        versionCode 6
+        versionName "1.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "BaseUrl", "\"http://dev.tekzee.in/\""
         signingConfig signingConfigs.release

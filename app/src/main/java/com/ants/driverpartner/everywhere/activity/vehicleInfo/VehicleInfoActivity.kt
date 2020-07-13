@@ -130,7 +130,7 @@ class VehicleInfoActivity : BaseMainActivity(), View.OnClickListener,
             R.id.edt_vehicle_type -> presenter!!.getVechicleCategory()
 
 
-            R.id.btn_upload -> submit()
+            R.id.btn_upload -> arrsubmit()
 
         }
 

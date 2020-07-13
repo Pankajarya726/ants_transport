@@ -4,6 +4,7 @@ package com.tekzee.mallortaxi.network
 import com.ants.driverpartner.everywhere.activity.driverDetails.model.GetDriverListResponse
 import com.ants.driverpartner.everywhere.activity.forgotPass.ForgotPassResponse
 import com.ants.driverpartner.everywhere.activity.login.model.LoginResponse
+import com.ants.driverpartner.everywhere.activity.notification.DeleteNotification
 import com.ants.driverpartner.everywhere.activity.notification.NotificationResponse
 import com.ants.driverpartner.everywhere.activity.otp.VerifyOtpResponse
 import com.ants.driverpartner.everywhere.activity.ownerRegistration.DriverDocument.model.OwnersVehilce
@@ -356,7 +357,7 @@ class ApiClient {
         headers: HashMap<String, String?>,
         notificationId: RequestBody,
         userId: RequestBody
-    ): Observable<Response<NotificationResponse>> {
+    ): Observable<Response<DeleteNotification>> {
         return apiService.deleteNotification(headers, notificationId, userId)
     }
 

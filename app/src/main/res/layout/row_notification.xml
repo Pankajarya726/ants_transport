@@ -18,10 +18,10 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:elevation="2dp"
-            android:padding="20dp"
+            android:padding="10dp"
             android:background="@drawable/white_circle"
             android:layout_centerVertical="true"
-            android:src="@drawable/ants" />
+            android:src="@drawable/splash_logo_black" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -43,6 +43,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:text=""
+                    android:layout_marginRight="25dp"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/textview_size"
                     app:textFontPath="fonts/poppins_regular.otf" />
