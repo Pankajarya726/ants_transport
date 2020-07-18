@@ -33,7 +33,7 @@
                 android:layout_centerInParent="true"
                 android:text="Vehicle Information"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
         </RelativeLayout>
@@ -76,7 +76,7 @@
                     android:paddingRight="5dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
@@ -102,7 +102,7 @@
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
 
@@ -343,7 +343,7 @@
                     android:layout_marginTop="15dp"
                     android:text="Picture of Vehicle"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
 
@@ -363,7 +363,7 @@
                         android:gravity="center"
                         android:text="Front"
                         android:textColor="@color/colorBlack"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         app:textFontPath="fonts/poppins_regular.otf" />
 
 
@@ -375,7 +375,7 @@
                         android:gravity="center"
                         android:text="Back"
                         android:textColor="@color/colorBlack"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         app:textFontPath="fonts/poppins_regular.otf" />
 
                     <com.an.customfontview.CustomTextView
@@ -386,7 +386,7 @@
                         android:gravity="center"
                         android:text="Left"
                         android:textColor="@color/colorBlack"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         app:textFontPath="fonts/poppins_regular.otf" />
 
                     <com.an.customfontview.CustomTextView
@@ -397,7 +397,7 @@
                         android:gravity="center"
                         android:text="Right"
                         android:textColor="@color/colorBlack"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         app:textFontPath="fonts/poppins_regular.otf" />
 
 
@@ -503,13 +503,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
-                    android:layout_marginTop="15sp"
-                    android:layout_marginBottom="20sp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="20dp"
 
                     android:background="@drawable/button_theam"
                     android:text="@string/save_continue"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
 

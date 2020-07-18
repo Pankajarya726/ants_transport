@@ -25,7 +25,7 @@
                 android:layout_centerInParent="true"
                 android:text="OTP"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
             <ImageView
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:text="Enter OTP"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
@@ -76,7 +76,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Please enter the four digit code"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
             <com.an.customfontview.CustomTextView
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:text="sent via Email to reset your password"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
 
@@ -109,7 +109,7 @@
                     android:padding="8dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="#fff"
-                    android:textSize="18sp" />
+                    android:textSize="18dp" />
 
                 <com.an.customfontview.CustomEditText
                     android:id="@+id/et_pin_box_2"
@@ -125,7 +125,7 @@
                     android:padding="8dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="#fff"
-                    android:textSize="18sp" />
+                    android:textSize="18dp" />
 
                 <com.an.customfontview.CustomEditText
                     android:id="@+id/et_pin_box_3"
@@ -141,7 +141,7 @@
                     android:padding="8dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="#fff"
-                    android:textSize="18sp" />
+                    android:textSize="18dp" />
 
                 <com.an.customfontview.CustomEditText
                     android:id="@+id/et_pin_box_4"
@@ -157,7 +157,7 @@
                     android:padding="8dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="#fff"
-                    android:textSize="18sp" />
+                    android:textSize="18dp" />
 
             </LinearLayout>
 
@@ -175,7 +175,7 @@
             android:layout_marginRight="30dp"
             android:background="@drawable/button_theam"
             android:text="submit"
-            android:textSize="18sp"
+            android:textSize="18dp"
             android:textColor="@color/colorBlack"
             app:textFontPath="fonts/poppins_regular.otf"/>
 
@@ -203,7 +203,7 @@
             android:layout_marginBottom="40dp"
             android:layout_marginRight="30dp"
             android:text="Resend OTP"
-            android:textSize="18sp"
+            android:textSize="18dp"
             android:textStyle="bold"
             android:gravity="center_horizontal"
             android:textColor="@color/colorAccent"

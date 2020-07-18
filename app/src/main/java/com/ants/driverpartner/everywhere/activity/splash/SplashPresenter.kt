@@ -43,7 +43,7 @@ class SplashPresenter(private var view: SplashView, private var context: Context
             )
             input.addProperty(
                 "appversion",
-                versionName
+                "1.5"
             )
             input.addProperty(
                 "driver_id",

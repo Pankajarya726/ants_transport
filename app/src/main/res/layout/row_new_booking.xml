@@ -61,7 +61,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="25dp"
                         android:layout_marginRight="5dp"
-                        android:layout_marginBottom="10sp"
+                        android:layout_marginBottom="10dp"
                         android:paddingTop="20dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/distance" />
@@ -75,14 +75,14 @@
                         <com.an.customfontview.CustomTextView
                             android:id="@+id/tv_name"
                             android:layout_width="match_parent"
-                            android:layout_height="25sp"
+                            android:layout_height="25dp"
                             android:gravity="top|left"
                             android:hint="Name"
                             android:maxLines="1"
                             android:minLines="1"
                             android:text=""
                             android:textColor="@color/colorBlack"
-                            android:textSize="18sp"
+                            android:textSize="18dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -95,7 +95,7 @@
                             android:minLines="2"
                             android:text="indore"
                             android:textColor="@color/colorGrey"
-                            android:textSize="12sp"
+                            android:textSize="12dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -109,7 +109,7 @@
                             android:minLines="2"
                             android:text="bhopal"
                             android:textColor="@color/colorGrey"
-                            android:textSize="12sp"
+                            android:textSize="12dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -160,7 +160,7 @@
                             android:maxLines="1"
                             android:minLines="1"
                             android:textColor="@color/colorGrey"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -189,7 +189,7 @@
                             android:maxLines="1"
                             android:minLines="1"
                             android:textColor="@color/colorGrey"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
                     </LinearLayout>
@@ -226,7 +226,7 @@
                             android:maxLines="1"
                             android:minLines="1"
                             android:textColor="@color/colorGrey"
-                            android:textSize="14sp"
+                            android:textSize="14dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -254,7 +254,7 @@
                             android:minLines="1"
                             android:text=""
                             android:textColor="@color/colorGrey"
-                            android:textSize="12sp"
+                            android:textSize="12dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -282,7 +282,7 @@
                         android:minLines="1"
                         android:paddingTop="5dp"
                         android:textColor="@color/colorGrey"
-                        android:textSize="14sp"
+                        android:textSize="14dp"
                         android:textStyle="bold"
                         app:textFontPath="fonts/poppins_regular.otf" />
                 </LinearLayout>
@@ -309,7 +309,7 @@
                     android:paddingTop="5dp"
                     android:text="Cost:"
                     android:textColor="@color/colorAccent"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -323,7 +323,7 @@
                     android:minLines="1"
                     android:paddingTop="5dp"
                     android:textColor="@color/colorGrey"
-                    android:textSize="14sp"
+                    android:textSize="14dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
             </LinearLayout>
@@ -343,7 +343,7 @@
                 android:paddingTop="5dp"
                 android:text="Collection Details"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
             <LinearLayout
@@ -369,7 +369,7 @@
                     android:background="@drawable/button_theam"
                     android:text="Accept"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:textFontPath="fonts/poppins_regular.otf"
 
                     />
@@ -384,7 +384,7 @@
                     android:background="@drawable/button_red"
                     android:text="Decline"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:textFontPath="fonts/poppins_regular.otf"
 
                     />

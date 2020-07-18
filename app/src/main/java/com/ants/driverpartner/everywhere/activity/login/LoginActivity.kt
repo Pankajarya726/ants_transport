@@ -99,8 +99,8 @@ class LoginActivity : BaseMainActivity(), LoginPresenter.LoginMainView, View.OnC
 
 
         var dialog = Dialog(this)
+
         dialog.setContentView(com.ants.driverpartner.everywhere.R.layout.dialog_profile_type)
-        dialog.setTitle("Custom Dialog")
 
         var btnOk = dialog.findViewById(R.id.btn_ok) as Button
         var radioGroup = dialog.findViewById(R.id.radio_group_profile) as RadioGroup

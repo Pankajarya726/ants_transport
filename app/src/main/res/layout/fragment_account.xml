@@ -47,7 +47,7 @@
                     android:layout_toRightOf="@+id/img_profile"
                     android:text="Martin Garrix"
                     android:textColor="@color/colorWhite"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView

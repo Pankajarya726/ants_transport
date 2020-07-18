@@ -57,7 +57,7 @@
                     android:hint="03 Sep 2019 03:00 PM"
                     android:text="03 Sep 2019 03:00 PM"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -80,7 +80,7 @@
                     android:gravity="center|left"
                     android:text="Booking ID"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -93,7 +93,7 @@
                     android:hint="12121"
                     android:text="12121"
                     android:textColor="@color/colorGrey"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -117,7 +117,7 @@
                     android:text="Distance"
 
                     android:textColor="@color/colorBlack"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -130,7 +130,7 @@
                     android:hint="10km"
                     android:text="10km"
                     android:textColor="@color/colorGrey"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -165,7 +165,7 @@
                             android:minLines="2"
                             android:text="Pick Up"
                             android:textColor="@color/colorBlack"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -178,7 +178,7 @@
                             android:minLines="2"
                             android:text="Drop"
                             android:textColor="@color/colorBlack"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -191,7 +191,7 @@
                           android:layout_height="match_parent"
                           android:layout_marginTop="15dp"
                           android:layout_marginRight="5dp"
-                          android:layout_marginBottom="15sp"
+                          android:layout_marginBottom="15dp"
                           android:scaleType="fitCenter"
                           android:src="@drawable/distance" />-->
 
@@ -212,7 +212,7 @@
                             android:minLines="2"
                             android:text="2nd floor, 160-161, AB Rd, Behind C21 Mall, Scheme 54 PU4, Indore"
                             android:textColor="@color/colorGrey"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -227,7 +227,7 @@
                             android:minLines="2"
                             android:text="2nd floor, 160-161, AB Rd, Behind C21 Mall, Scheme 54 PU4, Indore"
                             android:textColor="@color/colorGrey"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             android:textStyle="bold"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -255,7 +255,7 @@
                     android:gravity="center|left"
                     android:text="Payment Status"
                     android:textColor="@color/colorGrey"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
@@ -270,7 +270,7 @@
                     android:hint="Uppaid"
                     android:text="Uppaid"
                     android:textColor="@color/colorAccent"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -285,7 +285,7 @@
                     android:gravity="center|left"
                     android:text="YOU MAKE"
                     android:textColor="@color/colorGrey"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
@@ -299,7 +299,7 @@
                     android:hint="50$"
                     android:text="50$"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
             </RelativeLayout>

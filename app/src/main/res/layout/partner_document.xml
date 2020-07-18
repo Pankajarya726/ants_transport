@@ -33,7 +33,7 @@
                 android:layout_centerInParent="true"
                 android:text="Driver Document"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
         </RelativeLayout>
@@ -614,10 +614,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
-                    android:layout_marginTop="15sp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/button_theam"
                     android:text="upload"
-                    android:layout_marginBottom="20sp"
+                    android:layout_marginBottom="20dp"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/tv_size"
                     app:btnFontPath="fonts/poppins_regular.otf" />

@@ -3,7 +3,8 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="300dp"
+    android:layout_width="match_parent"
+    android:minWidth="300dp"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite"
     android:orientation="vertical">
@@ -39,9 +40,9 @@
                 android:id="@+id/img_owner"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="5dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/owner" />
 
             <ImageView
@@ -68,14 +69,14 @@
                 android:layout_height="35dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@id/img_owner"
-                android:gravity="center"
-
                 android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/img_owner"
+
+                android:gravity="center"
 
                 android:text="Owner/ Driver"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -90,7 +91,7 @@
                 android:gravity="center"
                 android:text="Driver"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -109,12 +110,12 @@
                 android:id="@+id/radio_owner"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginRight="5dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
                 android:button="@drawable/button_radio"
                 android:checked="true"
-                android:layout_marginTop="5dp"
 
                 android:gravity="center"
 
@@ -125,11 +126,11 @@
                 android:id="@+id/radio_partner"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginRight="5dp"
-
                 android:layout_alignParentRight="true"
+
                 android:layout_centerVertical="true"
                 android:layout_marginTop="27dp"
+                android:layout_marginRight="5dp"
                 android:button="@drawable/button_radio"
                 android:checked="false"
                 android:gravity="center"

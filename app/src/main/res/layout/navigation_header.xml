@@ -47,7 +47,7 @@
                 android:layout_centerVertical="true"
                 android:text=""
                 android:textColor="@color/colorWhite"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 />
 
             <com.an.customfontview.CustomTextView
@@ -61,7 +61,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="012345689"
                 android:textColor="@color/colorWhite"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 />
 
         </LinearLayout>

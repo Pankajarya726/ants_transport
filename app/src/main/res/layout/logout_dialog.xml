@@ -37,7 +37,7 @@
             android:gravity="center"
             android:text="@string/logout_text"
             android:textColor="@color/colorBlack"
-            android:textSize="16sp"
+            android:textSize="16dp"
             app:textFontPath="fonts/poppins_regular.otf" />
 
         <LinearLayout
@@ -59,7 +59,7 @@
                 android:padding="10dp"
                 android:text="yes"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -73,7 +73,7 @@
                 android:padding="10dp"
                 android:text="No"
                 android:textColor="@color/colorBlack"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:textStyle="bold"
                 app:textFontPath="fonts/poppins_regular.otf" />
 

@@ -34,7 +34,7 @@
                 android:layout_centerInParent="true"
                 android:text="Sign Up"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
         </RelativeLayout>
@@ -204,7 +204,7 @@
                     android:layout_marginTop="1dp"
                     android:text="Password Must contain at least 1 number, 1 uppercase , 1 lowercase, 1 special character and at least 6 characters"
                     android:textColor="@color/colorGrey"
-                    android:textSize="12sp"
+                    android:textSize="12dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView

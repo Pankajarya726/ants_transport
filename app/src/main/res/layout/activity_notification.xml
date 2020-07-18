@@ -15,7 +15,7 @@
             android:elevation="2dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:paddingHorizontal="15sp">
+            android:paddingHorizontal="15dp">
 
             <ImageView
                 android:id="@+id/iv_back"
@@ -31,7 +31,7 @@
                 android:layout_centerInParent="true"
                 android:text="Notification"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="20dp"
 
                 app:textFontPath="fonts/poppins_regular.otf"></com.an.customfontview.CustomTextView>
 
@@ -44,7 +44,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_notification"
             android:layout_width="match_parent"
-            android:layout_margin="15sp"
+            android:layout_margin="15dp"
             android:visibility="gone"
             android:layout_height="wrap_content">
 

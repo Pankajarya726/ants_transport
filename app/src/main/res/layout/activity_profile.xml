@@ -30,7 +30,7 @@
                     android:maxLines="1"
                     android:text="Account Information"
                     android:textColor="@color/colorBlack"
-                    android:textSize="20sp"
+                    android:textSize="20dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
 
@@ -127,7 +127,7 @@
                             android:maxLines="1"
                             android:text="Name"
                             android:textColor="@color/colorBlackGrey"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
                         <com.an.customfontview.CustomEditText
@@ -144,7 +144,7 @@
                             android:paddingBottom="5dp"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorGrey"
-                            android:textSize="17sp"
+                            android:textSize="17dp"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
                         <View
@@ -161,7 +161,7 @@
                             android:maxLines="1"
                             android:text="Email"
                             android:textColor="@color/colorBlackGrey"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
                         <com.an.customfontview.CustomEditText
@@ -179,7 +179,7 @@
                             android:paddingBottom="5dp"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorGrey"
-                            android:textSize="17sp"
+                            android:textSize="17dp"
 
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -191,11 +191,11 @@
                         <com.an.customfontview.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15sp"
+                            android:layout_marginTop="15dp"
                             android:maxLines="1"
                             android:text="Mobile Number"
                             android:textColor="@color/colorBlackGrey"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
                         <com.an.customfontview.CustomEditText
@@ -213,7 +213,7 @@
                             android:paddingBottom="5dp"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorGrey"
-                            android:textSize="17sp"
+                            android:textSize="17dp"
 
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -225,11 +225,11 @@
                         <com.an.customfontview.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15sp"
+                            android:layout_marginTop="15dp"
                             android:maxLines="1"
                             android:text="@string/residential_address"
                             android:textColor="@color/colorBlackGrey"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
                         <com.an.customfontview.CustomEditText
@@ -247,7 +247,7 @@
                             android:paddingBottom="5dp"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorGrey"
-                            android:textSize="17sp"
+                            android:textSize="17dp"
 
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -259,11 +259,11 @@
                         <com.an.customfontview.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15sp"
+                            android:layout_marginTop="15dp"
                             android:maxLines="1"
                             android:text="@string/postal_address"
                             android:textColor="@color/colorBlackGrey"
-                            android:textSize="15sp"
+                            android:textSize="15dp"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
                         <com.an.customfontview.CustomEditText
@@ -281,7 +281,7 @@
                             android:paddingBottom="5dp"
                             android:textColor="@color/colorBlack"
                             android:textColorHint="@color/colorGrey"
-                            android:textSize="17sp"
+                            android:textSize="17dp"
 
                             app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -303,7 +303,7 @@
                             android:minLines="1"
                             android:text="UPDATE"
                             android:textColor="@color/colorBlack"
-                            android:textSize="20sp"
+                            android:textSize="20dp"
                             app:textFontPath="fonts/poppins_regular.otf" />
 
 

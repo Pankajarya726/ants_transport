@@ -32,7 +32,7 @@
                 android:layout_centerInParent="true"
                 android:text="Vehicles"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
             <ImageView

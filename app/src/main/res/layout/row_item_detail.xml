@@ -34,7 +34,7 @@
                     android:text="Package Type"
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -47,7 +47,7 @@
                     android:gravity="center_vertical"
                     android:text="Box"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -75,7 +75,7 @@
                     android:text="Number of Units"
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -87,7 +87,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -115,7 +115,7 @@
                     android:text="Provide Loaders"
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -127,7 +127,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -154,7 +154,7 @@
                     android:paddingRight="10dp"
                     android:text="Hazardous Material"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -166,7 +166,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -192,7 +192,7 @@
                     android:gravity="center_vertical"
                     android:text="Insurance"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -204,7 +204,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -230,7 +230,7 @@
                     android:gravity="center_vertical"
                     android:text="Packaging"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -242,7 +242,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -268,7 +268,7 @@
                     android:gravity="center_vertical"
                     android:text="Stackable"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -280,7 +280,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -306,7 +306,7 @@
                     android:text="Collection Service"
                     android:textColor="@color/colorBlack"
                     android:paddingRight="10dp"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -318,7 +318,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -345,7 +345,7 @@
                     android:text="Lift Service at collection"
                     android:textColor="@color/colorBlack"
                     android:paddingRight="10dp"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -357,7 +357,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -383,7 +383,7 @@
                     android:gravity="center_vertical"
                     android:text="Delivery Service"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -395,7 +395,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -422,7 +422,7 @@
                     android:text="Lift Service at Delivery"
                     android:textColor="@color/colorBlack"
                     android:paddingRight="10dp"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -434,7 +434,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -461,7 +461,7 @@
                     android:text="Weight facuility at Delivery"
                     android:textColor="@color/colorBlack"
                     android:paddingRight="10dp"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -473,7 +473,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -500,7 +500,7 @@
                     android:text="Delivery Appointment"
                     android:textColor="@color/colorBlack"
                     android:paddingRight="10dp"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -512,7 +512,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -539,7 +539,7 @@
                     android:paddingRight="10dp"
                     android:text="Call before Delivery"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
@@ -551,7 +551,7 @@
                     android:background="@color/colorWhite"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:textFontPath="fonts/poppins_regular.otf" />
 

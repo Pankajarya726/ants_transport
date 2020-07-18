@@ -34,7 +34,7 @@
             android:paddingLeft="1dp"
             android:paddingRight="15dp"
             android:textColor="#393e41"
-            android:textSize="16sp"
+            android:textSize="16dp"
             tools:text="Name" />
 
     </RelativeLayout>

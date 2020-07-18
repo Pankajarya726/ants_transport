@@ -31,7 +31,7 @@
                 android:layout_centerInParent="true"
                 android:text="Vehicle Information"
                 android:textColor="@color/colorBlack"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:textFontPath="fonts/poppins_regular.otf" />
 
         </RelativeLayout>
@@ -73,7 +73,7 @@
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
                 <com.an.customfontview.CustomTextView
@@ -99,7 +99,7 @@
                     android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
 
@@ -120,13 +120,13 @@
                     android:background="@drawable/rectangular_bg"
                     android:gravity="center|left"
                     android:hint="Enter Tare"
-                    android:inputType="number"
-                    android:maxLength="3"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/poppins_regular.otf" />
+
 
                 <com.an.customfontview.CustomTextView
                     android:layout_width="match_parent"
@@ -147,10 +147,11 @@
                     android:hint="Mass"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/poppins_regular.otf" />
+
 
                 <com.an.customfontview.CustomTextView
                     android:layout_width="match_parent"
@@ -160,7 +161,6 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="15dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
-
                 <com.an.customfontview.CustomEditText
                     android:id="@+id/edt_reg_number"
                     android:layout_width="match_parent"
@@ -171,10 +171,11 @@
                     android:hint="Enter Registration Number"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/poppins_regular.otf" />
+
 
                 <com.an.customfontview.CustomTextView
                     android:layout_width="match_parent"
@@ -195,10 +196,11 @@
                     android:hint="Enter Model"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/poppins_regular.otf" />
+
 
                 <com.an.customfontview.CustomTextView
                     android:layout_width="match_parent"
@@ -217,6 +219,7 @@
                     android:background="@drawable/rectangular_bg"
                     android:gravity="center|left"
                     android:hint="Enter Manufacture"
+                    android:textSize="@dimen/edt_size"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
@@ -329,7 +332,7 @@
                     android:layout_marginTop="15dp"
                     android:text="Picture of Vehicle"
                     android:textColor="@color/colorBlack"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:textFontPath="fonts/poppins_regular.otf" />
 
 
@@ -349,7 +352,7 @@
                         android:gravity="center"
                         android:text="Front"
                         android:textColor="@color/colorBlack"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         app:textFontPath="fonts/poppins_regular.otf" />
 
 
@@ -361,7 +364,7 @@
                         android:gravity="center"
                         android:text="Back"
                         android:textColor="@color/colorBlack"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         app:textFontPath="fonts/poppins_regular.otf" />
 
                     <com.an.customfontview.CustomTextView
@@ -372,7 +375,7 @@
                         android:gravity="center"
                         android:text="Left"
                         android:textColor="@color/colorBlack"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         app:textFontPath="fonts/poppins_regular.otf" />
 
                     <com.an.customfontview.CustomTextView
@@ -383,7 +386,7 @@
                         android:gravity="center"
                         android:text="Right"
                         android:textColor="@color/colorBlack"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         app:textFontPath="fonts/poppins_regular.otf" />
 
 
@@ -476,10 +479,11 @@
                     android:hint="Enter VIN"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:textColor="@color/colorBlack"
                     android:textColorHint="@color/colorGrey"
+                    android:textSize="@dimen/edt_size"
                     app:textFontPath="fonts/poppins_regular.otf" />
+
 
 
 
@@ -488,11 +492,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
-                    android:layout_marginTop="15sp"
+                    android:layout_marginTop="15dp"
                     android:background="@drawable/button_theam"
                     android:text="upload"
                     android:textColor="@color/colorWhite"
-                    android:textSize="15sp"
+                    android:textSize="15dp"
                     app:btnFontPath="fonts/poppins_regular.otf" />
 
 
