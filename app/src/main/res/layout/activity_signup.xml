@@ -178,6 +178,7 @@
                         android:background="@color/colorWhite"
                         android:gravity="center|left"
                         android:hint="Enter Password"
+                        android:maxLength="20"
                         android:inputType="text"
                         android:maxLines="1"
                         android:paddingLeft="10dp"
@@ -202,7 +203,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="1dp"
-                    android:text="Password Must contain at least 1 number, 1 uppercase , 1 lowercase, 1 special character and at least 6 characters"
+                    android:text="Password Must contain at least 1 number, 1 uppercase , 1 lowercase, 1 special(!@#$%^&amp;*?) character and at least 6 characters"
                     android:textColor="@color/colorGrey"
                     android:textSize="12dp"
                     app:textFontPath="fonts/poppins_regular.otf" />

@@ -130,7 +130,7 @@ class SignUpActivity : BaseMainActivity(), SignupPresenter.SignupMainView,
             showSuccessDialog(this, "Enter Password")
 
         } else if (!Utility.passwordValidator(binding.edtPassword.text.trim().toString())) {
-            showSuccessDialog(this, "Password Must contain at least 1 number, 1 uppercase ,1 lowercase ,1 special character and at least 6 characters")
+            showSuccessDialog(this, "Password Must contain at least 1 number, 1 uppercase ,1 lowercase ,1 special(!@#\$%^&*?) character and at least 6 characters")
 
         } else if (binding.edtComfirmPassword.text.trim().toString().isEmpty()) {
             showSuccessDialog(this, "Enter Confirm Password")

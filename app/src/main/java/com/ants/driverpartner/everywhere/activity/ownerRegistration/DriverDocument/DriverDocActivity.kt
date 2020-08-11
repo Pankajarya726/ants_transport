@@ -160,6 +160,8 @@ class DriverDocActivity : BaseMainActivity(),
             DialogUtils.showSuccessDialog(this, "Please Enter Mobile Number")
         } else if (getPassword().isEmpty()) {
             DialogUtils.showSuccessDialog(this, "Please Enter Password")
+        } else if (getPassword().length<6) {
+            DialogUtils.showSuccessDialog(this, "Password must contain at least 6 character")
         } else if (getResidentialAddress().isEmpty()) {
             DialogUtils.showSuccessDialog(this, "Please Enter Residential Address")
         } else if (getPostalAddress().isEmpty()) {

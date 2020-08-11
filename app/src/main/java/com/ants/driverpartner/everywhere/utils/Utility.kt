@@ -90,7 +90,7 @@ object Utility {
         val pattern: Pattern
         val matcher: Matcher
         val PASSWORD_PATTERN =
-            "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"
+            "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*?]).{6,})"
         pattern = Pattern.compile(PASSWORD_PATTERN)
         matcher = pattern.matcher(email)
         return matcher.matches()

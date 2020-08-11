@@ -66,7 +66,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
 
     lateinit var binding: ActivityCurrentBinding
     private var presenter: NavigationPresenter? = null
-    private var first_time :Boolean = false
+    private var first_time: Boolean = false
     private var mMap: GoogleMap? = null
     private var mGoogleApiClient: GoogleApiClient? = null
     private var sentToSettings = false
@@ -75,7 +75,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
     private var pickupLatLng = LatLng(28.61, 77.22)
     private var dropLatLng = LatLng(28.61, 76.22)
     private var mapFragment: SupportMapFragment? = null
-    private var driverLatLong = LatLng(33.96, 25.60)
+    private var driverLatLong = LatLng(0.0, 0.0)
     private var previousLatLong: LatLng? = null
     private var pickUpMarker: Marker? = null
     private var dropMarker: Marker? = null
@@ -106,11 +106,6 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
         presenter = NavigationPresenter(this, this)
 //        view.setHeaderTitle(getString(R.string.current_fragment))
 
-//        val gpsTracker = GPSTracker(this)
-//
-//        Log.e(javaClass.simpleName,gpsTracker.latitude.toString())
-//        Log.e(javaClass.simpleName,gpsTracker.latitude.toString())
-
 
         init()
     }
@@ -140,9 +135,9 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
 
 
         Log.e(javaClass.simpleName, responseData.data[0].packageDetail.senderLat)
-        Log.e(javaClass.simpleName,responseData.data[0].packageDetail.senderLong)
-        Log.e(javaClass.simpleName,responseData.data[0].packageDetail.receiverLat)
-        Log.e(javaClass.simpleName,responseData.data[0].packageDetail.receiverLong)
+        Log.e(javaClass.simpleName, responseData.data[0].packageDetail.senderLong)
+        Log.e(javaClass.simpleName, responseData.data[0].packageDetail.receiverLat)
+        Log.e(javaClass.simpleName, responseData.data[0].packageDetail.receiverLong)
 
         bookingId = responseData.data[0].bookingId
 
@@ -152,7 +147,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
 
         if (bookingStatus == 2) {
 
-            if (driverLatLong !=LatLng(0.0,0.0)) {
+            if (driverLatLong != LatLng(0.0, 0.0)) {
 
 
                 updatePickUpLatiLong(driverLatLong.latitude, driverLatLong.longitude)
@@ -161,7 +156,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
                     responseData.data[0].packageDetail.senderLong.toDouble()
                 )
 
-            }else{
+            } else {
                 updatePickUpLatiLong(driverLatLong.latitude, driverLatLong.longitude)
                 updateDropLatiLong(
                     responseData.data[0].packageDetail.senderLat.toDouble(),
@@ -261,7 +256,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
     }
 
     fun goToHistoryFragment() {
-        Utility.setSharedPreference(this, "booking_complete","booking_complete");
+        Utility.setSharedPreference(this, "booking_complete", "booking_complete");
 
         DialogUtils.showCustomAlertDialog(
             this,
@@ -280,13 +275,6 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
     override fun onCallClick(receiverPhone: String) {
         if (getData != null) {
             bottomSheetDialogFragment!!.dismiss()
-
-
-//            if (receiverPhone != null) {
-//                view.doCall(receiverPhone)
-//            }
-
-
         }
 
     }
@@ -412,6 +400,13 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
     }
 
     override fun onLocationChanged(location: Location?) {
+        Log.e("onLocationChanged",location.toString())
+        if(driverLatLong==LatLng(0.0,0.0)||driverLatLong==null){
+            presenter!!.getCurrentBooking()
+        }else{
+            driverLatLong = LatLng(location!!.latitude, location!!.longitude)
+
+        }
 
 
 
@@ -463,7 +458,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
 
         pickupLatLng = LatLng(latitude, longitude)
 
-        Log.e(javaClass.simpleName,pickupLatLng.toString())
+        Log.e(javaClass.simpleName, pickupLatLng.toString())
 
 
     }
@@ -485,7 +480,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.nav_arrow))
             driverMaker = mMap!!.addMarker(driverMakerOption!!.position(newPosition))
         } else {
-            driverMaker!!.position= newPosition
+            driverMaker!!.position = newPosition
         }
     }
 
@@ -651,10 +646,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
 
         createLocationRequest()
         startLocationUpdates()
-            presenter!!.getCurrentBooking()
-
-
-
+//        presenter!!.getCurrentBooking()
 
 
     }
@@ -728,13 +720,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) !== PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request_old the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+                requestPermission()
                 return
             }
             LocationServices.FusedLocationApi.requestLocationUpdates(
@@ -769,7 +755,6 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
 
     private fun chekLocationPermission() {
 
-        Log.e(javaClass.simpleName, "check Premission")
 
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -780,7 +765,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
         ) {
             Log.e(javaClass.simpleName, "Premission Granted")
 
-        proceedAfterPermission()
+            proceedAfterPermission()
 
         } else {
             Log.e(javaClass.simpleName, "Premission Not Granted")
@@ -946,11 +931,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
     }
 
     private fun proceedAfterPermission() {
-//        Toast.makeText(
-//            this,
-//            "We got required permissions for profile.",
-//            Toast.LENGTH_LONG
-//        ).show()
+
 
         mGoogleApiClient = GoogleApiClient.Builder(this)
             .addConnectionCallbacks(this)
@@ -1021,7 +1002,11 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
         }
     }
 
-    fun animatePolyLine(latLngList: ArrayList<LatLng>, blackPolyLine: Polyline, grayPolyLine: Polyline) {
+    fun animatePolyLine(
+        latLngList: ArrayList<LatLng>,
+        blackPolyLine: Polyline,
+        grayPolyLine: Polyline
+    ) {
         var listLatLng: List<LatLng>
         var blackPolyline: Polyline?
         var grayPolyline: Polyline?
@@ -1094,7 +1079,7 @@ class CurrentActivity : BaseMainActivity(), NavigationView, OnMapReadyCallback,
         currentLatLng: LatLng?,
         MAP_ZOOM_LEVEL: Float
     ) {
-        if (marker != null && currentLatLng != null && marker.position!=null) {
+        if (marker != null && currentLatLng != null && marker.position != null) {
             val handler = Handler()
             val start = SystemClock.uptimeMillis()
             val proj = googleMap.projection

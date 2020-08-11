@@ -106,7 +106,7 @@ class ResetPasswordActivity : BaseMainActivity(), ResetPasswordView,
             } else if (getNewPassword().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Please Enter the New Password")
             } else if (!Utility.passwordValidator(getNewPassword())) {
-                DialogUtils.showSuccessDialog(this, "Password Must contain at least 1 number, 1 uppercase ,1 lowercase ,1 special character and at least 6 characters")
+                DialogUtils.showSuccessDialog(this, "Password Must contain at least 1 number, 1 uppercase ,1 lowercase ,1 special(!@#\$%^&*?) character and at least 6 characters")
             } else if (binding.edtConfirmPassword.text.trim().toString().isEmpty()) {
                 DialogUtils.showSuccessDialog(this, "Please Enter Confirm Password")
             } else if (!getNewPassword().equals(binding.edtConfirmPassword.text.trim().toString())) {
