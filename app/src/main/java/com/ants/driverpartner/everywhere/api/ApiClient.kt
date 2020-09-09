@@ -78,7 +78,8 @@ class ApiClient {
     }
 
     companion object {
-        private val BASE_URL = "http://dev.tekzee.in/Ants/api/"
+//        private val BASE_URL = "http://dev.tekzee.in/Ants/api/"
+        private val BASE_URL = "http://3.14.127.106/ants/api/"
         private var apiClient: ApiClient? = null
         /**
          * Gets my app client.
